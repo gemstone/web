@@ -21,10 +21,10 @@
 //
 //******************************************************************************************************
 
-namespace Gemstone.GemTem
+namespace Gemstone.Web
 {
     /// <summary>
-    /// Sample class for new GemTem library.
+    /// Sample class for new Web library.
     /// </summary>
     public class Class
     {
