@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpTOC>
+
+  <HelpTOCNode Title="About" Url="html/About.htm" />
+  <HelpTOCNode Id="76fa31c7-b743-4571-959a-d705254150be" Title="Gemstone.Web" Url="html/N_Gemstone_Web.htm">
+    <HelpTOCNode Id="3107f0f3-6105-4078-b278-e36e90866191" Title="Class Class" Url="html/T_Gemstone_Web_Class.htm">
+      <HelpTOCNode Title="Class Constructor " Url="html/M_Gemstone_Web_Class__ctor.htm" />
+      <HelpTOCNode Title="Class Methods" Url="html/Methods_T_Gemstone_Web_Class.htm" />
+    </HelpTOCNode>
+  </HelpTOCNode>
+</HelpTOC>
