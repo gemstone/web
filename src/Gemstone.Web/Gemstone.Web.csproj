@@ -83,6 +83,7 @@
     <None Remove="Shared\Scripts\angular.js" />
     <None Remove="Shared\Scripts\bootstrap.js" />
     <None Remove="Shared\Scripts\bootstrap4.js" />
+    <None Remove="Shared\Scripts\d3.v4.min.js" />
     <None Remove="Shared\Scripts\default.ployfill.js" />
     <None Remove="Shared\Scripts\default.polyfill.min.js" />
     <None Remove="Shared\Scripts\esri-leaflet.js" />
@@ -129,6 +130,7 @@
     <None Remove="Shared\Scripts\primeui.js" />
     <None Remove="Shared\Scripts\react-dom.development.js" />
     <None Remove="Shared\Scripts\react-dom.production.min.js" />
+    <None Remove="Shared\Scripts\react-router-dom.min.js" />
     <None Remove="Shared\Scripts\react.development.js" />
     <None Remove="Shared\Scripts\react.production.min.js" />
     <None Remove="Shared\Scripts\select2.js" />
@@ -175,6 +177,7 @@
     <EmbeddedResource Include="Shared\Scripts\angular.js" />
     <EmbeddedResource Include="Shared\Scripts\bootstrap.js" />
     <EmbeddedResource Include="Shared\Scripts\bootstrap4.js" />
+    <EmbeddedResource Include="Shared\Scripts\d3.v4.min.js" />
     <EmbeddedResource Include="Shared\Scripts\default.ployfill.js" />
     <EmbeddedResource Include="Shared\Scripts\default.polyfill.min.js" />
     <EmbeddedResource Include="Shared\Scripts\esri-leaflet.js" />
@@ -221,6 +224,7 @@
     <EmbeddedResource Include="Shared\Scripts\primeui.js" />
     <EmbeddedResource Include="Shared\Scripts\react-dom.development.js" />
     <EmbeddedResource Include="Shared\Scripts\react-dom.production.min.js" />
+    <EmbeddedResource Include="Shared\Scripts\react-router-dom.min.js" />
     <EmbeddedResource Include="Shared\Scripts\react.development.js" />
     <EmbeddedResource Include="Shared\Scripts\react.production.min.js" />
     <EmbeddedResource Include="Shared\Scripts\select2.js" />
