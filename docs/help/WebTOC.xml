@@ -2,10 +2,15 @@
 <HelpTOC>
 
   <HelpTOCNode Title="About" Url="html/About.htm" />
-  <HelpTOCNode Id="76fa31c7-b743-4571-959a-d705254150be" Title="Gemstone.Web" Url="html/N_Gemstone_Web.htm">
-    <HelpTOCNode Id="3107f0f3-6105-4078-b278-e36e90866191" Title="Class Class" Url="html/T_Gemstone_Web_Class.htm">
+  <HelpTOCNode Id="f3a1313a-4258-49ef-b8a9-0362dec8be26" Title="Gemstone.Web" Url="html/N_Gemstone_Web.htm">
+    <HelpTOCNode Id="7a2b8ec3-f1d3-48c5-8e32-e9579cddc57f" Title="Class Class" Url="html/T_Gemstone_Web_Class.htm">
       <HelpTOCNode Title="Class Constructor " Url="html/M_Gemstone_Web_Class__ctor.htm" />
       <HelpTOCNode Title="Class Methods" Url="html/Methods_T_Gemstone_Web_Class.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="8414acaa-c442-411d-908b-08c9f8113b0c" Title="WebExtensions Class" Url="html/T_Gemstone_Web_WebExtensions.htm">
+      <HelpTOCNode Id="ff4bd83e-5a70-430d-b5a6-156df66f8d11" Title="WebExtensions Methods" Url="html/Methods_T_Gemstone_Web_WebExtensions.htm">
+        <HelpTOCNode Title="StaticFileEmbeddedResources Method " Url="html/M_Gemstone_Web_WebExtensions_StaticFileEmbeddedResources.htm" />
+      </HelpTOCNode>
     </HelpTOCNode>
   </HelpTOCNode>
 </HelpTOC>

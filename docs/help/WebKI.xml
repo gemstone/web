@@ -8,6 +8,13 @@
   <HelpKINode Title="Class.Class constructor" Url="html/M_Gemstone_Web_Class__ctor.htm" />
   <HelpKINode Title="Gemstone.Web namespace" Url="html/N_Gemstone_Web.htm" />
   <HelpKINode Title="Gemstone.Web.Class class" Url="html/T_Gemstone_Web_Class.htm" />
+  <HelpKINode Title="Gemstone.Web.WebExtensions class" Url="html/T_Gemstone_Web_WebExtensions.htm" />
+  <HelpKINode Title="StaticFileEmbeddedResources method" Url="html/M_Gemstone_Web_WebExtensions_StaticFileEmbeddedResources.htm" />
+  <HelpKINode Title="WebExtensions class">
+    <HelpKINode Title="WebExtensions Class" Url="html/T_Gemstone_Web_WebExtensions.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Gemstone_Web_WebExtensions.htm" />
+  </HelpKINode>
+  <HelpKINode Title="WebExtensions.StaticFileEmbeddedResources method" Url="html/M_Gemstone_Web_WebExtensions_StaticFileEmbeddedResources.htm" />
   <HelpKINode Title="welcome">
     <HelpKINode Title="getting started, root, gemstone" Url="html/About.htm" />
   </HelpKINode>

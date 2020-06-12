@@ -18,5 +18,18 @@
         </markup>
       </summary>
     </member>
+    <member name="T:Gemstone.Web.WebExtensions">
+      <summary>
+            Defines extension methods useful for web applications.
+            </summary>
+    </member>
+    <member name="M:Gemstone.Web.WebExtensions.StaticFileEmbeddedResources">
+      <summary>
+            Used to create <see cref="T:Microsoft.AspNetCore.Builder.StaticFileOptions" /> for serving Gemstone.Web embedded javascript and css stylesheets.
+            </summary>
+      <returns>
+        <see cref="T:Microsoft.AspNetCore.Builder.StaticFileOptions" />
+      </returns>
+    </member>
   </members>
 </doc>
