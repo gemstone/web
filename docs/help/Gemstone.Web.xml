@@ -31,5 +31,24 @@
         <see cref="T:Microsoft.AspNetCore.Builder.StaticFileOptions" />
       </returns>
     </member>
+    <member name="T:Gemstone.Web.Hosting.HostExtensions">
+      <summary>
+            Defines extensions for web hosts.
+            </summary>
+    </member>
+    <member name="M:Gemstone.Web.Hosting.HostExtensions.GetLocalWebAddressAsync(Microsoft.Extensions.Hosting.IHost)">
+      <summary>
+            Gets a web server address usable from the local system.
+            </summary>
+      <param name="host">The host of the web server.</param>
+      <returns>The local address of the web server.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Hosting.HostExtensions.GetServerAddresses(Microsoft.Extensions.Hosting.IHost)">
+      <summary>
+            Gets the list of addresses the web server is listening on.
+            </summary>
+      <param name="host">The host of the web server.</param>
+      <returns>The list of addresses the server is listening on.</returns>
+    </member>
   </members>
 </doc>

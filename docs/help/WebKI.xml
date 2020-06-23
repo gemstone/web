@@ -8,7 +8,17 @@
   <HelpKINode Title="Class.Class constructor" Url="html/M_Gemstone_Web_Class__ctor.htm" />
   <HelpKINode Title="Gemstone.Web namespace" Url="html/N_Gemstone_Web.htm" />
   <HelpKINode Title="Gemstone.Web.Class class" Url="html/T_Gemstone_Web_Class.htm" />
+  <HelpKINode Title="Gemstone.Web.Hosting namespace" Url="html/N_Gemstone_Web_Hosting.htm" />
+  <HelpKINode Title="Gemstone.Web.Hosting.HostExtensions class" Url="html/T_Gemstone_Web_Hosting_HostExtensions.htm" />
   <HelpKINode Title="Gemstone.Web.WebExtensions class" Url="html/T_Gemstone_Web_WebExtensions.htm" />
+  <HelpKINode Title="GetLocalWebAddressAsync method" Url="html/M_Gemstone_Web_Hosting_HostExtensions_GetLocalWebAddressAsync.htm" />
+  <HelpKINode Title="GetServerAddresses method" Url="html/M_Gemstone_Web_Hosting_HostExtensions_GetServerAddresses.htm" />
+  <HelpKINode Title="HostExtensions class">
+    <HelpKINode Title="HostExtensions Class" Url="html/T_Gemstone_Web_Hosting_HostExtensions.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_Gemstone_Web_Hosting_HostExtensions.htm" />
+  </HelpKINode>
+  <HelpKINode Title="HostExtensions.GetLocalWebAddressAsync method" Url="html/M_Gemstone_Web_Hosting_HostExtensions_GetLocalWebAddressAsync.htm" />
+  <HelpKINode Title="HostExtensions.GetServerAddresses method" Url="html/M_Gemstone_Web_Hosting_HostExtensions_GetServerAddresses.htm" />
   <HelpKINode Title="StaticFileEmbeddedResources method" Url="html/M_Gemstone_Web_WebExtensions_StaticFileEmbeddedResources.htm" />
   <HelpKINode Title="WebExtensions class">
     <HelpKINode Title="WebExtensions Class" Url="html/T_Gemstone_Web_WebExtensions.htm" />
