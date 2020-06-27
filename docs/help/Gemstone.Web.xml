@@ -36,6 +36,13 @@
             Defines extensions for web hosts.
             </summary>
     </member>
+    <member name="M:Gemstone.Web.Hosting.HostExtensions.ConfigureLocalWebAddress(Microsoft.AspNetCore.Hosting.IWebHostBuilder)">
+      <summary>
+            Configures the web host to listen on a random port on localhost addresses.
+            </summary>
+      <param name="webHostBuilder">The web host builder.</param>
+      <returns>The web host builder.</returns>
+    </member>
     <member name="M:Gemstone.Web.Hosting.HostExtensions.GetLocalWebAddressAsync(Microsoft.Extensions.Hosting.IHost)">
       <summary>
             Gets a web server address usable from the local system.
