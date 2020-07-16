@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
@@ -20,9 +20,9 @@
     <RazorLangVersion>3.0</RazorLangVersion>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <Nullable>enable</Nullable>
-    <Version>1.0.52</Version>
-    <InformationalVersion Condition="'$(Configuration)'=='Release'">1.0.52 -- Release Build</InformationalVersion>
-    <InformationalVersion Condition="'$(Configuration)'!='Release'">1.0.52 -- Debug Build</InformationalVersion>
+    <Version>1.0.53</Version>
+    <InformationalVersion Condition="'$(Configuration)'=='Release'">1.0.53 -- Release Build</InformationalVersion>
+    <InformationalVersion Condition="'$(Configuration)'!='Release'">1.0.53 -- Debug Build</InformationalVersion>
     <Configurations>Debug;Release;Development</Configurations>
   </PropertyGroup>
 
