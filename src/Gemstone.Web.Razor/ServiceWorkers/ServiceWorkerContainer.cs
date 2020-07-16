@@ -42,6 +42,6 @@ namespace Gemstone.Web.Razor.ServiceWorkers
             WhenReadyFactory.Value;
 
         private async Task CreateWhenReady() =>
-            await JSRuntime.InvokeVoidAsync("Gemstone.ServiceWorker.WhenReady");
+            await JSRuntime.InvokeVoidAsync("Gemstone.ServiceWorkers.WhenReady");
     }
 }
