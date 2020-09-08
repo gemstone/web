@@ -30,6 +30,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -63,8 +64,27 @@ namespace Gemstone.Web.Hosting
                 catch { return IPAddress.Loopback; }
             }
 
-            IPAddress localhostAddress = GetLocalhostAddress();
-            return webHostBuilder.UseUrls($"http://{localhostAddress}:0");
+            return webHostBuilder.ConfigureAppConfiguration((_, configurationBuilder) =>
+            {
+                IConfiguration? configuration = configurationBuilder.Sources
+                    .OfType<ChainedConfigurationSource>()
+                    .Select(source => source.Configuration)
+                    .LastOrDefault();
+
+                if (configuration == null)
+                {
+                    configuration = new ConfigurationBuilder()
+                        .AddInMemoryCollection()
+                        .Build();
+
+                    configurationBuilder.AddConfiguration(configuration);
+                }
+
+                IPAddress localhostAddress = GetLocalhostAddress();
+                string key = WebHostDefaults.ServerUrlsKey;
+                string value = $"http://{localhostAddress}:0";
+                configuration[key] = value;
+            });
         }
 
         /// <summary>
