@@ -2,20 +2,20 @@
 <HelpTOC>
 
   <HelpTOCNode Title="About" Url="html/About.htm" />
-  <HelpTOCNode Id="49dbc2ff-d427-48ed-83f0-c1c7d324cb43" Title="Gemstone.Web" Url="html/N_Gemstone_Web.htm">
-    <HelpTOCNode Id="994f088f-89f0-4dd8-bcd8-38bb7de02c44" Title="Class Class" Url="html/T_Gemstone_Web_Class.htm">
+  <HelpTOCNode Id="790e6a44-d0f8-4156-9427-a4b17b92fcaf" Title="Gemstone.Web" Url="html/N_Gemstone_Web.htm">
+    <HelpTOCNode Id="59e86eff-f1aa-4467-91b5-630383d6317f" Title="Class Class" Url="html/T_Gemstone_Web_Class.htm">
       <HelpTOCNode Title="Class Constructor " Url="html/M_Gemstone_Web_Class__ctor.htm" />
       <HelpTOCNode Title="Class Methods" Url="html/Methods_T_Gemstone_Web_Class.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="5d72232c-fe60-403e-8e29-800af61ae7ab" Title="WebExtensions Class" Url="html/T_Gemstone_Web_WebExtensions.htm">
-      <HelpTOCNode Id="fb251ff2-489f-4b9a-9dd5-48555832722b" Title="WebExtensions Methods" Url="html/Methods_T_Gemstone_Web_WebExtensions.htm">
+    <HelpTOCNode Id="7a569d42-f117-4fac-8f38-9d9d558714ab" Title="WebExtensions Class" Url="html/T_Gemstone_Web_WebExtensions.htm">
+      <HelpTOCNode Id="f30d066f-ee7e-42f2-8457-84ee2dcb0c15" Title="WebExtensions Methods" Url="html/Methods_T_Gemstone_Web_WebExtensions.htm">
         <HelpTOCNode Title="StaticFileEmbeddedResources Method " Url="html/M_Gemstone_Web_WebExtensions_StaticFileEmbeddedResources.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="f69137a6-cda1-4130-864e-2e0798d2bd55" Title="Gemstone.Web.Hosting" Url="html/N_Gemstone_Web_Hosting.htm">
-    <HelpTOCNode Id="230632d3-0bc3-4194-a255-40c4e48eb5e4" Title="HostExtensions Class" Url="html/T_Gemstone_Web_Hosting_HostExtensions.htm">
-      <HelpTOCNode Id="f86b1491-2030-4c7f-82a9-063aba5f19b6" Title="HostExtensions Methods" Url="html/Methods_T_Gemstone_Web_Hosting_HostExtensions.htm">
+  <HelpTOCNode Id="48db9518-e7d1-4ce8-8c18-ab02a8415964" Title="Gemstone.Web.Hosting" Url="html/N_Gemstone_Web_Hosting.htm">
+    <HelpTOCNode Id="7212de72-502f-45c7-bf3b-7d2329f3126a" Title="HostExtensions Class" Url="html/T_Gemstone_Web_Hosting_HostExtensions.htm">
+      <HelpTOCNode Id="58bfadf7-4fd4-4af7-80ea-204fead256d2" Title="HostExtensions Methods" Url="html/Methods_T_Gemstone_Web_Hosting_HostExtensions.htm">
         <HelpTOCNode Title="ConfigureLocalWebAddress Method " Url="html/M_Gemstone_Web_Hosting_HostExtensions_ConfigureLocalWebAddress.htm" />
         <HelpTOCNode Title="GetLocalWebAddressAsync Method " Url="html/M_Gemstone_Web_Hosting_HostExtensions_GetLocalWebAddressAsync.htm" />
         <HelpTOCNode Title="GetServerAddresses Method " Url="html/M_Gemstone_Web_Hosting_HostExtensions_GetServerAddresses.htm" />
