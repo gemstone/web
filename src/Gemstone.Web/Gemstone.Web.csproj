@@ -12,7 +12,7 @@
     <PackageDescription>GPA Gemstone Web Library</PackageDescription>
     <PackageIcon>gemstone-square-128.png</PackageIcon>
     <Description>GPA Gemstone Web Library</Description>
-    <Copyright>Copyright © 2020</Copyright>
+    <Copyright>Copyright © 2022</Copyright>
     <PackageProjectUrl>https://github.com/gemstone</PackageProjectUrl>
     <RepositoryUrl>https://github.com/gemstone/web</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
