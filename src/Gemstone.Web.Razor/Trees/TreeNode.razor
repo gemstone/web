@@ -105,7 +105,7 @@
 
         IsCollapsed = !IsCollapsed;
 
-        TreeNodeCollapseEventArgs args = new TreeNodeCollapseEventArgs(TreeView, this);
+        TreeNodeCollapseEventArgs args = new(TreeView, this);
 
         if (IsCollapsed)
         {

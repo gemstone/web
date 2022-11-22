@@ -46,6 +46,6 @@ namespace Gemstone.Web.Razor.Elements
         /// <param name="reference">The reference to the element.</param>
         /// <returns>The referenced element.</returns>
         public Element GetElement(ElementReference reference) =>
-            new Element(reference, JSRuntime);
+            new(reference, JSRuntime);
     }
 }

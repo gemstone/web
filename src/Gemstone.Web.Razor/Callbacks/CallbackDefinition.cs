@@ -213,7 +213,7 @@ namespace Gemstone.Web.Razor.Callbacks
         /// <param name="disposeReference">True if the callback should dispose the reference when it is disposed; otherwise false.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
         public static CallbackDefinition Create<T>(DotNetObjectReference<T> reference, string methodName, bool disposeReference = false) where T : class =>
-            new CallbackDefinition(typeof(DotNetObjectReference<T>), reference, methodName, disposeReference);
+            new(typeof(DotNetObjectReference<T>), reference, methodName, disposeReference);
 
         #region [ Delegate Captures ]
 
@@ -222,238 +222,238 @@ namespace Gemstone.Web.Razor.Callbacks
         /// </summary>
         /// <param name="action">The action to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From(Action action) => new CallbackDefinition(action);
+        public static CallbackDefinition From(Action action) => new(action);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="action">The action to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T>(Action<T> action) => new CallbackDefinition(action);
+        public static CallbackDefinition From<T>(Action<T> action) => new(action);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="action">The action to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2>(Action<T1, T2> action) => new CallbackDefinition(action);
+        public static CallbackDefinition From<T1, T2>(Action<T1, T2> action) => new(action);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="action">The action to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, T3>(Action<T1, T2, T3> action) => new CallbackDefinition(action);
+        public static CallbackDefinition From<T1, T2, T3>(Action<T1, T2, T3> action) => new(action);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="action">The action to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, T3, T4>(Action<T1, T2, T3, T4> action) => new CallbackDefinition(action);
+        public static CallbackDefinition From<T1, T2, T3, T4>(Action<T1, T2, T3, T4> action) => new(action);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="action">The action to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, T3, T4, T5>(Action<T1, T2, T3, T4, T5> action) => new CallbackDefinition(action);
+        public static CallbackDefinition From<T1, T2, T3, T4, T5>(Action<T1, T2, T3, T4, T5> action) => new(action);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="action">The action to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6>(Action<T1, T2, T3, T4, T5, T6> action) => new CallbackDefinition(action);
+        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6>(Action<T1, T2, T3, T4, T5, T6> action) => new(action);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="action">The action to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> action) => new CallbackDefinition(action);
+        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> action) => new(action);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="action">The action to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8>(Action<T1, T2, T3, T4, T5, T6, T7, T8> action) => new CallbackDefinition(action);
+        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8>(Action<T1, T2, T3, T4, T5, T6, T7, T8> action) => new(action);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="action">The action to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action) => new CallbackDefinition(action);
+        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action) => new(action);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="action">The action to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action) => new CallbackDefinition(action);
+        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action) => new(action);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="action">The action to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action) => new CallbackDefinition(action);
+        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action) => new(action);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="action">The action to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action) => new CallbackDefinition(action);
+        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action) => new(action);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="action">The action to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action) => new CallbackDefinition(action);
+        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action) => new(action);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="action">The action to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action) => new CallbackDefinition(action);
+        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action) => new(action);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="action">The action to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action) => new CallbackDefinition(action);
+        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action) => new(action);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="action">The action to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action) => new CallbackDefinition(action);
+        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action) => new(action);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="func">The function to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<TResult>(Func<TResult> func) => new CallbackDefinition(func);
+        public static CallbackDefinition From<TResult>(Func<TResult> func) => new(func);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="func">The function to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T, TResult>(Func<T, TResult> func) => new CallbackDefinition(func);
+        public static CallbackDefinition From<T, TResult>(Func<T, TResult> func) => new(func);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="func">The function to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, TResult>(Func<T1, T2, TResult> func) => new CallbackDefinition(func);
+        public static CallbackDefinition From<T1, T2, TResult>(Func<T1, T2, TResult> func) => new(func);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="func">The function to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func) => new CallbackDefinition(func);
+        public static CallbackDefinition From<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> func) => new(func);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="func">The function to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> func) => new CallbackDefinition(func);
+        public static CallbackDefinition From<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> func) => new(func);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="func">The function to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> func) => new CallbackDefinition(func);
+        public static CallbackDefinition From<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> func) => new(func);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="func">The function to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, TResult>(Func<T1, T2, T3, T4, T5, T6, TResult> func) => new CallbackDefinition(func);
+        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, TResult>(Func<T1, T2, T3, T4, T5, T6, TResult> func) => new(func);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="func">The function to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> func) => new CallbackDefinition(func);
+        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> func) => new(func);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="func">The function to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> func) => new CallbackDefinition(func);
+        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> func) => new(func);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="func">The function to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> func) => new CallbackDefinition(func);
+        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> func) => new(func);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="func">The function to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> func) => new CallbackDefinition(func);
+        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> func) => new(func);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="func">The function to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> func) => new CallbackDefinition(func);
+        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> func) => new(func);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="func">The function to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> func) => new CallbackDefinition(func);
+        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> func) => new(func);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="func">The function to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> func) => new CallbackDefinition(func);
+        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> func) => new(func);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="func">The function to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> func) => new CallbackDefinition(func);
+        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> func) => new(func);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="func">The function to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> func) => new CallbackDefinition(func);
+        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> func) => new(func);
 
         /// <summary>
         /// Creates a new instance of the <see cref="CallbackDefinition"/> class.
         /// </summary>
         /// <param name="func">The function to be captured in a callback.</param>
         /// <returns>The definition for the callback to be used with JavaScript.</returns>
-        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> func) => new CallbackDefinition(func);
+        public static CallbackDefinition From<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult> func) => new(func);
 
         #endregion
 

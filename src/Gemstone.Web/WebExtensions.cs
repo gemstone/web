@@ -41,7 +41,7 @@ namespace Gemstone.Web
         /// </summary>
         /// <returns><see cref="StaticFileOptions"/></returns>
         public static StaticFileOptions StaticFileEmbeddedResources() {
-            ManifestEmbeddedFileProvider embeddedFileProvider = new ManifestEmbeddedFileProvider(Assembly.GetExecutingAssembly(), "Shared");
+            ManifestEmbeddedFileProvider embeddedFileProvider = new(Assembly.GetExecutingAssembly(), "Shared");
             return new StaticFileOptions()
             {
                 FileProvider = embeddedFileProvider,

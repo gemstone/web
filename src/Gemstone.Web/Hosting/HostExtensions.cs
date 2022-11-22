@@ -142,7 +142,7 @@ namespace Gemstone.Web.Hosting
 
             static async ValueTask<string?> GetLocalURLAsync(string url)
             {
-                UriBuilder uriBuilder = new UriBuilder(url);
+                UriBuilder uriBuilder = new(url);
                 uriBuilder.Host = await GetValidHostAsync(uriBuilder.Host);
                 return uriBuilder.Uri?.ToString();
             }

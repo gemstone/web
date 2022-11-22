@@ -28,7 +28,7 @@
 
         SelectedNode = node;
 
-        TreeNodeSelectedEventArgs args = new TreeNodeSelectedEventArgs(this, previous, node);
+        TreeNodeSelectedEventArgs args = new(this, previous, node);
         await SelectionChanged.InvokeAsync(args);
         await (previous?.Deselected.InvokeAsync(args) ?? Task.CompletedTask);
         await (node?.Selected.InvokeAsync(args) ?? Task.CompletedTask);
