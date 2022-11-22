@@ -16,7 +16,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>GPA;Gemstone;library;web</PackageTags>
-    <LangVersion>8</LangVersion>
+    <LangVersion>latest</LangVersion>
     <RazorLangVersion>3.0</RazorLangVersion>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <Nullable>enable</Nullable>
