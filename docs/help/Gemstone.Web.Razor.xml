@@ -1,0 +1,3438 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Gemstone.Web.Razor</name>
+  </assembly>
+  <members>
+    <member name="T:Gemstone.Web.Razor._Imports">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>T:Gemstone.Web.Razor._Imports</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Gemstone.Web.Razor._Imports.#ctor">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>Gemstone.Web.Razor._Imports</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Gemstone.Web.Razor._Imports.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>M:Gemstone.Web.Razor._Imports.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)</parameter>
+          </include>
+        </markup>
+      </summary>
+      <param name="__builder">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>__builder</parameter>
+            <parameter>M:Gemstone.Web.Razor._Imports.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)</parameter>
+          </include>
+        </markup>
+      </param>
+    </member>
+    <member name="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition">
+      <summary>
+            Defines a callback that can be invoked by the <see cref="T:Microsoft.JSInterop.IJSRuntime" />.
+            </summary>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.#ctor(System.Delegate)">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="methodCapture">The method to be invoked from Javascript.</param>
+      <exception cref="T:System.ArgumentException">The method to be invoked is not annotated with the <see cref="T:Microsoft.JSInterop.JSInvokableAttribute" />.</exception>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.#ctor(System.String,System.String)">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="assemblyName">The name of the assembly in which the callback is defined.</param>
+      <param name="methodName">The name of the method in which the </param>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.Create``1(Microsoft.JSInterop.DotNetObjectReference{``0},System.String,System.Boolean)">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="reference">The reference to the instance containing the method to be captured in a callback.</param>
+      <param name="methodName">The name of the method to be captured in the callback.</param>
+      <param name="disposeReference">True if the callback should dispose the reference when it is disposed; otherwise false.</param>
+      <typeparam name="T">The type containing the instance method to be captured in a callback.</typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.Create``1(``0,System.String)">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="instance">The instance containing the method to be captured in a callback.</param>
+      <param name="methodName">The name of the method to be captured in the callback.</param>
+      <typeparam name="T">The type containing the instance method to be captured in a callback.</typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.Dispose">
+      <summary>
+            Releases all unmanaged resources associated with this callback.
+            </summary>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From(System.Action)">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="action">The action to be captured in a callback.</param>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``1(System.Action{``0})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="action">The action to be captured in a callback.</param>
+      <typeparam name="T">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``1(System.Action{``0})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``10(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="action">The action to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``10(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``10(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T3">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T3</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``10(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T4">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T4</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``10(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T5">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T5</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``10(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T6">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T6</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``10(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T7">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T7</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``10(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T8">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T8</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``10(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T9">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T9</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``10(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T10">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T10</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``10(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``11(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="action">The action to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``11(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``11(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T3">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T3</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``11(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T4">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T4</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``11(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T5">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T5</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``11(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T6">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T6</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``11(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T7">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T7</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``11(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T8">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T8</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``11(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T9">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T9</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``11(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T10">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T10</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``11(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T11">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T11</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``11(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``12(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="action">The action to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``12(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``12(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T3">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T3</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``12(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T4">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T4</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``12(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T5">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T5</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``12(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T6">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T6</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``12(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T7">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T7</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``12(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T8">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T8</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``12(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T9">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T9</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``12(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T10">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T10</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``12(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T11">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T11</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``12(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T12">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T12</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``12(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``13(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="action">The action to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``13(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``13(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T3">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T3</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``13(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T4">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T4</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``13(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T5">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T5</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``13(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T6">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T6</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``13(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T7">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T7</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``13(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T8">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T8</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``13(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T9">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T9</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``13(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T10">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T10</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``13(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T11">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T11</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``13(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T12">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T12</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``13(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T13">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T13</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``13(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="action">The action to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T3">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T3</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T4">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T4</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T5">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T5</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T6">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T6</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T7">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T7</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T8">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T8</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T9">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T9</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T10">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T10</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T11">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T11</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T12">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T12</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T13">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T13</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T14">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T14</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="action">The action to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T3">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T3</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T4">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T4</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T5">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T5</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T6">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T6</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T7">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T7</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T8">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T8</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T9">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T9</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T10">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T10</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T11">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T11</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T12">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T12</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T13">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T13</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T14">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T14</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T15">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T15</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="action">The action to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T3">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T3</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T4">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T4</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T5">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T5</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T6">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T6</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T7">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T7</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T8">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T8</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T9">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T9</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T10">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T10</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T11">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T11</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T12">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T12</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T13">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T13</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T14">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T14</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T15">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T15</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T16">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T16</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``2(System.Action{``0,``1})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="action">The action to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``2(System.Action{``0,``1})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``2(System.Action{``0,``1})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``3(System.Action{``0,``1,``2})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="action">The action to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``3(System.Action{``0,``1,``2})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``3(System.Action{``0,``1,``2})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T3">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T3</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``3(System.Action{``0,``1,``2})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``4(System.Action{``0,``1,``2,``3})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="action">The action to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``4(System.Action{``0,``1,``2,``3})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``4(System.Action{``0,``1,``2,``3})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T3">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T3</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``4(System.Action{``0,``1,``2,``3})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T4">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T4</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``4(System.Action{``0,``1,``2,``3})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``5(System.Action{``0,``1,``2,``3,``4})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="action">The action to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``5(System.Action{``0,``1,``2,``3,``4})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``5(System.Action{``0,``1,``2,``3,``4})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T3">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T3</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``5(System.Action{``0,``1,``2,``3,``4})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T4">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T4</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``5(System.Action{``0,``1,``2,``3,``4})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T5">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T5</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``5(System.Action{``0,``1,``2,``3,``4})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``6(System.Action{``0,``1,``2,``3,``4,``5})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="action">The action to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``6(System.Action{``0,``1,``2,``3,``4,``5})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``6(System.Action{``0,``1,``2,``3,``4,``5})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T3">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T3</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``6(System.Action{``0,``1,``2,``3,``4,``5})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T4">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T4</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``6(System.Action{``0,``1,``2,``3,``4,``5})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T5">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T5</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``6(System.Action{``0,``1,``2,``3,``4,``5})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T6">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T6</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``6(System.Action{``0,``1,``2,``3,``4,``5})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``7(System.Action{``0,``1,``2,``3,``4,``5,``6})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="action">The action to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``7(System.Action{``0,``1,``2,``3,``4,``5,``6})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``7(System.Action{``0,``1,``2,``3,``4,``5,``6})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T3">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T3</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``7(System.Action{``0,``1,``2,``3,``4,``5,``6})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T4">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T4</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``7(System.Action{``0,``1,``2,``3,``4,``5,``6})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T5">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T5</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``7(System.Action{``0,``1,``2,``3,``4,``5,``6})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T6">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T6</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``7(System.Action{``0,``1,``2,``3,``4,``5,``6})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T7">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T7</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``7(System.Action{``0,``1,``2,``3,``4,``5,``6})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``8(System.Action{``0,``1,``2,``3,``4,``5,``6,``7})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="action">The action to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``8(System.Action{``0,``1,``2,``3,``4,``5,``6,``7})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``8(System.Action{``0,``1,``2,``3,``4,``5,``6,``7})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T3">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T3</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``8(System.Action{``0,``1,``2,``3,``4,``5,``6,``7})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T4">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T4</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``8(System.Action{``0,``1,``2,``3,``4,``5,``6,``7})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T5">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T5</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``8(System.Action{``0,``1,``2,``3,``4,``5,``6,``7})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T6">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T6</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``8(System.Action{``0,``1,``2,``3,``4,``5,``6,``7})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T7">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T7</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``8(System.Action{``0,``1,``2,``3,``4,``5,``6,``7})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T8">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T8</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``8(System.Action{``0,``1,``2,``3,``4,``5,``6,``7})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``9(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="action">The action to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``9(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``9(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T3">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T3</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``9(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T4">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T4</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``9(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T5">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T5</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``9(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T6">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T6</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``9(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T7">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T7</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``9(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T8">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T8</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``9(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T9">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T9</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``9(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``1(System.Func{``0})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="func">The function to be captured in a callback.</param>
+      <typeparam name="TResult">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>TResult</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``1(System.Func{``0})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``10(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="func">The function to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``10(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``10(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T3">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T3</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``10(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T4">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T4</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``10(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T5">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T5</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``10(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T6">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T6</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``10(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T7">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T7</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``10(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T8">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T8</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``10(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T9">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T9</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``10(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="TResult">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>TResult</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``10(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``11(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="func">The function to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``11(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``11(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T3">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T3</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``11(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T4">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T4</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``11(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T5">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T5</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``11(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T6">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T6</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``11(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T7">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T7</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``11(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T8">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T8</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``11(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T9">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T9</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``11(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T10">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T10</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``11(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="TResult">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>TResult</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``11(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``12(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="func">The function to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``12(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``12(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T3">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T3</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``12(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T4">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T4</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``12(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T5">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T5</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``12(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T6">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T6</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``12(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T7">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T7</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``12(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T8">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T8</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``12(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T9">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T9</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``12(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T10">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T10</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``12(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T11">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T11</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``12(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="TResult">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>TResult</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``12(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``13(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="func">The function to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``13(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``13(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T3">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T3</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``13(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T4">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T4</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``13(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T5">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T5</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``13(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T6">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T6</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``13(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T7">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T7</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``13(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T8">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T8</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``13(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T9">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T9</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``13(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T10">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T10</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``13(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T11">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T11</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``13(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T12">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T12</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``13(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="TResult">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>TResult</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``13(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="func">The function to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T3">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T3</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T4">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T4</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T5">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T5</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T6">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T6</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T7">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T7</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T8">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T8</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T9">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T9</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T10">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T10</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T11">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T11</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T12">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T12</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T13">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T13</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="TResult">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>TResult</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``14(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="func">The function to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T3">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T3</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T4">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T4</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T5">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T5</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T6">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T6</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T7">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T7</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T8">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T8</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T9">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T9</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T10">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T10</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T11">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T11</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T12">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T12</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T13">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T13</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T14">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T14</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="TResult">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>TResult</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``15(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="func">The function to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T3">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T3</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T4">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T4</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T5">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T5</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T6">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T6</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T7">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T7</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T8">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T8</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T9">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T9</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T10">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T10</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T11">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T11</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T12">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T12</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T13">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T13</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T14">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T14</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T15">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T15</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="TResult">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>TResult</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``16(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``17(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15,``16})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="func">The function to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``17(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15,``16})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``17(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15,``16})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T3">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T3</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``17(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15,``16})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T4">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T4</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``17(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15,``16})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T5">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T5</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``17(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15,``16})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T6">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T6</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``17(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15,``16})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T7">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T7</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``17(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15,``16})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T8">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T8</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``17(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15,``16})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T9">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T9</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``17(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15,``16})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T10">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T10</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``17(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15,``16})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T11">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T11</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``17(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15,``16})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T12">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T12</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``17(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15,``16})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T13">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T13</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``17(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15,``16})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T14">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T14</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``17(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15,``16})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T15">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T15</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``17(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15,``16})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T16">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T16</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``17(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15,``16})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="TResult">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>TResult</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``17(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15,``16})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``2(System.Func{``0,``1})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="func">The function to be captured in a callback.</param>
+      <typeparam name="T">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``2(System.Func{``0,``1})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="TResult">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>TResult</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``2(System.Func{``0,``1})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``3(System.Func{``0,``1,``2})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="func">The function to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``3(System.Func{``0,``1,``2})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``3(System.Func{``0,``1,``2})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="TResult">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>TResult</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``3(System.Func{``0,``1,``2})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``4(System.Func{``0,``1,``2,``3})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="func">The function to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``4(System.Func{``0,``1,``2,``3})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``4(System.Func{``0,``1,``2,``3})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T3">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T3</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``4(System.Func{``0,``1,``2,``3})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="TResult">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>TResult</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``4(System.Func{``0,``1,``2,``3})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``5(System.Func{``0,``1,``2,``3,``4})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="func">The function to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``5(System.Func{``0,``1,``2,``3,``4})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``5(System.Func{``0,``1,``2,``3,``4})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T3">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T3</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``5(System.Func{``0,``1,``2,``3,``4})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T4">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T4</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``5(System.Func{``0,``1,``2,``3,``4})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="TResult">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>TResult</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``5(System.Func{``0,``1,``2,``3,``4})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``6(System.Func{``0,``1,``2,``3,``4,``5})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="func">The function to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``6(System.Func{``0,``1,``2,``3,``4,``5})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``6(System.Func{``0,``1,``2,``3,``4,``5})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T3">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T3</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``6(System.Func{``0,``1,``2,``3,``4,``5})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T4">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T4</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``6(System.Func{``0,``1,``2,``3,``4,``5})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T5">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T5</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``6(System.Func{``0,``1,``2,``3,``4,``5})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="TResult">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>TResult</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``6(System.Func{``0,``1,``2,``3,``4,``5})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``7(System.Func{``0,``1,``2,``3,``4,``5,``6})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="func">The function to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``7(System.Func{``0,``1,``2,``3,``4,``5,``6})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``7(System.Func{``0,``1,``2,``3,``4,``5,``6})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T3">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T3</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``7(System.Func{``0,``1,``2,``3,``4,``5,``6})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T4">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T4</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``7(System.Func{``0,``1,``2,``3,``4,``5,``6})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T5">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T5</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``7(System.Func{``0,``1,``2,``3,``4,``5,``6})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T6">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T6</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``7(System.Func{``0,``1,``2,``3,``4,``5,``6})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="TResult">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>TResult</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``7(System.Func{``0,``1,``2,``3,``4,``5,``6})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``8(System.Func{``0,``1,``2,``3,``4,``5,``6,``7})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="func">The function to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``8(System.Func{``0,``1,``2,``3,``4,``5,``6,``7})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``8(System.Func{``0,``1,``2,``3,``4,``5,``6,``7})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T3">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T3</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``8(System.Func{``0,``1,``2,``3,``4,``5,``6,``7})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T4">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T4</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``8(System.Func{``0,``1,``2,``3,``4,``5,``6,``7})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T5">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T5</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``8(System.Func{``0,``1,``2,``3,``4,``5,``6,``7})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T6">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T6</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``8(System.Func{``0,``1,``2,``3,``4,``5,``6,``7})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T7">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T7</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``8(System.Func{``0,``1,``2,``3,``4,``5,``6,``7})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="TResult">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>TResult</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``8(System.Func{``0,``1,``2,``3,``4,``5,``6,``7})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``9(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8})">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Callbacks.CallbackDefinition" /> class.
+            </summary>
+      <param name="func">The function to be captured in a callback.</param>
+      <typeparam name="T1">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T1</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``9(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T2">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T2</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``9(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T3">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T3</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``9(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T4">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T4</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``9(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T5">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T5</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``9(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T6">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T6</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``9(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T7">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T7</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``9(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="T8">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T8</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``9(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <typeparam name="TResult">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>TResult</parameter>
+            <parameter>M:Gemstone.Web.Razor.Callbacks.CallbackDefinition.From``9(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8})</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>The definition for the callback to be used with JavaScript.</returns>
+    </member>
+    <member name="T:Gemstone.Web.Razor.Elements.Element">
+      <summary>
+            Represents an HTML element.
+            </summary>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Elements.Element.ClickAsync">
+      <summary>
+            Dispatches the 'click' event to this element.
+            </summary>
+      <returns>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>returns</parameter>
+            <parameter>M:Gemstone.Web.Razor.Elements.Element.ClickAsync</parameter>
+          </include>
+        </markup>
+      </returns>
+    </member>
+    <member name="P:Gemstone.Web.Razor.Elements.Element.Reference">
+      <summary>
+            Gets the reference to the element.
+            </summary>
+    </member>
+    <member name="T:Gemstone.Web.Razor.Elements.ElementExtensions">
+      <summary>
+            Extension method for elements.
+            </summary>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Elements.ElementExtensions.AddElements(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+      <summary>
+            Adds the <see cref="T:Gemstone.Web.Razor.Elements.ElementFactory" /> service.
+            </summary>
+      <param name="services">The service collection.</param>
+    </member>
+    <member name="T:Gemstone.Web.Razor.Elements.ElementFactory">
+      <summary>
+            Factory for <see cref="T:Gemstone.Web.Razor.Elements.Element" /> instances.
+            </summary>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Elements.ElementFactory.#ctor(Microsoft.JSInterop.IJSRuntime)">
+      <summary>
+            Creates a new instance of the <see cref="T:Gemstone.Web.Razor.Elements.ElementFactory" /> class.
+            </summary>
+      <param name="jsRuntime">The JavaScript runtime.</param>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Elements.ElementFactory.GetElement(Microsoft.AspNetCore.Components.ElementReference)">
+      <summary>
+            Gets the referenced <see cref="T:Gemstone.Web.Razor.Elements.Element" /> instance.
+            </summary>
+      <param name="reference">The reference to the element.</param>
+      <returns>The referenced element.</returns>
+    </member>
+    <member name="T:Gemstone.Web.Razor.ServiceWorkers.IServiceWorkerContainer">
+      <summary>
+            Interface for interacting with service workers.
+            </summary>
+    </member>
+    <member name="P:Gemstone.Web.Razor.ServiceWorkers.IServiceWorkerContainer.WhenReady">
+      <summary>
+            Returns a task that resolves when the page is
+            controlled by an active service worker.
+            </summary>
+    </member>
+    <member name="T:Gemstone.Web.Razor.ServiceWorkers.ServiceWorkerExtensions">
+      <summary>
+            Defines extension methods for service workers.
+            </summary>
+    </member>
+    <member name="M:Gemstone.Web.Razor.ServiceWorkers.ServiceWorkerExtensions.AddServiceWorkers(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+      <summary>
+            Adds the <see cref="T:Gemstone.Web.Razor.ServiceWorkers.IServiceWorkerContainer" /> to the service collection.
+            </summary>
+      <param name="services">The service collection.</param>
+    </member>
+    <member name="T:Gemstone.Web.Razor.Trees.TreeNode">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>T:Gemstone.Web.Razor.Trees.TreeNode</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Trees.TreeNode.#ctor">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>Gemstone.Web.Razor.Trees.TreeNode</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="P:Gemstone.Web.Razor.Trees.TreeNode.BodyClass">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>P:Gemstone.Web.Razor.Trees.TreeNode.BodyClass</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Trees.TreeNode.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>M:Gemstone.Web.Razor.Trees.TreeNode.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)</parameter>
+          </include>
+        </markup>
+      </summary>
+      <param name="__builder">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>__builder</parameter>
+            <parameter>M:Gemstone.Web.Razor.Trees.TreeNode.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)</parameter>
+          </include>
+        </markup>
+      </param>
+    </member>
+    <member name="P:Gemstone.Web.Razor.Trees.TreeNode.ChildContent">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>P:Gemstone.Web.Razor.Trees.TreeNode.ChildContent</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="P:Gemstone.Web.Razor.Trees.TreeNode.Collapsed">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>P:Gemstone.Web.Razor.Trees.TreeNode.Collapsed</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="P:Gemstone.Web.Razor.Trees.TreeNode.Data">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>P:Gemstone.Web.Razor.Trees.TreeNode.Data</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Trees.TreeNode.DeselectAsync">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>M:Gemstone.Web.Razor.Trees.TreeNode.DeselectAsync</parameter>
+          </include>
+        </markup>
+      </summary>
+      <returns>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>returns</parameter>
+            <parameter>M:Gemstone.Web.Razor.Trees.TreeNode.DeselectAsync</parameter>
+          </include>
+        </markup>
+      </returns>
+    </member>
+    <member name="P:Gemstone.Web.Razor.Trees.TreeNode.Deselected">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>P:Gemstone.Web.Razor.Trees.TreeNode.Deselected</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Trees.TreeNode.Dispose">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocDispose">
+            <parameter>Gemstone.Web.Razor.Trees.TreeNode</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="P:Gemstone.Web.Razor.Trees.TreeNode.Expanded">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>P:Gemstone.Web.Razor.Trees.TreeNode.Expanded</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Trees.TreeNode.GetAncestors">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>M:Gemstone.Web.Razor.Trees.TreeNode.GetAncestors</parameter>
+          </include>
+        </markup>
+      </summary>
+      <returns>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>returns</parameter>
+            <parameter>M:Gemstone.Web.Razor.Trees.TreeNode.GetAncestors</parameter>
+          </include>
+        </markup>
+      </returns>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Trees.TreeNode.GetData``1">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>M:Gemstone.Web.Razor.Trees.TreeNode.GetData``1</parameter>
+          </include>
+        </markup>
+      </summary>
+      <typeparam name="T">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T</parameter>
+            <parameter>M:Gemstone.Web.Razor.Trees.TreeNode.GetData``1</parameter>
+          </include>
+        </markup>
+      </typeparam>
+      <returns>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>returns</parameter>
+            <parameter>M:Gemstone.Web.Razor.Trees.TreeNode.GetData``1</parameter>
+          </include>
+        </markup>
+      </returns>
+    </member>
+    <member name="P:Gemstone.Web.Razor.Trees.TreeNode.IsCollapsed">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>P:Gemstone.Web.Razor.Trees.TreeNode.IsCollapsed</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="P:Gemstone.Web.Razor.Trees.TreeNode.IsSelected">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>P:Gemstone.Web.Razor.Trees.TreeNode.IsSelected</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="P:Gemstone.Web.Razor.Trees.TreeNode.Label">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>P:Gemstone.Web.Razor.Trees.TreeNode.Label</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Trees.TreeNode.OnInitialized">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>M:Gemstone.Web.Razor.Trees.TreeNode.OnInitialized</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="P:Gemstone.Web.Razor.Trees.TreeNode.Parent">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>P:Gemstone.Web.Razor.Trees.TreeNode.Parent</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Trees.TreeNode.SelectAsync">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>M:Gemstone.Web.Razor.Trees.TreeNode.SelectAsync</parameter>
+          </include>
+        </markup>
+      </summary>
+      <returns>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>returns</parameter>
+            <parameter>M:Gemstone.Web.Razor.Trees.TreeNode.SelectAsync</parameter>
+          </include>
+        </markup>
+      </returns>
+    </member>
+    <member name="P:Gemstone.Web.Razor.Trees.TreeNode.Selected">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>P:Gemstone.Web.Razor.Trees.TreeNode.Selected</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="P:Gemstone.Web.Razor.Trees.TreeNode.StartCollapsed">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>P:Gemstone.Web.Razor.Trees.TreeNode.StartCollapsed</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Trees.TreeNode.ToggleCollapsedAsync">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>M:Gemstone.Web.Razor.Trees.TreeNode.ToggleCollapsedAsync</parameter>
+          </include>
+        </markup>
+      </summary>
+      <returns>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>returns</parameter>
+            <parameter>M:Gemstone.Web.Razor.Trees.TreeNode.ToggleCollapsedAsync</parameter>
+          </include>
+        </markup>
+      </returns>
+    </member>
+    <member name="P:Gemstone.Web.Razor.Trees.TreeNode.TreeView">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>P:Gemstone.Web.Razor.Trees.TreeNode.TreeView</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="T:Gemstone.Web.Razor.Trees.TreeNodeCollapseEventArgs">
+      <summary>
+            Arguments for collapsed and expanded events.
+            </summary>
+    </member>
+    <member name="P:Gemstone.Web.Razor.Trees.TreeNodeCollapseEventArgs.Node">
+      <summary>
+            The node that was collapsed or expanded.
+            </summary>
+    </member>
+    <member name="P:Gemstone.Web.Razor.Trees.TreeNodeCollapseEventArgs.View">
+      <summary>
+            The tree view containing the node that was collapsed or expanded.
+            </summary>
+    </member>
+    <member name="T:Gemstone.Web.Razor.Trees.TreeNodeSelectedEventArgs">
+      <summary>
+            Arguments for selected events.
+            </summary>
+    </member>
+    <member name="P:Gemstone.Web.Razor.Trees.TreeNodeSelectedEventArgs.Previous">
+      <summary>
+            The node that was previously selected.
+            </summary>
+    </member>
+    <member name="P:Gemstone.Web.Razor.Trees.TreeNodeSelectedEventArgs.Selected">
+      <summary>
+            The node to which the selection changed.
+            </summary>
+    </member>
+    <member name="P:Gemstone.Web.Razor.Trees.TreeNodeSelectedEventArgs.View">
+      <summary>
+            The tree view in which the selection changed.
+            </summary>
+    </member>
+    <member name="T:Gemstone.Web.Razor.Trees.TreeView">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>T:Gemstone.Web.Razor.Trees.TreeView</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Trees.TreeView.#ctor">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>Gemstone.Web.Razor.Trees.TreeView</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Trees.TreeView.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>M:Gemstone.Web.Razor.Trees.TreeView.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)</parameter>
+          </include>
+        </markup>
+      </summary>
+      <param name="__builder">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>__builder</parameter>
+            <parameter>M:Gemstone.Web.Razor.Trees.TreeView.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)</parameter>
+          </include>
+        </markup>
+      </param>
+    </member>
+    <member name="P:Gemstone.Web.Razor.Trees.TreeView.ChildContent">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>P:Gemstone.Web.Razor.Trees.TreeView.ChildContent</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="P:Gemstone.Web.Razor.Trees.TreeView.NodeCollapsed">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>P:Gemstone.Web.Razor.Trees.TreeView.NodeCollapsed</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="P:Gemstone.Web.Razor.Trees.TreeView.NodeExpanded">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>P:Gemstone.Web.Razor.Trees.TreeView.NodeExpanded</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="P:Gemstone.Web.Razor.Trees.TreeView.SelectedNode">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>P:Gemstone.Web.Razor.Trees.TreeView.SelectedNode</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="P:Gemstone.Web.Razor.Trees.TreeView.SelectionChanged">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>P:Gemstone.Web.Razor.Trees.TreeView.SelectionChanged</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Gemstone.Web.Razor.Trees.TreeView.SetSelectedNodeAsync(Gemstone.Web.Razor.Trees.TreeNode)">
+      <summary>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>summary</parameter>
+            <parameter>M:Gemstone.Web.Razor.Trees.TreeView.SetSelectedNodeAsync(Gemstone.Web.Razor.Trees.TreeNode)</parameter>
+          </include>
+        </markup>
+      </summary>
+      <param name="node">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>node</parameter>
+            <parameter>M:Gemstone.Web.Razor.Trees.TreeView.SetSelectedNodeAsync(Gemstone.Web.Razor.Trees.TreeNode)</parameter>
+          </include>
+        </markup>
+      </param>
+      <returns>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>returns</parameter>
+            <parameter>M:Gemstone.Web.Razor.Trees.TreeView.SetSelectedNodeAsync(Gemstone.Web.Razor.Trees.TreeNode)</parameter>
+          </include>
+        </markup>
+      </returns>
+    </member>
+  </members>
+</doc>
