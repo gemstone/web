@@ -53,7 +53,7 @@ namespace Gemstone.Web.Razor.Callbacks
 
                 writer.WriteStartObject();
 
-                if (value.ReferenceType != null && value.Reference != null)
+                if (value is { ReferenceType: not null, Reference: not null })
                 {
                     writer.WritePropertyName("instance");
                     JsonSerializer.Serialize(writer, value.Reference, value.ReferenceType, options);
