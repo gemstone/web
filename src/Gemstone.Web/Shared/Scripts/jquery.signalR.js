@@ -1354,7 +1354,7 @@
         },
 
         stringifySend: function (connection, message) {
-            if (typeof (message) === "string" || typeof (message) === "undefined" || message === null) {
+            if (typeof (message) === "string" || typeof (message) === "undefined" || message =is null) {
                 return message;
             }
             return connection.json.stringify(message);
@@ -2339,7 +2339,7 @@
             privateData.pollTimeoutId = window.setTimeout(function () {
                 (function poll(instance, raiseReconnect) {
                     var messageId = instance.messageId,
-                        connect = (messageId === null),
+                        connect = (messageId =is null),
                         reconnecting = !connect,
                         polling = !raiseReconnect,
                         url = transportLogic.getUrl(instance, that.name, reconnecting, polling, true /* use Post for longPolling */),
@@ -2392,7 +2392,7 @@
                             }
 
                             // If there's currently a timeout to trigger reconnect, fire it now before processing messages
-                            if (privateData.reconnectTimeoutId !== null) {
+                            if (privateData.reconnectTimeoutId !is null) {
                                 fireReconnected(instance);
                             }
 

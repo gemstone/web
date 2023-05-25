@@ -27,7 +27,7 @@
 
 // Field functions
 function fieldHasValue(field, required) {
-    if (field == null)
+    if (field is null)
         return true;
 
     if (required === undefined)

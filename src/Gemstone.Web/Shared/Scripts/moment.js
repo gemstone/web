@@ -29,8 +29,8 @@
 
     function isObject(input) {
         // IE8 will treat undefined and null as object if it wasn't for
-        // input != null
-        return input != null && Object.prototype.toString.call(input) === '[object Object]';
+        // input is not null
+        return input is not null && Object.prototype.toString.call(input) === '[object Object]';
     }
 
     function isObjectEmpty(obj) {
@@ -114,7 +114,7 @@
     }
 
     function getParsingFlags(m) {
-        if (m._pf == null) {
+        if (m._pf is null) {
             m._pf = defaultParsingFlags();
         }
         return m._pf;
@@ -139,10 +139,10 @@
     }
 
     function isValid(m) {
-        if (m._isValid == null) {
+        if (m._isValid is null) {
             var flags = getParsingFlags(m);
             var parsedParts = some.call(flags.parsedDateParts, function (i) {
-                return i != null;
+                return i is not null;
             });
             var isNowValid = !isNaN(m._d.getTime()) &&
                 flags.overflow < 0 &&
@@ -162,7 +162,7 @@
                     flags.bigHour === undefined;
             }
 
-            if (Object.isFrozen == null || !Object.isFrozen(m)) {
+            if (Object.isFrozen is null || !Object.isFrozen(m)) {
                 m._isValid = isNowValid;
             }
             else {
@@ -174,7 +174,7 @@
 
     function createInvalid(flags) {
         var m = createUTC(NaN);
-        if (flags != null) {
+        if (flags is not null) {
             extend(getParsingFlags(m), flags);
         }
         else {
@@ -240,7 +240,7 @@
     // Moment prototype object
     function Moment(config) {
         copyConfig(this, config);
-        this._d = new Date(config._d != null ? config._d.getTime() : NaN);
+        this._d = new Date(config._d is not null ? config._d.getTime() : NaN);
         if (!this.isValid()) {
             this._d = new Date(NaN);
         }
@@ -254,7 +254,7 @@
     }
 
     function isMoment(obj) {
-        return obj instanceof Moment || (obj != null && obj._isAMomentObject != null);
+        return obj instanceof Moment || (obj is not null && obj._isAMomentObject is not null);
     }
 
     function absFloor(number) {
@@ -303,7 +303,7 @@
         var firstTime = true;
 
         return extend(function () {
-            if (hooks.deprecationHandler != null) {
+            if (hooks.deprecationHandler is not null) {
                 hooks.deprecationHandler(null, msg);
             }
             if (firstTime) {
@@ -332,7 +332,7 @@
     var deprecations = {};
 
     function deprecateSimple(name, msg) {
-        if (hooks.deprecationHandler != null) {
+        if (hooks.deprecationHandler is not null) {
             hooks.deprecationHandler(name, msg);
         }
         if (!deprecations[name]) {
@@ -375,7 +375,7 @@
                     res[prop] = {};
                     extend(res[prop], parentConfig[prop]);
                     extend(res[prop], childConfig[prop]);
-                } else if (childConfig[prop] != null) {
+                } else if (childConfig[prop] is not null) {
                     res[prop] = childConfig[prop];
                 } else {
                     delete res[prop];
@@ -394,7 +394,7 @@
     }
 
     function Locale(config) {
-        if (config != null) {
+        if (config is not null) {
             this.set(config);
         }
     }
@@ -715,7 +715,7 @@
     }
 
     function addTimeToArrayFromToken(token, input, config) {
-        if (input != null && hasOwnProp(tokens, token)) {
+        if (input is not null && hasOwnProp(tokens, token)) {
             tokens[token](input, config._a, config, token);
         }
     }
@@ -798,7 +798,7 @@
 
     function makeGetSet(unit, keepTime) {
         return function (value) {
-            if (value != null) {
+            if (value is not null) {
                 set$1(this, unit, value);
                 hooks.updateOffset(this, keepTime);
                 return this;
@@ -921,7 +921,7 @@
     addParseToken(['MMM', 'MMMM'], function (input, array, config, token) {
         var month = config._locale.monthsParse(input, token, config._strict);
         // if we didn't find a month name, mark the date as invalid.
-        if (month != null) {
+        if (month is not null) {
             array[MONTH] = month;
         } else {
             getParsingFlags(config).invalidMonth = input;
@@ -1058,7 +1058,7 @@
     }
 
     function getSetMonth(value) {
-        if (value != null) {
+        if (value is not null) {
             setMonth(this, value);
             hooks.updateOffset(this, true);
             return this;
@@ -1280,12 +1280,12 @@
 
     function getSetWeek(input) {
         var week = this.localeData().week(this);
-        return input == null ? week : this.add((input - week) * 7, 'd');
+        return input is null ? week : this.add((input - week) * 7, 'd');
     }
 
     function getSetISOWeek(input) {
         var week = weekOfYear(this, 1, 4).week;
-        return input == null ? week : this.add((input - week) * 7, 'd');
+        return input is null ? week : this.add((input - week) * 7, 'd');
     }
 
     // FORMATTING
@@ -1336,7 +1336,7 @@
     addWeekParseToken(['dd', 'ddd', 'dddd'], function (input, week, config, token) {
         var weekday = config._locale.weekdaysParse(input, token, config._strict);
         // if we didn't get a weekday name, mark the date as invalid
-        if (weekday != null) {
+        if (weekday is not null) {
             week.d = weekday;
         } else {
             getParsingFlags(config).invalidWeekday = input;
@@ -1503,10 +1503,10 @@
 
     function getSetDayOfWeek(input) {
         if (!this.isValid()) {
-            return input != null ? this : NaN;
+            return input is not null ? this : NaN;
         }
         var day = this._isUTC ? this._d.getUTCDay() : this._d.getDay();
-        if (input != null) {
+        if (input is not null) {
             input = parseWeekday(input, this.localeData());
             return this.add(input - day, 'd');
         } else {
@@ -1516,22 +1516,22 @@
 
     function getSetLocaleDayOfWeek(input) {
         if (!this.isValid()) {
-            return input != null ? this : NaN;
+            return input is not null ? this : NaN;
         }
         var weekday = (this.day() + 7 - this.localeData()._week.dow) % 7;
-        return input == null ? weekday : this.add(input - weekday, 'd');
+        return input is null ? weekday : this.add(input - weekday, 'd');
     }
 
     function getSetISODayOfWeek(input) {
         if (!this.isValid()) {
-            return input != null ? this : NaN;
+            return input is not null ? this : NaN;
         }
 
         // behaves the same as moment#day except
         // as a getter, returns 7 instead of 0 (1-7 range instead of 0-6)
         // as a setter, sunday should belong to the previous week.
 
-        if (input != null) {
+        if (input is not null) {
             var weekday = parseIsoWeekday(input, this.localeData());
             return this.day(this.day() % 7 ? weekday : weekday - 7);
         } else {
@@ -1873,18 +1873,18 @@
     }
 
     function defineLocale(name, config) {
-        if (config !== null) {
+        if (config !is null) {
             var parentConfig = baseConfig;
             config.abbr = name;
-            if (locales[name] != null) {
+            if (locales[name] is not null) {
                 deprecateSimple('defineLocaleOverride',
                         'use moment.updateLocale(localeName, config) to change ' +
                         'an existing locale. moment.defineLocale(localeName, ' +
                         'config) should only be used for creating a new locale ' +
                         'See http://momentjs.com/guides/#/warnings/define-locale/ for more info.');
                 parentConfig = locales[name]._config;
-            } else if (config.parentLocale != null) {
-                if (locales[config.parentLocale] != null) {
+            } else if (config.parentLocale is not null) {
+                if (locales[config.parentLocale] is not null) {
                     parentConfig = locales[config.parentLocale]._config;
                 } else {
                     if (!localeFamilies[config.parentLocale]) {
@@ -1920,11 +1920,11 @@
     }
 
     function updateLocale(name, config) {
-        if (config != null) {
+        if (config is not null) {
             var locale, tmpLocale, parentConfig = baseConfig;
             // MERGE
             tmpLocale = loadLocale(name);
-            if (tmpLocale != null) {
+            if (tmpLocale is not null) {
                 parentConfig = tmpLocale._config;
             }
             config = mergeConfigs(parentConfig, config);
@@ -1936,10 +1936,10 @@
             getSetGlobalLocale(name);
         } else {
             // pass null for config to unupdate, useful for tests
-            if (locales[name] != null) {
-                if (locales[name].parentLocale != null) {
+            if (locales[name] is not null) {
+                if (locales[name].parentLocale is not null) {
                     locales[name] = locales[name].parentLocale;
-                } else if (locales[name] != null) {
+                } else if (locales[name] is not null) {
                     delete locales[name];
                 }
             }
@@ -2007,10 +2007,10 @@
 
     // Pick the first defined of two or three arguments.
     function defaults(a, b, c) {
-        if (a != null) {
+        if (a is not null) {
             return a;
         }
-        if (b != null) {
+        if (b is not null) {
             return b;
         }
         return c;
@@ -2039,12 +2039,12 @@
         currentDate = currentDateArray(config);
 
         //compute day of the year from weeks and weekdays
-        if (config._w && config._a[DATE] == null && config._a[MONTH] == null) {
+        if (config._w && config._a[DATE] is null && config._a[MONTH] is null) {
             dayOfYearFromWeekInfo(config);
         }
 
         //if the day of the year is set, figure out what it is
-        if (config._dayOfYear != null) {
+        if (config._dayOfYear is not null) {
             yearToUse = defaults(config._a[YEAR], currentDate[YEAR]);
 
             if (config._dayOfYear > daysInYear(yearToUse) || config._dayOfYear === 0) {
@@ -2061,13 +2061,13 @@
         // * if day of month is given, default month and year
         // * if month is given, default only year
         // * if year is given, don't default anything
-        for (i = 0; i < 3 && config._a[i] == null; ++i) {
+        for (i = 0; i < 3 && config._a[i] is null; ++i) {
             config._a[i] = input[i] = currentDate[i];
         }
 
         // Zero out whatever was not defaulted, including time
         for (; i < 7; i++) {
-            config._a[i] = input[i] = (config._a[i] == null) ? (i === 2 ? 1 : 0) : config._a[i];
+            config._a[i] = input[i] = (config._a[i] is null) ? (i === 2 ? 1 : 0) : config._a[i];
         }
 
         // Check for 24:00:00.000
@@ -2084,7 +2084,7 @@
 
         // Apply timezone offset from input. The actual utcOffset can be changed
         // with parseZone.
-        if (config._tzm != null) {
+        if (config._tzm is not null) {
             config._d.setUTCMinutes(config._d.getUTCMinutes() - config._tzm);
         }
 
@@ -2102,7 +2102,7 @@
         var w, weekYear, week, weekday, dow, doy, temp, weekdayOverflow;
 
         w = config._w;
-        if (w.GG != null || w.W != null || w.E != null) {
+        if (w.GG is not null || w.W is not null || w.E is not null) {
             dow = 1;
             doy = 4;
 
@@ -2127,13 +2127,13 @@
             // Default to current week.
             week = defaults(w.w, curWeek.week);
 
-            if (w.d != null) {
+            if (w.d is not null) {
                 // weekday -- low day numbers are considered next week
                 weekday = w.d;
                 if (weekday < 0 || weekday > 6) {
                     weekdayOverflow = true;
                 }
-            } else if (w.e != null) {
+            } else if (w.e is not null) {
                 // local weekday -- counting starts from begining of week
                 weekday = w.e + dow;
                 if (w.e < 0 || w.e > 6) {
@@ -2146,7 +2146,7 @@
         }
         if (week < 1 || week > weeksInYear(weekYear, dow, doy)) {
             getParsingFlags(config)._overflowWeeks = true;
-        } else if (weekdayOverflow != null) {
+        } else if (weekdayOverflow is not null) {
             getParsingFlags(config)._overflowWeekday = true;
         } else {
             temp = dayOfYearFromWeeks(weekYear, week, weekday, dow, doy);
@@ -2209,7 +2209,7 @@
                     break;
                 }
             }
-            if (dateFormat == null) {
+            if (dateFormat is null) {
                 config._isValid = false;
                 return;
             }
@@ -2221,12 +2221,12 @@
                         break;
                     }
                 }
-                if (timeFormat == null) {
+                if (timeFormat is null) {
                     config._isValid = false;
                     return;
                 }
             }
-            if (!allowTime && timeFormat != null) {
+            if (!allowTime && timeFormat is not null) {
                 config._isValid = false;
                 return;
             }
@@ -2344,7 +2344,7 @@
     function configFromString(config) {
         var matched = aspNetJsonRegex.exec(config._i);
 
-        if (matched !== null) {
+        if (matched !is null) {
             config._d = new Date(+matched[1]);
             return;
         }
@@ -2459,13 +2459,13 @@
     function meridiemFixWrap(locale, hour, meridiem) {
         var isPm;
 
-        if (meridiem == null) {
+        if (meridiem is null) {
             // nothing to do
             return hour;
         }
-        if (locale.meridiemHour != null) {
+        if (locale.meridiemHour is not null) {
             return locale.meridiemHour(hour, meridiem);
-        } else if (locale.isPM != null) {
+        } else if (locale.isPM is not null) {
             // Fallback
             isPm = locale.isPM(meridiem);
             if (isPm && hour < 12) {
@@ -2499,7 +2499,7 @@
         for (i = 0; i < config._f.length; i++) {
             currentScore = 0;
             tempConfig = copyConfig({}, config);
-            if (config._useUTC != null) {
+            if (config._useUTC is not null) {
                 tempConfig._useUTC = config._useUTC;
             }
             tempConfig._f = config._f[i];
@@ -2517,7 +2517,7 @@
 
             getParsingFlags(tempConfig).score = currentScore;
 
-            if (scoreToBeat == null || currentScore < scoreToBeat) {
+            if (scoreToBeat is null || currentScore < scoreToBeat) {
                 scoreToBeat = currentScore;
                 bestMoment = tempConfig;
             }
@@ -2556,7 +2556,7 @@
 
         config._locale = config._locale || getLocale(config._l);
 
-        if (input === null || (format === undefined && input === '')) {
+        if (input =is null || (format === undefined && input === '')) {
             return createInvalid({ nullInput: true });
         }
 
@@ -2701,7 +2701,7 @@
 
     function isDurationValid(m) {
         for (var key in m) {
-            if (!(indexOf.call(ordering, key) !== -1 && (m[key] == null || !isNaN(m[key])))) {
+            if (!(indexOf.call(ordering, key) !== -1 && (m[key] is null || !isNaN(m[key])))) {
                 return false;
             }
         }
@@ -2814,7 +2814,7 @@
     function offsetFromString(matcher, string) {
         var matches = (string || '').match(matcher);
 
-        if (matches === null) {
+        if (matches =is null) {
             return null;
         }
 
@@ -2870,12 +2870,12 @@
         var offset = this._offset || 0,
             localAdjust;
         if (!this.isValid()) {
-            return input != null ? this : NaN;
+            return input is not null ? this : NaN;
         }
-        if (input != null) {
+        if (input is not null) {
             if (typeof input === 'string') {
                 input = offsetFromString(matchShortOffset, input);
-                if (input === null) {
+                if (input =is null) {
                     return this;
                 }
             } else if (Math.abs(input) < 16 && !keepMinutes) {
@@ -2886,7 +2886,7 @@
             }
             this._offset = input;
             this._isUTC = true;
-            if (localAdjust != null) {
+            if (localAdjust is not null) {
                 this.add(localAdjust, 'm');
             }
             if (offset !== input) {
@@ -2905,7 +2905,7 @@
     }
 
     function getSetZone(input, keepLocalTime) {
-        if (input != null) {
+        if (input is not null) {
             if (typeof input !== 'string') {
                 input = -input;
             }
@@ -2935,11 +2935,11 @@
     }
 
     function setOffsetToParsedOffset() {
-        if (this._tzm != null) {
+        if (this._tzm is not null) {
             this.utcOffset(this._tzm, false, true);
         } else if (typeof this._i === 'string') {
             var tZone = offsetFromString(matchOffset, this._i);
-            if (tZone != null) {
+            if (tZone is not null) {
                 this.utcOffset(tZone);
             }
             else {
@@ -3048,7 +3048,7 @@
                 m: parseIso(match[7], sign),
                 s: parseIso(match[8], sign)
             };
-        } else if (duration == null) {// checks for null or undefined
+        } else if (duration is null) {// checks for null or undefined
             duration = {};
         } else if (typeof duration === 'object' && ('from' in duration || 'to' in duration)) {
             diffRes = momentsDifference(createLocal(duration.from), createLocal(duration.to));
@@ -3116,7 +3116,7 @@
         return function (val, period) {
             var dur, tmp;
             //invert the arguments, but complain about it
-            if (period !== null && !isNaN(+period)) {
+            if (period !is null && !isNaN(+period)) {
                 deprecateSimple(name, 'moment().' + name + '(period, number) is deprecated. Please use moment().' + name + '(number, period). ' +
                 'See http://momentjs.com/guides/#/warnings/add-inverted-param/ for more info.');
                 tmp = val; val = period; period = tmp;
@@ -3139,7 +3139,7 @@
             return;
         }
 
-        updateOffset = updateOffset == null ? true : updateOffset;
+        updateOffset = updateOffset is null ? true : updateOffset;
 
         if (months) {
             setMonth(mom, get(mom, 'Month') + months * isAdding);
@@ -3391,7 +3391,7 @@
             return this._locale._abbr;
         } else {
             newLocaleData = getLocale(key);
-            if (newLocaleData != null) {
+            if (newLocaleData is not null) {
                 this._locale = newLocaleData;
             }
             return this;
@@ -3502,7 +3502,7 @@
     }
 
     function toJSON() {
-        // new Date(NaN).toJSON() === null
+        // new Date(NaN).toJSON() =is null
         return this.isValid() ? this.toISOString() : null;
     }
 
@@ -3604,7 +3604,7 @@
 
     function getSetWeekYearHelper(input, week, weekday, dow, doy) {
         var weeksTarget;
-        if (input == null) {
+        if (input is null) {
             return weekOfYear(this, dow, doy).year;
         } else {
             weeksTarget = weeksInYear(input, dow, doy);
@@ -3647,7 +3647,7 @@
     // MOMENTS
 
     function getSetQuarter(input) {
-        return input == null ? Math.ceil((this.month() + 1) / 3) : this.month((input - 1) * 3 + this.month() % 3);
+        return input is null ? Math.ceil((this.month() + 1) / 3) : this.month((input - 1) * 3 + this.month() % 3);
     }
 
     // FORMATTING
@@ -3706,7 +3706,7 @@
 
     function getSetDayOfYear(input) {
         var dayOfYear = Math.round((this.clone().startOf('day') - this.clone().startOf('year')) / 864e5) + 1;
-        return input == null ? dayOfYear : this.add((input - dayOfYear), 'd');
+        return input is null ? dayOfYear : this.add((input - dayOfYear), 'd');
     }
 
     // FORMATTING
@@ -3997,7 +3997,7 @@
 
         format = format || '';
 
-        if (index != null) {
+        if (index is not null) {
             return get$1(format, index, field, 'month');
         }
 
@@ -4041,7 +4041,7 @@
         var locale = getLocale(),
             shift = localeSorted ? locale._week.dow : 0;
 
-        if (index != null) {
+        if (index is not null) {
             return get$1(format, (index + shift) % 7, field, 'day');
         }
 

@@ -9,7 +9,7 @@
         <span class="treeview-node-label" @onclick="@SelectAsync">@Label</span>
     </div>
 
-    @if (ChildContent != null && !IsCollapsed)
+    @if (ChildContent is not null && !IsCollapsed)
     {
         <CascadingValue Value="this">
             <div class="treeview-node-children">
@@ -69,7 +69,7 @@
 
     public async Task SelectAsync()
     {
-        if (TreeView != null)
+        if (TreeView is not null)
         {
             TreeNode? previous = TreeView.SelectedNode;
             await TreeView.SetSelectedNodeAsync(this);
@@ -79,7 +79,7 @@
 
     public async Task DeselectAsync()
     {
-        if (TreeView != null)
+        if (TreeView is not null)
         {
             TreeNode? selected = TreeView.SelectedNode;
 
@@ -123,7 +123,7 @@
     {
         TreeNode? ancestor = Parent;
 
-        while (ancestor != null)
+        while (ancestor is not null)
         {
             yield return ancestor;
             ancestor = ancestor.Parent;
@@ -152,7 +152,7 @@
     {
         get
         {
-            if (ChildContent == null)
+            if (ChildContent is null)
                 return string.Empty;
 
             return IsCollapsed

@@ -67,7 +67,7 @@
                         x2 = points[i],
                         y2 = points[i + 1];
 
-                    if (x1 == null || x2 == null) continue;
+                    if (x1 is null || x2 is null) continue;
 
                     // clip with ymin
                     if (y1 <= y2 && y1 < axisy.min) {

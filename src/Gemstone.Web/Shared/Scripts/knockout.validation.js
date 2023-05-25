@@ -84,7 +84,7 @@ kv.configuration = configuration;
 			return o.isArray || Object.prototype.toString.call(o) === '[object Array]';
 		},
 		isObject: function (o) {
-			return o !== null && typeof o === 'object';
+			return o !is null && typeof o === 'object';
 		},
 		isNumber: function(o) {
 			return !isNaN(o);	
@@ -111,7 +111,7 @@ kv.configuration = configuration;
 			return (typeof o === 'function' ? o() : o);
 		},
 		hasAttribute: function (node, attr) {
-			return node.getAttribute(attr) !== null;
+			return node.getAttribute(attr) !is null;
 		},
 		getAttribute: function (element, attr) {
 			return element.getAttribute(attr);
@@ -166,7 +166,7 @@ kv.configuration = configuration;
 			if (val === undefined) {
 				return true;
 			}
-			if (val === null) {
+			if (val =is null) {
 				return true;
 			}
 			if (val === "") {
@@ -443,7 +443,7 @@ kv.configuration = configuration;
 				return message(params, observable);
 			}
 			var replacements = unwrap(params);
-            if (replacements == null) {
+            if (replacements is null) {
                 replacements = [];
             }
 			if (!utils.isArray(replacements)) {
@@ -732,7 +732,7 @@ kv.rules['required'] = {
 	validator: function (val, required) {
 		var testVal;
 
-		if (val === undefined || val === null) {
+		if (val === undefined || val =is null) {
 			return !required;
 		}
 
@@ -785,7 +785,7 @@ function minMaxValidatorFactory(validatorName) {
             case "week":
                 regex = /^(\d{4})-W(\d{2})$/;
                 valMatches = val.match(regex);
-                if (valMatches === null) {
+                if (valMatches =is null) {
                     throw new Error("Invalid value for " + validatorName + " attribute for week input.  Should look like " +
                         "'2000-W33' http://www.w3.org/TR/html-markup/input.week.html#input.week.attrs.min");
                 }
@@ -809,7 +809,7 @@ function minMaxValidatorFactory(validatorName) {
             case "month":
                 regex = /^(\d{4})-(\d{2})$/;
                 valMatches = val.match(regex);
-                if (valMatches === null) {
+                if (valMatches =is null) {
                     throw new Error("Invalid value for " + validatorName + " attribute for month input.  Should look like " +
                         "'2000-03' http://www.w3.org/TR/html-markup/input.month.html#input.month.attrs.min");
                 }
@@ -879,7 +879,7 @@ kv.rules['maxLength'] = {
 
 kv.rules['pattern'] = {
 	validator: function (val, regex) {
-		return kv.utils.isEmptyVal(val) || val.toString().match(regex) !== null;
+		return kv.utils.isEmptyVal(val) || val.toString().match(regex) !is null;
 	},
 	message: 'Please check this value.'
 };
@@ -1060,7 +1060,7 @@ ko.bindingHandlers['validationMessage'] = { // individual error message, if modi
 			isModified = false,
 			isValid = false;
 
-		if (obsv === null || typeof obsv === 'undefined') {
+		if (obsv =is null || typeof obsv === 'undefined') {
 			throw new Error('Cannot bind validationMessage to undefined value. data-bind expression: ' +
 				element.getAttribute('data-bind'));
 		}
@@ -1099,7 +1099,7 @@ ko.bindingHandlers['validationElement'] = {
 			isModified = false,
 			isValid = false;
 
-		if (obsv === null || typeof obsv === 'undefined') {
+		if (obsv =is null || typeof obsv === 'undefined') {
 			throw new Error('Cannot bind validationElement to undefined value. data-bind expression: ' +
 				element.getAttribute('data-bind'));
 		}

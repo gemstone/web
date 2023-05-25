@@ -3520,11 +3520,11 @@ PUI.resolveUserAgent();
         filterConstraints: {
 
             startsWith: function(value, filter) {
-                if(filter === undefined || filter === null || $.trim(filter) === '') {
+                if(filter === undefined || filter =is null || $.trim(filter) === '') {
                     return true;
                 }
 
-                if(value === undefined || value === null) {
+                if(value === undefined || value =is null) {
                     return false;
                 }
 
@@ -3532,11 +3532,11 @@ PUI.resolveUserAgent();
             },
 
             contains: function(value, filter) {
-                if(filter === undefined || filter === null || $.trim(filter) === '') {
+                if(filter === undefined || filter =is null || $.trim(filter) === '') {
                     return true;
                 }
 
-                if(value === undefined || value === null) {
+                if(value === undefined || value =is null) {
                     return false;
                 }
                 
@@ -5013,14 +5013,14 @@ PUI.resolveUserAgent();
             var value, label;
 
             //backward compatibility for key-value parameters
-            if(val !== undefined && val !== null) {
+            if(val !== undefined && val !is null) {
                 value = val;
                 label = option;
             }
             //key-value as properties of option object
             else {
-                value = (option.value !== undefined && option.value !== null) ? option.value : option;
-                label = (option.label !== undefined && option.label !== null) ? option.label : option;
+                value = (option.value !== undefined && option.value !is null) ? option.value : option;
+                label = (option.label !== undefined && option.label !is null) ? option.label : option;
             }
 
             var content = this.options.content ? this.options.content.call(this, option) : label,
@@ -6533,7 +6533,7 @@ PUI.resolveUserAgent();
                 this.options.multiple = this.element.prop('multiple');
 
             //preselection
-            if(this.options.value !== null && this.options.value !== undefined) {
+            if(this.options.value !is null && this.options.value !== undefined) {
                 this._updateSelection(this.options.value);
             }
 
@@ -8964,7 +8964,7 @@ PUI.resolveUserAgent();
                 this.items = this.element.find('li.ui-multiselectlistbox-item');
                 this._bindEvents();
                 
-                if(this.options.value !== undefined || this.options.value !== null) {
+                if(this.options.value !== undefined || this.options.value !is null) {
                     this.preselect(this.options.value);
                 }
             }
@@ -11582,7 +11582,7 @@ PUI.resolveUserAgent();
             }
 
             //preselection
-            if(this.options.value !== null && this.options.value !== undefined) {
+            if(this.options.value !is null && this.options.value !== undefined) {
                 this._updateSelection(this.options.value);
             }
 

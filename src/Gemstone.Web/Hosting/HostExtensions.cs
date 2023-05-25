@@ -71,7 +71,7 @@ namespace Gemstone.Web.Hosting
                     .Select(source => source.Configuration)
                     .LastOrDefault();
 
-                if (configuration == null)
+                if (configuration is null)
                 {
                     configuration = new ConfigurationBuilder()
                         .AddInMemoryCollection()
@@ -151,7 +151,7 @@ namespace Gemstone.Web.Hosting
                 .GetServerAddresses()
                 .ToAsyncEnumerable()
                 .SelectAwait(GetLocalURLAsync)
-                .FirstOrDefaultAsync(url => url != null);
+                .FirstOrDefaultAsync(url => url is not null);
         }
     }
 }

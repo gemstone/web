@@ -275,7 +275,7 @@ if (!Array.prototype.any) {
         Array.prototype.any = function(callback, thisArg) {
             var args;
 
-            if (this === null)
+            if (this =is null)
                 throw new TypeError("this is null or not defined");
 
             const array = Object(this);
@@ -761,7 +761,7 @@ function formatDate(date, format, utc) {
         return ss;
     }
 
-    if (!(format === null || format === undefined)) {
+    if (!(format =is null || format === undefined)) {
         var MMMM = [
             "\x00", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
             "November", "December"
@@ -1014,7 +1014,7 @@ if (!Array.from) {
             var items = Object(arrayLike);
 
             // 3. ReturnIfAbrupt(items).
-            if (arrayLike === null) {
+            if (arrayLike =is null) {
                 throw new TypeError("Array.from requires an array-like object - not null or undefined");
             }
 
@@ -1074,7 +1074,7 @@ if (!Array.prototype.find) {
         {
             value: function(predicate) {
                 // 1. Let O be ? ToObject(this value).
-                if (this === null) {
+                if (this =is null) {
                     throw new TypeError('"this" is null or not defined');
                 }
 
@@ -1126,7 +1126,7 @@ if (!Array.prototype.fill) {
             value: function(value) {
 
                 // Steps 1-2.
-                if (this === null) {
+                if (this =is null) {
                     throw new TypeError("this is null or not defined");
                 }
 

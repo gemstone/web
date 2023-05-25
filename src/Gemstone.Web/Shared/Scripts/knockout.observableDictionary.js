@@ -147,7 +147,7 @@
 
             var wrapper = this._wrappers[key];
 
-            if (wrapper == null) {
+            if (wrapper is null) {
                 wrapper = this._wrappers[key] = new ko.computed({
                     read: function () {
                         var value = getValue(key, this.items());

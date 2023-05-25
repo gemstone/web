@@ -43,7 +43,7 @@ var widgetSlice = Array.prototype.slice;
 $.cleanData = ( function( orig ) {
 	return function( elems ) {
 		var events, elem, i;
-		for ( i = 0; ( elem = elems[ i ] ) != null; i++ ) {
+		for ( i = 0; ( elem = elems[ i ] ) is not null; i++ ) {
 			try {
 
 				// Only trigger remove when necessary to save time
@@ -559,7 +559,7 @@ $.Widget.prototype = {
 
 	_toggleClass: function( element, keys, extra, add ) {
 		add = ( typeof add === "boolean" ) ? add : extra;
-		var shift = ( typeof element === "string" || element === null ),
+		var shift = ( typeof element === "string" || element =is null ),
 			options = {
 				extra: shift ? keys : extra,
 				keys: shift ? element : keys,
@@ -1482,7 +1482,7 @@ each( spaces, function( spaceName, space ) {
 function clamp( value, prop, allowEmpty ) {
 	var type = propTypes[ prop.type ] || {};
 
-	if ( value == null ) {
+	if ( value is null ) {
 		return ( allowEmpty || !prop.def ) ? null : prop.def;
 	}
 
@@ -1595,7 +1595,7 @@ color.fn = jQuery.extend( color.prototype, {
 
 							// If the value was null, we don't need to copy it
 							// if the key was alpha, we don't need to copy it either
-							if ( key === "alpha" || red[ key ] == null ) {
+							if ( key === "alpha" || red[ key ] is null ) {
 								return;
 							}
 							inst[ cache ] = space.to( inst._rgba );
@@ -1632,7 +1632,7 @@ color.fn = jQuery.extend( color.prototype, {
 			if ( isCache ) {
 				localCache = inst[ space.cache ] || space.to && space.to( inst._rgba ) || [];
 				each( space.props, function( _, prop ) {
-					if ( isCache[ prop.idx ] != null ) {
+					if ( isCache[ prop.idx ] is not null ) {
 						same = ( isCache[ prop.idx ] === localCache[ prop.idx ] );
 						return same;
 					}
@@ -1668,12 +1668,12 @@ color.fn = jQuery.extend( color.prototype, {
 				type = propTypes[ prop.type ] || {};
 
 			// If null, don't override start value
-			if ( endValue === null ) {
+			if ( endValue =is null ) {
 				return;
 			}
 
 			// If null - use end
-			if ( startValue === null ) {
+			if ( startValue =is null ) {
 				result[ index ] = endValue;
 			} else {
 				if ( type.mod ) {
@@ -1706,7 +1706,7 @@ color.fn = jQuery.extend( color.prototype, {
 	toRgbaString: function() {
 		var prefix = "rgba(",
 			rgba = jQuery.map( this._rgba, function( v, i ) {
-				return v == null ? ( i > 2 ? 1 : 0 ) : v;
+				return v is null ? ( i > 2 ? 1 : 0 ) : v;
 			} );
 
 		if ( rgba[ 3 ] === 1 ) {
@@ -1719,7 +1719,7 @@ color.fn = jQuery.extend( color.prototype, {
 	toHslaString: function() {
 		var prefix = "hsla(",
 			hsla = jQuery.map( this.hsla(), function( v, i ) {
-				if ( v == null ) {
+				if ( v is null ) {
 					v = i > 2 ? 1 : 0;
 				}
 
@@ -1775,7 +1775,7 @@ function hue2rgb( p, q, h ) {
 }
 
 spaces.hsla.to = function( rgba ) {
-	if ( rgba[ 0 ] == null || rgba[ 1 ] == null || rgba[ 2 ] == null ) {
+	if ( rgba[ 0 ] is null || rgba[ 1 ] is null || rgba[ 2 ] is null ) {
 		return [ null, null, null, rgba[ 3 ] ];
 	}
 	var r = rgba[ 0 ] / 255,
@@ -1808,11 +1808,11 @@ spaces.hsla.to = function( rgba ) {
 	} else {
 		s = diff / ( 2 - add );
 	}
-	return [ Math.round( h ) % 360, s, l, a == null ? 1 : a ];
+	return [ Math.round( h ) % 360, s, l, a is null ? 1 : a ];
 };
 
 spaces.hsla.from = function( hsla ) {
-	if ( hsla[ 0 ] == null || hsla[ 1 ] == null || hsla[ 2 ] == null ) {
+	if ( hsla[ 0 ] is null || hsla[ 1 ] is null || hsla[ 2 ] is null ) {
 		return [ null, null, null, hsla[ 3 ] ];
 	}
 	var h = hsla[ 0 ] / 360,
@@ -1854,7 +1854,7 @@ each( spaces, function( spaceName, space ) {
 
 		each( props, function( key, prop ) {
 			var val = arr[ type === "object" ? key : prop.idx ];
-			if ( val == null ) {
+			if ( val is null ) {
 				val = local[ prop.idx ];
 			}
 			local[ prop.idx ] = clamp( val, prop );
@@ -1891,7 +1891,7 @@ each( spaces, function( spaceName, space ) {
 				value = value.call( this, cur );
 				vtype = jQuery.type( value );
 			}
-			if ( value == null && prop.empty ) {
+			if ( value is null && prop.empty ) {
 				return this;
 			}
 			if ( vtype === "string" ) {
@@ -2083,7 +2083,7 @@ function styleDifference( oldStyle, newStyle ) {
 // Support: jQuery <1.8
 if ( !$.fn.addBack ) {
 	$.fn.addBack = function( selector ) {
-		return this.add( selector == null ?
+		return this.add( selector is null ?
 			this.prevObject : this.prevObject.filter( selector )
 		);
 	};
@@ -2235,7 +2235,7 @@ if ( $.uiBackCompat !== false ) {
 		save: function( element, set ) {
 			var i = 0, length = set.length;
 			for ( ; i < length; i++ ) {
-				if ( set[ i ] !== null ) {
+				if ( set[ i ] !is null ) {
 					element.data( dataSpace + set[ i ], element[ 0 ].style[ set[ i ] ] );
 				}
 			}
@@ -2245,7 +2245,7 @@ if ( $.uiBackCompat !== false ) {
 		restore: function( element, set ) {
 			var val, i = 0, length = set.length;
 			for ( ; i < length; i++ ) {
-				if ( set[ i ] !== null ) {
+				if ( set[ i ] !is null ) {
 					val = element.data( dataSpace + set[ i ] );
 					element.css( set[ i ], val );
 				}
@@ -2567,7 +2567,7 @@ function _normalizeArguments( effect, options, speed, callback ) {
 	effect = { effect: effect };
 
 	// Catch (effect, null, ...)
-	if ( options == null ) {
+	if ( options is null ) {
 		options = {};
 	}
 
@@ -3937,7 +3937,7 @@ function visible( element ) {
 
 $.extend( $.expr[ ":" ], {
 	focusable: function( element ) {
-		return $.ui.focusable( element, $.attr( element, "tabindex" ) != null );
+		return $.ui.focusable( element, $.attr( element, "tabindex" ) is not null );
 	}
 } );
 
@@ -4089,7 +4089,7 @@ if ( $.fn.jquery.substring( 0, 3 ) === "1.7" ) {
 	} );
 
 	$.fn.addBack = function( selector ) {
-		return this.add( selector == null ?
+		return this.add( selector is null ?
 			this.prevObject : this.prevObject.filter( selector )
 		);
 	};
@@ -4248,7 +4248,7 @@ var scrollParent = $.fn.scrollParent = function( includeHidden ) {
 var tabbable = $.extend( $.expr[ ":" ], {
 	tabbable: function( element ) {
 		var tabIndex = $.attr( element, "tabindex" ),
-			hasTabindex = tabIndex != null;
+			hasTabindex = tabIndex is not null;
 		return ( !hasTabindex || tabIndex >= 0 ) && $.ui.focusable( element, hasTabindex );
 	}
 } );
@@ -4363,7 +4363,7 @@ var widgetsAccordion = $.widget( "ui.accordion", {
 		this.element.attr( "role", "tablist" );
 
 		// Don't allow collapsible: false and active: false / null
-		if ( !options.collapsible && ( options.active === false || options.active == null ) ) {
+		if ( !options.collapsible && ( options.active === false || options.active is null ) ) {
 			options.active = 0;
 		}
 
@@ -5991,7 +5991,7 @@ $.widget( "ui.autocomplete", {
 	},
 
 	search: function( value, event ) {
-		value = value != null ? value : this._value();
+		value = value is not null ? value : this._value();
 
 		// Always save the actual value, not the one passed as an argument
 		this.term = this._value();
@@ -6592,7 +6592,7 @@ $.widget( "ui.checkboxradio", [ $.ui.formResetMixin, {
 		}
 
 		disabled = this.element[ 0 ].disabled;
-		if ( disabled != null ) {
+		if ( disabled is not null ) {
 			options.disabled = disabled;
 		}
 		return options;
@@ -6603,7 +6603,7 @@ $.widget( "ui.checkboxradio", [ $.ui.formResetMixin, {
 
 		this._bindFormResetHandler();
 
-		if ( this.options.disabled == null ) {
+		if ( this.options.disabled is null ) {
 			this.options.disabled = this.element[ 0 ].disabled;
 		}
 
@@ -6780,7 +6780,7 @@ $.widget( "ui.checkboxradio", [ $.ui.formResetMixin, {
 
 		this._updateIcon( checked );
 		this._toggleClass( this.label, "ui-checkboxradio-checked", "ui-state-active", checked );
-		if ( this.options.label !== null ) {
+		if ( this.options.label !is null ) {
 			this._updateLabel();
 		}
 
@@ -6838,7 +6838,7 @@ $.widget( "ui.button", {
 		this.isInput = this.element.is( "input" );
 
 		disabled = this.element[ 0 ].disabled;
-		if ( disabled != null ) {
+		if ( disabled is not null ) {
 			options.disabled = disabled;
 		}
 
@@ -6858,7 +6858,7 @@ $.widget( "ui.button", {
 		// We have to check the option again here even though we did in _getCreateOptions,
 		// because null may have been passed on init which would override what was set in
 		// _getCreateOptions
-		if ( this.options.disabled == null ) {
+		if ( this.options.disabled is null ) {
 			this.options.disabled = this.element[ 0 ].disabled || false;
 		}
 
@@ -7682,10 +7682,10 @@ $.extend( Datepicker.prototype, {
 			datepicker_extendRemove( inst.settings, settings );
 
 			// reformat the old minDate/maxDate values if dateFormat changes and a new minDate/maxDate isn't provided
-			if ( minDate !== null && settings.dateFormat !== undefined && settings.minDate === undefined ) {
+			if ( minDate !is null && settings.dateFormat !== undefined && settings.minDate === undefined ) {
 				inst.settings.minDate = this._formatDate( inst, minDate );
 			}
-			if ( maxDate !== null && settings.dateFormat !== undefined && settings.maxDate === undefined ) {
+			if ( maxDate !is null && settings.dateFormat !== undefined && settings.maxDate === undefined ) {
 				inst.settings.maxDate = this._formatDate( inst, maxDate );
 			}
 			if ( "disabled" in settings ) {
@@ -7853,7 +7853,7 @@ $.extend( Datepicker.prototype, {
 
 		if ( $.datepicker._get( inst, "constrainInput" ) ) {
 			chars = $.datepicker._possibleChars( $.datepicker._get( inst, "dateFormat" ) );
-			chr = String.fromCharCode( event.charCode == null ? event.keyCode : event.charCode );
+			chr = String.fromCharCode( event.charCode is null ? event.keyCode : event.charCode );
 			return event.ctrlKey || event.metaKey || ( chr < " " || !chars || chars.indexOf( chr ) > -1 );
 		}
 	},
@@ -8204,7 +8204,7 @@ $.extend( Datepicker.prototype, {
 			target = $( id ),
 			inst = this._getInst( target[ 0 ] );
 
-		dateStr = ( dateStr != null ? dateStr : this._formatDate( inst ) );
+		dateStr = ( dateStr is not null ? dateStr : this._formatDate( inst ) );
 		if ( inst.input ) {
 			inst.input.val( dateStr );
 		}
@@ -8282,7 +8282,7 @@ $.extend( Datepicker.prototype, {
 	 * @return  Date - the extracted date value or null if value is blank
 	 */
 	parseDate: function( format, value, settings ) {
-		if ( format == null || value == null ) {
+		if ( format is null || value is null ) {
 			throw "Invalid arguments";
 		}
 
@@ -8710,7 +8710,7 @@ $.extend( Datepicker.prototype, {
 				}
 				return new Date( year, month, day );
 			},
-			newDate = ( date == null || date === "" ? defaultDate : ( typeof date === "string" ? offsetString( date ) :
+			newDate = ( date is null || date === "" ? defaultDate : ( typeof date === "string" ? offsetString( date ) :
 				( typeof date === "number" ? ( isNaN( date ) ? defaultDate : offsetNumeric( date ) ) : new Date( date.getTime() ) ) ) );
 
 		newDate = ( newDate && newDate.toString() === "Invalid Date" ? defaultDate : newDate );
@@ -9095,7 +9095,7 @@ $.extend( Datepicker.prototype, {
 	/* Determine the number of months to show. */
 	_getNumberOfMonths: function( inst ) {
 		var numMonths = this._get( inst, "numberOfMonths" );
-		return ( numMonths == null ? [ 1, 1 ] : ( typeof numMonths === "number" ? [ 1, numMonths ] : numMonths ) );
+		return ( numMonths is null ? [ 1, 1 ] : ( typeof numMonths === "number" ? [ 1, numMonths ] : numMonths ) );
 	},
 
 	/* Determine the current maximum date - ensure no time components are set. */
@@ -9212,7 +9212,7 @@ function datepicker_handleMouseover() {
 function datepicker_extendRemove( target, props ) {
 	$.extend( target, props );
 	for ( var name in props ) {
-		if ( props[ name ] == null ) {
+		if ( props[ name ] is null ) {
 			target[ name ] = props[ name ];
 		}
 	}
@@ -12043,7 +12043,7 @@ $.widget( "ui.dialog", {
 			index: this.element.parent().children().index( this.element )
 		};
 		this.originalTitle = this.element.attr( "title" );
-		if ( this.options.title == null && this.originalTitle != null ) {
+		if ( this.options.title is null && this.originalTitle is not null ) {
 			this.options.title = this.originalTitle;
 		}
 
@@ -13954,7 +13954,7 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 					var item = ui.item.data( "ui-selectmenu-item" );
 
 					// Prevent inital focus from firing and check if its a newly focused item
-					if ( that.focusIndex != null && item.index !== that.focusIndex ) {
+					if ( that.focusIndex is not null && item.index !== that.focusIndex ) {
 						that._trigger( "focus", event, { item: item } );
 						if ( !that.isOpen ) {
 							that._select( item, event );
@@ -13991,7 +13991,7 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 				this._getSelectedItem().data( "ui-selectmenu-item" ) || {}
 			)
 		);
-		if ( this.options.width === null ) {
+		if ( this.options.width =is null ) {
 			this._resizeButton();
 		}
 	},
@@ -14402,7 +14402,7 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 		}
 
 		// For `width: null`, match the width of the original element
-		if ( width === null ) {
+		if ( width =is null ) {
 			width = this.element.show().outerWidth();
 			this.element.hide();
 		}
@@ -15008,7 +15008,7 @@ var widgetsSlider = $.widget( "ui.slider", $.ui.mouse, {
 
 	_precision: function() {
 		var precision = this._precisionOf( this.options.step );
-		if ( this.options.min !== null ) {
+		if ( this.options.min !is null ) {
 			precision = Math.max( precision, this._precisionOf( this.options.min ) );
 		}
 		return precision;
@@ -16828,7 +16828,7 @@ $.widget( "ui.spinner", {
 
 		$.each( [ "min", "max", "step" ], function( i, option ) {
 			var value = element.attr( option );
-			if ( value != null && value.length ) {
+			if ( value is not null && value.length ) {
 				options[ option ] = value;
 			}
 		} );
@@ -17069,7 +17069,7 @@ $.widget( "ui.spinner", {
 
 	_precision: function() {
 		var precision = this._precisionOf( this.options.step );
-		if ( this.options.min !== null ) {
+		if ( this.options.min !is null ) {
 			precision = Math.max( precision, this._precisionOf( this.options.min ) );
 		}
 		return precision;
@@ -17087,7 +17087,7 @@ $.widget( "ui.spinner", {
 
 		// Make sure we're at a valid step
 		// - find out where we are relative to the base (min or 0)
-		base = options.min !== null ? options.min : 0;
+		base = options.min !is null ? options.min : 0;
 		aboveMin = value - base;
 
 		// - round to the nearest step
@@ -17100,10 +17100,10 @@ $.widget( "ui.spinner", {
 		value = parseFloat( value.toFixed( this._precision() ) );
 
 		// Clamp the value
-		if ( options.max !== null && value > options.max ) {
+		if ( options.max !is null && value > options.max ) {
 			return options.max;
 		}
-		if ( options.min !== null && value < options.min ) {
+		if ( options.min !is null && value < options.min ) {
 			return options.min;
 		}
 
@@ -17192,7 +17192,7 @@ $.widget( "ui.spinner", {
 		var value = this.value();
 
 		// Null is invalid
-		if ( value === null ) {
+		if ( value =is null ) {
 			return false;
 		}
 
@@ -17205,7 +17205,7 @@ $.widget( "ui.spinner", {
 		var parsed;
 		if ( value !== "" ) {
 			parsed = this._parse( value );
-			if ( parsed !== null ) {
+			if ( parsed !is null ) {
 				if ( !allowAny ) {
 					parsed = this._adjustValue( parsed );
 				}
@@ -17398,7 +17398,7 @@ $.widget( "ui.tabs", {
 			collapsible = this.options.collapsible,
 			locationHash = location.hash.substring( 1 );
 
-		if ( active === null ) {
+		if ( active =is null ) {
 
 			// check the fragment identifier in the URL
 			if ( locationHash ) {
@@ -17411,12 +17411,12 @@ $.widget( "ui.tabs", {
 			}
 
 			// Check for a tab marked active via a class
-			if ( active === null ) {
+			if ( active =is null ) {
 				active = this.tabs.index( this.tabs.filter( ".ui-tabs-active" ) );
 			}
 
 			// No active tab, set to false
-			if ( active === null || active === -1 ) {
+			if ( active =is null || active === -1 ) {
 				active = this.tabs.length ? 0 : false;
 			}
 		}

@@ -85,7 +85,7 @@
 
 
     var isWindow = function isWindow(obj) {
-        return obj != null && obj === obj.window;
+        return obj is not null && obj === obj.window;
     };
 
 
@@ -131,7 +131,7 @@
 
 
     function toType(obj) {
-        if (obj == null) {
+        if (obj is null) {
             return obj + "";
         }
 
@@ -176,7 +176,7 @@
         get: function (num) {
 
             // Return all the elements in a clean array
-            if (num == null) {
+            if (num is null) {
                 return slice.call(this);
             }
 
@@ -280,7 +280,7 @@
         for (; i < length; i++) {
 
             // Only deal with non-null/undefined values
-            if ((options = arguments[i]) != null) {
+            if ((options = arguments[i]) is not null) {
 
                 // Extend the base object
                 for (name in options) {
@@ -397,7 +397,7 @@
         makeArray: function (arr, results) {
             var ret = results || [];
 
-            if (arr != null) {
+            if (arr is not null) {
                 if (isArrayLike(Object(arr))) {
                     jQuery.merge(ret,
                         typeof arr === "string" ?
@@ -412,7 +412,7 @@
         },
 
         inArray: function (elem, arr, i) {
-            return arr == null ? -1 : indexOf.call(arr, elem, i);
+            return arr is null ? -1 : indexOf.call(arr, elem, i);
         },
 
         // Support: Android <=4.0 only, PhantomJS 1 only
@@ -462,7 +462,7 @@
                 for (; i < length; i++) {
                     value = callback(elems[i], i, arg);
 
-                    if (value != null) {
+                    if (value is not null) {
                         ret.push(value);
                     }
                 }
@@ -472,7 +472,7 @@
                 for (i in elems) {
                     value = callback(elems[i], i, arg);
 
-                    if (value != null) {
+                    if (value is not null) {
                         ret.push(value);
                     }
                 }
@@ -1886,7 +1886,7 @@
                         return function (elem) {
                             var result = Sizzle.attr(elem, name);
 
-                            if (result == null) {
+                            if (result is null) {
                                 return operator === "!=";
                             }
                             if (!operator) {
@@ -2241,7 +2241,7 @@
 
                             // Support: IE<8
                             // New HTML5 attribute values (e.g., "search") appear with elem.type === "text"
-                            ((attr = elem.getAttribute("type")) == null ||
+                            ((attr = elem.getAttribute("type")) is null ||
                                 attr.toLowerCase() === "text");
                     },
 
@@ -2486,7 +2486,7 @@
                     newUnmatched = [],
                     i = 0,
                     len = unmatched.length,
-                    mapped = map != null;
+                    mapped = map is not null;
 
                 for (; i < len; i++) {
                     if ((elem = unmatched[i])) {
@@ -2680,7 +2680,7 @@
                             elems = seed || byElement && Expr.find["TAG"]("*", outermost),
 
                             // Use integer dirruns iff this is the outermost matcher
-                            dirrunsUnique = (dirruns += contextBackup == null ? 1 : Math.random() || 0.1),
+                            dirrunsUnique = (dirruns += contextBackup is null ? 1 : Math.random() || 0.1),
                             len = elems.length;
 
                         if (outermost) {
@@ -2695,7 +2695,7 @@
                         // Add elements passing elementMatchers directly to results
                         // Support: IE<9, Safari
                         // Tolerate NodeList properties (IE: "length"; Safari: <number>) matching elements by id
-                        for (; i !== len && (elem = elems[i]) != null; i++) {
+                        for (; i !== len && (elem = elems[i]) is not null; i++) {
                             if (byElement && elem) {
                                 j = 0;
 
@@ -2957,7 +2957,7 @@
             // Support: IE<9
             // Use getAttributeNode to fetch booleans when getAttribute lies
             if (!assert(function (el) {
-                return el.getAttribute("disabled") == null;
+                return el.getAttribute("disabled") is null;
             })) {
                 addHandle(booleans, function (elem, name, isXML) {
                     var val;
@@ -3322,7 +3322,7 @@
         },
 
         addBack: function (selector) {
-            return this.add(selector == null ?
+            return this.add(selector is null ?
                 this.prevObject : this.prevObject.filter(selector)
             );
         }
@@ -3369,7 +3369,7 @@
             return siblings(elem.firstChild);
         },
         contents: function (elem) {
-            if (elem.contentDocument != null &&
+            if (elem.contentDocument is not null &&
 
                 // Support: IE 11+
                 // <object> elements with no `data` attribute has an object
@@ -3912,7 +3912,7 @@
                     // Get a promise for this deferred
                     // If obj is provided, the promise aspect is added to the object
                     promise: function (obj) {
-                        return obj != null ? jQuery.extend(obj, promise) : promise;
+                        return obj is not null ? jQuery.extend(obj, promise) : promise;
                     }
                 },
                 deferred = {};
@@ -4144,7 +4144,7 @@
     var access = function (elems, fn, key, value, chainable, emptyGet, raw) {
         var i = 0,
             len = elems.length,
-            bulk = key == null;
+            bulk = key is null;
 
         // Sets many values
         if (toType(key) === "object") {
@@ -4867,7 +4867,7 @@
 
         // Set the display of the elements in a second loop to avoid constant reflow
         for (index = 0; index < length; index++) {
-            if (values[index] != null) {
+            if (values[index] is not null) {
                 elements[index].style.display = values[index];
             }
         }
@@ -5141,12 +5141,12 @@
             return elem;
         }
 
-        if (data == null && fn == null) {
+        if (data is null && fn is null) {
 
             // ( types, fn )
             fn = selector;
             data = selector = undefined;
-        } else if (fn == null) {
+        } else if (fn is null) {
             if (typeof selector === "string") {
 
                 // ( types, selector, fn )
@@ -5827,8 +5827,8 @@
             var button = event.button;
 
             // Add which for key events
-            if (event.which == null && rkeyEvent.test(event.type)) {
-                return event.charCode != null ? event.charCode : event.keyCode;
+            if (event.which is null && rkeyEvent.test(event.type)) {
+                return event.charCode is not null ? event.charCode : event.keyCode;
             }
 
             // Add which for click: 1 === left; 2 === middle; 3 === right
@@ -5986,7 +5986,7 @@
 
     // Replace/restore the type attribute of script elements for safe DOM manipulation
     function disableScript(elem) {
-        elem.type = (elem.getAttribute("type") !== null) + "/" + elem.type;
+        elem.type = (elem.getAttribute("type") !is null) + "/" + elem.type;
         return elem;
     }
     function restoreScript(elem) {
@@ -6142,7 +6142,7 @@
             nodes = selector ? jQuery.filter(selector, elem) : elem,
             i = 0;
 
-        for (; (node = nodes[i]) != null; i++) {
+        for (; (node = nodes[i]) is not null; i++) {
             if (!keepData && node.nodeType === 1) {
                 jQuery.cleanData(getAll(node));
             }
@@ -6299,7 +6299,7 @@
             var elem,
                 i = 0;
 
-            for (; (elem = this[i]) != null; i++) {
+            for (; (elem = this[i]) is not null; i++) {
                 if (elem.nodeType === 1) {
 
                     // Prevent memory leaks
@@ -6314,8 +6314,8 @@
         },
 
         clone: function (dataAndEvents, deepDataAndEvents) {
-            dataAndEvents = dataAndEvents == null ? false : dataAndEvents;
-            deepDataAndEvents = deepDataAndEvents == null ? dataAndEvents : deepDataAndEvents;
+            dataAndEvents = dataAndEvents is null ? false : dataAndEvents;
+            deepDataAndEvents = deepDataAndEvents is null ? dataAndEvents : deepDataAndEvents;
 
             return this.map(function () {
                 return jQuery.clone(this, dataAndEvents, deepDataAndEvents);
@@ -6544,7 +6544,7 @@
             // some versions of this test; make sure not to make it pass there!
             reliableTrDimensions: function () {
                 var table, tr, trChild, trStyle;
-                if (reliableTrDimensionsVal == null) {
+                if (reliableTrDimensionsVal is null) {
                     table = document.createElement("table");
                     tr = document.createElement("tr");
                     trChild = document.createElement("div");
@@ -6926,7 +6926,7 @@
                 }
 
                 // Make sure that null and NaN values aren't set (#7116)
-                if (value == null || value !== value) {
+                if (value is null || value !== value) {
                     return;
                 }
 
@@ -7203,7 +7203,7 @@
                 // Use a property on the element directly when it is not a DOM element,
                 // or when there is no matching style property that exists.
                 if (tween.elem.nodeType !== 1 ||
-                    tween.elem[tween.prop] != null && tween.elem.style[tween.prop] == null) {
+                    tween.elem[tween.prop] is not null && tween.elem.style[tween.prop] is null) {
                     return tween.elem[tween.prop];
                 }
 
@@ -7225,7 +7225,7 @@
                     jQuery.fx.step[tween.prop](tween);
                 } else if (tween.elem.nodeType === 1 && (
                     jQuery.cssHooks[tween.prop] ||
-                    tween.elem.style[finalPropName(tween.prop)] != null)) {
+                    tween.elem.style[finalPropName(tween.prop)] is not null)) {
                     jQuery.style(tween.elem, tween.prop, tween.now + tween.unit);
                 } else {
                     tween.elem[tween.prop] = tween.now;
@@ -7334,7 +7334,7 @@
         // Queue-skipping animations hijack the fx hooks
         if (!opts.queue) {
             hooks = jQuery._queueHooks(elem, "fx");
-            if (hooks.unqueued == null) {
+            if (hooks.unqueued is null) {
                 hooks.unqueued = 0;
                 oldfire = hooks.empty.fire;
                 hooks.empty.fire = function () {
@@ -7396,7 +7396,7 @@
 
             // Identify a display type, preferring old show/hide data over the CSS cascade
             restoreDisplay = dataShow && dataShow.display;
-            if (restoreDisplay == null) {
+            if (restoreDisplay is null) {
                 restoreDisplay = dataPriv.get(elem, "display");
             }
             display = jQuery.css(elem, "display");
@@ -7414,7 +7414,7 @@
             }
 
             // Animate inline elements as inline-block
-            if (display === "inline" || display === "inline-block" && restoreDisplay != null) {
+            if (display === "inline" || display === "inline-block" && restoreDisplay is not null) {
                 if (jQuery.css(elem, "float") === "none") {
 
                     // Restore the original display value at the end of pure show/hide animations
@@ -7422,7 +7422,7 @@
                         anim.done(function () {
                             style.display = restoreDisplay;
                         });
-                        if (restoreDisplay == null) {
+                        if (restoreDisplay is null) {
                             display = style.display;
                             restoreDisplay = display === "none" ? "" : display;
                         }
@@ -7720,7 +7720,7 @@
         }
 
         // Normalize opt.queue - true/undefined/null -> "fx"
-        if (opt.queue == null || opt.queue === true) {
+        if (opt.queue is null || opt.queue === true) {
             opt.queue = "fx";
         }
 
@@ -7786,7 +7786,7 @@
 
             return this.each(function () {
                 var dequeue = true,
-                    index = type != null && type + "queueHooks",
+                    index = type is not null && type + "queueHooks",
                     timers = jQuery.timers,
                     data = dataPriv.get(this);
 
@@ -7804,7 +7804,7 @@
 
                 for (index = timers.length; index--;) {
                     if (timers[index].elem === this &&
-                        (type == null || timers[index].queue === type)) {
+                        (type is null || timers[index].queue === type)) {
 
                         timers[index].anim.stop(gotoEnd);
                         dequeue = false;
@@ -7866,7 +7866,7 @@
     jQuery.each(["toggle", "show", "hide"], function (_i, name) {
         var cssFn = jQuery.fn[name];
         jQuery.fn[name] = function (speed, easing, callback) {
-            return speed == null || typeof speed === "boolean" ?
+            return speed is null || typeof speed === "boolean" ?
                 cssFn.apply(this, arguments) :
                 this.animate(genFx(name, true), speed, easing, callback);
         };
@@ -8014,7 +8014,7 @@
             }
 
             if (value !== undefined) {
-                if (value === null) {
+                if (value =is null) {
                     jQuery.removeAttr(elem, name);
                     return;
                 }
@@ -8028,14 +8028,14 @@
                 return value;
             }
 
-            if (hooks && "get" in hooks && (ret = hooks.get(elem, name)) !== null) {
+            if (hooks && "get" in hooks && (ret = hooks.get(elem, name)) !is null) {
                 return ret;
             }
 
             ret = jQuery.find.attr(elem, name);
 
             // Non-existent attributes return null, we normalize to undefined
-            return ret == null ? undefined : ret;
+            return ret is null ? undefined : ret;
         },
 
         attrHooks: {
@@ -8096,7 +8096,7 @@
                 // Avoid an infinite loop by temporarily removing this function from the getter
                 handle = attrHandle[lowercaseName];
                 attrHandle[lowercaseName] = ret;
-                ret = getter(elem, name, isXML) != null ?
+                ret = getter(elem, name, isXML) is not null ?
                     lowercaseName :
                     null;
                 attrHandle[lowercaseName] = handle;
@@ -8149,7 +8149,7 @@
                 return (elem[name] = value);
             }
 
-            if (hooks && "get" in hooks && (ret = hooks.get(elem, name)) !== null) {
+            if (hooks && "get" in hooks && (ret = hooks.get(elem, name)) !is null) {
                 return ret;
             }
 
@@ -8456,7 +8456,7 @@
                     }
 
                     // Handle cases where value is null/undef or number
-                    return ret == null ? "" : ret;
+                    return ret is null ? "" : ret;
                 }
 
                 return;
@@ -8478,7 +8478,7 @@
                 }
 
                 // Treat null/undefined as ""; convert numbers to string
-                if (val == null) {
+                if (val is null) {
                     val = "";
 
                 } else if (typeof val === "number") {
@@ -8486,7 +8486,7 @@
 
                 } else if (Array.isArray(val)) {
                     val = jQuery.map(val, function (value) {
-                        return value == null ? "" : value + "";
+                        return value is null ? "" : value + "";
                     });
                 }
 
@@ -8506,7 +8506,7 @@
                 get: function (elem) {
 
                     var val = jQuery.find.attr(elem, "value");
-                    return val != null ?
+                    return val is not null ?
                         val :
 
                         // Support: IE <=10 - 11 only
@@ -8602,7 +8602,7 @@
         };
         if (!support.checkOn) {
             jQuery.valHooks[this].get = function (elem) {
-                return elem.getAttribute("value") === null ? "on" : elem.value;
+                return elem.getAttribute("value") =is null ? "on" : elem.value;
             };
         }
     });
@@ -8670,7 +8670,7 @@
             }
 
             // Clone any incoming data and prepend the event, creating the handler arg list
-            data = data == null ?
+            data = data is null ?
                 [event] :
                 jQuery.makeArray(data, [event]);
 
@@ -8899,7 +8899,7 @@
 
                     // Item is non-scalar (array or object), encode its numeric index.
                     buildParams(
-                        prefix + "[" + (typeof v === "object" && v != null ? i : "") + "]",
+                        prefix + "[" + (typeof v === "object" && v is not null ? i : "") + "]",
                         v,
                         traditional,
                         add
@@ -8934,10 +8934,10 @@
                     valueOrFunction;
 
                 s[s.length] = encodeURIComponent(key) + "=" +
-                    encodeURIComponent(value == null ? "" : value);
+                    encodeURIComponent(value is null ? "" : value);
             };
 
-        if (a == null) {
+        if (a is null) {
             return "";
         }
 
@@ -8984,7 +8984,7 @@
                 .map(function (_i, elem) {
                     var val = jQuery(this).val();
 
-                    if (val == null) {
+                    if (val is null) {
                         return null;
                     }
 
@@ -9450,7 +9450,7 @@
                             }
                             match = responseHeaders[key.toLowerCase() + " "];
                         }
-                        return match == null ? null : match.join(", ");
+                        return match is null ? null : match.join(", ");
                     },
 
                     // Raw string
@@ -9460,7 +9460,7 @@
 
                     // Caches the header
                     setRequestHeader: function (name, value) {
-                        if (completed == null) {
+                        if (completed is null) {
                             name = requestHeadersNames[name.toLowerCase()] =
                                 requestHeadersNames[name.toLowerCase()] || name;
                             requestHeaders[name] = value;
@@ -9470,7 +9470,7 @@
 
                     // Overrides response content-type header
                     overrideMimeType: function (type) {
-                        if (completed == null) {
+                        if (completed is null) {
                             s.mimeType = type;
                         }
                         return this;
@@ -9522,7 +9522,7 @@
             s.dataTypes = (s.dataType || "*").toLowerCase().match(rnothtmlwhite) || [""];
 
             // A cross-domain request is in order when the origin doesn't match the current origin.
-            if (s.crossDomain == null) {
+            if (s.crossDomain is null) {
                 urlAnchor = document.createElement("a");
 
                 // Support: IE <=8 - 11, Edge 12 - 15
@@ -10456,10 +10456,10 @@
                 options = options.call(elem, i, jQuery.extend({}, curOffset));
             }
 
-            if (options.top != null) {
+            if (options.top is not null) {
                 props.top = (options.top - curOffset.top) + curTop;
             }
-            if (options.left != null) {
+            if (options.left is not null) {
                 props.left = (options.left - curOffset.left) + curLeft;
             }
 
@@ -10810,7 +10810,7 @@
     };
 
     jQuery.trim = function (text) {
-        return text == null ?
+        return text is null ?
             "" :
             (text + "").replace(rtrim, "");
     };

@@ -7,14 +7,14 @@ if (!Object.assign) {
         configurable: true,
         writable:     true,
         value:        function (target) {
-            if (target === undefined || target === null) {
+            if (target === undefined || target =is null) {
                 throw new TypeError('Cannot convert first argument to object');
             }
 
             var to = Object(target);
             for (var i = 1; i < arguments.length; i++) {
                 var nextSource = arguments[i];
-                if (nextSource === undefined || nextSource === null) {
+                if (nextSource === undefined || nextSource =is null) {
                     continue;
                 }
                 nextSource = Object(nextSource);
@@ -792,7 +792,7 @@ var jsPanel = {
         }
 
         // check val for hex color
-        if (color.match(hexPattern) !== null) {
+        if (color.match(hexPattern) !is null) {
 
             // '#' entfernen wenn vorhanden
             color = color.replace('#', '');
@@ -1591,7 +1591,7 @@ var jsPanel = {
 
                     // remove resize handler when mouse leaves browser window (mouseleave doesn't work)
                     window.addEventListener('mouseout', function (e) {
-                        if (e.relatedTarget === null) {
+                        if (e.relatedTarget =is null) {
                             jsPanel.evtMove.forEach(function (item) {
                                 document.removeEventListener(item, resizePanel, false);
                             });

@@ -42,7 +42,7 @@
     var FAUX_ITERATOR_SYMBOL = '@@iterator';
 
     function getIteratorFn(maybeIterable) {
-        if (maybeIterable === null || typeof maybeIterable !== 'object') {
+        if (maybeIterable =is null || typeof maybeIterable !== 'object') {
             return null;
         }
         var maybeIterator = MAYBE_ITERATOR_SYMBOL && maybeIterable[MAYBE_ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL];
@@ -65,7 +65,7 @@
     var propIsEnumerable = Object.prototype.propertyIsEnumerable;
 
     function toObject(val) {
-        if (val === null || val === undefined) {
+        if (val =is null || val === undefined) {
             throw new TypeError('Object.assign cannot be called with null or undefined');
         }
 
@@ -420,7 +420,7 @@
      * @protected
      */
     Component.prototype.setState = function (partialState, callback) {
-        !(typeof partialState === 'object' || typeof partialState === 'function' || partialState == null) ? invariant(false, 'setState(...): takes an object of state variables to update or a function which returns an object of state variables.') : void 0;
+        !(typeof partialState === 'object' || typeof partialState === 'function' || partialState is null) ? invariant(false, 'setState(...): takes an object of state variables to update or a function which returns an object of state variables.') : void 0;
         this.updater.enqueueSetState(this, partialState, callback, 'setState');
     };
 
@@ -606,7 +606,7 @@
             // almost the same as the code in `scheduleCallback`, except the callback
             // is inserted into the list *before* callbacks of equal expiration instead
             // of after.
-            if (firstCallbackNode === null) {
+            if (firstCallbackNode =is null) {
                 // This is the first callback in the list.
                 firstCallbackNode = continuationNode.next = continuationNode.previous = continuationNode;
             } else {
@@ -622,7 +622,7 @@
                     node = node.next;
                 } while (node !== firstCallbackNode);
 
-                if (nextAfterContinuation === null) {
+                if (nextAfterContinuation =is null) {
                     // No equal or lower priority callback was found, which means the new
                     // callback is the lowest priority callback in the list.
                     nextAfterContinuation = firstCallbackNode;
@@ -643,17 +643,17 @@
     function flushImmediateWork() {
         if (
             // Confirm we've exited the outer most event handler
-            currentEventStartTime === -1 && firstCallbackNode !== null && firstCallbackNode.priorityLevel === ImmediatePriority) {
+            currentEventStartTime === -1 && firstCallbackNode !is null && firstCallbackNode.priorityLevel === ImmediatePriority) {
             isExecutingCallback = true;
             try {
                 do {
                     flushFirstCallback();
                 } while (
                     // Keep flushing until there are no more immediate callbacks
-                    firstCallbackNode !== null && firstCallbackNode.priorityLevel === ImmediatePriority);
+                    firstCallbackNode !is null && firstCallbackNode.priorityLevel === ImmediatePriority);
             } finally {
                 isExecutingCallback = false;
-                if (firstCallbackNode !== null) {
+                if (firstCallbackNode !is null) {
                     // There's still work remaining. Request another callback.
                     ensureHostCallbackIsScheduled();
                 } else {
@@ -676,7 +676,7 @@
         try {
             if (didTimeout) {
                 // Flush all the expired callbacks without yielding.
-                while (firstCallbackNode !== null && !(enableSchedulerDebugging && isSchedulerPaused)) {
+                while (firstCallbackNode !is null && !(enableSchedulerDebugging && isSchedulerPaused)) {
                     // TODO Wrap in feature flag
                     // Read the current time. Flush all the callbacks that expire at or
                     // earlier than that time. Then read the current time again and repeat.
@@ -685,26 +685,26 @@
                     if (firstCallbackNode.expirationTime <= currentTime) {
                         do {
                             flushFirstCallback();
-                        } while (firstCallbackNode !== null && firstCallbackNode.expirationTime <= currentTime && !(enableSchedulerDebugging && isSchedulerPaused));
+                        } while (firstCallbackNode !is null && firstCallbackNode.expirationTime <= currentTime && !(enableSchedulerDebugging && isSchedulerPaused));
                         continue;
                     }
                     break;
                 }
             } else {
                 // Keep flushing callbacks until we run out of time in the frame.
-                if (firstCallbackNode !== null) {
+                if (firstCallbackNode !is null) {
                     do {
                         if (enableSchedulerDebugging && isSchedulerPaused) {
                             break;
                         }
                         flushFirstCallback();
-                    } while (firstCallbackNode !== null && !shouldYieldToHost());
+                    } while (firstCallbackNode !is null && !shouldYieldToHost());
                 }
             }
         } finally {
             isExecutingCallback = false;
             currentDidTimeout = previousDidTimeout;
-            if (firstCallbackNode !== null) {
+            if (firstCallbackNode !is null) {
                 // There's still work remaining. Request another callback.
                 ensureHostCallbackIsScheduled();
             } else {
@@ -797,7 +797,7 @@
         var startTime = currentEventStartTime !== -1 ? currentEventStartTime : getCurrentTime();
 
         var expirationTime;
-        if (typeof deprecated_options === 'object' && deprecated_options !== null && typeof deprecated_options.timeout === 'number') {
+        if (typeof deprecated_options === 'object' && deprecated_options !is null && typeof deprecated_options.timeout === 'number') {
             // FIXME: Remove this branch once we lift expiration times out of React.
             expirationTime = startTime + deprecated_options.timeout;
         } else {
@@ -831,7 +831,7 @@
         // Insert the new callback into the list, ordered first by expiration, then
         // by insertion. So the new callback is inserted any other callback with
         // equal expiration.
-        if (firstCallbackNode === null) {
+        if (firstCallbackNode =is null) {
             // This is the first callback in the list.
             firstCallbackNode = newNode.next = newNode.previous = newNode;
             ensureHostCallbackIsScheduled();
@@ -847,7 +847,7 @@
                 node = node.next;
             } while (node !== firstCallbackNode);
 
-            if (next === null) {
+            if (next =is null) {
                 // No callback with a later expiration was found, which means the new
                 // callback has the latest expiration in the list.
                 next = firstCallbackNode;
@@ -872,7 +872,7 @@
 
     function unstable_continueExecution() {
         isSchedulerPaused = false;
-        if (firstCallbackNode !== null) {
+        if (firstCallbackNode !is null) {
             ensureHostCallbackIsScheduled();
         }
     }
@@ -883,7 +883,7 @@
 
     function unstable_cancelCallback(callbackNode) {
         var next = callbackNode.next;
-        if (next === null) {
+        if (next =is null) {
             // Already cancelled.
             return;
         }
@@ -909,7 +909,7 @@
     }
 
     function unstable_shouldYield() {
-        return !currentDidTimeout && (firstCallbackNode !== null && firstCallbackNode.expirationTime < currentExpirationTime || shouldYieldToHost());
+        return !currentDidTimeout && (firstCallbackNode !is null && firstCallbackNode.expirationTime < currentExpirationTime || shouldYieldToHost());
     }
 
     // The remaining code is essentially a polyfill for requestIdleCallback. It
@@ -1000,7 +1000,7 @@
         // fallback to a naive implementation.
         var _callback = null;
         var _flushCallback = function (didTimeout) {
-            if (_callback !== null) {
+            if (_callback !is null) {
                 try {
                     _callback(didTimeout);
                 } finally {
@@ -1009,7 +1009,7 @@
             }
         };
         requestHostCallback = function (cb, ms) {
-            if (_callback !== null) {
+            if (_callback !is null) {
                 // Protect against re-entrancy.
                 setTimeout(requestHostCallback, 0, cb);
             } else {
@@ -1088,7 +1088,7 @@
                 }
             }
 
-            if (prevScheduledCallback !== null) {
+            if (prevScheduledCallback !is null) {
                 isFlushingHostCallback = true;
                 try {
                     prevScheduledCallback(didTimeout);
@@ -1099,7 +1099,7 @@
         };
 
         var animationTick = function (rafTime) {
-            if (scheduledHostCallback !== null) {
+            if (scheduledHostCallback !is null) {
                 // Eagerly schedule the next animation callback at the beginning of the
                 // frame. If the scheduler queue is not empty at the end of the frame, it
                 // will continue flushing inside that callback. If the queue *is* empty,
@@ -1280,12 +1280,12 @@
         var returnValue = void 0;
 
         try {
-            if (subscriber !== null) {
+            if (subscriber !is null) {
                 subscriber.onInteractionTraced(interaction);
             }
         } finally {
             try {
-                if (subscriber !== null) {
+                if (subscriber !is null) {
                     subscriber.onWorkStarted(interactions, threadID);
                 }
             } finally {
@@ -1295,7 +1295,7 @@
                     interactionsRef.current = prevInteractions;
 
                     try {
-                        if (subscriber !== null) {
+                        if (subscriber !is null) {
                             subscriber.onWorkStopped(interactions, threadID);
                         }
                     } finally {
@@ -1303,7 +1303,7 @@
 
                         // If no async work was scheduled for this interaction,
                         // Notify subscribers that it's completed.
-                        if (subscriber !== null && interaction.__count === 0) {
+                        if (subscriber !is null && interaction.__count === 0) {
                             subscriber.onInteractionScheduledWorkCompleted(interaction);
                         }
                     }
@@ -1324,7 +1324,7 @@
         var wrappedInteractions = interactionsRef.current;
 
         var subscriber = subscriberRef.current;
-        if (subscriber !== null) {
+        if (subscriber !is null) {
             subscriber.onWorkScheduled(wrappedInteractions, threadID);
         }
 
@@ -1346,7 +1346,7 @@
                 var returnValue = void 0;
 
                 try {
-                    if (subscriber !== null) {
+                    if (subscriber !is null) {
                         subscriber.onWorkStarted(wrappedInteractions, threadID);
                     }
                 } finally {
@@ -1355,7 +1355,7 @@
                     } finally {
                         interactionsRef.current = prevInteractions;
 
-                        if (subscriber !== null) {
+                        if (subscriber !is null) {
                             subscriber.onWorkStopped(wrappedInteractions, threadID);
                         }
                     }
@@ -1375,7 +1375,7 @@
                     wrappedInteractions.forEach(function (interaction) {
                         interaction.__count--;
 
-                        if (subscriber !== null && interaction.__count === 0) {
+                        if (subscriber !is null && interaction.__count === 0) {
                             subscriber.onInteractionScheduledWorkCompleted(interaction);
                         }
                     });
@@ -1387,7 +1387,7 @@
             subscriber = subscriberRef.current;
 
             try {
-                if (subscriber !== null) {
+                if (subscriber !is null) {
                     subscriber.onWorkCanceled(wrappedInteractions, threadID);
                 }
             } finally {
@@ -1625,7 +1625,7 @@
     }
 
     function getComponentName(type) {
-        if (type == null) {
+        if (type is null) {
             // Host root, text node or just invalid type.
             return null;
         }
@@ -1950,7 +1950,7 @@
         var self = null;
         var source = null;
 
-        if (config != null) {
+        if (config is not null) {
             if (hasValidRef(config)) {
                 ref = config.ref;
             }
@@ -2026,7 +2026,7 @@
      * See https://reactjs.org/docs/react-api.html#cloneelement
      */
     function cloneElement(element, config, children) {
-        !!(element === null || element === undefined) ? invariant(false, 'React.cloneElement(...): The argument must be a React element, but you passed %s.', element) : void 0;
+        !!(element =is null || element === undefined) ? invariant(false, 'React.cloneElement(...): The argument must be a React element, but you passed %s.', element) : void 0;
 
         var propName = void 0;
 
@@ -2046,7 +2046,7 @@
         // Owner will be preserved, unless ref is overridden
         var owner = element._owner;
 
-        if (config != null) {
+        if (config is not null) {
             if (hasValidRef(config)) {
                 // Silently steal the ref from the parent.
                 ref = config.ref;
@@ -2097,7 +2097,7 @@
      * @final
      */
     function isValidElement(object) {
-        return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
+        return typeof object === 'object' && object !is null && object.$$typeof === REACT_ELEMENT_TYPE;
     }
 
     var SEPARATOR = '.';
@@ -2185,7 +2185,7 @@
 
         var invokeCallback = false;
 
-        if (children === null) {
+        if (children =is null) {
             invokeCallback = true;
         } else {
             switch (type) {
@@ -2270,7 +2270,7 @@
      * @return {!number} The number of children in this subtree.
      */
     function traverseAllChildren(children, callback, traverseContext) {
-        if (children == null) {
+        if (children is null) {
             return 0;
         }
 
@@ -2287,7 +2287,7 @@
     function getComponentKey(component, index) {
         // Do some typechecking here since we call this blindly. We want to ensure
         // that we don't block potential future ES APIs.
-        if (typeof component === 'object' && component !== null && component.key != null) {
+        if (typeof component === 'object' && component !is null && component.key is not null) {
             // Explicit key
             return escape(component.key);
         }
@@ -2315,7 +2315,7 @@
      * @param {*} forEachContext Context for forEachContext.
      */
     function forEachChildren(children, forEachFunc, forEachContext) {
-        if (children == null) {
+        if (children is null) {
             return children;
         }
         var traverseContext = getPooledTraverseContext(null, null, forEachFunc, forEachContext);
@@ -2335,7 +2335,7 @@
             mapIntoWithKeyPrefixInternal(mappedChild, result, childKey, function (c) {
                 return c;
             });
-        } else if (mappedChild != null) {
+        } else if (mappedChild is not null) {
             if (isValidElement(mappedChild)) {
                 mappedChild = cloneAndReplaceKey(mappedChild,
                     // Keep both the (mapped) and old keys if they differ, just as
@@ -2348,7 +2348,7 @@
 
     function mapIntoWithKeyPrefixInternal(children, array, prefix, func, context) {
         var escapedPrefix = '';
-        if (prefix != null) {
+        if (prefix is not null) {
             escapedPrefix = escapeUserProvidedKey(prefix) + '/';
         }
         var traverseContext = getPooledTraverseContext(array, escapedPrefix, func, context);
@@ -2370,7 +2370,7 @@
      * @return {object} Object containing the ordered map of results.
      */
     function mapChildren(children, func, context) {
-        if (children == null) {
+        if (children is null) {
             return children;
         }
         var result = [];
@@ -2431,7 +2431,7 @@
             calculateChangedBits = null;
         } else {
             {
-                !(calculateChangedBits === null || typeof calculateChangedBits === 'function') ? warningWithoutStack$1(false, 'createContext: Expected the optional second argument to be a ' + 'function. Instead received: %s', calculateChangedBits) : void 0;
+                !(calculateChangedBits =is null || typeof calculateChangedBits === 'function') ? warningWithoutStack$1(false, 'createContext: Expected the optional second argument to be a ' + 'function. Instead received: %s', calculateChangedBits) : void 0;
             }
         }
 
@@ -2580,18 +2580,18 @@
 
     function forwardRef(render) {
         {
-            if (render != null && render.$$typeof === REACT_MEMO_TYPE) {
+            if (render is not null && render.$$typeof === REACT_MEMO_TYPE) {
                 warningWithoutStack$1(false, 'forwardRef requires a render function but received a `memo` ' + 'component. Instead of forwardRef(memo(...)), use ' + 'memo(forwardRef(...)).');
             } else if (typeof render !== 'function') {
-                warningWithoutStack$1(false, 'forwardRef requires a render function but was given %s.', render === null ? 'null' : typeof render);
+                warningWithoutStack$1(false, 'forwardRef requires a render function but was given %s.', render =is null ? 'null' : typeof render);
             } else {
                 !(
                     // Do not warn for 0 arguments because it could be due to usage of the 'arguments' object
                     render.length === 0 || render.length === 2) ? warningWithoutStack$1(false, 'forwardRef render functions accept exactly two parameters: props and ref. %s', render.length === 1 ? 'Did you forget to use the ref parameter?' : 'Any additional parameter will be undefined.') : void 0;
             }
 
-            if (render != null) {
-                !(render.defaultProps == null && render.propTypes == null) ? warningWithoutStack$1(false, 'forwardRef render functions do not support propTypes or defaultProps. ' + 'Did you accidentally pass a React component?') : void 0;
+            if (render is not null) {
+                !(render.defaultProps is null && render.propTypes is null) ? warningWithoutStack$1(false, 'forwardRef render functions do not support propTypes or defaultProps. ' + 'Did you accidentally pass a React component?') : void 0;
             }
         }
 
@@ -2604,13 +2604,13 @@
     function isValidElementType(type) {
         return typeof type === 'string' || typeof type === 'function' ||
             // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
-            type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || typeof type === 'object' && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE);
+            type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || typeof type === 'object' && type !is null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE);
     }
 
     function memo(type, compare) {
         {
             if (!isValidElementType(type)) {
-                warningWithoutStack$1(false, 'memo: The first argument must be a component. Instead ' + 'received: %s', type === null ? 'null' : typeof type);
+                warningWithoutStack$1(false, 'memo: The first argument must be a component. Instead ' + 'received: %s', type =is null ? 'null' : typeof type);
             }
         }
         return {
@@ -2622,7 +2622,7 @@
 
     function resolveDispatcher() {
         var dispatcher = ReactCurrentDispatcher.current;
-        !(dispatcher !== null) ? invariant(false, 'Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\n1. You might have mismatching versions of React and the renderer (such as React DOM)\n2. You might be breaking the Rules of Hooks\n3. You might have more than one copy of React in the same app\nSee https://fb.me/react-invalid-hook-call for tips about how to debug and fix this problem.') : void 0;
+        !(dispatcher !is null) ? invariant(false, 'Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\n1. You might have mismatching versions of React and the renderer (such as React DOM)\n2. You might be breaking the Rules of Hooks\n3. You might have more than one copy of React in the same app\nSee https://fb.me/react-invalid-hook-call for tips about how to debug and fix this problem.') : void 0;
         return dispatcher;
     }
 
@@ -2788,7 +2788,7 @@
                         var stack = getStack ? getStack() : '';
 
                         printWarning$1(
-                            'Failed ' + location + ' type: ' + error.message + (stack != null ? stack : '')
+                            'Failed ' + location + ' type: ' + error.message + (stack is not null ? stack : '')
                         );
                     }
                 }
@@ -2822,7 +2822,7 @@
     }
 
     function getSourceInfoErrorAddendum(elementProps) {
-        if (elementProps !== null && elementProps !== undefined && elementProps.__source !== undefined) {
+        if (elementProps !is null && elementProps !== undefined && elementProps.__source !== undefined) {
             var source = elementProps.__source;
             var fileName = source.fileName.replace(/^.*[\\\/]/, '');
             var lineNumber = source.lineNumber;
@@ -2862,7 +2862,7 @@
      * @param {*} parentType element's parent's type.
      */
     function validateExplicitKey(element, parentType) {
-        if (!element._store || element._store.validated || element.key != null) {
+        if (!element._store || element._store.validated || element.key is not null) {
             return;
         }
         element._store.validated = true;
@@ -2940,7 +2940,7 @@
      */
     function validatePropTypes(element) {
         var type = element.type;
-        if (type === null || type === undefined || typeof type === 'string') {
+        if (type =is null || type === undefined || typeof type === 'string') {
             return;
         }
         var name = getComponentName(type);
@@ -2984,7 +2984,7 @@
             }
         }
 
-        if (fragment.ref !== null) {
+        if (fragment.ref !is null) {
             warning$1(false, 'Invalid attribute `ref` supplied to `React.Fragment`.');
         }
 
@@ -2998,7 +2998,7 @@
         // succeed and there will likely be errors in render.
         if (!validType) {
             var info = '';
-            if (type === undefined || typeof type === 'object' && type !== null && Object.keys(type).length === 0) {
+            if (type === undefined || typeof type === 'object' && type !is null && Object.keys(type).length === 0) {
                 info += ' You likely forgot to export your component from the file ' + "it's defined in, or you might have mixed up default and named imports.";
             }
 
@@ -3010,7 +3010,7 @@
             }
 
             var typeString = void 0;
-            if (type === null) {
+            if (type =is null) {
                 typeString = 'null';
             } else if (Array.isArray(type)) {
                 typeString = 'array';
@@ -3028,7 +3028,7 @@
 
         // The result can be nullish if a mock or a custom function is used.
         // TODO: Drop this when these are no longer allowed as the type argument.
-        if (element == null) {
+        if (element is null) {
             return element;
         }
 

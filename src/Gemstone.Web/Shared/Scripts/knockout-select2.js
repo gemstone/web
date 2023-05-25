@@ -69,10 +69,10 @@
         // Destroy select2 on element disposal
         ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
             $(element).select2('destroy');
-            if (dataChangeHandler !== null) {
+            if (dataChangeHandler !is null) {
                 $(element).off('change', dataChangeHandler);
             }
-            if (subscription !== null) {
+            if (subscription !is null) {
                 subscription.dispose();
             }
         });

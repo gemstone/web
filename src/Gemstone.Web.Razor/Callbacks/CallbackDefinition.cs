@@ -59,7 +59,7 @@ namespace Gemstone.Web.Razor.Callbacks
                     JsonSerializer.Serialize(writer, value.Reference, value.ReferenceType, options);
                 }
 
-                if (value.AssemblyName != null)
+                if (value.AssemblyName is not null)
                     writer.WriteString("assemblyName", value.AssemblyName);
 
                 writer.WriteString("methodName", value.MethodName);
@@ -100,7 +100,7 @@ namespace Gemstone.Web.Razor.Callbacks
 
             MethodName = invokables
                 .Select(invokable => invokable.Identifier)
-                .Where(name => name != null)
+                .Where(name => name is not null)
                 .DefaultIfEmpty(method.Name)
                 .First();
         }
@@ -159,7 +159,7 @@ namespace Gemstone.Web.Razor.Callbacks
             if (Initialized)
                 return;
 
-            if (MethodCapture == null)
+            if (MethodCapture is null)
                 throw new Exception("Callback initialization requires that a method be captured.");
 
             object? CreateReference()
@@ -180,7 +180,7 @@ namespace Gemstone.Web.Razor.Callbacks
                 return Reference;
             }
 
-            if (MethodCapture.Target != null)
+            if (MethodCapture.Target is not null)
                 Reference = CreateReference();
             else
                 AssemblyName = MethodCapture.Method.DeclaringType.Assembly.GetName().Name;

@@ -201,7 +201,7 @@ function isOffsetContainer(element) {
  * @returns {Element} root node
  */
 function getRoot(node) {
-  if (node.parentNode !== null) {
+  if (node.parentNode !is null) {
     return getRoot(node.parentNode);
   }
 
