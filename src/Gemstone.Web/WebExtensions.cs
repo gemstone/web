@@ -21,10 +21,7 @@
 //
 //******************************************************************************************************
 
-using System;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.FileProviders;
@@ -42,7 +39,7 @@ namespace Gemstone.Web
         /// <returns><see cref="StaticFileOptions"/></returns>
         public static StaticFileOptions StaticFileEmbeddedResources() {
             ManifestEmbeddedFileProvider embeddedFileProvider = new(Assembly.GetExecutingAssembly(), "Shared");
-            return new StaticFileOptions()
+            return new StaticFileOptions
             {
                 FileProvider = embeddedFileProvider,
                 RequestPath = new PathString("/@Gemstone")
