@@ -3,7 +3,7 @@
 <div class="treeview-node @SelectedClass @CollapseClass">
     <div class="treeview-node-body @BodyClass">
         <span class="treeview-node-bullet" @onclick="@ToggleCollapsedAsync">&nbsp;</span>
-        <span class="treeview-node-icon" @onclick="@SelectAsync" @ondblclick="@ToggleCollapsedAsync" />
+        <span class="treeview-node-icon" @onclick="@SelectAsync" @ondblclick="@ToggleCollapsedAsync"></span>
         <span class="treeview-node-label" @onclick="@SelectAsync">@Label</span>
     </div>
 
@@ -18,6 +18,8 @@
 </div>
 
 @code {
+    #pragma warning disable CS1591
+
     [CascadingParameter]
     public TreeView? TreeView { get; set; }
 
@@ -56,14 +58,8 @@
 
     public bool IsCollapsed { get; private set; }
 
-#if NETSTANDARD2_1
-    [return: MaybeNull]
-    public T GetData<T>() =>
-        (Data is T data) ? data : default(T);
-#else
     public T GetData<T>() =>
         (Data is T data) ? data : default(T)!;
-#endif
 
     public async Task SelectAsync()
     {

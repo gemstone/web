@@ -108,7 +108,7 @@ namespace Gemstone.Web.Hosting
         {
             static async ValueTask<string?> GetValidHostAsync(string hostNameOrAddress)
             {
-                if (IPAddress.TryParse(hostNameOrAddress, out IPAddress ipAddress))
+                if (IPAddress.TryParse(hostNameOrAddress, out IPAddress? ipAddress))
                 {
                     IPAddress[] loopbackAddresses =
                     {
@@ -144,7 +144,7 @@ namespace Gemstone.Web.Hosting
             {
                 UriBuilder uriBuilder = new(url);
                 uriBuilder.Host = await GetValidHostAsync(uriBuilder.Host);
-                return uriBuilder.Uri?.ToString();
+                return uriBuilder.Uri.ToString();
             }
 
             return await host

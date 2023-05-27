@@ -167,12 +167,12 @@ namespace Gemstone.Web.Razor.Callbacks
                 if (Disposed)
                     throw new ObjectDisposedException(nameof(CallbackDefinition));
 
-                Type referenceType = MethodCapture.Method.DeclaringType;
+                const string FactoryMethodName = nameof(DotNetObjectReference.Create);
+                Type referenceType = MethodCapture.Method.DeclaringType!;
                 Type factoryType = typeof(DotNetObjectReference);
-                string factoryMethodName = nameof(DotNetObjectReference.Create);
 
                 MethodInfo factoryMethod = factoryType
-                    .GetMethod(factoryMethodName)
+                    .GetMethod(FactoryMethodName)!
                     .MakeGenericMethod(referenceType);
 
                 ReferenceType = factoryMethod.ReturnType;
@@ -183,7 +183,7 @@ namespace Gemstone.Web.Razor.Callbacks
             if (MethodCapture.Target is not null)
                 Reference = CreateReference();
             else
-                AssemblyName = MethodCapture.Method.DeclaringType.Assembly.GetName().Name;
+                AssemblyName = MethodCapture.Method.DeclaringType!.Assembly.GetName().Name;
 
             Initialized = true;
         }
