@@ -4,20 +4,6 @@
     <name>Gemstone.Web</name>
   </assembly>
   <members>
-    <member name="T:Gemstone.Web.Class">
-      <summary>
-            Sample class for new Web library.
-            </summary>
-    </member>
-    <member name="M:Gemstone.Web.Class.#ctor">
-      <summary>
-        <markup>
-          <include item="SMCAutoDocConstructor">
-            <parameter>Gemstone.Web.Class</parameter>
-          </include>
-        </markup>
-      </summary>
-    </member>
     <member name="T:Gemstone.Web.WebExtensions">
       <summary>
             Defines extension methods useful for web applications.
