@@ -3,7 +3,7 @@
   <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>net7.0;netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>net8.0;netstandard2.1</TargetFrameworks>
     <RootNamespace>Gemstone.Web</RootNamespace>
     <PackageId>Gemstone.Web</PackageId>
     <Authors>Grid Protection Alliance</Authors>
@@ -67,9 +67,9 @@
     <PackageReference Include="Gemstone.Common" Version="1.0.106" Condition="'$(Configuration)'!='Development'" />
     
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.5" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="3.1.5" />
-    <PackageReference Include="System.Linq.Async" Version="4.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="8.0.0" />
+    <PackageReference Include="System.Linq.Async" Version="6.0.1" />
 
     <!-- <ProjectReference Include="..\..\..\expressions\src\Gemstone.Expressions\Gemstone.Expressions.csproj" Condition="'$(Configuration)'=='Development'" /> -->
     <!-- <PackageReference Include="Gemstone.Expressions" Version="1.0.0" Condition="'$(Configuration)'!='Development'" /> -->
