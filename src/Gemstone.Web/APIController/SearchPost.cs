@@ -21,23 +21,13 @@
 //
 //******************************************************************************************************
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-using System.Threading.Tasks;
 using Gemstone.Data.Model;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Hosting.Server;
-using Microsoft.AspNetCore.Hosting.Server.Features;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+
 namespace Gemstone.Web.APIController
 {
     /// <summary>
-    /// Content of a POST Request for searching in <see cref="IReadModelController"/>
+    /// Content of a POST Request for searching in <see cref="IReadModelController{T}"/>
     /// </summary>
     public class SearchPost<T> where T : class, new()
     {
