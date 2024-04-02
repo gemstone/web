@@ -33,17 +33,17 @@ namespace Gemstone.Web.APIController
         /// <summary>
         /// endpoint to get all Models related to a given ParentID
         /// </summary>
-        public IHttpActionResult Get(string parentID);
+        public IHttpActionResult Get(string parentID, int page);
 
         /// <summary>
         /// endpoint to get all Models in order.
         /// </summary>
-        public IHttpActionResult Get(string sort, int ascending);
+        public IHttpActionResult Get(string sort, int ascending, int page);
 
         /// <summary>
         /// endpoint to get all Models in order related to a given ParentID
         /// </summary>
-        public IHttpActionResult Get(string parentID, string sort, int ascending) ;
+        public IHttpActionResult Get(string parentID, string sort, int ascending, int page) ;
         
         /// <summary>
         /// endpoint to get a specific Model 
