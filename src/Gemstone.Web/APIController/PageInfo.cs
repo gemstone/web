@@ -1,5 +1,5 @@
 ﻿//******************************************************************************************************
-//  IReadModelController.cs - Gbtc
+//  PageInfo.cs - Gbtc
 //
 //  Copyright © 2024, Grid Protection Alliance.  All Rights Reserved.
 //
@@ -21,49 +21,26 @@
 //
 //******************************************************************************************************
 
-using System.Web.Http;
-
 namespace Gemstone.Web.APIController
 {
     /// <summary>
-    /// Defines an interface for a common ModelController
+    /// Content of a POST Return for providing pageination info to client from <see cref="IReadModelController{T}"/>
     /// </summary>
-    public interface IReadModelController<T> where T : class, new()
+    public class PageInfo
     {
         /// <summary>
-        /// endpoint to get all Models related to a given ParentID
+        /// Number of Models per Page
         /// </summary>
-        public IHttpActionResult Get(string parentID, int page);
+        public int PageSize { get; set; }
 
         /// <summary>
-        /// endpoint to get all Models in order.
+        /// Total Number of Pages
         /// </summary>
-        public IHttpActionResult Get(string sort, bool ascending, int page);
+        public int PageCount { get; set; }
 
         /// <summary>
-        /// endpoint to get all Models in order related to a given ParentID
+        /// Number of Models
         /// </summary>
-        public IHttpActionResult Get(string parentID, string sort, bool ascending, int page) ;
-        
-        /// <summary>
-        /// endpoint to get a specific Model 
-        /// </summary>    
-        public IHttpActionResult GetOne(string id);
-
-        /// <summary>
-        /// endpoint to search models
-        /// </summary>
-        public IHttpActionResult Search(SearchPost<T> postData, int page);
-
-        /// <summary>
-        /// endpoint to get Pagination information
-        /// </summary>
-        public IHttpActionResult GetPageInfo(SearchPost<T> postData);
-
-        /// <summary>
-        /// endpoint to get Pagination information
-        /// </summary>
-        public IHttpActionResult GetPageInfo();
-
+        public int TotalCount { get; set; }
     }
 }
