@@ -26,7 +26,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Gemstone.Web.APIController
 {
     /// <summary>
-    /// Defines an interface for a common ModelController
+    /// Defines an interface for a common ModelController (read only operations)
     /// </summary>
     public interface IReadModelController<T> where T : class, new()
     {
