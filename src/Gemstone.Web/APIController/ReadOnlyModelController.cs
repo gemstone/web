@@ -25,6 +25,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Gemstone.Configuration;
 using Gemstone.Data;
 using Gemstone.Data.Model;
 using Microsoft.AspNetCore.Mvc;
@@ -267,7 +268,7 @@ namespace Gemstone.Web.APIController
         /// Create the <see cref="AdoDataConnection"/> for the controller.
         /// </summary>
         /// <returns>a new <see cref="AdoDataConnection"/></returns>
-        protected AdoDataConnection CreateConnection() => new AdoDataConnection("systemSettings");
+        protected AdoDataConnection CreateConnection() => new AdoDataConnection(Settings.Default);
 
        
         #endregion
