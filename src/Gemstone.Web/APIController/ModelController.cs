@@ -23,6 +23,7 @@
 
 using System;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using Gemstone.Data;
 using Gemstone.Data.Model;
@@ -72,9 +73,10 @@ namespace Gemstone.Web.APIController
         /// Updates a record from associated table.
         /// </summary>
         /// <param name="record">The record to be updated.</param>
+        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>An <see cref="IActionResult"/> containing the new record <see cref="T"/> or <see cref="Exception"/>.</returns>
         [HttpPatch, Route("")]
-        public Task<IActionResult> Patch(T record)
+        public Task<IActionResult> Patch(T record, CancellationToken cancellationToken)
         {
             if (!PatchAuthCheck())
                 return Task.FromResult<IActionResult>(Unauthorized());
@@ -90,9 +92,10 @@ namespace Gemstone.Web.APIController
         /// Creates new record in associated table.
         /// </summary>
         /// <param name="record">The record to be created.</param>
+        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>An <see cref="IActionResult"/> containing the new <see cref="T"/> or <see cref="Exception"/>.</returns>
         [HttpPost, Route("")]
-        public Task<IActionResult> Post(T record)
+        public Task<IActionResult> Post(T record, CancellationToken cancellationToken)
         {
             if (!PostAuthCheck())
                 return Task.FromResult<IActionResult>(Unauthorized());
@@ -104,14 +107,14 @@ namespace Gemstone.Web.APIController
             return Task.FromResult<IActionResult>(Ok(record));
         }
 
-
         /// <summary>
         /// Deletes a record from associated table.
         /// </summary>
         /// <param name="record">The record to be deleted.</param>
+        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>An <see cref="IActionResult"/> containing 1 or <see cref="Exception"/>.</returns>
         [HttpDelete, Route("")]
-        public Task<IActionResult> Delete(T record)
+        public Task<IActionResult> Delete(T record, CancellationToken cancellationToken)
         {
             if (!DeleteAuthCheck())
                 return Task.FromResult<IActionResult>(Unauthorized());
@@ -127,9 +130,10 @@ namespace Gemstone.Web.APIController
         /// Deletes a record from associated table by primary key.
         /// </summary>
         /// <param name="id">The primary key of the record to be deleted.</param>
+        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>An <see cref="IActionResult"/> containing 1 or <see cref="Exception"/>.</returns>
         [HttpDelete, Route("{id}")]
-        public Task<IActionResult> Delete(string id)
+        public Task<IActionResult> Delete(string id, CancellationToken cancellationToken)
         {
             if(!DeleteAuthCheck())
                 return Task.FromResult<IActionResult>(Unauthorized());

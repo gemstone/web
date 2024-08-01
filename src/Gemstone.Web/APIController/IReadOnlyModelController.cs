@@ -21,6 +21,7 @@
 //
 //******************************************************************************************************
 
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,37 +35,37 @@ namespace Gemstone.Web.APIController
         /// <summary>
         /// Endpoint to get all models related to a given parent ID.
         /// </summary>
-        public Task<IActionResult> Get(string parentID, int page);
+        public Task<IActionResult> Get(string parentID, int page, CancellationToken cancellationToken);
 
         /// <summary>
         /// Endpoint to get all models in order.
         /// </summary>
-        public Task<IActionResult> Get(string sort, bool ascending, int page);
+        public Task<IActionResult> Get(string sort, bool ascending, int page, CancellationToken cancellationToken);
 
         /// <summary>
         /// Endpoint to get all models in order related to a given ParentID.
         /// </summary>
-        public Task<IActionResult> Get(string parentID, string sort, bool ascending, int page);
+        public Task<IActionResult> Get(string parentID, string sort, bool ascending, int page, CancellationToken cancellationToken);
         
         /// <summary>
         /// Endpoint to get a specific model.
         /// </summary>    
-        public Task<IActionResult> GetOne(string id);
+        public Task<IActionResult> GetOne(string id, CancellationToken cancellationToken);
 
         /// <summary>
         /// Endpoint to search models.
         /// </summary>
-        public Task<IActionResult> Search(SearchPost<T> postData, int page);
+        public Task<IActionResult> Search(SearchPost<T> postData, int page, CancellationToken cancellationToken);
 
         /// <summary>
         /// Endpoint to get pagination information.
         /// </summary>
-        public Task<IActionResult> GetPageInfo(SearchPost<T> postData);
+        public Task<IActionResult> GetPageInfo(SearchPost<T> postData, CancellationToken cancellationToken);
 
         /// <summary>
         /// Endpoint to get pagination information.
         /// </summary>
-        public Task<IActionResult> GetPageInfo();
+        public Task<IActionResult> GetPageInfo(CancellationToken cancellationToken);
 
     }
 }

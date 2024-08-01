@@ -26,6 +26,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using Gemstone.Configuration;
 using Gemstone.Data;
@@ -104,9 +105,10 @@ namespace Gemstone.Web.APIController
         /// </summary>
         /// <param name="parentID">Parent ID to be used if table has set parent keys.</param>
         /// <param name="page">The 0 based page number to be returned.</param>
+        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>An <see cref="IActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/>.</returns>
         [HttpGet, Route("{page:min(0)}/{parentID?}")]
-        public Task<IActionResult> Get(string? parentID, int page)
+        public Task<IActionResult> Get(string? parentID, int page, CancellationToken cancellationToken)
         {
             if (!GetAuthCheck())
                 return Task.FromResult<IActionResult>(Unauthorized());
@@ -135,9 +137,10 @@ namespace Gemstone.Web.APIController
         /// <param name="sort">Field to be used for sorting.</param>
         /// <param name="ascending">Flag when <c>true</c> will sort ascending; otherwise, descending.</param>
         /// <param name="page">The 0 based page number to be returned.</param>
+        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>An <see cref="IActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/>.</returns>
         [HttpGet, Route("{page:min(0)}/{sort}/{ascending:bool}")]
-        public Task<IActionResult> Get(string sort, bool ascending, int page)
+        public Task<IActionResult> Get(string sort, bool ascending, int page, CancellationToken cancellationToken)
         {
             if (!GetAuthCheck())
                 return Task.FromResult<IActionResult>(Unauthorized());
@@ -158,9 +161,10 @@ namespace Gemstone.Web.APIController
         /// <param name="ascending">Flag when <c>true</c> will sort ascending; otherwise, descending.</param>
         /// <param name="page">The 0 based page number to be returned.</param>
         /// <param name="parentID">Parent ID to be used if table has set parent keys.</param>
+        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>An <see cref="IActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/>.</returns>
         [HttpGet, Route("{page:min(0)}/{parentID}/{sort}/{ascending:bool}")]
-        public Task<IActionResult> Get(string parentID, string sort, bool ascending, int page)
+        public Task<IActionResult> Get(string parentID, string sort, bool ascending, int page, CancellationToken cancellationToken)
         {
             if (!GetAuthCheck())
                 return Task.FromResult<IActionResult>(Unauthorized());
@@ -183,9 +187,10 @@ namespace Gemstone.Web.APIController
         /// Gets a single record from associated table.
         /// </summary>
         /// <param name="id">The PrimaryKey value of the Model to be returned.</param>
+        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>An <see cref="IActionResult"/> containing a <see cref="T"/> or <see cref="Exception"/>.</returns>
         [HttpGet, Route("One/{id}")]
-        public Task<IActionResult> GetOne(string id)
+        public Task<IActionResult> GetOne(string id, CancellationToken cancellationToken)
         {
             if (!GetAuthCheck())
                 return Task.FromResult<IActionResult>(Unauthorized());
@@ -204,9 +209,10 @@ namespace Gemstone.Web.APIController
         /// </summary>
         /// <param name="postData">Search criteria.</param>
         /// <param name="page">the 0 based page number to be returned.</param>
+        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>An <see cref="IActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/>.</returns>
         [HttpPost, Route("Search/{page:min(0)}")]
-        public Task<IActionResult> Search([FromBody] SearchPost<T> postData, int page)
+        public Task<IActionResult> Search([FromBody] SearchPost<T> postData, int page, CancellationToken cancellationToken)
         {
             if (!GetAuthCheck())
                 return Task.FromResult<IActionResult>(Unauthorized());
@@ -222,9 +228,10 @@ namespace Gemstone.Web.APIController
         /// Gets the pagination information for the provided search criteria.
         /// </summary>
         /// <param name="postData">Search criteria.</param>
+        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>A <see cref="PageInfo"/> object containing the pagination information or <see cref="Exception"/>.</returns>
         [HttpPost, Route("PageInfo")]
-        public Task<IActionResult> GetPageInfo(SearchPost<T> postData)
+        public Task<IActionResult> GetPageInfo(SearchPost<T> postData, CancellationToken cancellationToken)
         {
             if (!GetAuthCheck())
                 return Task.FromResult<IActionResult>(Unauthorized());
@@ -244,9 +251,10 @@ namespace Gemstone.Web.APIController
         /// <summary>
         /// Gets pagination information.
         /// </summary>
+        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>A <see cref="PageInfo"/> object containing the pagination information or <see cref="Exception"/>.</returns>
         [HttpGet, Route("PageInfo")]
-        public Task<IActionResult> GetPageInfo()
+        public Task<IActionResult> GetPageInfo(CancellationToken cancellationToken)
         {
             if (!GetAuthCheck())
                 return Task.FromResult<IActionResult>(Unauthorized());

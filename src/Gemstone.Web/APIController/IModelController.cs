@@ -21,6 +21,7 @@
 //
 //******************************************************************************************************
 
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,21 +35,21 @@ namespace Gemstone.Web.APIController
         /// <summary>
         /// Endpoint to update modeled record.
         /// </summary>
-        public Task<IActionResult> Patch(T record);
+        public Task<IActionResult> Patch(T record, CancellationToken cancellationToken);
 
         /// <summary>
         /// Endpoint to add modeled record.
         /// </summary>
-        public Task<IActionResult> Post(T record);
+        public Task<IActionResult> Post(T record, CancellationToken cancellationToken);
 
         /// <summary>
         /// Endpoint to delete modeled record.
         /// </summary>
-        public Task<IActionResult> Delete(T record);
+        public Task<IActionResult> Delete(T record, CancellationToken cancellationToken);
 
         /// <summary>
         /// Endpoint to delete modeled record by ID.
         /// </summary>
-        public Task<IActionResult> Delete(string id);
+        public Task<IActionResult> Delete(string id, CancellationToken cancellationToken);
     }
 }
