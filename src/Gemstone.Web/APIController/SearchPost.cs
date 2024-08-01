@@ -27,7 +27,7 @@ using Gemstone.Data.Model;
 namespace Gemstone.Web.APIController
 {
     /// <summary>
-    /// Content of a POST Request for searching in <see cref="IReadModelController{T}"/>
+    /// Content of a POST Request for searching in <see cref="IReadOnlyModelController{T}"/>
     /// </summary>
     public class SearchPost<T> where T : class, new()
     {

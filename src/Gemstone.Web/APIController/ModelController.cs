@@ -22,9 +22,8 @@
 //******************************************************************************************************
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using Gemstone.Data;
 using Gemstone.Data.Model;
 using Microsoft.AspNetCore.Mvc;
@@ -32,16 +31,16 @@ using Microsoft.AspNetCore.Mvc;
 namespace Gemstone.Web.APIController
 {
     /// <summary>
-    /// Defines a ModelController 
+    /// Represents a ModelController.
     /// </summary>
-    public class ModelController<T> : ReadModelController<T>, IModelController<T> where T : class, new()
+    public class ModelController<T> : ReadOnlyModelController<T>, IModelController<T> where T : class, new()
     {
         #region [ Constructor ]
 
         /// <summary>
-        /// Creates a new <see cref="ReadModelController{T}"/>
+        /// Creates a new <see cref="ReadOnlyModelController{T}"/>
         /// </summary>
-        public ModelController(): base()
+        public ModelController()
         {
             DeleteRoles = typeof(T).GetCustomAttribute<DeleteRolesAttribute>()?.Roles ?? "";
             PostRoles = typeof(T).GetCustomAttribute<PostRolesAttribute>()?.Roles ?? "";
@@ -51,118 +50,122 @@ namespace Gemstone.Web.APIController
         #endregion
 
         #region [ Properties ]
-        protected string PatchRoles { get; } = "";
-        protected string PostRoles { get; } = "";
-        protected string DeleteRoles { get; } = "";
+
+        /// <summary>
+        /// Gets the roles required for PATCH requests.
+        /// </summary>
+        protected string PatchRoles { get; }
+
+        /// <summary>
+        /// Gets the roles required for POST requests.
+        /// </summary>
+        protected string PostRoles { get; }
+
+        /// <summary>
+        /// Gets the roles required for DELETE requests.
+        /// </summary>
+        protected string DeleteRoles { get; }
 
         #endregion
 
         /// <summary>
-        /// Updates a record from associated table
+        /// Updates a record from associated table.
         /// </summary>
-        /// <param name="record">The record to be updated</param>
-        /// <returns><see cref="IActionResult"/> containing the new record <see cref="T"/> or <see cref="Exception"/></returns>
+        /// <param name="record">The record to be updated.</param>
+        /// <returns>An <see cref="IActionResult"/> containing the new record <see cref="T"/> or <see cref="Exception"/>.</returns>
         [HttpPatch, Route("")]
-        public IActionResult Patch(T record)
+        public Task<IActionResult> Patch(T record)
         {
             if (!PatchAuthCheck())
-                return Unauthorized();
+                return Task.FromResult<IActionResult>(Unauthorized());
 
-            using (AdoDataConnection connection = CreateConnection())
-            {
-                TableOperations<T> tableOperations = new TableOperations<T>(connection);
-                tableOperations.UpdateRecord(record);
-            }
-            return Ok(record);
+            using AdoDataConnection connection = CreateConnection();
+            TableOperations<T> tableOperations = new(connection);
+            tableOperations.UpdateRecord(record);
+
+            return Task.FromResult<IActionResult>(Ok(record));
         }
 
         /// <summary>
-        /// creates new records in associated table
+        /// Creates new record in associated table.
         /// </summary>
-        /// <param name="record"> The record to be created </param>
-        /// <returns><see cref="IActionResult"/> containing the new <see cref="T"/> or <see cref="Exception"/></returns>
+        /// <param name="record">The record to be created.</param>
+        /// <returns>An <see cref="IActionResult"/> containing the new <see cref="T"/> or <see cref="Exception"/>.</returns>
         [HttpPost, Route("")]
-        public IActionResult Post(T record)
+        public Task<IActionResult> Post(T record)
         {
             if (!PostAuthCheck())
-                return Unauthorized();
+                return Task.FromResult<IActionResult>(Unauthorized());
 
-            
-            using (AdoDataConnection connection = CreateConnection())
-            {
-                TableOperations<T> tableOperations = new TableOperations<T>(connection);
-                tableOperations.AddNewRecord(record);
-            }
-            return Ok(record);
+            using AdoDataConnection connection = CreateConnection();
+            TableOperations<T> tableOperations = new(connection);
+            tableOperations.AddNewRecord(record);
+
+            return Task.FromResult<IActionResult>(Ok(record));
         }
 
 
         /// <summary>
-        /// Deletes a record from associated table
+        /// Deletes a record from associated table.
         /// </summary>
-        /// <param name="record"> The record to be deleted </param>
-        /// <returns><see cref="IActionResult"/> containing 1 or <see cref="Exception"/></returns>
+        /// <param name="record">The record to be deleted.</param>
+        /// <returns>An <see cref="IActionResult"/> containing 1 or <see cref="Exception"/>.</returns>
         [HttpDelete, Route("")]
-        public IActionResult Delete(T record)
+        public Task<IActionResult> Delete(T record)
         {
             if (!DeleteAuthCheck())
-                return Unauthorized();
+                return Task.FromResult<IActionResult>(Unauthorized());
 
+            using AdoDataConnection connection = CreateConnection();
+            TableOperations<T> tableOperations = new(connection);
+            tableOperations.DeleteRecord(record);
 
-            using (AdoDataConnection connection = CreateConnection())
-            {
-                TableOperations<T> tableOperations = new TableOperations<T>(connection);
-                tableOperations.DeleteRecord(record);
-            }
-            return Ok(1);
+            return Task.FromResult<IActionResult>(Ok(1));
         }
 
-
         /// <summary>
-        /// Deletes a record from associated table
+        /// Deletes a record from associated table by primary key.
         /// </summary>
-        /// <param name="id"> The primary key of the record to be deleted </param>
-        /// <returns><see cref="IActionResult"/> containing 1 or <see cref="Exception"/></returns>
+        /// <param name="id">The primary key of the record to be deleted.</param>
+        /// <returns>An <see cref="IActionResult"/> containing 1 or <see cref="Exception"/>.</returns>
         [HttpDelete, Route("{id}")]
-        public IActionResult Delete(string id)
+        public Task<IActionResult> Delete(string id)
         {
             if(!DeleteAuthCheck())
-                return Unauthorized();
+                return Task.FromResult<IActionResult>(Unauthorized());
 
+            using AdoDataConnection connection = CreateConnection();
+            TableOperations<T> tableOperations = new(connection);
+            tableOperations.DeleteRecordWhere($"{PrimaryKeyField} = {{0}}", id);
 
-            using (AdoDataConnection connection = CreateConnection())
-            {
-                TableOperations<T> tableOperations = new TableOperations<T>(connection);
-                tableOperations.DeleteRecordWhere($"{PrimaryKeyField} = {{0}}", id);
-            }
-            return Ok(1);
+            return Task.FromResult<IActionResult>(Ok(1));
         }
 
         #region [ Methods ]
 
         /// <summary>
-        /// Check if current User is authorized for POST Requests
+        /// Check if current user is authorized for POST Requests.
         /// </summary>
-        /// <returns>True if User is authorized for POST requests</returns>
-        protected bool PostAuthCheck()
+        /// <returns><c>true</c> if User is authorized for POST requests; otherwise, <c>false</c>.</returns>
+        protected virtual bool PostAuthCheck()
         {
             return PostRoles == string.Empty || User.IsInRole(PostRoles);
         }
 
         /// <summary>
-        /// Check if current User is authorized for DELETE Requests
+        /// Check if current user is authorized for DELETE Requests.
         /// </summary>
-        /// <returns>True if User is authorized for DELETE requests</returns>
-        protected bool DeleteAuthCheck()
+        /// <returns><c>true</c> if User is authorized for DELETE requests; otherwise, <c>false</c>.</returns>
+        protected virtual bool DeleteAuthCheck()
         {
             return DeleteRoles == string.Empty || User.IsInRole(DeleteRoles);
         }
 
         /// <summary>
-        /// Check if current User is authorized for PATCH Requests
+        /// Check if current user is authorized for PATCH Requests.
         /// </summary>
-        /// <returns>True if User is authorized for PATCH requests</returns>
-        protected bool PatchAuthCheck()
+        /// <returns><c>true</c> if User is authorized for PATCH requests; otherwise, <c>false</c>.</returns>
+        protected virtual bool PatchAuthCheck()
         {
             return PatchRoles == string.Empty || User.IsInRole(PatchRoles);
         }

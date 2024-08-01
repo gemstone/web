@@ -20,11 +20,13 @@
 //       Generated original version of source code.
 //
 //******************************************************************************************************
+// ReSharper disable CoVariantArrayConversion
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using Gemstone.Configuration;
 using Gemstone.Data;
 using Gemstone.Data.Model;
@@ -33,28 +35,28 @@ using Microsoft.AspNetCore.Mvc;
 namespace Gemstone.Web.APIController
 {
     /// <summary>
-    /// Defines a Read Only ModelController 
+    /// Represents a readonly ModelController.
     /// </summary>
-    public class ReadModelController<T> : ControllerBase, IReadModelController<T> where T : class, new()
+    public class ReadOnlyModelController<T> : ControllerBase, IReadOnlyModelController<T> where T : class, new()
     {
         #region [ Constructor ]
 
         /// <summary>
-        /// Creates a new <see cref="ReadModelController{T}"/>
+        /// Creates a new <see cref="ReadOnlyModelController{T}"/>
         /// </summary>
-        public ReadModelController()
+        public ReadOnlyModelController()
         {
             PrimaryKeyField = typeof(T).GetProperties().FirstOrDefault(p => p.GetCustomAttributes<PrimaryKeyAttribute>().Any())?.Name ?? "ID";
 
             ParentKey = typeof(T).GetProperties().FirstOrDefault(p => p.GetCustomAttributes<ParentKeyAttribute>().Any())?.Name ?? "";
 
-            PropertyInfo? pi = typeof(T).GetProperties().FirstOrDefault(p => p.GetCustomAttributes<DefaultSortOrderAttribute>().Any());
-            DefaultSortOrderAttribute? dsoa = pi?.GetCustomAttribute<DefaultSortOrderAttribute>();
+            PropertyInfo? propertyInfo = typeof(T).GetProperties().FirstOrDefault(p => p.GetCustomAttributes<DefaultSortOrderAttribute>().Any());
+            DefaultSortOrderAttribute? sortOrderAttribute = propertyInfo?.GetCustomAttribute<DefaultSortOrderAttribute>();
 
-            if (dsoa != null)
+            if (sortOrderAttribute is not null)
             {
-                DefaultSort = $"{pi?.Name}";
-                DefaultSortDirection = dsoa.Ascending;
+                DefaultSort = $"{propertyInfo?.Name}";
+                DefaultSortDirection = sortOrderAttribute.Ascending;
             }
 
             GetRoles = typeof(T).GetCustomAttribute<GetRolesAttribute>()?.Roles ?? "";
@@ -65,201 +67,207 @@ namespace Gemstone.Web.APIController
 
         #region [ Properties ]
 
-        protected string PrimaryKeyField { get; set; } = "ID";
-        protected string ParentKey { get; set; } = "";
-        protected string? DefaultSort { get; } = null;
-        protected bool DefaultSortDirection { get; } = false;
-        protected string GetRoles { get; } = "";
-        private int PageSize { get; } = 50;
+        /// <summary>
+        /// Gets or sets the primary key field for the model.
+        /// </summary>
+        protected string PrimaryKeyField { get; set; }
+
+        /// <summary>
+        /// Gets or sets the parent key field for the model.
+        /// </summary>
+        protected string ParentKey { get; set; }
+
+        /// <summary>
+        /// Gets or sets the default sort field for the model.
+        /// </summary>
+        protected string? DefaultSort { get; }
+
+        /// <summary>
+        /// Gets or sets the default sort direction for the model.
+        /// </summary>
+        protected bool DefaultSortDirection { get; }
+
+        /// <summary>
+        /// Gets the roles required for GET requests.
+        /// </summary>
+        protected string GetRoles { get; }
+
+        /// <summary>
+        /// Gets the page size for the model.
+        /// </summary>
+        private int PageSize { get; }
 
         #endregion
 
         /// <summary>
-        /// Gets all records from associated table, filtered to parent key ID if provided
+        /// Gets all records from associated table, filtered to parent keys if provided.
         /// </summary>
-        /// <param name="parentID">Parent ID to be used if Table has a set Parent Key</param>
-        /// <param name="page">the 0 based page number to be returned</param>
-        /// <returns><see cref="IActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/></returns>
+        /// <param name="parentID">Parent ID to be used if table has set parent keys.</param>
+        /// <param name="page">The 0 based page number to be returned.</param>
+        /// <returns>An <see cref="IActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/>.</returns>
         [HttpGet, Route("{page:min(0)}/{parentID?}")]
-        public IActionResult Get(string parentID, int page)
+        public Task<IActionResult> Get(string? parentID, int page)
         {
             if (!GetAuthCheck())
-                return Unauthorized();
+                return Task.FromResult<IActionResult>(Unauthorized());
 
-            IEnumerable<T> result;
-            using (AdoDataConnection connection = CreateConnection())
+            using AdoDataConnection connection = CreateConnection();
+            TableOperations<T> tableOperations = new(connection);
+            RecordFilter<T>? filter = null;
+
+            if (ParentKey != string.Empty && parentID is not null)
             {
-                TableOperations<T> tableOperations = new TableOperations<T>(connection);
-                RecordFilter<T>? filter = null;
-
-                if (ParentKey != string.Empty && parentID != null)
-                {
-                    filter = new RecordFilter<T>() { 
-                        FieldName = ParentKey,
-                        Operator = "=",
-                        SearchParameter = parentID
-                    };
-                }
-
-                result = tableOperations.QueryRecords(DefaultSort, DefaultSortDirection, page, PageSize, filter );
+                filter = new RecordFilter<T>() { 
+                    FieldName = ParentKey,
+                    Operator = "=",
+                    SearchParameter = parentID
+                };
             }
-            return Ok(result);
+
+            IEnumerable<T> result = tableOperations.QueryRecords(DefaultSort, DefaultSortDirection, page, PageSize, filter );
+
+            return Task.FromResult<IActionResult>(Ok(result));
         }
 
         /// <summary>
-        /// Gets all records from associated table sorted by the provided field
+        /// Gets all records from associated table sorted by the provided field.
         /// </summary>
-        /// <param name="sort"> Field to be used for sorting </param>
-        /// <param name="ascending"> true t sort by ascending </param>
-        /// <param name="page">the 0 based page number to be returned</param>
-        /// <returns><see cref="IActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/></returns>
+        /// <param name="sort">Field to be used for sorting.</param>
+        /// <param name="ascending">Flag when <c>true</c> will sort ascending; otherwise, descending.</param>
+        /// <param name="page">The 0 based page number to be returned.</param>
+        /// <returns>An <see cref="IActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/>.</returns>
         [HttpGet, Route("{page:min(0)}/{sort}/{ascending:bool}")]
-        public IActionResult Get(string sort, bool ascending, int page)
+        public Task<IActionResult> Get(string sort, bool ascending, int page)
         {
             if (!GetAuthCheck())
-                return Unauthorized();
+                return Task.FromResult<IActionResult>(Unauthorized());
 
-            IEnumerable<T> result;
-            using (AdoDataConnection connection = CreateConnection())
-            {
-                TableOperations<T> tableOperations = new TableOperations<T>(connection);
-                RecordFilter<T>? filter = null;
+            using AdoDataConnection connection = CreateConnection();
+            TableOperations<T> tableOperations = new(connection);
+            RecordFilter<T>? filter = null;
 
-                result = tableOperations.QueryRecords(sort, ascending, page, PageSize, filter);
-            }
-            return Ok(result);
+            IEnumerable<T> result = tableOperations.QueryRecords(sort, ascending, page, PageSize, filter);
+
+            return Task.FromResult<IActionResult>(Ok(result));
         }
 
-
         /// <summary>
-        /// Gets all records from associated table sorted by the provided field
+        /// Gets all records from associated table sorted by the provided field.
         /// </summary>
-        /// <param name="sort"> Field to be used for sorting </param>
-        /// <param name="ascending"> true t sort by ascending </param>
-        /// <param name="page">the 0 based page number to be returned</param>
-        /// <param name="parentID">Parent ID to be used if Table has a set Parent Key</param>
-        /// <returns><see cref="IActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/></returns>
+        /// <param name="sort">Field to be used for sorting.</param>
+        /// <param name="ascending">Flag when <c>true</c> will sort ascending; otherwise, descending.</param>
+        /// <param name="page">The 0 based page number to be returned.</param>
+        /// <param name="parentID">Parent ID to be used if table has set parent keys.</param>
+        /// <returns>An <see cref="IActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/>.</returns>
         [HttpGet, Route("{page:min(0)}/{parentID}/{sort}/{ascending:bool}")]
-        public IActionResult Get(string parentID, string sort, bool ascending, int page)
+        public Task<IActionResult> Get(string parentID, string sort, bool ascending, int page)
         {
             if (!GetAuthCheck())
-                return Unauthorized();
+                return Task.FromResult<IActionResult>(Unauthorized());
 
-            IEnumerable<T> result;
-            using (AdoDataConnection connection = CreateConnection())
+            using AdoDataConnection connection = CreateConnection();
+            TableOperations<T> tableOperations = new(connection);
+            RecordFilter<T> filter = new()
             {
-                TableOperations<T> tableOperations = new TableOperations<T>(connection);
-                RecordFilter<T> filter = new RecordFilter<T>()
-                    {
-                        FieldName = ParentKey,
-                        Operator = "=",
-                        SearchParameter = parentID
-                    };
-                
+                FieldName = ParentKey,
+                Operator = "=",
+                SearchParameter = parentID
+            };
+            
+            IEnumerable<T> result = tableOperations.QueryRecords(sort, ascending, page, PageSize, filter);
 
-                result = tableOperations.QueryRecords(sort, ascending, page, PageSize, filter);
-            }
-            return Ok(result);
+            return Task.FromResult<IActionResult>(Ok(result));
         }
 
         /// <summary>
-        /// Gets a single record from associated table
+        /// Gets a single record from associated table.
         /// </summary>
-        /// <param name="id"> The PrimaryKey value of the Model to be returned </param>
-        /// <returns><see cref="IActionResult"/> containing a <see cref="T"/> or <see cref="Exception"/></returns>
+        /// <param name="id">The PrimaryKey value of the Model to be returned.</param>
+        /// <returns>An <see cref="IActionResult"/> containing a <see cref="T"/> or <see cref="Exception"/>.</returns>
         [HttpGet, Route("One/{id}")]
-        public IActionResult GetOne(string id)
+        public Task<IActionResult> GetOne(string id)
         {
             if (!GetAuthCheck())
-                return Unauthorized();
+                return Task.FromResult<IActionResult>(Unauthorized());
 
-            T? result;
-            using (AdoDataConnection connection = CreateConnection())
-            {
-                TableOperations<T> tableOperations = new TableOperations<T>(connection);
-                result = tableOperations.QueryRecord(new RecordRestriction($"{PrimaryKeyField} = {{0}}",id));
-            }
+            using AdoDataConnection connection = CreateConnection();
+            TableOperations<T> tableOperations = new(connection);
+            T? result = tableOperations.QueryRecord(new RecordRestriction($"{PrimaryKeyField} = {{0}}",id));
 
-            if (result is null)
-                return NotFound();
-
-            return Ok(result);
+            return result is null ? 
+                Task.FromResult<IActionResult>(NotFound()) : 
+                Task.FromResult<IActionResult>(Ok(result));
         }
 
         /// <summary>
-        /// Gets all records from associated table matching the provided search criteria
+        /// Gets all records from associated table matching the provided search criteria.
         /// </summary>
-        /// <param name="postData"> The Search Criteria </param>
-        /// <param name="page">the 0 based page number to be returned</param>
-        /// <returns><see cref="IActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/></returns>
+        /// <param name="postData">Search criteria.</param>
+        /// <param name="page">the 0 based page number to be returned.</param>
+        /// <returns>An <see cref="IActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/>.</returns>
         [HttpPost, Route("Search/{page:min(0)}")]
-        public IActionResult Search([FromBody] SearchPost<T> postData, int page)
+        public Task<IActionResult> Search([FromBody] SearchPost<T> postData, int page)
         {
             if (!GetAuthCheck())
-                return Unauthorized();
+                return Task.FromResult<IActionResult>(Unauthorized());
 
-            IEnumerable<T> result;
-            using (AdoDataConnection connection = CreateConnection())
-            {
-                TableOperations<T> tableOperations = new TableOperations<T>(connection);
-                result = tableOperations.QueryRecords(postData.OrderBy, postData.Ascending, page, PageSize, postData.Searches.ToArray());
-            }
+            using AdoDataConnection connection = CreateConnection();
+            TableOperations<T> tableOperations = new(connection);
+            IEnumerable<T> result = tableOperations.QueryRecords(postData.OrderBy, postData.Ascending, page, PageSize, postData.Searches.ToArray());
 
-            return Ok(result);
+            return Task.FromResult<IActionResult>(Ok(result));
         }
 
         /// <summary>
-        /// Gets the Pagination Information for the provided Search Criteria
+        /// Gets the pagination information for the provided search criteria.
         /// </summary>
-        /// <param name="postData"> search criteria</param>
-        /// <returns> a <see cref="PageInfo"/> object containting the pageination information or <see cref="Exception"/> </returns>
+        /// <param name="postData">Search criteria.</param>
+        /// <returns>A <see cref="PageInfo"/> object containing the pagination information or <see cref="Exception"/>.</returns>
         [HttpPost, Route("PageInfo")]
-        public IActionResult GetPageInfo(SearchPost<T> postData)
+        public Task<IActionResult> GetPageInfo(SearchPost<T> postData)
         {
             if (!GetAuthCheck())
-                return Unauthorized();
+                return Task.FromResult<IActionResult>(Unauthorized());
 
-            using (AdoDataConnection connection = CreateConnection())
+            using AdoDataConnection connection = CreateConnection();
+            TableOperations<T> tableOperations = new(connection);
+            int recordCount = tableOperations.QueryRecordCount(postData.Searches.ToArray());
+
+            return Task.FromResult<IActionResult>(Ok(new PageInfo()
             {
-                TableOperations<T> tableOperations = new TableOperations<T>(connection);
-                int nRecords = tableOperations.QueryRecordCount(postData.Searches.ToArray());
-                return Ok(new PageInfo()
-                {
-                    PageSize = PageSize,
-                    PageCount = (int)Math.Ceiling((double)nRecords/(double)PageSize),
-                    TotalCount = nRecords
-                });
-            }
+                PageSize = PageSize,
+                PageCount = (int)Math.Ceiling(recordCount / (double)PageSize),
+                TotalCount = recordCount
+            }));
         }
 
         /// <summary>
-        /// Gets the Pagination Information
+        /// Gets pagination information.
         /// </summary>
-        /// <returns> a <see cref="PageInfo"/> object containting the pageination information or <see cref="Exception"/> </returns>
+        /// <returns>A <see cref="PageInfo"/> object containing the pagination information or <see cref="Exception"/>.</returns>
         [HttpGet, Route("PageInfo")]
-        public IActionResult GetPageInfo()
+        public Task<IActionResult> GetPageInfo()
         {
             if (!GetAuthCheck())
-                return Unauthorized();
-            using (AdoDataConnection connection = CreateConnection())
+                return Task.FromResult<IActionResult>(Unauthorized());
+            
+            using AdoDataConnection connection = CreateConnection();
+            TableOperations<T> tableOperations = new(connection);
+            int recordCount = tableOperations.QueryRecordCount((RecordRestriction?)null);
+            
+            return Task.FromResult<IActionResult>(Ok(new PageInfo()
             {
-                TableOperations<T> tableOperations = new TableOperations<T>(connection);
-                int nRecords = tableOperations.QueryRecordCount((RecordRestriction?)null);
-                return Ok(new PageInfo()
-                {
-                    PageSize = PageSize,
-                    PageCount = (int)Math.Ceiling((double)nRecords / (double)PageSize),
-                    TotalCount = nRecords
-                });
-            }
+                PageSize = PageSize,
+                PageCount = (int)Math.Ceiling(recordCount / (double)PageSize),
+                TotalCount = recordCount
+            }));
         }
-        #region [ Methods ]
 
         /// <summary>
-        /// Check if current User is authorized for GET Requests
+        /// Check if current User is authorized for GET Requests.
         /// </summary>
-        /// <returns>True if User is authorized for GET requests</returns>
-        protected bool GetAuthCheck()
+        /// <returns><c>true</c> if User is authorized for GET requests; otherwise, <c>false</c>.</returns>
+        protected virtual bool GetAuthCheck()
         {
             return GetRoles == string.Empty || User.IsInRole(GetRoles);
         }
@@ -267,10 +275,10 @@ namespace Gemstone.Web.APIController
         /// <summary>
         /// Create the <see cref="AdoDataConnection"/> for the controller.
         /// </summary>
-        /// <returns>a new <see cref="AdoDataConnection"/></returns>
-        protected AdoDataConnection CreateConnection() => new AdoDataConnection(Settings.Default);
-
-       
-        #endregion
+        /// <returns>A new <see cref="AdoDataConnection"/>.</returns>
+        protected virtual AdoDataConnection CreateConnection()
+        {
+            return new AdoDataConnection(Settings.Default);
+        }
     }
 }

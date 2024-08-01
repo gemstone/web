@@ -21,49 +21,50 @@
 //
 //******************************************************************************************************
 
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Gemstone.Web.APIController
 {
     /// <summary>
-    /// Defines an interface for a common ModelController (read only operations)
+    /// Defines an interface for common readonly ModelController operations.
     /// </summary>
-    public interface IReadModelController<T> where T : class, new()
+    public interface IReadOnlyModelController<T> where T : class, new()
     {
         /// <summary>
-        /// endpoint to get all Models related to a given ParentID
+        /// Endpoint to get all models related to a given parent ID.
         /// </summary>
-        public IActionResult Get(string parentID, int page);
+        public Task<IActionResult> Get(string parentID, int page);
 
         /// <summary>
-        /// endpoint to get all Models in order.
+        /// Endpoint to get all models in order.
         /// </summary>
-        public IActionResult Get(string sort, bool ascending, int page);
+        public Task<IActionResult> Get(string sort, bool ascending, int page);
 
         /// <summary>
-        /// endpoint to get all Models in order related to a given ParentID
+        /// Endpoint to get all models in order related to a given ParentID.
         /// </summary>
-        public IActionResult Get(string parentID, string sort, bool ascending, int page) ;
+        public Task<IActionResult> Get(string parentID, string sort, bool ascending, int page);
         
         /// <summary>
-        /// endpoint to get a specific Model 
+        /// Endpoint to get a specific model.
         /// </summary>    
-        public IActionResult GetOne(string id);
+        public Task<IActionResult> GetOne(string id);
 
         /// <summary>
-        /// endpoint to search models
+        /// Endpoint to search models.
         /// </summary>
-        public IActionResult Search(SearchPost<T> postData, int page);
+        public Task<IActionResult> Search(SearchPost<T> postData, int page);
 
         /// <summary>
-        /// endpoint to get Pagination information
+        /// Endpoint to get pagination information.
         /// </summary>
-        public IActionResult GetPageInfo(SearchPost<T> postData);
+        public Task<IActionResult> GetPageInfo(SearchPost<T> postData);
 
         /// <summary>
-        /// endpoint to get Pagination information
+        /// Endpoint to get pagination information.
         /// </summary>
-        public IActionResult GetPageInfo();
+        public Task<IActionResult> GetPageInfo();
 
     }
 }

@@ -29,7 +29,7 @@ namespace Gemstone.Web.APIController
     /// <summary>
     /// Defines an interface for a common ModelController including write operations.
     /// </summary>
-    public interface IModelController<T>: IReadModelController<T> where T : class, new()
+    public interface IModelController<T>: IReadOnlyModelController<T> where T : class, new()
     {
         /// <summary>
         /// Endpoint to update modeled record.

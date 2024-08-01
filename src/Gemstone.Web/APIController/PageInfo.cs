@@ -24,7 +24,7 @@
 namespace Gemstone.Web.APIController
 {
     /// <summary>
-    /// Content of a POST Return for providing pageination info to client from <see cref="IReadModelController{T}"/>
+    /// Content of a POST Return for providing pageination info to client from <see cref="IReadOnlyModelController{T}"/>
     /// </summary>
     public class PageInfo
     {
