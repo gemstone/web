@@ -21,33 +21,34 @@
 //
 //******************************************************************************************************
 
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Gemstone.Web.APIController
 {
     /// <summary>
-    /// Defines an interface for a common ModelController including write operations
+    /// Defines an interface for a common ModelController including write operations.
     /// </summary>
     public interface IModelController<T>: IReadModelController<T> where T : class, new()
     {
         /// <summary>
-        /// endpoint to update models
+        /// Endpoint to update modeled record.
         /// </summary>
-        public IActionResult Patch(T record);
+        public Task<IActionResult> Patch(T record);
 
         /// <summary>
-        /// endpoint to Add model
+        /// Endpoint to add modeled record.
         /// </summary>
-        public IActionResult Post(T record);
+        public Task<IActionResult> Post(T record);
 
         /// <summary>
-        /// endpoint to delete model
+        /// Endpoint to delete modeled record.
         /// </summary>
-        public IActionResult Delete(T record);
+        public Task<IActionResult> Delete(T record);
 
         /// <summary>
-        /// endpoint to delete By ID
+        /// Endpoint to delete modeled record by ID.
         /// </summary>
-        public IActionResult Delete(string id);
+        public Task<IActionResult> Delete(string id);
     }
 }
