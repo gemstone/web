@@ -27,22 +27,33 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
+using Gemstone.Data.Model;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
 namespace Gemstone.Web.APIController
 {
     /// <summary>
-    /// Content of a POST Request for searching in <see cref="IModelControler"/>
+    /// Content of a POST Request for searching in <see cref="IReadModelController"/>
     /// </summary>
-       public class SearchPost
-        {
-            public IEnumerable<SQLSearchFilter> Searches { get; set; }
-            public string OrderBy { get; set; }
-            public bool Ascending { get; set; }
-        }
+    public class SearchPost<T> where T : class, new()
+    {
+        /// <summary>
+        /// The <see cref="RecordFilter{T}"/> to be applied to the search
+        /// </summary>
+        public IEnumerable<RecordFilter<T>> Searches { get; set; }
+
+        /// <summary>
+        /// The Field to oreder the results by
+        /// </summary>
+        public string OrderBy { get; set; }
+
+        /// <summary>
+        /// {true} if the results should be ordered ascending
+        /// </summary>
+        public bool Ascending { get; set; }
+    }
 }

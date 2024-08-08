@@ -27,6 +27,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
+using System.Web.Http;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
@@ -39,31 +40,31 @@ namespace Gemstone.Web.APIController
     /// <summary>
     /// Defines an interface for a common ModelController
     /// </summary>
-    public interface IReadModelController
+    public interface IReadModelController<T> where T : class, new()
     {
         /// <summary>
-        /// endpoint to get all Models related to a given <see cref={parentID}/>
+        /// endpoint to get all Models related to a given ParentID
         /// </summary>
-        public IHttpActionResult Get(string parentID) {}
+        public IHttpActionResult Get(string parentID);
 
         /// <summary>
-        /// endpoint to get all Models in <see cref={sort} /> order.
+        /// endpoint to get all Models in order.
         /// </summary>
-        public IHttpActionResult Get(string sort, int ascending) {}
+        public IHttpActionResult Get(string sort, int ascending);
 
         /// <summary>
-        /// endpoint to get all Models in <see cref={sort} /> order related to a given <see cref={parentID} />
+        /// endpoint to get all Models in order related to a given ParentID
         /// </summary>
-        public IHttpActionResult Get(string parentID, string sort, int ascending) {}
+        public IHttpActionResult Get(string parentID, string sort, int ascending) ;
         
         /// <summary>
         /// endpoint to get a specific Model 
         /// </summary>    
-        public IHttpActionResult GetOne(string id) {}
+        public IHttpActionResult GetOne(string id);
 
         /// <summary>
         /// endpoint to search models
         /// </summary>
-        public IHttpActionResult Search(PostData postData, int page) {}
+        public IHttpActionResult Search(SearchPost<T> postData, int page);
     }
 }
