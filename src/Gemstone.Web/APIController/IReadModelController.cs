@@ -21,7 +21,7 @@
 //
 //******************************************************************************************************
 
-using System.Web.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Gemstone.Web.APIController
 {
@@ -33,37 +33,37 @@ namespace Gemstone.Web.APIController
         /// <summary>
         /// endpoint to get all Models related to a given ParentID
         /// </summary>
-        public IHttpActionResult Get(string parentID, int page);
+        public IActionResult Get(string parentID, int page);
 
         /// <summary>
         /// endpoint to get all Models in order.
         /// </summary>
-        public IHttpActionResult Get(string sort, bool ascending, int page);
+        public IActionResult Get(string sort, bool ascending, int page);
 
         /// <summary>
         /// endpoint to get all Models in order related to a given ParentID
         /// </summary>
-        public IHttpActionResult Get(string parentID, string sort, bool ascending, int page) ;
+        public IActionResult Get(string parentID, string sort, bool ascending, int page) ;
         
         /// <summary>
         /// endpoint to get a specific Model 
         /// </summary>    
-        public IHttpActionResult GetOne(string id);
+        public IActionResult GetOne(string id);
 
         /// <summary>
         /// endpoint to search models
         /// </summary>
-        public IHttpActionResult Search(SearchPost<T> postData, int page);
+        public IActionResult Search(SearchPost<T> postData, int page);
 
         /// <summary>
         /// endpoint to get Pagination information
         /// </summary>
-        public IHttpActionResult GetPageInfo(SearchPost<T> postData);
+        public IActionResult GetPageInfo(SearchPost<T> postData);
 
         /// <summary>
         /// endpoint to get Pagination information
         /// </summary>
-        public IHttpActionResult GetPageInfo();
+        public IActionResult GetPageInfo();
 
     }
 }

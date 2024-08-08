@@ -25,16 +25,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Web.Http;
 using Gemstone.Data;
 using Gemstone.Data.Model;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Gemstone.Web.APIController
 {
     /// <summary>
     /// Defines a Read Only ModelController 
     /// </summary>
-    public class ReadModelController<T> : ApiController, IReadModelController<T> where T : class, new()
+    public class ReadModelController<T> : ControllerBase, IReadModelController<T> where T : class, new()
     {
         #region [ Constructor ]
 
@@ -78,9 +78,9 @@ namespace Gemstone.Web.APIController
         /// </summary>
         /// <param name="parentID">Parent ID to be used if Table has a set Parent Key</param>
         /// <param name="page">the 0 based page number to be returned</param>
-        /// <returns><see cref="IHttpActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/></returns>
+        /// <returns><see cref="IActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/></returns>
         [HttpGet, Route("{page:min(0)}/{parentID?}")]
-        public IHttpActionResult Get(string parentID, int page)
+        public IActionResult Get(string parentID, int page)
         {
             if (!GetAuthCheck())
                 return Unauthorized();
@@ -111,9 +111,9 @@ namespace Gemstone.Web.APIController
         /// <param name="sort"> Field to be used for sorting </param>
         /// <param name="ascending"> true t sort by ascending </param>
         /// <param name="page">the 0 based page number to be returned</param>
-        /// <returns><see cref="IHttpActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/></returns>
+        /// <returns><see cref="IActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/></returns>
         [HttpGet, Route("{page:min(0)}/{sort}/{ascending:bool}")]
-        public IHttpActionResult Get(string sort, bool ascending, int page)
+        public IActionResult Get(string sort, bool ascending, int page)
         {
             if (!GetAuthCheck())
                 return Unauthorized();
@@ -137,9 +137,9 @@ namespace Gemstone.Web.APIController
         /// <param name="ascending"> true t sort by ascending </param>
         /// <param name="page">the 0 based page number to be returned</param>
         /// <param name="parentID">Parent ID to be used if Table has a set Parent Key</param>
-        /// <returns><see cref="IHttpActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/></returns>
+        /// <returns><see cref="IActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/></returns>
         [HttpGet, Route("{page:min(0)}/{parentID}/{sort}/{ascending:bool}")]
-        public IHttpActionResult Get(string parentID, string sort, bool ascending, int page)
+        public IActionResult Get(string parentID, string sort, bool ascending, int page)
         {
             if (!GetAuthCheck())
                 return Unauthorized();
@@ -165,9 +165,9 @@ namespace Gemstone.Web.APIController
         /// Gets a single record from associated table
         /// </summary>
         /// <param name="id"> The PrimaryKey value of the Model to be returned </param>
-        /// <returns><see cref="IHttpActionResult"/> containing a <see cref="T"/> or <see cref="Exception"/></returns>
+        /// <returns><see cref="IActionResult"/> containing a <see cref="T"/> or <see cref="Exception"/></returns>
         [HttpGet, Route("One/{id}")]
-        public IHttpActionResult GetOne(string id)
+        public IActionResult GetOne(string id)
         {
             if (!GetAuthCheck())
                 return Unauthorized();
@@ -190,9 +190,9 @@ namespace Gemstone.Web.APIController
         /// </summary>
         /// <param name="postData"> The Search Criteria </param>
         /// <param name="page">the 0 based page number to be returned</param>
-        /// <returns><see cref="IHttpActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/></returns>
+        /// <returns><see cref="IActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/></returns>
         [HttpPost, Route("Search/{page:min(0)}")]
-        public IHttpActionResult Search([FromBody] SearchPost<T> postData, int page)
+        public IActionResult Search([FromBody] SearchPost<T> postData, int page)
         {
             if (!GetAuthCheck())
                 return Unauthorized();
@@ -213,7 +213,7 @@ namespace Gemstone.Web.APIController
         /// <param name="postData"> search criteria</param>
         /// <returns> a <see cref="PageInfo"/> object containting the pageination information or <see cref="Exception"/> </returns>
         [HttpPost, Route("PageInfo")]
-        public IHttpActionResult GetPageInfo(SearchPost<T> postData)
+        public IActionResult GetPageInfo(SearchPost<T> postData)
         {
             if (!GetAuthCheck())
                 return Unauthorized();
@@ -236,7 +236,7 @@ namespace Gemstone.Web.APIController
         /// </summary>
         /// <returns> a <see cref="PageInfo"/> object containting the pageination information or <see cref="Exception"/> </returns>
         [HttpGet, Route("PageInfo")]
-        public IHttpActionResult GetPageInfo()
+        public IActionResult GetPageInfo()
         {
             if (!GetAuthCheck())
                 return Unauthorized();
