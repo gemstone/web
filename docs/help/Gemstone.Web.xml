@@ -17,6 +17,698 @@
         <see cref="T:Microsoft.AspNetCore.Builder.StaticFileOptions" />
       </returns>
     </member>
+    <member name="T:Gemstone.Web.APIController.IModelController`1">
+      <summary>
+            Defines an interface for a common ModelController including write operations.
+            </summary>
+      <typeparam name="T">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T</parameter>
+            <parameter>T:Gemstone.Web.APIController.IModelController`1</parameter>
+          </include>
+        </markup>
+      </typeparam>
+    </member>
+    <member name="M:Gemstone.Web.APIController.IModelController`1.Delete(System.String,System.Threading.CancellationToken)">
+      <summary>
+            Endpoint to delete modeled record by ID.
+            </summary>
+      <param name="id">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>id</parameter>
+            <parameter>M:Gemstone.Web.APIController.IModelController`1.Delete(System.String,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <param name="cancellationToken">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>cancellationToken</parameter>
+            <parameter>M:Gemstone.Web.APIController.IModelController`1.Delete(System.String,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <returns>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>returns</parameter>
+            <parameter>M:Gemstone.Web.APIController.IModelController`1.Delete(System.String,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </returns>
+    </member>
+    <member name="M:Gemstone.Web.APIController.IModelController`1.Delete(`0,System.Threading.CancellationToken)">
+      <summary>
+            Endpoint to delete modeled record.
+            </summary>
+      <param name="record">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>record</parameter>
+            <parameter>M:Gemstone.Web.APIController.IModelController`1.Delete(`0,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <param name="cancellationToken">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>cancellationToken</parameter>
+            <parameter>M:Gemstone.Web.APIController.IModelController`1.Delete(`0,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <returns>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>returns</parameter>
+            <parameter>M:Gemstone.Web.APIController.IModelController`1.Delete(`0,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </returns>
+    </member>
+    <member name="M:Gemstone.Web.APIController.IModelController`1.Patch(`0,System.Threading.CancellationToken)">
+      <summary>
+            Endpoint to update modeled record.
+            </summary>
+      <param name="record">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>record</parameter>
+            <parameter>M:Gemstone.Web.APIController.IModelController`1.Patch(`0,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <param name="cancellationToken">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>cancellationToken</parameter>
+            <parameter>M:Gemstone.Web.APIController.IModelController`1.Patch(`0,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <returns>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>returns</parameter>
+            <parameter>M:Gemstone.Web.APIController.IModelController`1.Patch(`0,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </returns>
+    </member>
+    <member name="M:Gemstone.Web.APIController.IModelController`1.Post(`0,System.Threading.CancellationToken)">
+      <summary>
+            Endpoint to add modeled record.
+            </summary>
+      <param name="record">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>record</parameter>
+            <parameter>M:Gemstone.Web.APIController.IModelController`1.Post(`0,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <param name="cancellationToken">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>cancellationToken</parameter>
+            <parameter>M:Gemstone.Web.APIController.IModelController`1.Post(`0,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <returns>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>returns</parameter>
+            <parameter>M:Gemstone.Web.APIController.IModelController`1.Post(`0,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </returns>
+    </member>
+    <member name="T:Gemstone.Web.APIController.IReadOnlyModelController`1">
+      <summary>
+            Defines an interface for common readonly ModelController operations.
+            </summary>
+      <typeparam name="T">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T</parameter>
+            <parameter>T:Gemstone.Web.APIController.IReadOnlyModelController`1</parameter>
+          </include>
+        </markup>
+      </typeparam>
+    </member>
+    <member name="M:Gemstone.Web.APIController.IReadOnlyModelController`1.Get(System.String,System.Boolean,System.Int32,System.Threading.CancellationToken)">
+      <summary>
+            Endpoint to get all models in order.
+            </summary>
+      <param name="sort">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>sort</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.Get(System.String,System.Boolean,System.Int32,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <param name="ascending">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>ascending</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.Get(System.String,System.Boolean,System.Int32,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <param name="page">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>page</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.Get(System.String,System.Boolean,System.Int32,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <param name="cancellationToken">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>cancellationToken</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.Get(System.String,System.Boolean,System.Int32,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <returns>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>returns</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.Get(System.String,System.Boolean,System.Int32,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </returns>
+    </member>
+    <member name="M:Gemstone.Web.APIController.IReadOnlyModelController`1.Get(System.String,System.Int32,System.Threading.CancellationToken)">
+      <summary>
+            Endpoint to get all models related to a given parent ID.
+            </summary>
+      <param name="parentID">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>parentID</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.Get(System.String,System.Int32,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <param name="page">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>page</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.Get(System.String,System.Int32,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <param name="cancellationToken">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>cancellationToken</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.Get(System.String,System.Int32,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <returns>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>returns</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.Get(System.String,System.Int32,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </returns>
+    </member>
+    <member name="M:Gemstone.Web.APIController.IReadOnlyModelController`1.Get(System.String,System.String,System.Boolean,System.Int32,System.Threading.CancellationToken)">
+      <summary>
+            Endpoint to get all models in order related to a given ParentID.
+            </summary>
+      <param name="parentID">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>parentID</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.Get(System.String,System.String,System.Boolean,System.Int32,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <param name="sort">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>sort</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.Get(System.String,System.String,System.Boolean,System.Int32,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <param name="ascending">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>ascending</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.Get(System.String,System.String,System.Boolean,System.Int32,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <param name="page">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>page</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.Get(System.String,System.String,System.Boolean,System.Int32,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <param name="cancellationToken">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>cancellationToken</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.Get(System.String,System.String,System.Boolean,System.Int32,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <returns>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>returns</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.Get(System.String,System.String,System.Boolean,System.Int32,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </returns>
+    </member>
+    <member name="M:Gemstone.Web.APIController.IReadOnlyModelController`1.GetOne(System.String,System.Threading.CancellationToken)">
+      <summary>
+            Endpoint to get a specific model.
+            </summary>
+      <param name="id">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>id</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.GetOne(System.String,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <param name="cancellationToken">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>cancellationToken</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.GetOne(System.String,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <returns>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>returns</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.GetOne(System.String,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </returns>
+    </member>
+    <member name="M:Gemstone.Web.APIController.IReadOnlyModelController`1.GetPageInfo(Gemstone.Web.APIController.SearchPost{`0},System.Threading.CancellationToken)">
+      <summary>
+            Endpoint to get pagination information.
+            </summary>
+      <param name="postData">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>postData</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.GetPageInfo(Gemstone.Web.APIController.SearchPost{`0},System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <param name="cancellationToken">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>cancellationToken</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.GetPageInfo(Gemstone.Web.APIController.SearchPost{`0},System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <returns>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>returns</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.GetPageInfo(Gemstone.Web.APIController.SearchPost{`0},System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </returns>
+    </member>
+    <member name="M:Gemstone.Web.APIController.IReadOnlyModelController`1.GetPageInfo(System.Threading.CancellationToken)">
+      <summary>
+            Endpoint to get pagination information.
+            </summary>
+      <param name="cancellationToken">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>cancellationToken</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.GetPageInfo(System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <returns>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>returns</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.GetPageInfo(System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </returns>
+    </member>
+    <member name="M:Gemstone.Web.APIController.IReadOnlyModelController`1.Search(Gemstone.Web.APIController.SearchPost{`0},System.Int32,System.Threading.CancellationToken)">
+      <summary>
+            Endpoint to search models.
+            </summary>
+      <param name="postData">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>postData</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.Search(Gemstone.Web.APIController.SearchPost{`0},System.Int32,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <param name="page">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>page</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.Search(Gemstone.Web.APIController.SearchPost{`0},System.Int32,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <param name="cancellationToken">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>cancellationToken</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.Search(Gemstone.Web.APIController.SearchPost{`0},System.Int32,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <returns>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>returns</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.Search(Gemstone.Web.APIController.SearchPost{`0},System.Int32,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </returns>
+    </member>
+    <member name="T:Gemstone.Web.APIController.ModelController`1">
+      <summary>
+            Represents a ModelController.
+            </summary>
+      <typeparam name="T">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T</parameter>
+            <parameter>T:Gemstone.Web.APIController.ModelController`1</parameter>
+          </include>
+        </markup>
+      </typeparam>
+    </member>
+    <member name="M:Gemstone.Web.APIController.ModelController`1.#ctor">
+      <summary>
+            Creates a new <see cref="T:Gemstone.Web.APIController.ReadOnlyModelController`1" /></summary>
+    </member>
+    <member name="M:Gemstone.Web.APIController.ModelController`1.Delete(System.String,System.Threading.CancellationToken)">
+      <summary>
+            Deletes a record from associated table by primary key.
+            </summary>
+      <param name="id">The primary key of the record to be deleted.</param>
+      <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+      <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult" /> containing 1 or <see cref="T:System.Exception" />.</returns>
+    </member>
+    <member name="M:Gemstone.Web.APIController.ModelController`1.Delete(`0,System.Threading.CancellationToken)">
+      <summary>
+            Deletes a record from associated table.
+            </summary>
+      <param name="record">The record to be deleted.</param>
+      <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+      <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult" /> containing 1 or <see cref="T:System.Exception" />.</returns>
+    </member>
+    <member name="M:Gemstone.Web.APIController.ModelController`1.DeleteAuthCheck">
+      <summary>
+            Check if current user is authorized for DELETE Requests.
+            </summary>
+      <returns>
+        <c>true</c> if User is authorized for DELETE requests; otherwise, <c>false</c>.</returns>
+    </member>
+    <member name="P:Gemstone.Web.APIController.ModelController`1.DeleteRoles">
+      <summary>
+            Gets the roles required for DELETE requests.
+            </summary>
+    </member>
+    <member name="M:Gemstone.Web.APIController.ModelController`1.Patch(`0,System.Threading.CancellationToken)">
+      <summary>
+            Updates a record from associated table.
+            </summary>
+      <param name="record">The record to be updated.</param>
+      <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+      <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult" /> containing the new record <see cref="!:T" /> or <see cref="T:System.Exception" />.</returns>
+    </member>
+    <member name="M:Gemstone.Web.APIController.ModelController`1.PatchAuthCheck">
+      <summary>
+            Check if current user is authorized for PATCH Requests.
+            </summary>
+      <returns>
+        <c>true</c> if User is authorized for PATCH requests; otherwise, <c>false</c>.</returns>
+    </member>
+    <member name="P:Gemstone.Web.APIController.ModelController`1.PatchRoles">
+      <summary>
+            Gets the roles required for PATCH requests.
+            </summary>
+    </member>
+    <member name="M:Gemstone.Web.APIController.ModelController`1.Post(`0,System.Threading.CancellationToken)">
+      <summary>
+            Creates new record in associated table.
+            </summary>
+      <param name="record">The record to be created.</param>
+      <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+      <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult" /> containing the new <see cref="!:T" /> or <see cref="T:System.Exception" />.</returns>
+    </member>
+    <member name="M:Gemstone.Web.APIController.ModelController`1.PostAuthCheck">
+      <summary>
+            Check if current user is authorized for POST Requests.
+            </summary>
+      <returns>
+        <c>true</c> if User is authorized for POST requests; otherwise, <c>false</c>.</returns>
+    </member>
+    <member name="P:Gemstone.Web.APIController.ModelController`1.PostRoles">
+      <summary>
+            Gets the roles required for POST requests.
+            </summary>
+    </member>
+    <member name="T:Gemstone.Web.APIController.PageInfo">
+      <summary>
+            Content of a POST Return for providing pageination info to client from <see cref="T:Gemstone.Web.APIController.IReadOnlyModelController`1" /></summary>
+    </member>
+    <member name="M:Gemstone.Web.APIController.PageInfo.#ctor">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>Gemstone.Web.APIController.PageInfo</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="P:Gemstone.Web.APIController.PageInfo.PageCount">
+      <summary>
+            Total Number of Pages
+            </summary>
+    </member>
+    <member name="P:Gemstone.Web.APIController.PageInfo.PageSize">
+      <summary>
+            Number of Models per Page
+            </summary>
+    </member>
+    <member name="P:Gemstone.Web.APIController.PageInfo.TotalCount">
+      <summary>
+            Number of Models
+            </summary>
+    </member>
+    <member name="T:Gemstone.Web.APIController.ReadOnlyModelController`1">
+      <summary>
+            Represents a readonly ModelController.
+            </summary>
+      <typeparam name="T">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T</parameter>
+            <parameter>T:Gemstone.Web.APIController.ReadOnlyModelController`1</parameter>
+          </include>
+        </markup>
+      </typeparam>
+    </member>
+    <member name="M:Gemstone.Web.APIController.ReadOnlyModelController`1.#ctor">
+      <summary>
+            Creates a new <see cref="T:Gemstone.Web.APIController.ReadOnlyModelController`1" /></summary>
+    </member>
+    <member name="M:Gemstone.Web.APIController.ReadOnlyModelController`1.CreateConnection">
+      <summary>
+            Create the <see cref="T:Gemstone.Data.AdoDataConnection" /> for the controller.
+            </summary>
+      <returns>A new <see cref="T:Gemstone.Data.AdoDataConnection" />.</returns>
+    </member>
+    <member name="P:Gemstone.Web.APIController.ReadOnlyModelController`1.DefaultSort">
+      <summary>
+            Gets or sets the default sort field for the model.
+            </summary>
+    </member>
+    <member name="P:Gemstone.Web.APIController.ReadOnlyModelController`1.DefaultSortDirection">
+      <summary>
+            Gets or sets the default sort direction for the model.
+            </summary>
+    </member>
+    <member name="M:Gemstone.Web.APIController.ReadOnlyModelController`1.Get(System.String,System.Boolean,System.Int32,System.Threading.CancellationToken)">
+      <summary>
+            Gets all records from associated table sorted by the provided field.
+            </summary>
+      <param name="sort">Field to be used for sorting.</param>
+      <param name="ascending">Flag when <c>true</c> will sort ascending; otherwise, descending.</param>
+      <param name="page">The 0 based page number to be returned.</param>
+      <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+      <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult" /> containing <see cref="T:System.Collections.Generic.IEnumerable`1" /> or <see cref="T:System.Exception" />.</returns>
+    </member>
+    <member name="M:Gemstone.Web.APIController.ReadOnlyModelController`1.Get(System.String,System.Int32,System.Threading.CancellationToken)">
+      <summary>
+            Gets all records from associated table, filtered to parent keys if provided.
+            </summary>
+      <param name="parentID">Parent ID to be used if table has set parent keys.</param>
+      <param name="page">The 0 based page number to be returned.</param>
+      <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+      <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult" /> containing <see cref="T:System.Collections.Generic.IEnumerable`1" /> or <see cref="T:System.Exception" />.</returns>
+    </member>
+    <member name="M:Gemstone.Web.APIController.ReadOnlyModelController`1.Get(System.String,System.String,System.Boolean,System.Int32,System.Threading.CancellationToken)">
+      <summary>
+            Gets all records from associated table sorted by the provided field.
+            </summary>
+      <param name="sort">Field to be used for sorting.</param>
+      <param name="ascending">Flag when <c>true</c> will sort ascending; otherwise, descending.</param>
+      <param name="page">The 0 based page number to be returned.</param>
+      <param name="parentID">Parent ID to be used if table has set parent keys.</param>
+      <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+      <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult" /> containing <see cref="T:System.Collections.Generic.IEnumerable`1" /> or <see cref="T:System.Exception" />.</returns>
+    </member>
+    <member name="M:Gemstone.Web.APIController.ReadOnlyModelController`1.GetAuthCheck">
+      <summary>
+            Check if current User is authorized for GET Requests.
+            </summary>
+      <returns>
+        <c>true</c> if User is authorized for GET requests; otherwise, <c>false</c>.</returns>
+    </member>
+    <member name="M:Gemstone.Web.APIController.ReadOnlyModelController`1.GetOne(System.String,System.Threading.CancellationToken)">
+      <summary>
+            Gets a single record from associated table.
+            </summary>
+      <param name="id">The PrimaryKey value of the Model to be returned.</param>
+      <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+      <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult" /> containing a <see cref="!:T" /> or <see cref="T:System.Exception" />.</returns>
+    </member>
+    <member name="M:Gemstone.Web.APIController.ReadOnlyModelController`1.GetPageInfo(Gemstone.Web.APIController.SearchPost{`0},System.Threading.CancellationToken)">
+      <summary>
+            Gets the pagination information for the provided search criteria.
+            </summary>
+      <param name="postData">Search criteria.</param>
+      <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+      <returns>A <see cref="T:Gemstone.Web.APIController.PageInfo" /> object containing the pagination information or <see cref="T:System.Exception" />.</returns>
+    </member>
+    <member name="M:Gemstone.Web.APIController.ReadOnlyModelController`1.GetPageInfo(System.Threading.CancellationToken)">
+      <summary>
+            Gets pagination information.
+            </summary>
+      <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+      <returns>A <see cref="T:Gemstone.Web.APIController.PageInfo" /> object containing the pagination information or <see cref="T:System.Exception" />.</returns>
+    </member>
+    <member name="P:Gemstone.Web.APIController.ReadOnlyModelController`1.GetRoles">
+      <summary>
+            Gets the roles required for GET requests.
+            </summary>
+    </member>
+    <member name="P:Gemstone.Web.APIController.ReadOnlyModelController`1.ParentKey">
+      <summary>
+            Gets or sets the parent key field for the model.
+            </summary>
+    </member>
+    <member name="P:Gemstone.Web.APIController.ReadOnlyModelController`1.PrimaryKeyField">
+      <summary>
+            Gets or sets the primary key field for the model.
+            </summary>
+    </member>
+    <member name="M:Gemstone.Web.APIController.ReadOnlyModelController`1.Search(Gemstone.Web.APIController.SearchPost{`0},System.Int32,System.Threading.CancellationToken)">
+      <summary>
+            Gets all records from associated table matching the provided search criteria.
+            </summary>
+      <param name="postData">Search criteria.</param>
+      <param name="page">the 0 based page number to be returned.</param>
+      <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+      <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult" /> containing <see cref="T:System.Collections.Generic.IEnumerable`1" /> or <see cref="T:System.Exception" />.</returns>
+    </member>
+    <member name="T:Gemstone.Web.APIController.SearchPost`1">
+      <summary>
+            Content of a POST Request for searching in <see cref="T:Gemstone.Web.APIController.IReadOnlyModelController`1" /></summary>
+      <typeparam name="T">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>typeparam</parameter>
+            <parameter>T</parameter>
+            <parameter>T:Gemstone.Web.APIController.SearchPost`1</parameter>
+          </include>
+        </markup>
+      </typeparam>
+    </member>
+    <member name="M:Gemstone.Web.APIController.SearchPost`1.#ctor">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>Gemstone.Web.APIController.SearchPost`1</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="P:Gemstone.Web.APIController.SearchPost`1.Ascending">
+      <summary>
+            {true} if the results should be ordered ascending
+            </summary>
+    </member>
+    <member name="P:Gemstone.Web.APIController.SearchPost`1.OrderBy">
+      <summary>
+            The Field to oreder the results by
+            </summary>
+    </member>
+    <member name="P:Gemstone.Web.APIController.SearchPost`1.Searches">
+      <summary>
+            The <see cref="T:Gemstone.Data.Model.RecordFilter`1" /> to be applied to the search
+            </summary>
+    </member>
     <member name="T:Gemstone.Web.Hosting.HostExtensions">
       <summary>
             Defines extensions for web hosts.
