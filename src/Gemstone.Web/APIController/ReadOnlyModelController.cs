@@ -210,17 +210,30 @@ namespace Gemstone.Web.APIController
         /// </summary>
         /// <param name="postData">Search criteria.</param>
         /// <param name="page">the 0 based page number to be returned.</param>
+        /// <param name="parentID">Parent ID to be used if table has set parent keys.</param>
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
-        /// <returns>An <see cref="IActionResult"/> containing <see cref="T:T[]"/> or <see cref="Exception"/>.</returns>
-        [HttpPost, Route("Search/{page:min(0)}")]
-        public Task<IActionResult> Search([FromBody] SearchPost<T> postData, int page, CancellationToken cancellationToken)
+        /// <returns>An <see cref="IActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/>.</returns>
+        [HttpPost, Route("Search/{page:min(0)}/{parentID?}")]
+        public Task<IActionResult> Search([FromBody] SearchPost<T> postData, int page, string? parentID, CancellationToken cancellationToken)
         {
             if (!GetAuthCheck())
                 return Task.FromResult<IActionResult>(Unauthorized());
 
             using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
-            T[] result = tableOperations.QueryRecords(postData.OrderBy, postData.Ascending, page, PageSize, postData.Searches.ToArray()).ToArray();
+            List<RecordFilter<T>> filters = new(postData.Searches);
+
+            if (ParentKey != string.Empty && parentID is not null)
+            {
+                filters.Add(new RecordFilter<T>()
+                {
+                    FieldName = ParentKey,
+                    Operator = "=",
+                    SearchParameter = parentID
+                });
+            }
+
+            IEnumerable<T> result = tableOperations.QueryRecords(postData.OrderBy, postData.Ascending, page, PageSize, filters.ToArray());
 
             return Task.FromResult<IActionResult>(Ok(result));
         }
