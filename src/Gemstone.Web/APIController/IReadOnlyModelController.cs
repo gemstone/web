@@ -55,7 +55,7 @@ namespace Gemstone.Web.APIController
         /// <summary>
         /// Endpoint to search models.
         /// </summary>
-        public Task<IActionResult> Search(SearchPost<T> postData, int page, CancellationToken cancellationToken);
+        public Task<IActionResult> Search(SearchPost<T> postData, int page, string? parentID, CancellationToken cancellationToken);
 
         /// <summary>
         /// Endpoint to get pagination information.
