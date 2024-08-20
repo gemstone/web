@@ -24,9 +24,9 @@
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <Nullable>enable</Nullable>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <Version>1.0.128</Version>
-    <InformationalVersion Condition="'$(Configuration)'=='Release'">1.0.128 -- Release Build</InformationalVersion>
-    <InformationalVersion Condition="'$(Configuration)'!='Release'">1.0.128 -- Debug Build</InformationalVersion>
+    <Version>1.0.129</Version>
+    <InformationalVersion Condition="'$(Configuration)'=='Release'">1.0.129 -- Release Build</InformationalVersion>
+    <InformationalVersion Condition="'$(Configuration)'!='Release'">1.0.129 -- Debug Build</InformationalVersion>
     <Configurations>Debug;Release;Development</Configurations>
     <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
   </PropertyGroup>
@@ -65,7 +65,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\common\src\Gemstone\Gemstone.Common.csproj" Condition="'$(Configuration)'=='Development'" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.3.0" />
-    <PackageReference Include="Gemstone.Common" Version="1.0.128" Condition="'$(Configuration)'!='Development'" />
+    <PackageReference Include="Gemstone.Common" Version="1.0.129" Condition="'$(Configuration)'!='Development'" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     
@@ -75,7 +75,7 @@
     <PackageReference Include="System.Linq.Async" Version="6.0.1" />
 
     <ProjectReference Include="..\..\..\data\src\Gemstone.Data\Gemstone.Data.csproj" Condition="'$(Configuration)'=='Development'" />
-    <PackageReference Include="Gemstone.Data" Version="1.0.128" Condition="'$(Configuration)'!='Development'" />
+    <PackageReference Include="Gemstone.Data" Version="1.0.129" Condition="'$(Configuration)'!='Development'" />
 
     <!-- <ProjectReference Include="..\..\..\expressions\src\Gemstone.Expressions\Gemstone.Expressions.csproj" Condition="'$(Configuration)'=='Development'" /> -->
     <!-- <PackageReference Include="Gemstone.Expressions" Version="1.0.0" Condition="'$(Configuration)'!='Development'" /> -->
