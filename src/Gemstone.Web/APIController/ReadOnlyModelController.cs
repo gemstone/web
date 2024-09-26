@@ -113,7 +113,7 @@ namespace Gemstone.Web.APIController
             if (!GetAuthCheck())
                 return await Task.FromResult<IActionResult>(Unauthorized());
 
-            using AdoDataConnection connection = CreateConnection();
+            await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             RecordFilter<T>? filter = null;
 
@@ -146,7 +146,7 @@ namespace Gemstone.Web.APIController
             if (!GetAuthCheck())
                 return await Task.FromResult<IActionResult>(Unauthorized());
 
-            using AdoDataConnection connection = CreateConnection();
+            await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             RecordFilter<T>? filter = null;
 
@@ -170,7 +170,7 @@ namespace Gemstone.Web.APIController
             if (!GetAuthCheck())
                 return await Task.FromResult<IActionResult>(Unauthorized());
 
-            using AdoDataConnection connection = CreateConnection();
+            await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             RecordFilter<T> filter = new()
             {
@@ -196,7 +196,7 @@ namespace Gemstone.Web.APIController
             if (!GetAuthCheck())
                 return await Task.FromResult<IActionResult>(Unauthorized());
 
-            using AdoDataConnection connection = CreateConnection();
+            await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             T? result = await tableOperations.QueryRecordAsync(new RecordRestriction($"{PrimaryKeyField} = {{0}}",id), cancellationToken);
 
@@ -219,7 +219,7 @@ namespace Gemstone.Web.APIController
             if (!GetAuthCheck())
                 return await Task.FromResult<IActionResult>(Unauthorized());
 
-            using AdoDataConnection connection = CreateConnection();
+            await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             RecordFilter<T>[] filters = [];
 
@@ -251,7 +251,7 @@ namespace Gemstone.Web.APIController
             if (!GetAuthCheck())
                 return await Task.FromResult<IActionResult>(Unauthorized());
 
-            using AdoDataConnection connection = CreateConnection();
+            await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             RecordFilter<T>[] filters = [];
 
@@ -287,8 +287,8 @@ namespace Gemstone.Web.APIController
         {
             if (!GetAuthCheck())
                 return await Task.FromResult<IActionResult>(Unauthorized());
-            
-            using AdoDataConnection connection = CreateConnection();
+
+            await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             RecordFilter<T>[] filters = [];
 
