@@ -198,7 +198,7 @@ namespace Gemstone.Web.APIController
 
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
-            T? result = await tableOperations.QueryRecordAsync(new RecordRestriction($"{PrimaryKeyField} = {{0}}", id), cancellationToken);
+            T? result = await tableOperations.QueryRecordAsync(new RecordRestriction($"{PrimaryKeyField} = {{0}}", id), cancellationToken).ConfigureAwait(false);
 
             return result is null ?
                 NotFound() :
@@ -235,7 +235,7 @@ namespace Gemstone.Web.APIController
 
             IAsyncEnumerable<T> result = tableOperations.QueryRecordsAsync(postData.OrderBy, postData.Ascending, page, PageSize, cancellationToken, filters);
 
-            return await Task.FromResult<IActionResult>(Ok(result));
+            return OK(await result.ToArrayAsync(cancellationToken).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -265,14 +265,14 @@ namespace Gemstone.Web.APIController
                 });
             }
 
-            int recordCount = await tableOperations.QueryRecordCountAsync(cancellationToken, filters);
+            int recordCount = await tableOperations.QueryRecordCountAsync(cancellationToken, filters).ConfigureAwait(false);
 
-            return await Task.FromResult<IActionResult>(Ok(new PageInfo()
+            return Ok(new PageInfo()
             {
                 PageSize = PageSize,
                 PageCount = (int)Math.Ceiling(recordCount / (double)PageSize),
                 TotalCount = recordCount
-            }));
+            });
         }
 
         /// <summary>
@@ -290,26 +290,14 @@ namespace Gemstone.Web.APIController
 
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
-            RecordFilter<T>[] filters = [];
-
-            if (ParentKey != string.Empty && parentID is not null)
-            {
-                filters.Append(new RecordFilter<T>()
-                {
-                    FieldName = ParentKey,
-                    Operator = "=",
-                    SearchParameter = parentID
-                });
-            }
-
-            int recordCount = await tableOperations.QueryRecordCountAsync(cancellationToken, filters);
-
-            return await Task.FromResult<IActionResult>(Ok(new PageInfo()
+            int recordCount = await tableOperations.QueryAsyncRecordCount((RecordRestriction?)null).ConfigureAwait(false);
+            
+            return Ok(new PageInfo()
             {
                 PageSize = PageSize,
                 PageCount = (int)Math.Ceiling(recordCount / (double)PageSize),
                 TotalCount = recordCount
-            }));
+            });
         }
 
         /// <summary>
