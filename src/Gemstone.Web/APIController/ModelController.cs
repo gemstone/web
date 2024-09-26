@@ -76,16 +76,16 @@ namespace Gemstone.Web.APIController
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>An <see cref="IActionResult"/> containing the new record <see cref="T"/> or <see cref="Exception"/>.</returns>
         [HttpPatch, Route("")]
-        public Task<IActionResult> Patch(T record, CancellationToken cancellationToken)
+        public async Task<IActionResult> Patch(T record, CancellationToken cancellationToken)
         {
             if (!PatchAuthCheck())
-                return Task.FromResult<IActionResult>(Unauthorized());
+                return await Task.FromResult<IActionResult>(Unauthorized());
 
             using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
-            tableOperations.UpdateRecord(record);
+            await tableOperations.UpdateRecordAsync(record, cancellationToken);
 
-            return Task.FromResult<IActionResult>(Ok(record));
+            return await Task.FromResult<IActionResult>(Ok(record));
         }
 
         /// <summary>
@@ -95,16 +95,16 @@ namespace Gemstone.Web.APIController
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>An <see cref="IActionResult"/> containing the new <see cref="T"/> or <see cref="Exception"/>.</returns>
         [HttpPost, Route("")]
-        public Task<IActionResult> Post(T record, CancellationToken cancellationToken)
+        public async Task<IActionResult> Post(T record, CancellationToken cancellationToken)
         {
             if (!PostAuthCheck())
-                return Task.FromResult<IActionResult>(Unauthorized());
+                return await Task.FromResult<IActionResult>(Unauthorized());
 
             using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
-            tableOperations.AddNewRecord(record);
+            await tableOperations.AddNewRecordAsync(record, cancellationToken);
 
-            return Task.FromResult<IActionResult>(Ok(record));
+            return await Task.FromResult<IActionResult>(Ok(record));
         }
 
         /// <summary>
@@ -114,16 +114,16 @@ namespace Gemstone.Web.APIController
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>An <see cref="IActionResult"/> containing 1 or <see cref="Exception"/>.</returns>
         [HttpDelete, Route("")]
-        public Task<IActionResult> Delete(T record, CancellationToken cancellationToken)
+        public async Task<IActionResult> Delete(T record, CancellationToken cancellationToken)
         {
             if (!DeleteAuthCheck())
-                return Task.FromResult<IActionResult>(Unauthorized());
+                return await Task.FromResult<IActionResult>(Unauthorized());
 
             using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
-            tableOperations.DeleteRecord(record);
+            await tableOperations.DeleteRecordAsync(cancellationToken, record);
 
-            return Task.FromResult<IActionResult>(Ok(1));
+            return await Task.FromResult<IActionResult>(Ok(1));
         }
 
         /// <summary>
@@ -133,16 +133,16 @@ namespace Gemstone.Web.APIController
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>An <see cref="IActionResult"/> containing 1 or <see cref="Exception"/>.</returns>
         [HttpDelete, Route("{id}")]
-        public Task<IActionResult> Delete(string id, CancellationToken cancellationToken)
+        public async Task<IActionResult> Delete(string id, CancellationToken cancellationToken)
         {
             if(!DeleteAuthCheck())
-                return Task.FromResult<IActionResult>(Unauthorized());
+                return await Task.FromResult<IActionResult>(Unauthorized());
 
             using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
-            tableOperations.DeleteRecordWhere($"{PrimaryKeyField} = {{0}}", id);
+            await tableOperations.DeleteRecordWhereAsync($"{PrimaryKeyField} = {{0}}", cancellationToken, id);
 
-            return Task.FromResult<IActionResult>(Ok(1));
+            return await Task.FromResult<IActionResult>(Ok(1));
         }
 
         #region [ Methods ]
