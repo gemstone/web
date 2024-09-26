@@ -108,12 +108,12 @@ namespace Gemstone.Web.APIController
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>An <see cref="IActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/>.</returns>
         [HttpGet, Route("{page:min(0)}/{parentID?}")]
-        public Task<IActionResult> Get(string? parentID, int page, CancellationToken cancellationToken)
+        public async Task<IActionResult> Get(string? parentID, int page, CancellationToken cancellationToken)
         {
             if (!GetAuthCheck())
-                return Task.FromResult<IActionResult>(Unauthorized());
+                return await Task.FromResult<IActionResult>(Unauthorized());
 
-            using AdoDataConnection connection = CreateConnection();
+            await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             RecordFilter<T>? filter = null;
 
@@ -126,9 +126,9 @@ namespace Gemstone.Web.APIController
                 };
             }
 
-            IEnumerable<T> result = tableOperations.QueryRecords(DefaultSort, DefaultSortDirection, page, PageSize, filter );
+            IAsyncEnumerable<T> result = tableOperations.QueryRecordsAsync(DefaultSort, DefaultSortDirection, page, PageSize, cancellationToken, filter);
 
-            return Task.FromResult<IActionResult>(Ok(result));
+            return await Task.FromResult<IActionResult>(Ok(result));
         }
 
         /// <summary>
@@ -140,18 +140,18 @@ namespace Gemstone.Web.APIController
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>An <see cref="IActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/>.</returns>
         [HttpGet, Route("{page:min(0)}/{sort}/{ascending:bool}")]
-        public Task<IActionResult> Get(string sort, bool ascending, int page, CancellationToken cancellationToken)
+        public async Task<IActionResult> Get(string sort, bool ascending, int page, CancellationToken cancellationToken)
         {
             if (!GetAuthCheck())
-                return Task.FromResult<IActionResult>(Unauthorized());
+                return await Task.FromResult<IActionResult>(Unauthorized());
 
-            using AdoDataConnection connection = CreateConnection();
+            await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             RecordFilter<T>? filter = null;
 
-            IEnumerable<T> result = tableOperations.QueryRecords(sort, ascending, page, PageSize, filter);
+            IAsyncEnumerable<T> result = tableOperations.QueryRecordsAsync(sort, ascending, page, PageSize, cancellationToken, filter);
 
-            return Task.FromResult<IActionResult>(Ok(result));
+            return await Task.FromResult<IActionResult>(Ok(result));
         }
 
         /// <summary>
@@ -164,12 +164,12 @@ namespace Gemstone.Web.APIController
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>An <see cref="IActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/>.</returns>
         [HttpGet, Route("{page:min(0)}/{parentID}/{sort}/{ascending:bool}")]
-        public Task<IActionResult> Get(string parentID, string sort, bool ascending, int page, CancellationToken cancellationToken)
+        public async Task<IActionResult> Get(string parentID, string sort, bool ascending, int page, CancellationToken cancellationToken)
         {
             if (!GetAuthCheck())
-                return Task.FromResult<IActionResult>(Unauthorized());
+                return await Task.FromResult<IActionResult>(Unauthorized());
 
-            using AdoDataConnection connection = CreateConnection();
+            await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             RecordFilter<T> filter = new()
             {
@@ -178,9 +178,9 @@ namespace Gemstone.Web.APIController
                 SearchParameter = parentID
             };
             
-            IEnumerable<T> result = tableOperations.QueryRecords(sort, ascending, page, PageSize, filter);
+            IAsyncEnumerable<T> result = tableOperations.QueryRecordsAsync(sort, ascending, page, PageSize, cancellationToken, filter);
 
-            return Task.FromResult<IActionResult>(Ok(result));
+            return await Task.FromResult<IActionResult>(Ok(result));
         }
 
         /// <summary>
@@ -190,18 +190,18 @@ namespace Gemstone.Web.APIController
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>An <see cref="IActionResult"/> containing a <see cref="T"/> or <see cref="Exception"/>.</returns>
         [HttpGet, Route("One/{id}")]
-        public Task<IActionResult> GetOne(string id, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetOne(string id, CancellationToken cancellationToken)
         {
             if (!GetAuthCheck())
-                return Task.FromResult<IActionResult>(Unauthorized());
+                return await Task.FromResult<IActionResult>(Unauthorized());
 
-            using AdoDataConnection connection = CreateConnection();
+            await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
-            T? result = tableOperations.QueryRecord(new RecordRestriction($"{PrimaryKeyField} = {{0}}",id));
+            T? result = await tableOperations.QueryRecordAsync(new RecordRestriction($"{PrimaryKeyField} = {{0}}",id), cancellationToken);
 
-            return result is null ? 
-                Task.FromResult<IActionResult>(NotFound()) : 
-                Task.FromResult<IActionResult>(Ok(result));
+            return result is null ?
+                await Task.FromResult<IActionResult>(NotFound()) :
+                await Task.FromResult<IActionResult>(Ok(result));
         }
 
         /// <summary>
@@ -212,16 +212,16 @@ namespace Gemstone.Web.APIController
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>An <see cref="IActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/>.</returns>
         [HttpPost, Route("Search/{page:min(0)}")]
-        public Task<IActionResult> Search([FromBody] SearchPost<T> postData, int page, CancellationToken cancellationToken)
+        public async Task<IActionResult> Search([FromBody] SearchPost<T> postData, int page, CancellationToken cancellationToken)
         {
             if (!GetAuthCheck())
-                return Task.FromResult<IActionResult>(Unauthorized());
+                return await Task.FromResult<IActionResult>(Unauthorized());
 
-            using AdoDataConnection connection = CreateConnection();
+            await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
-            IEnumerable<T> result = tableOperations.QueryRecords(postData.OrderBy, postData.Ascending, page, PageSize, postData.Searches.ToArray());
+            IAsyncEnumerable<T> result = tableOperations.QueryRecordsAsync(postData.OrderBy, postData.Ascending, page, PageSize, cancellationToken, postData.Searches.ToArray());
 
-            return Task.FromResult<IActionResult>(Ok(result));
+            return await Task.FromResult<IActionResult>(Ok(result));
         }
 
         /// <summary>
@@ -231,16 +231,16 @@ namespace Gemstone.Web.APIController
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>A <see cref="PageInfo"/> object containing the pagination information or <see cref="Exception"/>.</returns>
         [HttpPost, Route("PageInfo")]
-        public Task<IActionResult> GetPageInfo(SearchPost<T> postData, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetPageInfo(SearchPost<T> postData, CancellationToken cancellationToken)
         {
             if (!GetAuthCheck())
-                return Task.FromResult<IActionResult>(Unauthorized());
+                return await Task.FromResult<IActionResult>(Unauthorized());
 
-            using AdoDataConnection connection = CreateConnection();
+            await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
-            int recordCount = tableOperations.QueryRecordCount(postData.Searches.ToArray());
+            int recordCount = await tableOperations.QueryRecordCountAsync(cancellationToken, postData.Searches.ToArray());
 
-            return Task.FromResult<IActionResult>(Ok(new PageInfo()
+            return await Task.FromResult<IActionResult>(Ok(new PageInfo()
             {
                 PageSize = PageSize,
                 PageCount = (int)Math.Ceiling(recordCount / (double)PageSize),
@@ -254,16 +254,16 @@ namespace Gemstone.Web.APIController
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>A <see cref="PageInfo"/> object containing the pagination information or <see cref="Exception"/>.</returns>
         [HttpGet, Route("PageInfo")]
-        public Task<IActionResult> GetPageInfo(CancellationToken cancellationToken)
+        public async Task<IActionResult> GetPageInfo(CancellationToken cancellationToken)
         {
             if (!GetAuthCheck())
-                return Task.FromResult<IActionResult>(Unauthorized());
-            
-            using AdoDataConnection connection = CreateConnection();
+                return await Task.FromResult<IActionResult>(Unauthorized());
+
+            await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
-            int recordCount = tableOperations.QueryRecordCount((RecordRestriction?)null);
+            int recordCount = await tableOperations.QueryRecordCountAsync(cancellationToken, (RecordRestriction?)null);
             
-            return Task.FromResult<IActionResult>(Ok(new PageInfo()
+            return await Task.FromResult<IActionResult>(Ok(new PageInfo()
             {
                 PageSize = PageSize,
                 PageCount = (int)Math.Ceiling(recordCount / (double)PageSize),
