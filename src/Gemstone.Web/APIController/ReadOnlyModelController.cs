@@ -111,7 +111,7 @@ namespace Gemstone.Web.APIController
         public async Task<IActionResult> Get(string? parentID, int page, CancellationToken cancellationToken)
         {
             if (!GetAuthCheck())
-                return await Task.FromResult<IActionResult>(Unauthorized());
+                return Unauthorized();
 
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
@@ -129,7 +129,7 @@ namespace Gemstone.Web.APIController
 
             IAsyncEnumerable<T> result = tableOperations.QueryRecordsAsync(DefaultSort, DefaultSortDirection, page, PageSize, cancellationToken, filter);
 
-            return await Task.FromResult<IActionResult>(Ok(result));
+            return Ok(await result.ToArrayAsync(cancellationToken).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -144,7 +144,7 @@ namespace Gemstone.Web.APIController
         public async Task<IActionResult> Get(string sort, bool ascending, int page, CancellationToken cancellationToken)
         {
             if (!GetAuthCheck())
-                return await Task.FromResult<IActionResult>(Unauthorized());
+                return Unauthorized();
 
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
@@ -152,7 +152,7 @@ namespace Gemstone.Web.APIController
 
             IAsyncEnumerable<T> result = tableOperations.QueryRecordsAsync(sort, ascending, page, PageSize, cancellationToken, filter);
 
-            return await Task.FromResult<IActionResult>(Ok(result));
+            return Ok(await result.ToArrayAsync(cancellationToken).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace Gemstone.Web.APIController
         public async Task<IActionResult> Get(string parentID, string sort, bool ascending, int page, CancellationToken cancellationToken)
         {
             if (!GetAuthCheck())
-                return await Task.FromResult<IActionResult>(Unauthorized());
+                return Unauthorized();
 
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
@@ -181,7 +181,7 @@ namespace Gemstone.Web.APIController
             
             IAsyncEnumerable<T> result = tableOperations.QueryRecordsAsync(sort, ascending, page, PageSize, cancellationToken, filter);
 
-            return await Task.FromResult<IActionResult>(Ok(result));
+            return Ok(await result.ToArrayAsync(cancellationToken).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -194,15 +194,15 @@ namespace Gemstone.Web.APIController
         public async Task<IActionResult> GetOne(string id, CancellationToken cancellationToken)
         {
             if (!GetAuthCheck())
-                return await Task.FromResult<IActionResult>(Unauthorized());
+                return Unauthorized();
 
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             T? result = await tableOperations.QueryRecordAsync(new RecordRestriction($"{PrimaryKeyField} = {{0}}",id), cancellationToken);
 
             return result is null ?
-                await Task.FromResult<IActionResult>(NotFound()) :
-                await Task.FromResult<IActionResult>(Ok(result));
+                NotFound() :
+                Ok(result);
         }
 
         /// <summary>
@@ -217,7 +217,7 @@ namespace Gemstone.Web.APIController
         public async Task<IActionResult> Search([FromBody] SearchPost<T> postData, int page, string? parentID, CancellationToken cancellationToken)
         {
             if (!GetAuthCheck())
-                return await Task.FromResult<IActionResult>(Unauthorized());
+                return Unauthorized();
 
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
@@ -249,7 +249,7 @@ namespace Gemstone.Web.APIController
         public async Task<IActionResult> GetPageInfo(SearchPost<T> postData, string? parentID, CancellationToken cancellationToken)
         {
             if (!GetAuthCheck())
-                return await Task.FromResult<IActionResult>(Unauthorized());
+                return Unauthorized();
 
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
@@ -272,7 +272,7 @@ namespace Gemstone.Web.APIController
                 PageSize = PageSize,
                 PageCount = (int)Math.Ceiling(recordCount / (double)PageSize),
                 TotalCount = recordCount
-            }));
+            });
         }
 
         /// <summary>
@@ -286,7 +286,7 @@ namespace Gemstone.Web.APIController
         public async Task<IActionResult> GetPageInfo(string? parentID, CancellationToken cancellationToken)
         {
             if (!GetAuthCheck())
-                return await Task.FromResult<IActionResult>(Unauthorized());
+                return Unauthorized();
 
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
@@ -309,7 +309,7 @@ namespace Gemstone.Web.APIController
                 PageSize = PageSize,
                 PageCount = (int)Math.Ceiling(recordCount / (double)PageSize),
                 TotalCount = recordCount
-            }));
+            });
         }
 
         /// <summary>

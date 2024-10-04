@@ -79,13 +79,13 @@ namespace Gemstone.Web.APIController
         public async Task<IActionResult> Patch(T record, CancellationToken cancellationToken)
         {
             if (!PatchAuthCheck())
-                return await Task.FromResult<IActionResult>(Unauthorized());
+                return Unauthorized();
 
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             await tableOperations.UpdateRecordAsync(record, cancellationToken);
 
-            return await Task.FromResult<IActionResult>(Ok(record));
+            return Ok(record);
         }
 
         /// <summary>
@@ -98,13 +98,13 @@ namespace Gemstone.Web.APIController
         public async Task<IActionResult> Post(T record, CancellationToken cancellationToken)
         {
             if (!PostAuthCheck())
-                return await Task.FromResult<IActionResult>(Unauthorized());
+                return Unauthorized();
 
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             await tableOperations.AddNewRecordAsync(record, cancellationToken);
 
-            return await Task.FromResult<IActionResult>(Ok(record));
+            return Ok(record);
         }
 
         /// <summary>
@@ -117,13 +117,13 @@ namespace Gemstone.Web.APIController
         public async Task<IActionResult> Delete(T record, CancellationToken cancellationToken)
         {
             if (!DeleteAuthCheck())
-                return await Task.FromResult<IActionResult>(Unauthorized());
+                return Unauthorized();
 
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             await tableOperations.DeleteRecordAsync(cancellationToken, record);
 
-            return await Task.FromResult<IActionResult>(Ok(1));
+            return Ok(1);
         }
 
         /// <summary>
@@ -136,13 +136,13 @@ namespace Gemstone.Web.APIController
         public async Task<IActionResult> Delete(string id, CancellationToken cancellationToken)
         {
             if(!DeleteAuthCheck())
-                return await Task.FromResult<IActionResult>(Unauthorized());
+                return Unauthorized();
 
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             await tableOperations.DeleteRecordWhereAsync($"{PrimaryKeyField} = {{0}}", cancellationToken, id);
 
-            return await Task.FromResult<IActionResult>(Ok(1));
+            return Ok(1);
         }
 
         #region [ Methods ]
