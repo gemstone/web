@@ -106,7 +106,7 @@ namespace Gemstone.Web.APIController
         /// <param name="parentID">Parent ID to be used if table has set parent keys.</param>
         /// <param name="page">The 0 based page number to be returned.</param>
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
-        /// <returns>An <see cref="IActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/>.</returns>
+        /// <returns>An <see cref="IActionResult"/> containing <see cref="T:T[]"/> or <see cref="Exception"/>.</returns>
         [HttpGet, Route("{page:min(0)}/{parentID?}")]
         public Task<IActionResult> Get(string? parentID, int page, CancellationToken cancellationToken)
         {
@@ -126,7 +126,7 @@ namespace Gemstone.Web.APIController
                 };
             }
 
-            IEnumerable<T> result = tableOperations.QueryRecords(DefaultSort, DefaultSortDirection, page, PageSize, filter );
+            T[] result = tableOperations.QueryRecords(DefaultSort, DefaultSortDirection, page, PageSize, filter).ToArray();
 
             return Task.FromResult<IActionResult>(Ok(result));
         }
@@ -138,7 +138,7 @@ namespace Gemstone.Web.APIController
         /// <param name="ascending">Flag when <c>true</c> will sort ascending; otherwise, descending.</param>
         /// <param name="page">The 0 based page number to be returned.</param>
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
-        /// <returns>An <see cref="IActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/>.</returns>
+        /// <returns>An <see cref="IActionResult"/> containing <see cref="T:T[]"/> or <see cref="Exception"/>.</returns>
         [HttpGet, Route("{page:min(0)}/{sort}/{ascending:bool}")]
         public Task<IActionResult> Get(string sort, bool ascending, int page, CancellationToken cancellationToken)
         {
@@ -149,8 +149,8 @@ namespace Gemstone.Web.APIController
             TableOperations<T> tableOperations = new(connection);
             RecordFilter<T>? filter = null;
 
-            IEnumerable<T> result = tableOperations.QueryRecords(sort, ascending, page, PageSize, filter);
-
+            T[] result = tableOperations.QueryRecords(sort, ascending, page, PageSize, filter).ToArray();
+            
             return Task.FromResult<IActionResult>(Ok(result));
         }
 
@@ -162,7 +162,7 @@ namespace Gemstone.Web.APIController
         /// <param name="page">The 0 based page number to be returned.</param>
         /// <param name="parentID">Parent ID to be used if table has set parent keys.</param>
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
-        /// <returns>An <see cref="IActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/>.</returns>
+        /// <returns>An <see cref="IActionResult"/> containing <see cref="T:T[]"/> or <see cref="Exception"/>.</returns>
         [HttpGet, Route("{page:min(0)}/{parentID}/{sort}/{ascending:bool}")]
         public Task<IActionResult> Get(string parentID, string sort, bool ascending, int page, CancellationToken cancellationToken)
         {
@@ -178,7 +178,7 @@ namespace Gemstone.Web.APIController
                 SearchParameter = parentID
             };
             
-            IEnumerable<T> result = tableOperations.QueryRecords(sort, ascending, page, PageSize, filter);
+            T[] result = tableOperations.QueryRecords(sort, ascending, page, PageSize, filter).ToArray();
 
             return Task.FromResult<IActionResult>(Ok(result));
         }
@@ -210,7 +210,7 @@ namespace Gemstone.Web.APIController
         /// <param name="postData">Search criteria.</param>
         /// <param name="page">the 0 based page number to be returned.</param>
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
-        /// <returns>An <see cref="IActionResult"/> containing <see cref="IEnumerable{T}"/> or <see cref="Exception"/>.</returns>
+        /// <returns>An <see cref="IActionResult"/> containing <see cref="T:T[]"/> or <see cref="Exception"/>.</returns>
         [HttpPost, Route("Search/{page:min(0)}")]
         public Task<IActionResult> Search([FromBody] SearchPost<T> postData, int page, CancellationToken cancellationToken)
         {
@@ -219,7 +219,7 @@ namespace Gemstone.Web.APIController
 
             using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
-            IEnumerable<T> result = tableOperations.QueryRecords(postData.OrderBy, postData.Ascending, page, PageSize, postData.Searches.ToArray());
+            T[] result = tableOperations.QueryRecords(postData.OrderBy, postData.Ascending, page, PageSize, postData.Searches.ToArray()).ToArray();
 
             return Task.FromResult<IActionResult>(Ok(result));
         }
