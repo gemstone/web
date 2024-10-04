@@ -208,7 +208,7 @@ namespace Gemstone.Web.APIController
 
             List<T?> records = [];
 
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < (count ?? 1); i++)
             {
                 if (!await cache.Records.MoveNextAsync(cancellationToken).ConfigureAwait(false))
                     break;
