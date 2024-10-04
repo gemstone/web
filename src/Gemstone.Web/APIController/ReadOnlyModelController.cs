@@ -171,7 +171,7 @@ namespace Gemstone.Web.APIController
         /// <param name="expiration">Expiration time for the query data, in minutes, if not accessed. Defaults to 1 minute if not provided.</param>
         /// <param name="cancellationToken">Cancellation token to cancel the operation.</param>
         /// <returns>An <see cref="IActionResult"/> containing a token to be used for subsequent requests.</returns>
-        [HttpGet, Route("Open/{filterExpression}/{parameters}/{expiration?}")]
+        [HttpGet, Route("Open/{filterExpression}/{parameters}/{expiration:double?}")]
         public Task<IActionResult> Open(string? filterExpression, object?[] parameters, double? expiration, CancellationToken cancellationToken)
         {
             if (!GetAuthCheck())
@@ -194,7 +194,7 @@ namespace Gemstone.Web.APIController
         /// <remarks>
         /// When end of enumeration is reached, an empty array is returned.
         /// </remarks>
-        [HttpGet, Route("Next/{token}/{count?}")]
+        [HttpGet, Route("Next/{token}/{count:int?}")]
         public async Task<IActionResult> Next(string token, int? count, CancellationToken cancellationToken)
         {
             if (!GetAuthCheck())
