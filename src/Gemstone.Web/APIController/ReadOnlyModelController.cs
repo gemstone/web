@@ -26,8 +26,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Caching;
 using System.Threading;
 using System.Threading.Tasks;
+using Gemstone.Caching;
 using Gemstone.Configuration;
 using Gemstone.Data;
 using Gemstone.Data.Model;
@@ -40,6 +42,67 @@ namespace Gemstone.Web.APIController
     /// </summary>
     public class ReadOnlyModelController<T> : ControllerBase, IReadOnlyModelController<T> where T : class, new()
     {
+        #region [ Netsted Types ]
+
+        private class ConnectionCache : IDisposable
+        {
+            public string Token { get; } = Guid.NewGuid().ToString();
+
+            public TableOperations<T> Table { get; }
+
+            public IAsyncEnumerator<T?>? Records { get; set; }
+
+            private readonly AdoDataConnection m_connection;
+
+            private ConnectionCache()
+            {
+                m_connection = new AdoDataConnection(Settings.Default);
+                Table = new TableOperations<T>(m_connection);
+            }
+
+            public void Dispose()
+            {
+                m_connection.Dispose();
+            }
+
+            public static ConnectionCache Create(double expiration)
+            {
+                ConnectionCache cache = new();
+
+                MemoryCache<ConnectionCache>.GetOrAdd(cache.Token, expiration, () => cache, Dispose);
+
+                return cache;
+            }
+
+            public static bool TryGet(string token, out ConnectionCache? cache)
+            {
+                return MemoryCache<ConnectionCache>.TryGet(token, out cache);
+            }
+
+            public static bool Close(string token)
+            {
+                if (!TryGet(token, out ConnectionCache? cache))
+                    return false;
+
+                cache?.Dispose();
+
+                MemoryCache<ConnectionCache>.Remove(token);
+
+                return true;
+            }
+
+            private static void Dispose(CacheEntryRemovedArguments arguments)
+            {
+                if (arguments.RemovedReason != CacheEntryRemovedReason.Removed)
+                    return;
+
+                if (arguments.CacheItem.Value is ConnectionCache cache)
+                    cache.Dispose();
+            }
+        }
+
+        #endregion
+
         #region [ Constructor ]
 
         /// <summary>
@@ -99,6 +162,75 @@ namespace Gemstone.Web.APIController
         private int PageSize { get; }
 
         #endregion
+
+        /// <summary>
+        /// Opens a connection to the database and establishes a query operation, returning a token to be used for subsequent data requests.
+        /// </summary>
+        /// <param name="filterExpression">Filter expression to be used for the query.</param>
+        /// <param name="parameters">Parameters to be used for the query.</param>
+        /// <param name="expiration">Expiration time for the query data, in minutes, if not accessed. Defaults to 1 minute if not provided.</param>
+        /// <param name="cancellationToken">Cancellation token to cancel the operation.</param>
+        /// <returns>An <see cref="IActionResult"/> containing a token to be used for subsequent requests.</returns>
+        [HttpGet, Route("Open/{filterExpression}/{parameters}/{expiration?}")]
+        public Task<IActionResult> Open(string? filterExpression, object?[] parameters, double? expiration, CancellationToken cancellationToken)
+        {
+            if (!GetAuthCheck())
+                return Task.FromResult<IActionResult>(Unauthorized());
+
+            ConnectionCache cache = ConnectionCache.Create(expiration ?? 1.0D);
+            
+            cache.Records = cache.Table.QueryRecordsWhereAsync(filterExpression, cancellationToken, parameters).GetAsyncEnumerator(cancellationToken);
+
+            return Task.FromResult<IActionResult>(Ok(cache.Token));
+        }
+
+        /// <summary>
+        /// Gets the next set of records from the query operation associated with the provided token.
+        /// </summary>
+        /// <param name="token">Token associated with the query operation.</param>
+        /// <param name="count">Maximum number of records to return. Defaults 1 record if not provided.</param>
+        /// <param name="cancellationToken">Cancellation token to cancel the operation.</param>
+        /// <returns>An <see cref="IActionResult"/> containing the next set of records as <see cref="T:T[]"/>.</returns>
+        /// <remarks>
+        /// When end of enumeration is reached, an empty array is returned.
+        /// </remarks>
+        [HttpGet, Route("Next/{token}/{count?}")]
+        public async Task<IActionResult> Next(string token, int? count, CancellationToken cancellationToken)
+        {
+            if (!GetAuthCheck())
+                return Unauthorized();
+
+            if (!ConnectionCache.TryGet(token, out ConnectionCache? cache) || cache is null)
+                return NotFound();
+
+            if (cache.Records is null)
+                return Ok(Array.Empty<T>());
+
+            List<T?> records = [];
+
+            for (int i = 0; i < count; i++)
+            {
+                if (!await cache.Records.MoveNextAsync(cancellationToken).ConfigureAwait(false))
+                    break;
+
+                records.Add(cache.Records.Current);
+            }
+
+            return Ok(records);
+        }
+
+        /// <summary>
+        /// Closes the query operation associated with the provided token.
+        /// </summary>
+        /// <param name="token">Token associated with the query operation.</param>
+        [HttpGet, Route("Close/{token}")]
+        public IActionResult Close(string token)
+        {
+            if (!GetAuthCheck())
+                return Unauthorized();
+
+            return ConnectionCache.Close(token) ? Ok() : NotFound();
+        }
 
         /// <summary>
         /// Gets all records from associated table, filtered to parent keys if provided.
