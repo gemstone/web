@@ -190,9 +190,11 @@ namespace Gemstone.Web.APIController
         /// <param name="token">Token associated with the query operation.</param>
         /// <param name="count">Maximum number of records to return. Defaults 1 record if not provided.</param>
         /// <param name="cancellationToken">Cancellation token to cancel the operation.</param>
-        /// <returns>An <see cref="IActionResult"/> containing the next set of records as <see cref="T:T[]"/>.</returns>
+        /// <returns>
+        /// An <see cref="IActionResult"/> containing the next set of records as <see cref="List{T}"/>.
+        /// </returns>
         /// <remarks>
-        /// When end of enumeration is reached, an empty array is returned.
+        /// When end of enumeration is reached, an empty result list is returned.
         /// </remarks>
         [HttpGet, Route("Next/{token}/{count:int?}")]
         public async Task<IActionResult> Next(string token, int? count, CancellationToken cancellationToken)
@@ -203,17 +205,17 @@ namespace Gemstone.Web.APIController
             if (!ConnectionCache.TryGet(token, out ConnectionCache? cache) || cache is null)
                 return NotFound();
 
-            if (cache.Records is null)
-                return Ok(Array.Empty<T>());
-
             List<T?> records = [];
 
-            for (int i = 0; i < (count ?? 1); i++)
+            if (cache.Records is not null)
             {
-                if (!await cache.Records.MoveNextAsync(cancellationToken).ConfigureAwait(false))
-                    break;
+                for (int i = 0; i < (count ?? 1); i++)
+                {
+                    if (!await cache.Records.MoveNextAsync(cancellationToken).ConfigureAwait(false))
+                        break;
 
-                records.Add(cache.Records.Current);
+                    records.Add(cache.Records.Current);
+                }
             }
 
             return Ok(records);
