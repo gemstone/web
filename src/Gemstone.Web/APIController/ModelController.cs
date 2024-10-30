@@ -95,7 +95,7 @@ namespace Gemstone.Web.APIController
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>An <see cref="IActionResult"/> containing the new <see cref="T"/> or <see cref="Exception"/>.</returns>
         [HttpPost, Route("")]
-        public async Task<IActionResult> Post(T record, CancellationToken cancellationToken)
+        public async Task<IActionResult> Post([FromBody]T record, CancellationToken cancellationToken)
         {
             if (!PostAuthCheck())
                 return Unauthorized();
@@ -121,7 +121,7 @@ namespace Gemstone.Web.APIController
 
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
-            await tableOperations.DeleteRecordAsync(cancellationToken, record);
+            await tableOperations.DeleteRecordAsync(record, cancellationToken);
 
             return Ok(1);
         }
