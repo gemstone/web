@@ -313,6 +313,24 @@ namespace Gemstone.Web.APIController
         }
 
         /// <summary>
+        /// Gets a new record.
+        /// </summary>
+        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+        /// <returns>A <see cref="T"/> object or <see cref="Exception"/>.</returns>
+        [HttpGet, Route("New")]
+        public async Task<IActionResult> New(CancellationToken cancellationToken)
+        {
+            if (!GetAuthCheck())
+                return Unauthorized();
+
+            await using AdoDataConnection connection = CreateConnection();
+            TableOperations<T> tableOperations = new(connection);
+
+            T? result = tableOperations.NewRecord();
+            return Ok(result);
+        }
+
+        /// <summary>
         /// Check if current User is authorized for GET Requests.
         /// </summary>
         /// <returns><c>true</c> if User is authorized for GET requests; otherwise, <c>false</c>.</returns>
