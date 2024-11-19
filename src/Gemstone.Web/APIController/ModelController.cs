@@ -76,7 +76,7 @@ namespace Gemstone.Web.APIController
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>An <see cref="IActionResult"/> containing the new record <see cref="T"/> or <see cref="Exception"/>.</returns>
         [HttpPatch, Route("")]
-        public async Task<IActionResult> Patch(T record, CancellationToken cancellationToken)
+        public async Task<IActionResult> Patch([FromBody] T record, CancellationToken cancellationToken)
         {
             if (!PatchAuthCheck())
                 return Unauthorized();
@@ -114,7 +114,7 @@ namespace Gemstone.Web.APIController
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>An <see cref="IActionResult"/> containing 1 or <see cref="Exception"/>.</returns>
         [HttpDelete, Route("")]
-        public async Task<IActionResult> Delete(T record, CancellationToken cancellationToken)
+        public async Task<IActionResult> Delete([FromBody] T record, CancellationToken cancellationToken)
         {
             if (!DeleteAuthCheck())
                 return Unauthorized();
