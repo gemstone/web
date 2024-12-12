@@ -178,7 +178,7 @@ namespace Gemstone.Web.APIController
                 Operator = "=",
                 SearchParameter = parentID
             };
-            
+
             IAsyncEnumerable<T> result = tableOperations.QueryRecordsAsync(sort, ascending, page, PageSize, cancellationToken, filter);
 
             return Ok(await result.ToArrayAsync(cancellationToken).ConfigureAwait(false));
@@ -198,7 +198,7 @@ namespace Gemstone.Web.APIController
 
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
-            T? result = await tableOperations.QueryRecordAsync(new RecordRestriction($"{PrimaryKeyField} = {{0}}",id), cancellationToken);
+            T? result = await tableOperations.QueryRecordAsync(new RecordRestriction($"{PrimaryKeyField} = {{0}}", id), cancellationToken);
 
             return result is null ?
                 NotFound() :
@@ -233,9 +233,9 @@ namespace Gemstone.Web.APIController
                 });
             }
 
-			IAsyncEnumerable<T> result = tableOperations.QueryRecordsAsync(postData.OrderBy, postData.Ascending, page, PageSize, cancellationToken, filters);
+            IAsyncEnumerable<T> result = tableOperations.QueryRecordsAsync(postData.OrderBy, postData.Ascending, page, PageSize, cancellationToken, filters);
 
-			return await Task.FromResult<IActionResult>(Ok(result));
+            return await Task.FromResult<IActionResult>(Ok(result));
         }
 
         /// <summary>
@@ -265,14 +265,14 @@ namespace Gemstone.Web.APIController
                 });
             }
 
-			int recordCount = await tableOperations.QueryRecordCountAsync(cancellationToken, filters);
+            int recordCount = await tableOperations.QueryRecordCountAsync(cancellationToken, filters);
 
-			return await Task.FromResult<IActionResult>(Ok(new PageInfo()
+            return await Task.FromResult<IActionResult>(Ok(new PageInfo()
             {
                 PageSize = PageSize,
                 PageCount = (int)Math.Ceiling(recordCount / (double)PageSize),
                 TotalCount = recordCount
-            });
+            }));
         }
 
         /// <summary>
@@ -302,14 +302,14 @@ namespace Gemstone.Web.APIController
                 });
             }
 
-			int recordCount = await tableOperations.QueryRecordCountAsync(cancellationToken, filters);
+            int recordCount = await tableOperations.QueryRecordCountAsync(cancellationToken, filters);
 
-			return await Task.FromResult<IActionResult>(Ok(new PageInfo()
+            return await Task.FromResult<IActionResult>(Ok(new PageInfo()
             {
                 PageSize = PageSize,
                 PageCount = (int)Math.Ceiling(recordCount / (double)PageSize),
                 TotalCount = recordCount
-            });
+            }));
         }
 
         /// <summary>
