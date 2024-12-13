@@ -355,7 +355,7 @@ namespace Gemstone.Web.APIController
 
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
-            RecordFilter<T>[] filters = [];
+            RecordFilter<T>[] filters = postData.Searches.ToArray();
 
             if (ParentKey != string.Empty && parentID is not null)
             {
@@ -369,7 +369,7 @@ namespace Gemstone.Web.APIController
 
             IAsyncEnumerable<T> result = tableOperations.QueryRecordsAsync(postData.OrderBy, postData.Ascending, page, PageSize, cancellationToken, filters);
 
-            return OK(await result.ToArrayAsync(cancellationToken).ConfigureAwait(false));
+            return Ok(await result.ToArrayAsync(cancellationToken).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -424,7 +424,19 @@ namespace Gemstone.Web.APIController
 
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
-            int recordCount = await tableOperations.QueryAsyncRecordCount((RecordRestriction?)null).ConfigureAwait(false);
+            RecordFilter<T>[] filters = [];
+
+            if (ParentKey != string.Empty && parentID is not null)
+            {
+                filters.Append(new RecordFilter<T>()
+                {
+                    FieldName = ParentKey,
+                    Operator = "=",
+                    SearchParameter = parentID
+                });
+            }
+
+            int recordCount = await tableOperations.QueryRecordCountAsync(cancellationToken, filters).ConfigureAwait(false);
             
             return Ok(new PageInfo()
             {
