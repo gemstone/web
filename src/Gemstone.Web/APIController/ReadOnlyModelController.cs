@@ -387,7 +387,7 @@ namespace Gemstone.Web.APIController
 
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
-            RecordFilter<T>[] filters = [];
+            RecordFilter<T>[] filters = postData.Searches.ToArray();
 
             if (ParentKey != string.Empty && parentID is not null)
             {
