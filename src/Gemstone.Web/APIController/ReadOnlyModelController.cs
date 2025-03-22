@@ -178,7 +178,7 @@ namespace Gemstone.Web.APIController
                 return Task.FromResult<IActionResult>(Unauthorized());
 
             ConnectionCache cache = ConnectionCache.Create(expiration ?? 1.0D);
-            
+
             cache.Records = cache.Table.QueryRecordsWhereAsync(filterExpression, cancellationToken, parameters).GetAsyncEnumerator(cancellationToken);
 
             return Task.FromResult<IActionResult>(Ok(cache.Token));
@@ -437,7 +437,7 @@ namespace Gemstone.Web.APIController
             }
 
             int recordCount = await tableOperations.QueryRecordCountAsync(cancellationToken, filters).ConfigureAwait(false);
-            
+
             return Ok(new PageInfo()
             {
                 PageSize = PageSize,
@@ -462,6 +462,34 @@ namespace Gemstone.Web.APIController
 
             T? result = tableOperations.NewRecord();
             return Ok(result);
+        }
+
+        /// <summary>
+        /// Gets max value for the specified field.
+        /// </summary>
+        /// <param name="fieldName">Field to find max value for</param>
+        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+        /// <returns>An <see cref="int"/>.</returns>
+        [HttpGet, Route("Max/{fieldName}")]
+        public async Task<IActionResult> GetMaxValue(string fieldName, CancellationToken cancellationToken)
+        {
+            if (!GetAuthCheck())
+                return Unauthorized();
+
+            // Validate that the field exists on the model T using reflection
+            PropertyInfo? property = typeof(T).GetProperty(fieldName);
+            if (property is null)
+                return BadRequest();
+
+            // Create a connection and table operations instance
+            await using AdoDataConnection connection = CreateConnection();
+            TableOperations<T> tableOperations = new(connection);
+            string tableName = tableOperations.TableName;
+            string sql = $"SELECT MAX([{fieldName}]) FROM [{tableName}]";
+
+            object? maxValue = await connection.ExecuteScalarAsync(sql, cancellationToken).ConfigureAwait(false);
+
+            return Ok(maxValue ?? 0);
         }
 
         /// <summary>
