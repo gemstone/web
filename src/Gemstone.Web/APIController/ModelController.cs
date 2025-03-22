@@ -106,7 +106,7 @@ namespace Gemstone.Web.APIController
                         T? foundRecord = await tableOperations.QueryRecordAsync(tableOperations.GetNonPrimaryFieldRecordRestriction(record), cancellationToken).ConfigureAwait(false);
 
 
-            return Ok(record);
+                       return Ok(foundRecord ?? record);
         }
 
         /// <summary>
