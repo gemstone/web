@@ -103,7 +103,8 @@ namespace Gemstone.Web.APIController
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             await tableOperations.AddNewRecordAsync(record, cancellationToken);
-            record = await tableOperations.QueryRecord(tableOperations.GetNonPrimaryFieldRecordRestriction(record));
+                        T? foundRecord = await tableOperations.QueryRecordAsync(tableOperations.GetNonPrimaryFieldRecordRestriction(record), cancellationToken).ConfigureAwait(false);
+
 
             return Ok(record);
         }
