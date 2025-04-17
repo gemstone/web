@@ -76,7 +76,7 @@ namespace Gemstone.Web.APIController
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>An <see cref="IActionResult"/> containing the new record <see cref="T"/> or <see cref="Exception"/>.</returns>
         [HttpPatch, Route("")]
-        public async Task<IActionResult> Patch([FromBody] T record, CancellationToken cancellationToken)
+        public virtual async Task<IActionResult> Patch([FromBody] T record, CancellationToken cancellationToken)
         {
             if (!PatchAuthCheck())
                 return Unauthorized();
@@ -95,7 +95,7 @@ namespace Gemstone.Web.APIController
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>An <see cref="IActionResult"/> containing the new <see cref="T"/> or <see cref="Exception"/>.</returns>
         [HttpPost, Route("")]
-        public async Task<IActionResult> Post([FromBody]T record, CancellationToken cancellationToken)
+        public virtual async Task<IActionResult> Post([FromBody]T record, CancellationToken cancellationToken)
         {
             if (!PostAuthCheck())
                 return Unauthorized();
@@ -103,10 +103,9 @@ namespace Gemstone.Web.APIController
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             await tableOperations.AddNewRecordAsync(record, cancellationToken);
-                        T? foundRecord = await tableOperations.QueryRecordAsync(tableOperations.GetNonPrimaryFieldRecordRestriction(record), cancellationToken).ConfigureAwait(false);
+            T? foundRecord = await tableOperations.QueryRecordAsync(tableOperations.GetNonPrimaryFieldRecordRestriction(record), cancellationToken).ConfigureAwait(false);
 
-
-                       return Ok(foundRecord ?? record);
+            return Ok(foundRecord ?? record);
         }
 
         /// <summary>
@@ -116,7 +115,7 @@ namespace Gemstone.Web.APIController
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>An <see cref="IActionResult"/> containing 1 or <see cref="Exception"/>.</returns>
         [HttpDelete, Route("")]
-        public async Task<IActionResult> Delete([FromBody] T record, CancellationToken cancellationToken)
+        public virtual async Task<IActionResult> Delete([FromBody] T record, CancellationToken cancellationToken)
         {
             if (!DeleteAuthCheck())
                 return Unauthorized();
@@ -135,7 +134,7 @@ namespace Gemstone.Web.APIController
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>An <see cref="IActionResult"/> containing 1 or <see cref="Exception"/>.</returns>
         [HttpDelete, Route("{id}")]
-        public async Task<IActionResult> Delete(string id, CancellationToken cancellationToken)
+        public virtual async Task<IActionResult> Delete(string id, CancellationToken cancellationToken)
         {
             if(!DeleteAuthCheck())
                 return Unauthorized();
