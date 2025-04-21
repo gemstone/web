@@ -66,6 +66,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="9.0.4" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="8.0.0" />
     <PackageReference Include="System.Collections" Version="4.3.0" />
@@ -79,6 +80,9 @@
 
     <PackageReference Include="Gemstone.Common" Version="1.0.136" Condition="'$(Configuration)'!='Development'" />
     <ProjectReference Include="..\..\..\common\src\Gemstone\Gemstone.Common.csproj" Condition="'$(Configuration)'=='Development'" />
+
+    <PackageReference Include="Gemstone.Configuration" Version="1.0.136" Condition="'$(Configuration)'!='Development'" />
+    <ProjectReference Include="..\..\..\configuration\src\Gemstone.Configuration\Gemstone.Configuration.csproj" Condition="'$(Configuration)'=='Development'" />
 
     <PackageReference Include="Gemstone.Data" Version="1.0.136" Condition="'$(Configuration)'!='Development'" />
     <ProjectReference Include="..\..\..\data\src\Gemstone.Data\Gemstone.Data.csproj" Condition="'$(Configuration)'=='Development'" />
