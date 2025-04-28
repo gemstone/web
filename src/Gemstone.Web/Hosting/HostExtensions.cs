@@ -111,12 +111,12 @@ namespace Gemstone.Web.Hosting
                 if (IPAddress.TryParse(hostNameOrAddress, out IPAddress? ipAddress))
                 {
                     IPAddress[] loopbackAddresses =
-                    {
+                    [
                         IPAddress.Any,
                         IPAddress.IPv6Any,
                         IPAddress.Loopback,
                         IPAddress.IPv6Loopback
-                    };
+                    ];
 
                     // "Any" addresses are not valid for DNS lookups,
                     // "Loopback" addresses will resolve to the
