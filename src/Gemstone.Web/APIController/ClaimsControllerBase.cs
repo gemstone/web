@@ -23,7 +23,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Security.Claims;
+using System.Linq;
 using Gemstone.Security.AuthenticationProviders;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,9 +40,12 @@ public abstract class ClaimsControllerBase : ControllerBase
     /// </summary>
     /// <returns>All of the authenticated user's claims.</returns>
     [HttpGet, Route("claims")]
-    public IEnumerable<Claim> GetAllClaims()
+    public IActionResult GetAllClaims()
     {
-        return HttpContext.User.Claims;
+        var claims = HttpContext.User.Claims
+            .Select(claim => new { claim.Type, claim.Value });
+
+        return Ok(claims);
     }
 
     /// <summary>
@@ -51,10 +54,11 @@ public abstract class ClaimsControllerBase : ControllerBase
     /// <param name="claimType">The type of the claims to be returned</param>
     /// <returns>The authenticated user's claims of the given type.</returns>
     [HttpGet, Route("claims/{**claimType}")]
-    public IEnumerable<Claim> GetClaims(string claimType)
+    public IEnumerable<string> GetClaims(string claimType)
     {
         return HttpContext.User
-            .FindAll(claim => claim.Type == claimType);
+            .FindAll(claim => claim.Type == claimType)
+            .Select(claim => claim.Value);
     }
 
     /// <summary>
