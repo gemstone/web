@@ -70,8 +70,8 @@ public abstract class ClaimsControllerBase : ControllerBase
     [HttpGet, Route("provider/{providerIdentity}/claimTypes")]
     public IActionResult GetClaimTypes(IServiceProvider serviceProvider, string providerIdentity)
     {
-        IAuthenticationClaimsProvider? claimsProvider = serviceProvider
-            .GetKeyedService<IAuthenticationClaimsProvider>(providerIdentity);
+        IAuthenticationProvider? claimsProvider = serviceProvider
+            .GetKeyedService<IAuthenticationProvider>(providerIdentity);
 
         return claimsProvider is not null
             ? Ok(claimsProvider.GetClaimTypes())
@@ -88,8 +88,8 @@ public abstract class ClaimsControllerBase : ControllerBase
     [HttpGet, Route("provider/{providerIdentity}/users")]
     public IActionResult FindUsers(IServiceProvider serviceProvider, string providerIdentity, string? searchText)
     {
-        IAuthenticationClaimsProvider? claimsProvider = serviceProvider
-            .GetKeyedService<IAuthenticationClaimsProvider>(providerIdentity);
+        IAuthenticationProvider? claimsProvider = serviceProvider
+            .GetKeyedService<IAuthenticationProvider>(providerIdentity);
 
         return claimsProvider is not null
             ? Ok(claimsProvider.FindUsers(searchText ?? "*"))
@@ -107,8 +107,8 @@ public abstract class ClaimsControllerBase : ControllerBase
     [HttpGet, Route("provider/{providerIdentity}/claims/{**claimType}")]
     public IActionResult FindClaims(IServiceProvider serviceProvider, string providerIdentity, string claimType, string? searchText)
     {
-        IAuthenticationClaimsProvider? claimsProvider = serviceProvider
-            .GetKeyedService<IAuthenticationClaimsProvider>(providerIdentity);
+        IAuthenticationProvider? claimsProvider = serviceProvider
+            .GetKeyedService<IAuthenticationProvider>(providerIdentity);
 
         return claimsProvider is not null
             ? Ok(claimsProvider.FindClaims(claimType, searchText ?? "*"))
