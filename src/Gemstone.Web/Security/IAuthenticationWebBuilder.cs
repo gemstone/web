@@ -27,7 +27,7 @@ using Gemstone.Security.AuthenticationProviders;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Gemstone.Web.Hosting;
+namespace Gemstone.Web.Security;
 
 /// <summary>
 /// Represents a builder for Gemstone authentication web components.

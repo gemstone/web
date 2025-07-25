@@ -31,7 +31,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace Gemstone.Web.Hosting;
+namespace Gemstone.Web.Security;
 
 /// <summary>
 /// Represents configuration options for the <see cref="AuthenticationSessionMiddleware"/>.
