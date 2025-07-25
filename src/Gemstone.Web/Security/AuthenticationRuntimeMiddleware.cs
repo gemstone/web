@@ -27,7 +27,7 @@ using System.Threading.Tasks;
 using Gemstone.Security.AuthenticationProviders;
 using Microsoft.AspNetCore.Http;
 
-namespace Gemstone.Web.Hosting;
+namespace Gemstone.Web.Security;
 
 /// <summary>
 /// Represents a middleware used to assign claims to authenticated users.

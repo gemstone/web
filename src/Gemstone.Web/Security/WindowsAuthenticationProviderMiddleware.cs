@@ -26,7 +26,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Http;
 
-namespace Gemstone.Web.Hosting;
+namespace Gemstone.Web.Security;
 
 /// <summary>
 /// Requires Windows authentication in a web application.
