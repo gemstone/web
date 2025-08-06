@@ -189,3 +189,21 @@ public class ControllerAccessHandler : AuthorizationHandler<ControllerAccessRequ
 public class ControllerAccessRequirement : IAuthorizationRequirement
 {
 }
+
+/// <summary>
+/// Defines extension methods for the controller access handler.
+/// </summary>
+public static class ControllerAccessHandlerExtensions
+{
+    private static ControllerAccessRequirement Requirement { get; } = new();
+
+    /// <summary>
+    /// Adds the <see cref="ControllerAccessRequirement"/> to the policy.
+    /// </summary>
+    /// <param name="builder">The policy builder</param>
+    /// <returns>The policy builder.</returns>
+    public static AuthorizationPolicyBuilder RequireControllerAccess(this AuthorizationPolicyBuilder builder)
+    {
+        return builder.AddRequirements(Requirement);
+    }
+}
