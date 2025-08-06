@@ -23,9 +23,17 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Gemstone.Security.AuthenticationProviders;
+using MathNet.Numerics;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Gemstone.Web.Security;
 
@@ -39,7 +47,7 @@ public interface IAuthenticationWebBuilder
     /// </summary>
     /// <param name="providerIdentity">The identity of the authentication provider</param>
     /// <returns>The authentication web builder.</returns>
-    IAuthenticationWebBuilder UseProviderMiddleware(string providerIdentity);
+    IAuthenticationWebBuilder UseProvider(string providerIdentity);
 
     /// <summary>
     /// Adds the default middleware type for the given provider identity to the application's request pipeline.
@@ -47,41 +55,16 @@ public interface IAuthenticationWebBuilder
     /// <param name="providerIdentity">The identity of the authentication provider</param>
     /// <param name="pathMatch">The path on which requests will require authentication using this provider</param>
     /// <returns>The authentication web builder.</returns>
-    IAuthenticationWebBuilder UseProviderMiddleware(string providerIdentity, string pathMatch);
+    IAuthenticationWebBuilder UseProvider(string providerIdentity, string pathMatch);
 
     /// <summary>
-    /// Adds the given middleware type for the given provider identity to the application's request pipeline.
-    /// </summary>
-    /// <param name="providerIdentity">The identity of the authentication provider</param>
-    /// <param name="middlewareType">The type of middleware to be used for authenticating the request</param>
-    /// <returns>The authentication web builder.</returns>
-    IAuthenticationWebBuilder UseProviderMiddleware(string providerIdentity, Type middlewareType);
-
-    /// <summary>
-    /// Adds the given middleware type for the given provider identity to the application's request pipeline.
+    /// Adds the default middleware type for the given provider identity to the application's request pipeline.
     /// </summary>
     /// <param name="providerIdentity">The identity of the authentication provider</param>
     /// <param name="pathMatch">The path on which requests will require authentication using this provider</param>
-    /// <param name="middlewareType">The type of middleware to be used for authenticating the request</param>
+    /// <param name="scheme">The authentication scheme to require on the endpoint</param>
     /// <returns>The authentication web builder.</returns>
-    IAuthenticationWebBuilder UseProviderMiddleware(string providerIdentity, string pathMatch, Type middlewareType);
-
-    /// <summary>
-    /// Adds the given middleware type for the given provider identity to the application's request pipeline.
-    /// </summary>
-    /// <typeparam name="TMiddleware">The type of middleware to be used for authenticating the request</typeparam>
-    /// <param name="providerIdentity">The identity of the authentication provider</param>
-    /// <returns>The authentication web builder.</returns>
-    IAuthenticationWebBuilder UseProviderMiddleware<TMiddleware>(string providerIdentity);
-
-    /// <summary>
-    /// Adds the given middleware type for the given provider identity to the application's request pipeline.
-    /// </summary>
-    /// <typeparam name="TMiddleware">The type of middleware to be used for authenticating the request</typeparam>
-    /// <param name="providerIdentity">The identity of the authentication provider</param>
-    /// <param name="pathMatch">The path on which requests will require authentication using this provider</param>
-    /// <returns>The authentication web builder.</returns>
-    IAuthenticationWebBuilder UseProviderMiddleware<TMiddleware>(string providerIdentity, string pathMatch);
+    IAuthenticationWebBuilder UseProvider(string providerIdentity, string pathMatch, string scheme);
 }
 
 /// <summary>
@@ -91,59 +74,66 @@ public static class AuthenticationWebBuilderExtensions
 {
     private class AuthenticationWebBuilder(IApplicationBuilder app) : IAuthenticationWebBuilder
     {
-        private static Dictionary<string, (string, Type)> MiddlewareRegistry { get; } = new Dictionary<string, (string, Type)>() {
-            { "windows", ("/asi/auth/windows", typeof(WindowsAuthenticationProviderMiddleware)) }
-        };
-
-        public IAuthenticationWebBuilder UseProviderMiddleware(string providerIdentity)
+        public IAuthenticationWebBuilder UseProvider(string providerIdentity)
         {
-            (string endpoint, Type middlewareType) = FindMiddlewareDescriptor(providerIdentity);
-            return UseProviderMiddleware(providerIdentity, endpoint, middlewareType);
+            string endpoint = $"/asi/auth/{providerIdentity}";
+            return UseProvider(providerIdentity, endpoint);
         }
 
-        public IAuthenticationWebBuilder UseProviderMiddleware(string providerIdentity, string endpoint)
+        public IAuthenticationWebBuilder UseProvider(string providerIdentity, string pathMatch)
         {
-            (_, Type middlewareType) = FindMiddlewareDescriptor(providerIdentity);
-            return UseProviderMiddleware(providerIdentity, endpoint, middlewareType);
+            return UseProvider(providerIdentity, pathMatch, providerIdentity);
         }
 
-        public IAuthenticationWebBuilder UseProviderMiddleware(string providerIdentity, Type middlewareType)
+        public IAuthenticationWebBuilder UseProvider(string providerIdentity, string pathMatch, string scheme)
         {
-            (string endpoint, _) = FindMiddlewareDescriptor(providerIdentity);
-            return UseProviderMiddleware(providerIdentity, endpoint, middlewareType);
-        }
+            app.Map(pathMatch, branch => branch
+                .UseRouting()
+                .UseAuthorization()
+                .UseMiddleware<AuthenticationRuntimeMiddleware>(providerIdentity)
+                .UseEndpoints(endpoints =>
+                {
+                    IEndpointConventionBuilder conventions = endpoints.MapGet("/", async context =>
+                    {
+                        await context.SignInAsync(context.User);
 
-        public IAuthenticationWebBuilder UseProviderMiddleware(string providerIdentity, string endpoint, Type middlewareType)
-        {
-            app.Map(endpoint, branch => branch
-                .UseMiddleware(middlewareType)
-                .UseMiddleware<AuthenticationRuntimeMiddleware>(providerIdentity));
+                        string? returnURL = context.Request.Query["redir"];
+                        context.Response.Redirect(returnURL ?? "/");
+                    });
+
+                    conventions.RequireAuthorization(policy => policy
+                        .AddAuthenticationSchemes(scheme)
+                        .RequireAuthenticatedUser());
+                }));
 
             return this;
         }
+    }
 
-        public IAuthenticationWebBuilder UseProviderMiddleware<TMiddleware>(string providerIdentity)
-        {
-            (string endpoint, _) = FindMiddlewareDescriptor(providerIdentity);
-            return UseProviderMiddleware<TMiddleware>(providerIdentity, endpoint);
-        }
+    /// <summary>
+    /// Sets up the default configuration for services to support Gemstone authentication.
+    /// </summary>
+    /// <typeparam name="T">Provides setup information for the runtime.</typeparam>
+    /// <param name="services">The collection of services</param>
+    /// <returns>Builder for adding additional authentication schemes.</returns>
+    public static AuthenticationBuilder ConfigureGemstoneWebAuthentication<T>(this IServiceCollection services) where T : class, IAuthenticationSetup
+    {
+        return services
+            .AddGemstoneAuthentication<T>()
+            .ConfigureGemstoneWebDefaults();
+    }
 
-        public IAuthenticationWebBuilder UseProviderMiddleware<TMiddleware>(string providerIdentity, string endpoint)
-        {
-            app.Map(endpoint, branch => branch
-                .UseMiddleware<TMiddleware>()
-                .UseMiddleware<AuthenticationRuntimeMiddleware>(providerIdentity));
-
-            return this;
-        }
-
-        private static (string, Type) FindMiddlewareDescriptor(string providerIdentity)
-        {
-            if (!MiddlewareRegistry.TryGetValue(providerIdentity, out (string, Type) descriptor))
-                throw new KeyNotFoundException($"Provider \"{providerIdentity}\" is not recognized");
-
-            return descriptor;
-        }
+    /// <summary>
+    /// Sets up the default configuration for services to support Gemstone authentication.
+    /// </summary>
+    /// <param name="services">The collection of services</param>
+    /// <param name="configure">Method to configure the runtime</param>
+    /// <returns>Builder for adding additional authentication schemes.</returns>
+    public static AuthenticationBuilder ConfigureGemstoneWebAuthentication(this IServiceCollection services, Action<IAuthenticationBuilder> configure)
+    {
+        return services
+            .AddGemstoneAuthentication(configure)
+            .ConfigureGemstoneWebDefaults();
     }
 
     /// <summary>
@@ -160,7 +150,7 @@ public static class AuthenticationWebBuilderExtensions
             IAuthenticationRuntime runtime = app.ApplicationServices.GetRequiredService<IAuthenticationRuntime>();
 
             foreach (string providerIdentity in runtime.GetProviderIdentities())
-                builder.UseProviderMiddleware(providerIdentity);
+                builder.UseProvider(providerIdentity);
         }
     }
 
@@ -172,9 +162,39 @@ public static class AuthenticationWebBuilderExtensions
     /// <returns>The application builder.</returns>
     public static IApplicationBuilder UseGemstoneAuthentication(this IApplicationBuilder app, Action<IAuthenticationWebBuilder> configure)
     {
-        AuthenticationWebBuilder builder = new(app);
+        AuthenticationWebBuilder builder = new(app.UseAuthentication());
         configure(builder);
-        app.UseMiddleware<AuthenticationSessionMiddleware>();
         return app;
+    }
+
+    private static AuthenticationBuilder ConfigureGemstoneWebDefaults(this IServiceCollection services)
+    {
+        services
+            .AddMemoryCache()
+            .TryAddSingleton<ITicketStore, DefaultTicketStore>();
+
+        services
+            .AddOptions<CookieAuthenticationOptions>()
+            .Configure<ITicketStore>((options, sessionStore) =>
+            {
+                options.SessionStore = sessionStore;
+
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(15);
+                options.SlidingExpiration = true;
+                options.LoginPath = "/Login";
+                options.ReturnUrlParameter = "redir";
+
+                options.Cookie.Name = "x-gemstone-auth";
+                options.Cookie.Path = "/";
+                options.Cookie.HttpOnly = true;
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                options.Cookie.IsEssential = true;
+            });
+
+        return services
+            .AddWindowsAuthenticationProvider()
+            .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddNegotiate("windows", _ => { })
+            .AddCookie();
     }
 }
