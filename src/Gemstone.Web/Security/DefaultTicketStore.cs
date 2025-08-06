@@ -82,6 +82,7 @@ public class DefaultTicketStore(IMemoryCache memoryCache) : ITicketStore
         MemoryCache
             .CreateEntry(key)
             .SetOptions(options)
+            .SetValue(ticket)
             .Dispose();
     }
 
