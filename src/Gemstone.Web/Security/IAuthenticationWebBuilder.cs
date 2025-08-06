@@ -174,7 +174,7 @@ public static class AuthenticationWebBuilderExtensions
             .TryAddSingleton<ITicketStore, DefaultTicketStore>();
 
         services
-            .AddOptions<CookieAuthenticationOptions>()
+            .AddOptions<CookieAuthenticationOptions>(CookieAuthenticationDefaults.AuthenticationScheme)
             .Configure<ITicketStore>((options, sessionStore) =>
             {
                 options.SessionStore = sessionStore;
