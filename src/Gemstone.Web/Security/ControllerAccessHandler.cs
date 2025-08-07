@@ -21,6 +21,7 @@
 //
 //******************************************************************************************************
 
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -128,21 +129,34 @@ public class ControllerAccessHandler : AuthorizationHandler<ControllerAccessRequ
 
     private void HandleResourceAccessPermission(ContextWrapper wrapper)
     {
-        ILookup<Permission, string> accessClaims = wrapper.Endpoint.Metadata
-            .GetOrderedMetadata<ResourceAccessAttribute>()
+        IReadOnlyList<ResourceAccessAttribute> accessAttributes = wrapper.Endpoint.Metadata
+            .GetOrderedMetadata<ResourceAccessAttribute>();
+
+        ILookup<Permission, string> accessClaims = accessAttributes
             .SelectMany(attribute => attribute.Access, (attribute, accessLevel) => $"Controller {attribute.Name} {accessLevel}")
             .ToLookup(claimValue => GetResourceAccessPermission(wrapper.User, claimValue));
 
-        bool fail = accessClaims[Permission.Deny]
+        bool isDenied = accessClaims[Permission.Deny]
             .Select(ToFailureReason)
             .Select(wrapper.Fail)
             .DefaultIfEmpty(false)
             .All(b => b);
 
-        if (fail)
+        if (isDenied)
             return;
 
         if (accessClaims[Permission.Allow].Any())
+        {
+            wrapper.Succeed();
+            return;
+        }
+
+        bool isAllowedByRole = accessAttributes
+            .SelectMany(attribute => attribute.Access)
+            .Select(accessLevel => accessLevel.ToString())
+            .Any(role => wrapper.User.HasClaim("Gemstone.Role", role));
+
+        if (isAllowedByRole)
             wrapper.Succeed();
     }
 
