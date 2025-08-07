@@ -22,18 +22,16 @@
 //******************************************************************************************************
 
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Gemstone.Security.AuthenticationProviders;
-using MathNet.Numerics;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
+using Microsoft.Net.Http.Headers;
 
 namespace Gemstone.Web.Security;
 
@@ -110,6 +108,40 @@ public static class AuthenticationWebBuilderExtensions
         }
     }
 
+    private class LogoutMiddleware(RequestDelegate next, IOptionsMonitor<CookieAuthenticationOptions> cookieOptions)
+    {
+        private CookieAuthenticationOptions Options => cookieOptions.CurrentValue;
+
+        public async Task Invoke(HttpContext httpContext)
+        {
+            if (!IsLogoutRequest(httpContext.Request))
+            {
+                await next(httpContext);
+                return;
+            }
+
+            await httpContext.SignOutAsync();
+
+            // This handles the redirect to login page
+            if (!IsAjaxRequest(httpContext.Request))
+                await httpContext.ChallengeAsync();
+        }
+
+        private bool IsLogoutRequest(HttpRequest request)
+        {
+            PathString logoutPath = Options.LogoutPath;
+            return logoutPath.HasValue && request.Path.StartsWithSegments(logoutPath);
+        }
+
+        // Taken from Microsoft's reference source for the Cookie authentication implementation
+        // https://github.com/dotnet/aspnetcore/blob/v9.0.8/src/Security/Authentication/Cookies/src/CookieAuthenticationEvents.cs#L105
+        private static bool IsAjaxRequest(HttpRequest request)
+        {
+            return string.Equals(request.Query[HeaderNames.XRequestedWith], "XMLHttpRequest", StringComparison.Ordinal) ||
+                string.Equals(request.Headers.XRequestedWith, "XMLHttpRequest", StringComparison.Ordinal);
+        }
+    }
+
     /// <summary>
     /// Sets up the default configuration for services to support Gemstone authentication.
     /// </summary>
@@ -164,7 +196,7 @@ public static class AuthenticationWebBuilderExtensions
     {
         AuthenticationWebBuilder builder = new(app.UseAuthentication());
         configure(builder);
-        return app;
+        return app.UseMiddleware<LogoutMiddleware>();
     }
 
     private static AuthenticationBuilder ConfigureGemstoneWebDefaults(this IServiceCollection services)
@@ -182,6 +214,7 @@ public static class AuthenticationWebBuilderExtensions
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(15);
                 options.SlidingExpiration = true;
                 options.LoginPath = "/Login";
+                options.LogoutPath = "/asi/logout";
                 options.ReturnUrlParameter = "redir";
 
                 options.Cookie.Name = "x-gemstone-auth";
