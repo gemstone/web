@@ -86,8 +86,7 @@ public class ControllerAccessHandler : AuthorizationHandler<ControllerAccessRequ
             return Task.CompletedTask;
 
         ControllerActionDescriptor? descriptor = endpoint.Metadata
-            .OfType<ControllerActionDescriptor>()
-            .FirstOrDefault();
+            .GetMetadata<ControllerActionDescriptor>();
 
         if (descriptor is null)
             return Task.CompletedTask;
@@ -104,7 +103,7 @@ public class ControllerAccessHandler : AuthorizationHandler<ControllerAccessRequ
     private bool HandleResourceActionPermission(ContextWrapper wrapper)
     {
         string? routeName = wrapper.Endpoint.Metadata
-            .OfType<IRouteNameMetadata>()
+            .GetOrderedMetadata<IRouteNameMetadata>()
             .Select(metadata => metadata.RouteName)
             .FirstOrDefault();
 
@@ -130,7 +129,7 @@ public class ControllerAccessHandler : AuthorizationHandler<ControllerAccessRequ
     private void HandleResourceAccessPermission(ContextWrapper wrapper)
     {
         ILookup<Permission, string> accessClaims = wrapper.Endpoint.Metadata
-            .OfType<ResourceAccessAttribute>()
+            .GetOrderedMetadata<ResourceAccessAttribute>()
             .SelectMany(attribute => attribute.Access, (attribute, accessLevel) => $"Controller {attribute.Name} {accessLevel}")
             .ToLookup(claimValue => GetResourceAccessPermission(wrapper.User, claimValue));
 
