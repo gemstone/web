@@ -110,7 +110,8 @@ public static class AuthenticationWebBuilderExtensions
 
     private class LogoutMiddleware(RequestDelegate next, IOptionsMonitor<CookieAuthenticationOptions> cookieOptions)
     {
-        private CookieAuthenticationOptions Options => cookieOptions.CurrentValue;
+        private CookieAuthenticationOptions Options => cookieOptions
+            .Get(CookieAuthenticationDefaults.AuthenticationScheme);
 
         public async Task Invoke(HttpContext httpContext)
         {
