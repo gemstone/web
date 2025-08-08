@@ -139,7 +139,7 @@ public class ControllerAccessHandler : AuthorizationHandler<ControllerAccessRequ
 
         ResourceAccessLevel[] access =
             accessAttribute?.Access ??
-            [ToAccessLevel(wrapper.HttpMethod)];
+            ToAccessLevels(wrapper.HttpMethod);
 
         ILookup<Permission, string> accessClaims = access
             .Select(accessLevel => $"Controller {resourceName} {accessLevel}")
@@ -167,7 +167,7 @@ public class ControllerAccessHandler : AuthorizationHandler<ControllerAccessRequ
         if (isAllowedByRole)
             wrapper.Succeed();
 
-        static ResourceAccessLevel ToAccessLevel(string httpMethod)
+        static ResourceAccessLevel[] ToAccessLevels(string httpMethod)
         {
             bool isReadOnly =
                 HttpMethods.IsGet(httpMethod) ||
@@ -176,8 +176,8 @@ public class ControllerAccessHandler : AuthorizationHandler<ControllerAccessRequ
                 HttpMethods.IsTrace(httpMethod);
 
             return isReadOnly
-                ? ResourceAccessLevel.View
-                : ResourceAccessLevel.Edit;
+                ? [ResourceAccessLevel.Admin, ResourceAccessLevel.Edit, ResourceAccessLevel.View]
+                : [ResourceAccessLevel.Admin, ResourceAccessLevel.Edit];
         }
     }
 
