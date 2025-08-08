@@ -179,9 +179,9 @@ public static class AuthenticationWebBuilderExtensions
 
         void configure(IAuthenticationWebBuilder builder)
         {
-            IAuthenticationRuntime runtime = app.ApplicationServices.GetRequiredService<IAuthenticationRuntime>();
+            IAuthenticationSetup setup = app.ApplicationServices.GetRequiredService<IAuthenticationSetup>();
 
-            foreach (string providerIdentity in runtime.GetProviderIdentities())
+            foreach (string providerIdentity in setup.GetProviderIdentities())
                 builder.UseProvider(providerIdentity);
         }
     }
