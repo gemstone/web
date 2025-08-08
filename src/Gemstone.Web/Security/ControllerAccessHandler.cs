@@ -21,7 +21,6 @@
 //
 //******************************************************************************************************
 
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -49,13 +48,15 @@ public class ControllerAccessHandler : AuthorizationHandler<ControllerAccessRequ
         Neither
     }
 
-    private class ContextWrapper(AuthorizationHandlerContext context, ControllerAccessRequirement requirement, Endpoint endpoint, ControllerActionDescriptor descriptor)
+    private class ContextWrapper(AuthorizationHandlerContext context, ControllerAccessRequirement requirement, HttpContext httpContext, Endpoint endpoint, ControllerActionDescriptor descriptor)
     {
         private AuthorizationHandlerContext Context { get; } = context;
         private ControllerAccessRequirement Requirement { get; } = requirement;
+
         public ClaimsPrincipal User { get; } = context.User;
         public Endpoint Endpoint { get; } = endpoint;
         public ControllerActionDescriptor Descriptor { get; } = descriptor;
+        public string HttpMethod => httpContext.Request.Method;
 
         public bool Succeed()
         {
@@ -92,7 +93,7 @@ public class ControllerAccessHandler : AuthorizationHandler<ControllerAccessRequ
         if (descriptor is null)
             return Task.CompletedTask;
 
-        ContextWrapper wrapper = new(context, requirement, endpoint, descriptor);
+        ContextWrapper wrapper = new(context, requirement, httpContext, endpoint, descriptor);
 
         if (HandleResourceActionPermission(wrapper))
             return Task.CompletedTask;
@@ -103,10 +104,10 @@ public class ControllerAccessHandler : AuthorizationHandler<ControllerAccessRequ
 
     private bool HandleResourceActionPermission(ContextWrapper wrapper)
     {
-        string? routeName = wrapper.Endpoint.Metadata
-            .GetOrderedMetadata<IRouteNameMetadata>()
-            .Select(metadata => metadata.RouteName)
-            .FirstOrDefault();
+        IRouteNameMetadata? routeNameMetadata = wrapper.Endpoint.Metadata
+            .GetMetadata<IRouteNameMetadata>();
+
+        string? routeName = routeNameMetadata?.RouteName;
 
         string resource = wrapper.Descriptor.ControllerName;
         string action = routeName ?? wrapper.Descriptor.ActionName;
@@ -129,11 +130,19 @@ public class ControllerAccessHandler : AuthorizationHandler<ControllerAccessRequ
 
     private void HandleResourceAccessPermission(ContextWrapper wrapper)
     {
-        IReadOnlyList<ResourceAccessAttribute> accessAttributes = wrapper.Endpoint.Metadata
-            .GetOrderedMetadata<ResourceAccessAttribute>();
+        ResourceAccessAttribute? accessAttribute = wrapper.Endpoint.Metadata
+            .GetMetadata<ResourceAccessAttribute>();
 
-        ILookup<Permission, string> accessClaims = accessAttributes
-            .SelectMany(attribute => attribute.Access, (attribute, accessLevel) => $"Controller {attribute.Name} {accessLevel}")
+        string resourceName =
+            accessAttribute?.Name ??
+            wrapper.Descriptor.ControllerName;
+
+        ResourceAccessLevel[] access =
+            accessAttribute?.Access ??
+            [ToAccessLevel(wrapper.HttpMethod)];
+
+        ILookup<Permission, string> accessClaims = access
+            .Select(accessLevel => $"Controller {resourceName} {accessLevel}")
             .ToLookup(claimValue => GetResourceAccessPermission(wrapper.User, claimValue));
 
         bool isDenied = accessClaims[Permission.Deny]
@@ -151,13 +160,25 @@ public class ControllerAccessHandler : AuthorizationHandler<ControllerAccessRequ
             return;
         }
 
-        bool isAllowedByRole = accessAttributes
-            .SelectMany(attribute => attribute.Access)
+        bool isAllowedByRole = access
             .Select(accessLevel => accessLevel.ToString())
             .Any(role => wrapper.User.HasClaim("Gemstone.Role", role));
 
         if (isAllowedByRole)
             wrapper.Succeed();
+
+        static ResourceAccessLevel ToAccessLevel(string httpMethod)
+        {
+            bool isReadOnly =
+                HttpMethods.IsGet(httpMethod) ||
+                HttpMethods.IsHead(httpMethod) ||
+                HttpMethods.IsOptions(httpMethod) ||
+                HttpMethods.IsTrace(httpMethod);
+
+            return isReadOnly
+                ? ResourceAccessLevel.View
+                : ResourceAccessLevel.Edit;
+        }
     }
 
     private AuthorizationFailureReason ToFailureReason(string claim)
