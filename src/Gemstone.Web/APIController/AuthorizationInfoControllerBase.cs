@@ -1,5 +1,5 @@
 ﻿//******************************************************************************************************
-//  ClaimsControllerBase.cs - Gbtc
+//  AuthorizationInfoControllerBase.cs - Gbtc
 //
 //  Copyright © 2025, Grid Protection Alliance.  All Rights Reserved.
 //
@@ -24,8 +24,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Gemstone.Collections.CollectionExtensions;
+using Gemstone.Security.AccessControl;
 using Gemstone.Security.AuthenticationProviders;
+using Gemstone.Web.Security;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Gemstone.Web.APIController;
@@ -33,13 +41,13 @@ namespace Gemstone.Web.APIController;
 /// <summary>
 /// Base class for a controller that provides information about claims to client applications.
 /// </summary>
-public abstract class ClaimsControllerBase : ControllerBase
+public abstract class AuthorizationInfoControllerBase : ControllerBase
 {
     /// <summary>
     /// Gets all the claims associated with the authenticated user.
     /// </summary>
     /// <returns>All of the authenticated user's claims.</returns>
-    [HttpGet, Route("claims")]
+    [HttpGet, Route("user/claims")]
     public IActionResult GetAllClaims()
     {
         var claims = HttpContext.User.Claims
@@ -53,7 +61,7 @@ public abstract class ClaimsControllerBase : ControllerBase
     /// </summary>
     /// <param name="claimType">The type of the claims to be returned</param>
     /// <returns>The authenticated user's claims of the given type.</returns>
-    [HttpGet, Route("claims/{**claimType}")]
+    [HttpGet, Route("user/claims/{**claimType}")]
     public IEnumerable<string> GetClaims(string claimType)
     {
         return HttpContext.User
@@ -113,5 +121,75 @@ public abstract class ClaimsControllerBase : ControllerBase
         return claimsProvider is not null
             ? Ok(claimsProvider.FindClaims(claimType, searchText ?? "*"))
             : NotFound();
+    }
+
+    /// <summary>
+    /// Gets a list of resources available for which permissions can be granted within the application.
+    /// </summary>
+    /// <param name="policyProvider">Provides authorization policies defined within the application</param>
+    /// <param name="endpointDataSource">Source for endpoint data used to look up controller and action metadata</param>
+    /// <returns>A list of resources within the application.</returns>
+    [HttpGet, Route("resources")]
+    public async Task<IActionResult> GetResources(IAuthorizationPolicyProvider policyProvider, EndpointDataSource endpointDataSource)
+    {
+        Dictionary<string, HashSet<ResourceAccessLevel>> resourceAccessLookup = [];
+
+        foreach (Endpoint endpoint in endpointDataSource.Endpoints)
+        {
+            ControllerActionDescriptor? descriptor = endpoint.Metadata
+                .GetMetadata<ControllerActionDescriptor>();
+
+            if (descriptor is null)
+                continue;
+
+            IReadOnlyList<IAuthorizeData> authorizeData = endpoint.Metadata.GetOrderedMetadata<IAuthorizeData>() ?? [];
+            IReadOnlyList<AuthorizationPolicy> policies = endpoint.Metadata.GetOrderedMetadata<AuthorizationPolicy>() ?? [];
+            IReadOnlyList<IAuthorizationRequirementData> requirementData = endpoint.Metadata.GetOrderedMetadata<IAuthorizationRequirementData>() ?? [];
+            AuthorizationPolicy? policy = await AuthorizationPolicy.CombineAsync(policyProvider, authorizeData, policies);
+
+            bool hasControllerAccessRequirement = requirementData
+                .SelectMany(datum => datum.GetRequirements())
+                .Concat(policy?.Requirements ?? [])
+                .Any(requirement => requirement is ControllerAccessRequirement);
+
+            if (!hasControllerAccessRequirement)
+                continue;
+
+            ResourceAccessAttribute? accessAttribute = endpoint.Metadata
+                .GetMetadata<ResourceAccessAttribute>();
+
+            string resourceName = accessAttribute.GetResourceName(descriptor);
+            IEnumerable<ResourceAccessLevel> accessLevels = ToAccessLevels(endpoint, accessAttribute);
+            HashSet<ResourceAccessLevel> access = resourceAccessLookup.GetOrAdd(resourceName, _ => []);
+            access.UnionWith(accessLevels);
+        }
+
+        var resources = resourceAccessLookup
+            .OrderBy(kvp => kvp.Key)
+            .Select(kvp => new
+            {
+                Type = "Controller",
+                Name = kvp.Key,
+                AccessLevels = kvp.Value
+                    .OrderBy(level => level)
+                    .Select(level => $"{level}")
+            });
+
+        return Ok(resources);
+
+        static IEnumerable<ResourceAccessLevel> ToAccessLevels(Endpoint endpoint, ResourceAccessAttribute? accessAttribute)
+        {
+            if (accessAttribute is not null)
+                return accessAttribute.Access;
+
+            HttpMethodMetadata? httpMethodMetadata = endpoint.Metadata
+                .GetMetadata<HttpMethodMetadata>();
+
+            IReadOnlyList<string> httpMethods = httpMethodMetadata?.HttpMethods
+                ?? [HttpMethods.Get, HttpMethods.Post];
+
+            return httpMethods
+                .SelectMany(accessAttribute.GetAccessLevels);
+        }
     }
 }

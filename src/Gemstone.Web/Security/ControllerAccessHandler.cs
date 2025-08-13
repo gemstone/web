@@ -133,13 +133,8 @@ public class ControllerAccessHandler : AuthorizationHandler<ControllerAccessRequ
         ResourceAccessAttribute? accessAttribute = wrapper.Endpoint.Metadata
             .GetMetadata<ResourceAccessAttribute>();
 
-        string resourceName =
-            accessAttribute?.Name ??
-            wrapper.Descriptor.ControllerName;
-
-        ResourceAccessLevel[] access =
-            accessAttribute?.Access ??
-            ToAccessLevels(wrapper.HttpMethod);
+        string resourceName = accessAttribute.GetResourceName(wrapper.Descriptor);
+        ResourceAccessLevel[] access = accessAttribute.GetAccessLevels(wrapper.HttpMethod);
 
         ILookup<Permission, string> accessClaims = access
             .Select(accessLevel => $"Controller {resourceName} {accessLevel}")
@@ -166,19 +161,6 @@ public class ControllerAccessHandler : AuthorizationHandler<ControllerAccessRequ
 
         if (isAllowedByRole)
             wrapper.Succeed();
-
-        static ResourceAccessLevel[] ToAccessLevels(string httpMethod)
-        {
-            bool isReadOnly =
-                HttpMethods.IsGet(httpMethod) ||
-                HttpMethods.IsHead(httpMethod) ||
-                HttpMethods.IsOptions(httpMethod) ||
-                HttpMethods.IsTrace(httpMethod);
-
-            return isReadOnly
-                ? [ResourceAccessLevel.Admin, ResourceAccessLevel.Edit, ResourceAccessLevel.View]
-                : [ResourceAccessLevel.Admin, ResourceAccessLevel.Edit];
-        }
     }
 
     private AuthorizationFailureReason ToFailureReason(string claim)
