@@ -24,6 +24,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Gemstone.Collections.CollectionExtensions;
 using Gemstone.Security.AccessControl;
@@ -81,9 +82,14 @@ public abstract class AuthorizationInfoControllerBase : ControllerBase
         IAuthenticationProvider? claimsProvider = serviceProvider
             .GetKeyedService<IAuthenticationProvider>(providerIdentity);
 
-        return claimsProvider is not null
-            ? Ok(claimsProvider.GetClaimTypes())
-            : NotFound();
+        if (claimsProvider is null)
+            return NotFound();
+
+        var claimTypes = claimsProvider
+            .GetClaimTypes()
+            .Select(type => new { Type = type, Alias = GetClaimTypeAlias(type) });
+
+        return Ok(claimTypes);
     }
 
     /// <summary>
@@ -192,4 +198,68 @@ public abstract class AuthorizationInfoControllerBase : ControllerBase
                 .SelectMany(accessAttribute.GetAccessLevels);
         }
     }
+
+    private static string GetClaimTypeAlias(string claimType)
+    {
+        return ClaimTypeAliases.TryGetValue(claimType, out string? alias)
+            ? alias : claimType;
+    }
+
+    private static Dictionary<string, string> ClaimTypeAliases { get; } = new()
+    {
+        { ClaimTypes.Actor, nameof(ClaimTypes.Actor) },
+        { ClaimTypes.Anonymous, nameof(ClaimTypes.Anonymous) },
+        { ClaimTypes.Authentication, nameof(ClaimTypes.Authentication) },
+        { ClaimTypes.AuthenticationInstant, nameof(ClaimTypes.AuthenticationInstant) },
+        { ClaimTypes.AuthenticationMethod, nameof(ClaimTypes.AuthenticationMethod) },
+        { ClaimTypes.AuthorizationDecision, nameof(ClaimTypes.AuthorizationDecision) },
+        { ClaimTypes.CookiePath, nameof(ClaimTypes.CookiePath) },
+        { ClaimTypes.Country, nameof(ClaimTypes.Country) },
+        { ClaimTypes.DateOfBirth, nameof(ClaimTypes.DateOfBirth) },
+        { ClaimTypes.DenyOnlyPrimaryGroupSid, nameof(ClaimTypes.DenyOnlyPrimaryGroupSid) },
+        { ClaimTypes.DenyOnlyPrimarySid, nameof(ClaimTypes.DenyOnlyPrimarySid) },
+        { ClaimTypes.DenyOnlySid, nameof(ClaimTypes.DenyOnlySid) },
+        { ClaimTypes.DenyOnlyWindowsDeviceGroup, nameof(ClaimTypes.DenyOnlyWindowsDeviceGroup) },
+        { ClaimTypes.Dns, nameof(ClaimTypes.Dns) },
+        { ClaimTypes.Dsa, nameof(ClaimTypes.Dsa) },
+        { ClaimTypes.Email, nameof(ClaimTypes.Email) },
+        { ClaimTypes.Expiration, nameof(ClaimTypes.Expiration) },
+        { ClaimTypes.Expired, nameof(ClaimTypes.Expired) },
+        { ClaimTypes.Gender, nameof(ClaimTypes.Gender) },
+        { ClaimTypes.GivenName, nameof(ClaimTypes.GivenName) },
+        { ClaimTypes.GroupSid, nameof(ClaimTypes.GroupSid) },
+        { ClaimTypes.Hash, nameof(ClaimTypes.Hash) },
+        { ClaimTypes.HomePhone, nameof(ClaimTypes.HomePhone) },
+        { ClaimTypes.IsPersistent, nameof(ClaimTypes.IsPersistent) },
+        { ClaimTypes.Locality, nameof(ClaimTypes.Locality) },
+        { ClaimTypes.MobilePhone, nameof(ClaimTypes.MobilePhone) },
+        { ClaimTypes.Name, nameof(ClaimTypes.Name) },
+        { ClaimTypes.NameIdentifier, nameof(ClaimTypes.NameIdentifier) },
+        { ClaimTypes.OtherPhone, nameof(ClaimTypes.OtherPhone) },
+        { ClaimTypes.PostalCode, nameof(ClaimTypes.PostalCode) },
+        { ClaimTypes.PrimaryGroupSid, nameof(ClaimTypes.PrimaryGroupSid) },
+        { ClaimTypes.PrimarySid, nameof(ClaimTypes.PrimarySid) },
+        { ClaimTypes.Role, nameof(ClaimTypes.Role) },
+        { ClaimTypes.Rsa, nameof(ClaimTypes.Rsa) },
+        { ClaimTypes.SerialNumber, nameof(ClaimTypes.SerialNumber) },
+        { ClaimTypes.Sid, nameof(ClaimTypes.Sid) },
+        { ClaimTypes.Spn, nameof(ClaimTypes.Spn) },
+        { ClaimTypes.StateOrProvince, nameof(ClaimTypes.StateOrProvince) },
+        { ClaimTypes.StreetAddress, nameof(ClaimTypes.StreetAddress) },
+        { ClaimTypes.Surname, nameof(ClaimTypes.Surname) },
+        { ClaimTypes.System, nameof(ClaimTypes.System) },
+        { ClaimTypes.Thumbprint, nameof(ClaimTypes.Thumbprint) },
+        { ClaimTypes.Upn, nameof(ClaimTypes.Upn) },
+        { ClaimTypes.Uri, nameof(ClaimTypes.Uri) },
+        { ClaimTypes.UserData, nameof(ClaimTypes.UserData) },
+        { ClaimTypes.Version, nameof(ClaimTypes.Version) },
+        { ClaimTypes.Webpage, nameof(ClaimTypes.Webpage) },
+        { ClaimTypes.WindowsAccountName, nameof(ClaimTypes.WindowsAccountName) },
+        { ClaimTypes.WindowsDeviceClaim, nameof(ClaimTypes.WindowsDeviceClaim) },
+        { ClaimTypes.WindowsDeviceGroup, nameof(ClaimTypes.WindowsDeviceGroup) },
+        { ClaimTypes.WindowsFqbnVersion, nameof(ClaimTypes.WindowsFqbnVersion) },
+        { ClaimTypes.WindowsSubAuthority, nameof(ClaimTypes.WindowsSubAuthority) },
+        { ClaimTypes.WindowsUserClaim, nameof(ClaimTypes.WindowsUserClaim) },
+        { ClaimTypes.X500DistinguishedName, nameof(ClaimTypes.X500DistinguishedName) }
+    };
 }
