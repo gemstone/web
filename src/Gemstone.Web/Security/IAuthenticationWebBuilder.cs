@@ -212,8 +212,8 @@ public static class AuthenticationWebBuilderExtensions
             {
                 options.SessionStore = sessionStore;
 
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(15);
-                options.SlidingExpiration = true;
+                options.ExpireTimeSpan = TimeSpan.FromHours(24);
+                options.SlidingExpiration = false;
                 options.LoginPath = "/Login";
                 options.LogoutPath = "/asi/logout";
                 options.ReturnUrlParameter = "redir";

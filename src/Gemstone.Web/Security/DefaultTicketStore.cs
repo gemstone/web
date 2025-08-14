@@ -27,16 +27,30 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
 
 namespace Gemstone.Web.Security;
+
+/// <summary>
+/// Options to configure the memory cache used by the authentication ticket store.
+/// </summary>
+public class SessionCacheOptions
+{
+    /// <summary>
+    /// Gets or sets the amount of time a ticket should
+    /// remain valid since the last time it was accessed.
+    /// </summary>
+    public TimeSpan SlidingExpiration { get; set; } = TimeSpan.FromMinutes(15);
+}
 
 /// <summary>
 /// Represents an in-memory storage mechanism for authentication tickets.
 /// </summary>
 /// <param name="memoryCache">The cache in which tickets will be stored</param>
-public class DefaultTicketStore(IMemoryCache memoryCache) : ITicketStore
+public class DefaultTicketStore(IMemoryCache memoryCache, IOptionsMonitor<SessionCacheOptions> optionsMonitor) : ITicketStore
 {
     private IMemoryCache MemoryCache { get; } = memoryCache;
+    private SessionCacheOptions Options { get; } = optionsMonitor.CurrentValue;
 
     /// <inheritdoc/>
     public Task<string> StoreAsync(AuthenticationTicket ticket)
@@ -72,12 +86,10 @@ public class DefaultTicketStore(IMemoryCache memoryCache) : ITicketStore
     private void UpdateEntry(string key, AuthenticationTicket ticket)
     {
         DateTimeOffset? expiration = ticket.Properties.ExpiresUtc;
-        MemoryCacheEntryOptions options = new();
+        MemoryCacheEntryOptions options = new() { SlidingExpiration = Options.SlidingExpiration };
 
         if (expiration is not null)
             options.AbsoluteExpiration = ticket.Properties.ExpiresUtc;
-        else
-            options.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(24);
 
         MemoryCache
             .CreateEntry(key)
