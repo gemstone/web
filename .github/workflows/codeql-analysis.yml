@@ -59,12 +59,16 @@ jobs:
           build-mode: manual
           # queries: security-and-quality   # optional
 
-      - name: Restore
+      - name: Restore (web)
         run: dotnet restore ./src/Gemstone.Web/Gemstone.Web.csproj
+
+      - name: Restore (web.razor)
         run: dotnet restore ./src/Gemstone.Web.Razor/Gemstone.Web.Razor.csproj
 
-      - name: Build
+      - name: Build (web)
         run: dotnet build -c Release ./src/Gemstone.Web/Gemstone.Web.csproj --no-restore
+
+      - name: Build (web.razor)
         run: dotnet build -c Release ./src/Gemstone.Web.Razor/Gemstone.web.Razor.csproj --no-restore
 
       - name: Perform CodeQL Analysis
