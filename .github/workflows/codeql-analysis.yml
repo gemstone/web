@@ -49,8 +49,6 @@ jobs:
           ls -la
           echo "--- src ---"
           ls -la src || true
-          echo "--- src/Gemstone ---"
-          ls -la src/Gemstone || true
 
       - name: Initialize CodeQL (manual build)
         uses: github/codeql-action/init@v3
