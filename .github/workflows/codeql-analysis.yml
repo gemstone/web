@@ -67,7 +67,7 @@ jobs:
         run: dotnet build -c Release ./src/Gemstone.Web/Gemstone.Web.csproj --no-restore
 
       - name: Build (web.razor)
-        run: dotnet build -c Release ./src/Gemstone.Web.Razor/Gemstone.web.Razor.csproj --no-restore
+        run: dotnet build -c Release ./src/Gemstone.Web.Razor/Gemstone.Web.Razor.csproj --no-restore
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
