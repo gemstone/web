@@ -347,7 +347,7 @@
         </markup>
       </returns>
     </member>
-    <member name="M:Gemstone.Web.APIController.IReadOnlyModelController`1.GetPageInfo(Gemstone.Web.APIController.SearchPost{`0},System.Threading.CancellationToken)">
+    <member name="M:Gemstone.Web.APIController.IReadOnlyModelController`1.GetPageInfo(Gemstone.Web.APIController.SearchPost{`0},System.String,System.Threading.CancellationToken)">
       <summary>
             Endpoint to get pagination information.
             </summary>
@@ -356,7 +356,16 @@
           <include item="SMCMissingParamTag">
             <parameter>param</parameter>
             <parameter>postData</parameter>
-            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.GetPageInfo(Gemstone.Web.APIController.SearchPost{`0},System.Threading.CancellationToken)</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.GetPageInfo(Gemstone.Web.APIController.SearchPost{`0},System.String,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <param name="parentID">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>parentID</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.GetPageInfo(Gemstone.Web.APIController.SearchPost{`0},System.String,System.Threading.CancellationToken)</parameter>
           </include>
         </markup>
       </param>
@@ -365,7 +374,7 @@
           <include item="SMCMissingParamTag">
             <parameter>param</parameter>
             <parameter>cancellationToken</parameter>
-            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.GetPageInfo(Gemstone.Web.APIController.SearchPost{`0},System.Threading.CancellationToken)</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.GetPageInfo(Gemstone.Web.APIController.SearchPost{`0},System.String,System.Threading.CancellationToken)</parameter>
           </include>
         </markup>
       </param>
@@ -373,21 +382,30 @@
         <markup>
           <include item="SMCMissingTag">
             <parameter>returns</parameter>
-            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.GetPageInfo(Gemstone.Web.APIController.SearchPost{`0},System.Threading.CancellationToken)</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.GetPageInfo(Gemstone.Web.APIController.SearchPost{`0},System.String,System.Threading.CancellationToken)</parameter>
           </include>
         </markup>
       </returns>
     </member>
-    <member name="M:Gemstone.Web.APIController.IReadOnlyModelController`1.GetPageInfo(System.Threading.CancellationToken)">
+    <member name="M:Gemstone.Web.APIController.IReadOnlyModelController`1.GetPageInfo(System.String,System.Threading.CancellationToken)">
       <summary>
             Endpoint to get pagination information.
             </summary>
+      <param name="parentID">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>parentID</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.GetPageInfo(System.String,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
       <param name="cancellationToken">
         <markup>
           <include item="SMCMissingParamTag">
             <parameter>param</parameter>
             <parameter>cancellationToken</parameter>
-            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.GetPageInfo(System.Threading.CancellationToken)</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.GetPageInfo(System.String,System.Threading.CancellationToken)</parameter>
           </include>
         </markup>
       </param>
@@ -395,12 +413,12 @@
         <markup>
           <include item="SMCMissingTag">
             <parameter>returns</parameter>
-            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.GetPageInfo(System.Threading.CancellationToken)</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.GetPageInfo(System.String,System.Threading.CancellationToken)</parameter>
           </include>
         </markup>
       </returns>
     </member>
-    <member name="M:Gemstone.Web.APIController.IReadOnlyModelController`1.Search(Gemstone.Web.APIController.SearchPost{`0},System.Int32,System.Threading.CancellationToken)">
+    <member name="M:Gemstone.Web.APIController.IReadOnlyModelController`1.Search(Gemstone.Web.APIController.SearchPost{`0},System.Int32,System.String,System.Threading.CancellationToken)">
       <summary>
             Endpoint to search models.
             </summary>
@@ -409,7 +427,7 @@
           <include item="SMCMissingParamTag">
             <parameter>param</parameter>
             <parameter>postData</parameter>
-            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.Search(Gemstone.Web.APIController.SearchPost{`0},System.Int32,System.Threading.CancellationToken)</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.Search(Gemstone.Web.APIController.SearchPost{`0},System.Int32,System.String,System.Threading.CancellationToken)</parameter>
           </include>
         </markup>
       </param>
@@ -418,7 +436,16 @@
           <include item="SMCMissingParamTag">
             <parameter>param</parameter>
             <parameter>page</parameter>
-            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.Search(Gemstone.Web.APIController.SearchPost{`0},System.Int32,System.Threading.CancellationToken)</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.Search(Gemstone.Web.APIController.SearchPost{`0},System.Int32,System.String,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </param>
+      <param name="parentID">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>parentID</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.Search(Gemstone.Web.APIController.SearchPost{`0},System.Int32,System.String,System.Threading.CancellationToken)</parameter>
           </include>
         </markup>
       </param>
@@ -427,7 +454,7 @@
           <include item="SMCMissingParamTag">
             <parameter>param</parameter>
             <parameter>cancellationToken</parameter>
-            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.Search(Gemstone.Web.APIController.SearchPost{`0},System.Int32,System.Threading.CancellationToken)</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.Search(Gemstone.Web.APIController.SearchPost{`0},System.Int32,System.String,System.Threading.CancellationToken)</parameter>
           </include>
         </markup>
       </param>
@@ -435,7 +462,7 @@
         <markup>
           <include item="SMCMissingTag">
             <parameter>returns</parameter>
-            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.Search(Gemstone.Web.APIController.SearchPost{`0},System.Int32,System.Threading.CancellationToken)</parameter>
+            <parameter>M:Gemstone.Web.APIController.IReadOnlyModelController`1.Search(Gemstone.Web.APIController.SearchPost{`0},System.Int32,System.String,System.Threading.CancellationToken)</parameter>
           </include>
         </markup>
       </returns>
@@ -572,6 +599,20 @@
       <summary>
             Creates a new <see cref="T:Gemstone.Web.APIController.ReadOnlyModelController`1" /></summary>
     </member>
+    <member name="M:Gemstone.Web.APIController.ReadOnlyModelController`1.Close(System.String)">
+      <summary>
+            Closes the query operation associated with the provided token.
+            </summary>
+      <param name="token">Token associated with the query operation.</param>
+      <returns>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>returns</parameter>
+            <parameter>M:Gemstone.Web.APIController.ReadOnlyModelController`1.Close(System.String)</parameter>
+          </include>
+        </markup>
+      </returns>
+    </member>
     <member name="M:Gemstone.Web.APIController.ReadOnlyModelController`1.CreateConnection">
       <summary>
             Create the <see cref="T:Gemstone.Data.AdoDataConnection" /> for the controller.
@@ -596,7 +637,7 @@
       <param name="ascending">Flag when <c>true</c> will sort ascending; otherwise, descending.</param>
       <param name="page">The 0 based page number to be returned.</param>
       <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
-      <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult" /> containing <see cref="T:System.Collections.Generic.IEnumerable`1" /> or <see cref="T:System.Exception" />.</returns>
+      <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult" /> containing <see cref="T:T[]" /> or <see cref="T:System.Exception" />.</returns>
     </member>
     <member name="M:Gemstone.Web.APIController.ReadOnlyModelController`1.Get(System.String,System.Int32,System.Threading.CancellationToken)">
       <summary>
@@ -605,7 +646,7 @@
       <param name="parentID">Parent ID to be used if table has set parent keys.</param>
       <param name="page">The 0 based page number to be returned.</param>
       <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
-      <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult" /> containing <see cref="T:System.Collections.Generic.IEnumerable`1" /> or <see cref="T:System.Exception" />.</returns>
+      <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult" /> containing <see cref="T:T[]" /> or <see cref="T:System.Exception" />.</returns>
     </member>
     <member name="M:Gemstone.Web.APIController.ReadOnlyModelController`1.Get(System.String,System.String,System.Boolean,System.Int32,System.Threading.CancellationToken)">
       <summary>
@@ -616,7 +657,7 @@
       <param name="page">The 0 based page number to be returned.</param>
       <param name="parentID">Parent ID to be used if table has set parent keys.</param>
       <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
-      <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult" /> containing <see cref="T:System.Collections.Generic.IEnumerable`1" /> or <see cref="T:System.Exception" />.</returns>
+      <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult" /> containing <see cref="T:T[]" /> or <see cref="T:System.Exception" />.</returns>
     </member>
     <member name="M:Gemstone.Web.APIController.ReadOnlyModelController`1.GetAuthCheck">
       <summary>
@@ -624,6 +665,14 @@
             </summary>
       <returns>
         <c>true</c> if User is authorized for GET requests; otherwise, <c>false</c>.</returns>
+    </member>
+    <member name="M:Gemstone.Web.APIController.ReadOnlyModelController`1.GetMaxValue(System.String,System.Threading.CancellationToken)">
+      <summary>
+            Gets max value for the specified field.
+            </summary>
+      <param name="fieldName">Field to find max value for</param>
+      <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+      <returns>An <see cref="T:System.Int32" />.</returns>
     </member>
     <member name="M:Gemstone.Web.APIController.ReadOnlyModelController`1.GetOne(System.String,System.Threading.CancellationToken)">
       <summary>
@@ -633,25 +682,58 @@
       <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
       <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult" /> containing a <see cref="!:T" /> or <see cref="T:System.Exception" />.</returns>
     </member>
-    <member name="M:Gemstone.Web.APIController.ReadOnlyModelController`1.GetPageInfo(Gemstone.Web.APIController.SearchPost{`0},System.Threading.CancellationToken)">
+    <member name="M:Gemstone.Web.APIController.ReadOnlyModelController`1.GetPageInfo(Gemstone.Web.APIController.SearchPost{`0},System.String,System.Threading.CancellationToken)">
       <summary>
             Gets the pagination information for the provided search criteria.
             </summary>
       <param name="postData">Search criteria.</param>
+      <param name="parentID">Parent ID to be used if table has set parent keys.</param>
       <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
       <returns>A <see cref="T:Gemstone.Web.APIController.PageInfo" /> object containing the pagination information or <see cref="T:System.Exception" />.</returns>
     </member>
-    <member name="M:Gemstone.Web.APIController.ReadOnlyModelController`1.GetPageInfo(System.Threading.CancellationToken)">
+    <member name="M:Gemstone.Web.APIController.ReadOnlyModelController`1.GetPageInfo(System.String,System.Threading.CancellationToken)">
       <summary>
             Gets pagination information.
             </summary>
       <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+      <param name="parentID">Parent ID to be used if table has set parent keys.</param>
       <returns>A <see cref="T:Gemstone.Web.APIController.PageInfo" /> object containing the pagination information or <see cref="T:System.Exception" />.</returns>
     </member>
     <member name="P:Gemstone.Web.APIController.ReadOnlyModelController`1.GetRoles">
       <summary>
             Gets the roles required for GET requests.
             </summary>
+    </member>
+    <member name="M:Gemstone.Web.APIController.ReadOnlyModelController`1.New(System.Threading.CancellationToken)">
+      <summary>
+            Gets a new record.
+            </summary>
+      <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+      <returns>A <see cref="!:T" /> object or <see cref="T:System.Exception" />.</returns>
+    </member>
+    <member name="M:Gemstone.Web.APIController.ReadOnlyModelController`1.Next(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+      <summary>
+            Gets the next set of records from the query operation associated with the provided token.
+            </summary>
+      <param name="token">Token associated with the query operation.</param>
+      <param name="count">Maximum number of records to return. Defaults 1 record if not provided.</param>
+      <param name="cancellationToken">Cancellation token to cancel the operation.</param>
+      <returns>
+            An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult" /> containing the next set of records as <see cref="T:System.Collections.Generic.List`1" />.
+            </returns>
+      <remarks>
+            When end of enumeration is reached, an empty result list is returned.
+            </remarks>
+    </member>
+    <member name="M:Gemstone.Web.APIController.ReadOnlyModelController`1.Open(System.String,System.Object[],System.Nullable{System.Double},System.Threading.CancellationToken)">
+      <summary>
+            Opens a connection to the database and establishes a query operation, returning a token to be used for subsequent data requests.
+            </summary>
+      <param name="filterExpression">Filter expression to be used for the query.</param>
+      <param name="parameters">Parameters to be used for the query.</param>
+      <param name="expiration">Expiration time for the query data, in minutes, if not accessed. Defaults to 1 minute if not provided.</param>
+      <param name="cancellationToken">Cancellation token to cancel the operation.</param>
+      <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult" /> containing a token to be used for subsequent requests.</returns>
     </member>
     <member name="P:Gemstone.Web.APIController.ReadOnlyModelController`1.ParentKey">
       <summary>
@@ -663,14 +745,15 @@
             Gets or sets the primary key field for the model.
             </summary>
     </member>
-    <member name="M:Gemstone.Web.APIController.ReadOnlyModelController`1.Search(Gemstone.Web.APIController.SearchPost{`0},System.Int32,System.Threading.CancellationToken)">
+    <member name="M:Gemstone.Web.APIController.ReadOnlyModelController`1.Search(Gemstone.Web.APIController.SearchPost{`0},System.Int32,System.String,System.Threading.CancellationToken)">
       <summary>
             Gets all records from associated table matching the provided search criteria.
             </summary>
       <param name="postData">Search criteria.</param>
       <param name="page">the 0 based page number to be returned.</param>
+      <param name="parentID">Parent ID to be used if table has set parent keys.</param>
       <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
-      <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult" /> containing <see cref="T:System.Collections.Generic.IEnumerable`1" /> or <see cref="T:System.Exception" />.</returns>
+      <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult" /> containing <see cref="T:T[]" /> or <see cref="T:System.Exception" />.</returns>
     </member>
     <member name="T:Gemstone.Web.APIController.SearchPost`1">
       <summary>
