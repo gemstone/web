@@ -48,7 +48,7 @@ public class AuthenticationRuntimeMiddleware(RequestDelegate next, IAuthenticati
     public async Task Invoke(HttpContext httpContext)
     {
         ClaimsPrincipal user = httpContext.User;
-        ClaimsIdentity newIdentity = new(user.Identity, user.Claims);
+        ClaimsIdentity newIdentity = new(user.Identity);
         IEnumerable<Claim> assignedClaims = Runtime.GetAssignedClaims(ProviderIdentity, user);
         newIdentity.AddClaims(assignedClaims);
         httpContext.User = new(newIdentity);
