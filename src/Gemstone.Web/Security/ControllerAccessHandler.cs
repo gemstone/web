@@ -21,7 +21,6 @@
 //
 //******************************************************************************************************
 
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Gemstone.Security.AccessControl;
@@ -128,41 +127,6 @@ public class ControllerAccessHandler : AuthorizationHandler<ControllerAccessRequ
         }
     }
 
-    private void HandleResourceAccessPermission(ContextWrapper wrapper)
-    {
-        ResourceAccessAttribute? accessAttribute = wrapper.Endpoint.Metadata
-            .GetMetadata<ResourceAccessAttribute>();
-
-        string resourceName = accessAttribute.GetResourceName(wrapper.Descriptor);
-        ResourceAccessLevel[] access = accessAttribute.GetAccessLevels(wrapper.HttpMethod);
-
-        ILookup<Permission, string> accessClaims = access
-            .Select(accessLevel => $"Controller {resourceName} {accessLevel}")
-            .ToLookup(claimValue => GetResourceAccessPermission(wrapper.User, claimValue));
-
-        bool isDenied = accessClaims[Permission.Deny]
-            .Select(ToFailureReason)
-            .Select(wrapper.Fail)
-            .DefaultIfEmpty(false)
-            .All(b => b);
-
-        if (isDenied)
-            return;
-
-        if (accessClaims[Permission.Allow].Any())
-        {
-            wrapper.Succeed();
-            return;
-        }
-
-        bool isAllowedByRole = access
-            .Select(accessLevel => accessLevel.ToString())
-            .Any(role => wrapper.User.HasClaim("Gemstone.Role", role));
-
-        if (isAllowedByRole)
-            wrapper.Succeed();
-    }
-
     private AuthorizationFailureReason ToFailureReason(string claim)
     {
         return new AuthorizationFailureReason(this, $"{claim} permission denied");
@@ -173,27 +137,30 @@ public class ControllerAccessHandler : AuthorizationHandler<ControllerAccessRequ
     #region [ Static ]
 
     // Static Methods
+
     private static Permission GetResourceActionPermission(ClaimsPrincipal user, string claimValue)
     {
-        return GetResourcePermission(user, "Gemstone.ResourceAction", claimValue);
-    }
-
-    private static Permission GetResourceAccessPermission(ClaimsPrincipal user, string claimValue)
-    {
-        return GetResourcePermission(user, "Gemstone.ResourceAccess", claimValue);
-    }
-
-    private static Permission GetResourcePermission(ClaimsPrincipal user, string claimTypePrefix, string claimValue)
-    {
-        string allowClaim = $"{claimTypePrefix}.Allow";
-        string denyClaim = $"{claimTypePrefix}.Deny";
+        string allowClaim = $"Gemstone.ResourceAction.Allow";
+        string denyClaim = $"Gemstone.ResourceAction.Deny";
 
         if (user.HasClaim(denyClaim, claimValue))
-            return Permission.Allow;
+            return Permission.Deny;
 
         return user.HasClaim(allowClaim, claimValue)
-            ? Permission.Deny
+            ? Permission.Allow
             : Permission.Neither;
+    }
+
+    private static void HandleResourceAccessPermission(ContextWrapper wrapper)
+    {
+        ResourceAccessAttribute? accessAttribute = wrapper.Endpoint.Metadata
+            .GetMetadata<ResourceAccessAttribute>();
+
+        string resourceName = accessAttribute.GetResourceName(wrapper.Descriptor);
+        ResourceAccessLevel[] access = accessAttribute.GetAccessLevels(wrapper.HttpMethod);
+
+        if (wrapper.User.HasAccessTo("Controller", resourceName, access))
+            wrapper.Succeed();
     }
 
     #endregion
