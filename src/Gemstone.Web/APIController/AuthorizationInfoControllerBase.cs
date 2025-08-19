@@ -49,7 +49,7 @@ public abstract class AuthorizationInfoControllerBase : ControllerBase
     /// </summary>
     /// <returns>All of the authenticated user's claims.</returns>
     [HttpGet, Route("user/claims")]
-    public IActionResult GetAllClaims()
+    public virtual IActionResult GetAllClaims()
     {
         var claims = HttpContext.User.Claims
             .Select(claim => new { claim.Type, claim.Value });
@@ -63,7 +63,7 @@ public abstract class AuthorizationInfoControllerBase : ControllerBase
     /// <param name="claimType">The type of the claims to be returned</param>
     /// <returns>The authenticated user's claims of the given type.</returns>
     [HttpGet, Route("user/claims/{**claimType}")]
-    public IEnumerable<string> GetClaims(string claimType)
+    public virtual IEnumerable<string> GetClaims(string claimType)
     {
         return HttpContext.User
             .FindAll(claim => claim.Type == claimType)
@@ -77,7 +77,7 @@ public abstract class AuthorizationInfoControllerBase : ControllerBase
     /// <param name="providerIdentity">Identity of the authentication provider</param>
     /// <returns>The list of claim types used by the authentication provider.</returns>
     [HttpGet, Route("provider/{providerIdentity}/claimTypes")]
-    public IActionResult GetClaimTypes(IServiceProvider serviceProvider, string providerIdentity)
+    public virtual IActionResult GetClaimTypes(IServiceProvider serviceProvider, string providerIdentity)
     {
         IAuthenticationProvider? claimsProvider = serviceProvider
             .GetKeyedService<IAuthenticationProvider>(providerIdentity);
@@ -100,7 +100,7 @@ public abstract class AuthorizationInfoControllerBase : ControllerBase
     /// <param name="searchText">Text used to narrow the list of results</param>
     /// <returns>A list of users from the authentication provider.</returns>
     [HttpGet, Route("provider/{providerIdentity}/users")]
-    public IActionResult FindUsers(IServiceProvider serviceProvider, string providerIdentity, string? searchText)
+    public virtual IActionResult FindUsers(IServiceProvider serviceProvider, string providerIdentity, string? searchText)
     {
         IAuthenticationProvider? claimsProvider = serviceProvider
             .GetKeyedService<IAuthenticationProvider>(providerIdentity);
@@ -119,7 +119,7 @@ public abstract class AuthorizationInfoControllerBase : ControllerBase
     /// <param name="searchText">Text used to narrow the list of results</param>
     /// <returns>A list of claims from the authentication provider.</returns>
     [HttpGet, Route("provider/{providerIdentity}/claims/{**claimType}")]
-    public IActionResult FindClaims(IServiceProvider serviceProvider, string providerIdentity, string claimType, string? searchText)
+    public virtual IActionResult FindClaims(IServiceProvider serviceProvider, string providerIdentity, string claimType, string? searchText)
     {
         IAuthenticationProvider? claimsProvider = serviceProvider
             .GetKeyedService<IAuthenticationProvider>(providerIdentity);
@@ -136,7 +136,7 @@ public abstract class AuthorizationInfoControllerBase : ControllerBase
     /// <param name="endpointDataSource">Source for endpoint data used to look up controller and action metadata</param>
     /// <returns>A list of resources within the application.</returns>
     [HttpGet, Route("resources")]
-    public async Task<IActionResult> GetResources(IAuthorizationPolicyProvider policyProvider, EndpointDataSource endpointDataSource)
+    public virtual async Task<IActionResult> GetResources(IAuthorizationPolicyProvider policyProvider, EndpointDataSource endpointDataSource)
     {
         Dictionary<string, HashSet<ResourceAccessLevel>> resourceAccessLookup = [];
 
@@ -197,6 +197,38 @@ public abstract class AuthorizationInfoControllerBase : ControllerBase
             return httpMethods
                 .SelectMany(accessAttribute.GetAccessLevels);
         }
+    }
+
+    /// <summary>
+    /// Checks whether the user has permission to access each of the resources listed in the access list.
+    /// </summary>
+    /// <param name="accessList">List of resources the user is attempting to access</param>
+    /// <returns>List of boolean values indicating whether the user has access to each requested resource.</returns>
+    [HttpPost, Route("access")]
+    public virtual IEnumerable<bool> CheckAccess([FromBody] ResourceAccessEntry[] accessList)
+    {
+        return accessList.Select(entry => User.HasAccessTo(entry.ResourceType, entry.ResourceName, entry.Access));
+    }
+
+    /// <summary>
+    /// Represents an entry in a resource access list.
+    /// </summary>
+    public class ResourceAccessEntry
+    {
+        /// <summary>
+        /// Gets or sets the type of the resource.
+        /// </summary>
+        public string ResourceType { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Gets or sets the name of the resource.
+        /// </summary>
+        public string ResourceName { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Gets or sets the level of access needed.
+        /// </summary>
+        public ResourceAccessLevel[] Access { get; set; } = [];
     }
 
     private static string GetClaimTypeAlias(string claimType)
