@@ -20,8 +20,11 @@
 //       Generated original version of source code.
 //
 //******************************************************************************************************
+// ReSharper disable StaticMemberInGenericType
 
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -103,7 +106,7 @@ namespace Gemstone.Web.APIController
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             await tableOperations.AddNewRecordAsync(record, cancellationToken);
-            T? foundRecord = await tableOperations.QueryRecordAsync(tableOperations.GetNonPrimaryFieldRecordRestriction(record), cancellationToken).ConfigureAwait(false);
+            T? foundRecord = await tableOperations.QueryRecordAsync(tableOperations.GetNonPrimaryFieldRecordRestriction(record, DefaultExcludedFields), cancellationToken).ConfigureAwait(false);
 
             return Ok(foundRecord ?? record);
         }
@@ -174,6 +177,22 @@ namespace Gemstone.Web.APIController
         {
             return PatchRoles == string.Empty || User.IsInRole(PatchRoles);
         }
+
+        #endregion
+
+        #region [ Static ]
+
+        /// <summary>
+        /// Default set of fields to exclude from non-primary field record restrictions.
+        /// </summary>
+        public static readonly ReadOnlySet<string> DefaultExcludedFields = new(new HashSet<string>(
+        [
+            "CreatedOn",
+            "CreatedBy",
+            "UpdatedOn",
+            "UpdatedBy"
+        ],
+        StringComparer.OrdinalIgnoreCase));
 
         #endregion
     }
