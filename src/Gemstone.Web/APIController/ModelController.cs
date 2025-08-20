@@ -185,14 +185,13 @@ namespace Gemstone.Web.APIController
         /// <summary>
         /// Default set of fields to exclude from non-primary field record restrictions.
         /// </summary>
-        public static readonly ReadOnlySet<string> DefaultExcludedFields = new(new HashSet<string>(
+        public static readonly string[] DefaultExcludedFields = 
         [
             "CreatedOn",
             "CreatedBy",
             "UpdatedOn",
             "UpdatedBy"
-        ],
-        StringComparer.OrdinalIgnoreCase));
+        ];
 
         #endregion
     }
