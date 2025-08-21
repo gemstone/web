@@ -24,6 +24,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Gemstone.Collections.CollectionExtensions;
 using Gemstone.Security.AccessControl;
@@ -81,9 +82,14 @@ public abstract class AuthorizationInfoControllerBase : ControllerBase
         IAuthenticationProvider? claimsProvider = serviceProvider
             .GetKeyedService<IAuthenticationProvider>(providerIdentity);
 
-        return claimsProvider is not null
-            ? Ok(claimsProvider.GetClaimTypes())
-            : NotFound();
+        if (claimsProvider is null)
+            return NotFound();
+
+        var claimTypes = claimsProvider
+            .GetClaimTypes()
+            .Select(type => new { Value = type.Type, Label = type.Alias, LongLabel = type.Description });
+
+        return Ok(claimTypes);
     }
 
     /// <summary>
@@ -118,9 +124,14 @@ public abstract class AuthorizationInfoControllerBase : ControllerBase
         IAuthenticationProvider? claimsProvider = serviceProvider
             .GetKeyedService<IAuthenticationProvider>(providerIdentity);
 
-        return claimsProvider is not null
-            ? Ok(claimsProvider.FindClaims(claimType, searchText ?? "*"))
-            : NotFound();
+        if (claimsProvider is null)
+            return NotFound();
+
+        var claims = claimsProvider
+            .FindClaims(claimType, searchText ?? "*")
+            .Select(claim => new { Label = claim?.Description, Value = claim?.Value, LongLabel = claim?.LongDescription });
+
+        return Ok(claims);
     }
 
     /// <summary>
