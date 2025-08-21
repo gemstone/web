@@ -143,7 +143,7 @@ public abstract class AuthorizationInfoControllerBase : ControllerBase
     [HttpGet, Route("resources")]
     public virtual async Task<IActionResult> GetResources(IAuthorizationPolicyProvider policyProvider, EndpointDataSource endpointDataSource)
     {
-        Dictionary<string, HashSet<ResourceAccessLevel>> resourceAccessLookup = [];
+        Dictionary<string, HashSet<ResourceAccessType>> resourceAccessLookup = [];
 
         foreach (Endpoint endpoint in endpointDataSource.Endpoints)
         {
@@ -170,9 +170,9 @@ public abstract class AuthorizationInfoControllerBase : ControllerBase
                 .GetMetadata<ResourceAccessAttribute>();
 
             string resourceName = accessAttribute.GetResourceName(descriptor);
-            IEnumerable<ResourceAccessLevel> accessLevels = ToAccessLevels(endpoint, accessAttribute);
-            HashSet<ResourceAccessLevel> access = resourceAccessLookup.GetOrAdd(resourceName, _ => []);
-            access.UnionWith(accessLevels);
+            IEnumerable<ResourceAccessType> accessTypes = ToAccessTypes(endpoint, accessAttribute);
+            HashSet<ResourceAccessType> access = resourceAccessLookup.GetOrAdd(resourceName, _ => []);
+            access.UnionWith(accessTypes);
         }
 
         var resources = resourceAccessLookup
@@ -181,26 +181,26 @@ public abstract class AuthorizationInfoControllerBase : ControllerBase
             {
                 Type = "Controller",
                 Name = kvp.Key,
-                AccessLevels = kvp.Value
-                    .OrderBy(level => level)
-                    .Select(level => $"{level}")
+                AccessTypes = kvp.Value.OrderBy(type => type)
             });
 
         return Ok(resources);
 
-        static IEnumerable<ResourceAccessLevel> ToAccessLevels(Endpoint endpoint, ResourceAccessAttribute? accessAttribute)
+        static IEnumerable<ResourceAccessType> ToAccessTypes(Endpoint endpoint, ResourceAccessAttribute? accessAttribute)
         {
             if (accessAttribute is not null)
-                return accessAttribute.Access;
+                return [accessAttribute.Access];
 
             HttpMethodMetadata? httpMethodMetadata = endpoint.Metadata
                 .GetMetadata<HttpMethodMetadata>();
 
             IReadOnlyList<string> httpMethods = httpMethodMetadata?.HttpMethods
-                ?? [HttpMethods.Get, HttpMethods.Post];
+                ?? [];
 
             return httpMethods
-                .SelectMany(accessAttribute.GetAccessLevels);
+                .Select(accessAttribute.GetAccessType)
+                .Where(type => type is not null)
+                .Select(type => type.GetValueOrDefault());
         }
     }
 
@@ -233,6 +233,6 @@ public abstract class AuthorizationInfoControllerBase : ControllerBase
         /// <summary>
         /// Gets or sets the level of access needed.
         /// </summary>
-        public ResourceAccessLevel[] Access { get; set; } = [];
+        public ResourceAccessType Access { get; set; }
     }
 }

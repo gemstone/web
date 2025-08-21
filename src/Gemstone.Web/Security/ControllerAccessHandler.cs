@@ -153,13 +153,16 @@ public class ControllerAccessHandler : AuthorizationHandler<ControllerAccessRequ
 
     private static void HandleResourceAccessPermission(ContextWrapper wrapper)
     {
-        ResourceAccessAttribute? accessAttribute = wrapper.Endpoint.Metadata
-            .GetMetadata<ResourceAccessAttribute>();
+        IResourceAccessAttribute? accessAttribute = wrapper.Endpoint.Metadata
+            .GetMetadata<IResourceAccessAttribute>();
+
+        if (accessAttribute is NoResourceAccessAttribute)
+            return;
 
         string resourceName = accessAttribute.GetResourceName(wrapper.Descriptor);
-        ResourceAccessLevel[] access = accessAttribute.GetAccessLevels(wrapper.HttpMethod);
+        ResourceAccessType? access = accessAttribute.GetAccessType(wrapper.HttpMethod);
 
-        if (wrapper.User.HasAccessTo("Controller", resourceName, access))
+        if (access.HasValue && wrapper.User.HasAccessTo("Controller", resourceName, access.GetValueOrDefault()))
             wrapper.Succeed();
     }
 
