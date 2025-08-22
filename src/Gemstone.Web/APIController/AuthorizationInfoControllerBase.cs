@@ -126,24 +126,6 @@ public abstract partial class AuthorizationInfoControllerBase : ControllerBase
     }
 
     /// <summary>
-    /// Gets a list of users that can be authorized via the authentication provider.
-    /// </summary>
-    /// <param name="serviceProvider">Provides injected dependencies</param>
-    /// <param name="providerIdentity">Identity of the authentication provider</param>
-    /// <param name="searchText">Text used to narrow the list of results</param>
-    /// <returns>A list of users from the authentication provider.</returns>
-    [HttpGet, Route("provider/{providerIdentity}/users")]
-    public virtual IActionResult FindUsers(IServiceProvider serviceProvider, string providerIdentity, string? searchText)
-    {
-        IAuthenticationProvider? claimsProvider = serviceProvider
-            .GetKeyedService<IAuthenticationProvider>(providerIdentity);
-
-        return claimsProvider is not null
-            ? Ok(claimsProvider.FindUsers(searchText ?? "*"))
-            : NotFound();
-    }
-
-    /// <summary>
     /// Gets a list of claims that can be assigned to users who authenticate with the provider.
     /// </summary>
     /// <param name="serviceProvider">Provides injected dependencies</param>
@@ -160,11 +142,18 @@ public abstract partial class AuthorizationInfoControllerBase : ControllerBase
         if (claimsProvider is null)
             return NotFound();
 
+        if (!isSupported(claimType))
+            return BadRequest($"Claim type not supported");
+
         var claims = claimsProvider
             .FindClaims(claimType, searchText ?? "*")
-            .Select(claim => new { Label = claim?.Description, Value = claim?.Value, LongLabel = claim?.LongDescription });
+            .Select(claim => new { Label = claim.Description, claim.Value, LongLabel = claim.LongDescription });
 
         return Ok(claims);
+
+        bool isSupported(string claimType) => claimsProvider
+            .GetClaimTypes()
+            .Any(type => type.Type == claimType);
     }
 
     /// <summary>
