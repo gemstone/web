@@ -24,7 +24,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Gemstone.Collections.CollectionExtensions;
 using Gemstone.Security.AccessControl;
@@ -42,8 +42,37 @@ namespace Gemstone.Web.APIController;
 /// <summary>
 /// Base class for a controller that provides information about claims to client applications.
 /// </summary>
-public abstract class AuthorizationInfoControllerBase : ControllerBase
+public abstract partial class AuthorizationInfoControllerBase : ControllerBase
 {
+    #region [ Members ]
+
+    // Nested Types
+
+    /// <summary>
+    /// Represents an entry in a resource access list.
+    /// </summary>
+    public class ResourceAccessEntry
+    {
+        /// <summary>
+        /// Gets or sets the type of the resource.
+        /// </summary>
+        public string ResourceType { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Gets or sets the name of the resource.
+        /// </summary>
+        public string ResourceName { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Gets or sets the level of access needed.
+        /// </summary>
+        public ResourceAccessType Access { get; set; }
+    }
+
+    #endregion
+
+    #region [ Methods ]
+
     /// <summary>
     /// Gets all the claims associated with the authenticated user.
     /// </summary>
@@ -75,9 +104,10 @@ public abstract class AuthorizationInfoControllerBase : ControllerBase
     /// </summary>
     /// <param name="serviceProvider">Provides injected dependencies</param>
     /// <param name="providerIdentity">Identity of the authentication provider</param>
+    /// <param name="searchText">Text used to narrow the list of results</param>
     /// <returns>The list of claim types used by the authentication provider.</returns>
     [HttpGet, Route("provider/{providerIdentity}/claimTypes")]
-    public virtual IActionResult GetClaimTypes(IServiceProvider serviceProvider, string providerIdentity)
+    public virtual IActionResult FindClaimTypes(IServiceProvider serviceProvider, string providerIdentity, string? searchText)
     {
         IAuthenticationProvider? claimsProvider = serviceProvider
             .GetKeyedService<IAuthenticationProvider>(providerIdentity);
@@ -85,8 +115,11 @@ public abstract class AuthorizationInfoControllerBase : ControllerBase
         if (claimsProvider is null)
             return NotFound();
 
+        Regex? searchPattern = ToSearchPattern(searchText);
+
         var claimTypes = claimsProvider
             .GetClaimTypes()
+            .Where(type => searchPattern is null || searchPattern.IsMatch(type.Type))
             .Select(type => new { Value = type.Type, Label = type.Alias, LongLabel = type.Description });
 
         return Ok(claimTypes);
@@ -215,24 +248,32 @@ public abstract class AuthorizationInfoControllerBase : ControllerBase
         return accessList.Select(entry => User.HasAccessTo(entry.ResourceType, entry.ResourceName, entry.Access));
     }
 
-    /// <summary>
-    /// Represents an entry in a resource access list.
-    /// </summary>
-    public class ResourceAccessEntry
+    #endregion
+
+    #region [ Static ]
+
+    // Static Methods
+
+    private static Regex? ToSearchPattern(string? searchText)
     {
-        /// <summary>
-        /// Gets or sets the type of the resource.
-        /// </summary>
-        public string ResourceType { get; set; } = string.Empty;
+        if (searchText is null)
+            return null;
 
-        /// <summary>
-        /// Gets or sets the name of the resource.
-        /// </summary>
-        public string ResourceName { get; set; } = string.Empty;
+        Regex conversionPattern = SearchTextConversionPattern();
 
-        /// <summary>
-        /// Gets or sets the level of access needed.
-        /// </summary>
-        public ResourceAccessType Access { get; set; }
+        string searchPattern = conversionPattern.Replace(searchText, match => match.Value switch
+        {
+            "*" => ".*",
+            @"\\" => @"\\",
+            string v when v.StartsWith('\\') => Regex.Escape(v[1..]),
+            string v => Regex.Escape(v)
+        });
+
+        return new(searchPattern);
     }
+
+    [GeneratedRegex(@"\\.|\*|[^\\*]+")]
+    private static partial Regex SearchTextConversionPattern();
+
+    #endregion
 }
