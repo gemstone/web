@@ -221,7 +221,6 @@ public static class AuthenticationWebBuilderExtensions
                 options.Cookie.Name = "x-gemstone-auth";
                 options.Cookie.Path = "/";
                 options.Cookie.HttpOnly = true;
-                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                 options.Cookie.IsEssential = true;
             });
 
