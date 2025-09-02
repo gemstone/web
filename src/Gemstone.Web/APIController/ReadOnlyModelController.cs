@@ -33,6 +33,7 @@ using Gemstone.Caching;
 using Gemstone.Configuration;
 using Gemstone.Data;
 using Gemstone.Data.Model;
+using Gemstone.Security.AccessControl;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Gemstone.Web.APIController
@@ -174,9 +175,6 @@ namespace Gemstone.Web.APIController
         [HttpGet, Route("Open/{filterExpression}/{parameters}/{expiration:double?}")]
         public Task<IActionResult> Open(string? filterExpression, object?[] parameters, double? expiration, CancellationToken cancellationToken)
         {
-            if (!GetAuthCheck())
-                return Task.FromResult<IActionResult>(Unauthorized());
-
             ConnectionCache cache = ConnectionCache.Create(expiration ?? 1.0D);
 
             cache.Records = cache.Table.QueryRecordsWhereAsync(filterExpression, cancellationToken, parameters).GetAsyncEnumerator(cancellationToken);
@@ -199,9 +197,6 @@ namespace Gemstone.Web.APIController
         [HttpGet, Route("Next/{token}/{count:int?}")]
         public async Task<IActionResult> Next(string token, int? count, CancellationToken cancellationToken)
         {
-            if (!GetAuthCheck())
-                return Unauthorized();
-
             if (!ConnectionCache.TryGet(token, out ConnectionCache? cache) || cache is null)
                 return NotFound();
 
@@ -228,9 +223,6 @@ namespace Gemstone.Web.APIController
         [HttpGet, Route("Close/{token}")]
         public IActionResult Close(string token)
         {
-            if (!GetAuthCheck())
-                return Unauthorized();
-
             return ConnectionCache.Close(token) ? Ok() : NotFound();
         }
 
@@ -244,9 +236,6 @@ namespace Gemstone.Web.APIController
         [HttpGet, Route("{page:min(0)}/{parentID?}")]
         public virtual async Task<IActionResult> Get(string? parentID, int page, CancellationToken cancellationToken)
         {
-            if (!GetAuthCheck())
-                return Unauthorized();
-
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             RecordFilter<T>? filter = null;
@@ -277,9 +266,6 @@ namespace Gemstone.Web.APIController
         [HttpGet, Route("{page:min(0)}/{sort}/{ascending:bool}")]
         public virtual async Task<IActionResult> Get(string sort, bool ascending, int page, CancellationToken cancellationToken)
         {
-            if (!GetAuthCheck())
-                return Unauthorized();
-
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             RecordFilter<T>? filter = null;
@@ -301,9 +287,6 @@ namespace Gemstone.Web.APIController
         [HttpGet, Route("{page:min(0)}/{parentID}/{sort}/{ascending:bool}")]
         public virtual async Task<IActionResult> Get(string parentID, string sort, bool ascending, int page, CancellationToken cancellationToken)
         {
-            if (!GetAuthCheck())
-                return Unauthorized();
-
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             RecordFilter<T> filter = new()
@@ -327,9 +310,6 @@ namespace Gemstone.Web.APIController
         [HttpGet, Route("One/{id}")]
         public virtual async Task<IActionResult> GetOne(string id, CancellationToken cancellationToken)
         {
-            if (!GetAuthCheck())
-                return Unauthorized();
-
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             T? result = await tableOperations.QueryRecordAsync(new RecordRestriction($"{PrimaryKeyField} = {{0}}", id), cancellationToken).ConfigureAwait(false);
@@ -348,11 +328,9 @@ namespace Gemstone.Web.APIController
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>An <see cref="IActionResult"/> containing <see cref="T:T[]"/> or <see cref="Exception"/>.</returns>
         [HttpPost, Route("Search/{page:min(0)}/{parentID?}")]
+        [ResourceAccess(ResourceAccessType.Read)]
         public virtual async Task<IActionResult> Search([FromBody] SearchPost<T> postData, int page, string? parentID, CancellationToken cancellationToken)
         {
-            if (!GetAuthCheck())
-                return Unauthorized();
-
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             RecordFilter<T>[] filters = postData.Searches.ToArray();
@@ -380,11 +358,9 @@ namespace Gemstone.Web.APIController
         /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
         /// <returns>A <see cref="PageInfo"/> object containing the pagination information or <see cref="Exception"/>.</returns>
         [HttpPost, Route("PageInfo/{parentID?}")]
+        [ResourceAccess(ResourceAccessType.Read)]
         public virtual async Task<IActionResult> GetPageInfo(SearchPost<T> postData, string? parentID, CancellationToken cancellationToken)
         {
-            if (!GetAuthCheck())
-                return Unauthorized();
-
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             RecordFilter<T>[] filters = postData.Searches.ToArray();
@@ -419,9 +395,6 @@ namespace Gemstone.Web.APIController
         [HttpGet, Route("PageInfo/{parentID?}")]
         public virtual async Task<IActionResult> GetPageInfo(string? parentID, CancellationToken cancellationToken)
         {
-            if (!GetAuthCheck())
-                return Unauthorized();
-
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             RecordFilter<T>[] filters = [];
@@ -454,9 +427,6 @@ namespace Gemstone.Web.APIController
         [HttpGet, Route("New")]
         public virtual async Task<IActionResult> New(CancellationToken cancellationToken)
         {
-            if (!GetAuthCheck())
-                return Unauthorized();
-
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
 
@@ -473,9 +443,6 @@ namespace Gemstone.Web.APIController
         [HttpGet, Route("Max/{fieldName}")]
         public virtual async Task<IActionResult> GetMaxValue(string fieldName, CancellationToken cancellationToken)
         {
-            if (!GetAuthCheck())
-                return Unauthorized();
-
             // Validate that the field exists on the model T using reflection
             PropertyInfo? property = typeof(T).GetProperty(fieldName);
             if (property is null)
@@ -490,15 +457,6 @@ namespace Gemstone.Web.APIController
             object? maxValue = await connection.ExecuteScalarAsync(sql, cancellationToken).ConfigureAwait(false);
 
             return Ok(maxValue ?? 0);
-        }
-
-        /// <summary>
-        /// Check if current User is authorized for GET Requests.
-        /// </summary>
-        /// <returns><c>true</c> if User is authorized for GET requests; otherwise, <c>false</c>.</returns>
-        protected virtual bool GetAuthCheck()
-        {
-            return GetRoles == string.Empty || User.IsInRole(GetRoles);
         }
 
         /// <summary>
