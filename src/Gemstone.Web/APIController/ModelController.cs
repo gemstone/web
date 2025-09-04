@@ -20,8 +20,11 @@
 //       Generated original version of source code.
 //
 //******************************************************************************************************
+// ReSharper disable StaticMemberInGenericType
 
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -41,33 +44,10 @@ namespace Gemstone.Web.APIController
         /// <summary>
         /// Creates a new <see cref="ReadOnlyModelController{T}"/>
         /// </summary>
-        public ModelController()
-        {
-            DeleteRoles = typeof(T).GetCustomAttribute<DeleteRolesAttribute>()?.Roles ?? "";
-            PostRoles = typeof(T).GetCustomAttribute<PostRolesAttribute>()?.Roles ?? "";
-            PatchRoles = typeof(T).GetCustomAttribute<PatchRolesAttribute>()?.Roles ?? "";
-        }
-
+        public ModelController() { }
+        
         #endregion
 
-        #region [ Properties ]
-
-        /// <summary>
-        /// Gets the roles required for PATCH requests.
-        /// </summary>
-        protected string PatchRoles { get; }
-
-        /// <summary>
-        /// Gets the roles required for POST requests.
-        /// </summary>
-        protected string PostRoles { get; }
-
-        /// <summary>
-        /// Gets the roles required for DELETE requests.
-        /// </summary>
-        protected string DeleteRoles { get; }
-
-        #endregion
 
         /// <summary>
         /// Updates a record from associated table.
@@ -78,9 +58,6 @@ namespace Gemstone.Web.APIController
         [HttpPatch, Route("")]
         public virtual async Task<IActionResult> Patch([FromBody] T record, CancellationToken cancellationToken)
         {
-            if (!PatchAuthCheck())
-                return Unauthorized();
-
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             await tableOperations.UpdateRecordAsync(record, cancellationToken);
@@ -97,13 +74,10 @@ namespace Gemstone.Web.APIController
         [HttpPost, Route("")]
         public virtual async Task<IActionResult> Post([FromBody]T record, CancellationToken cancellationToken)
         {
-            if (!PostAuthCheck())
-                return Unauthorized();
-
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             await tableOperations.AddNewRecordAsync(record, cancellationToken);
-            T? foundRecord = await tableOperations.QueryRecordAsync(tableOperations.GetNonPrimaryFieldRecordRestriction(record), cancellationToken).ConfigureAwait(false);
+            T? foundRecord = await tableOperations.QueryRecordAsync(tableOperations.GetNonPrimaryFieldRecordRestriction(record, DefaultExcludedFields), cancellationToken).ConfigureAwait(false);
 
             return Ok(foundRecord ?? record);
         }
@@ -117,9 +91,6 @@ namespace Gemstone.Web.APIController
         [HttpDelete, Route("")]
         public virtual async Task<IActionResult> Delete([FromBody] T record, CancellationToken cancellationToken)
         {
-            if (!DeleteAuthCheck())
-                return Unauthorized();
-
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             await tableOperations.DeleteRecordAsync(record, cancellationToken);
@@ -136,9 +107,6 @@ namespace Gemstone.Web.APIController
         [HttpDelete, Route("{id}")]
         public virtual async Task<IActionResult> Delete(string id, CancellationToken cancellationToken)
         {
-            if(!DeleteAuthCheck())
-                return Unauthorized();
-
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
             await tableOperations.DeleteRecordWhereAsync($"{PrimaryKeyField} = {{0}}", cancellationToken, id);
@@ -146,34 +114,20 @@ namespace Gemstone.Web.APIController
             return Ok(1);
         }
 
-        #region [ Methods ]
+      
+
+        #region [ Static ]
 
         /// <summary>
-        /// Check if current user is authorized for POST Requests.
+        /// Default set of fields to exclude from non-primary field record restrictions.
         /// </summary>
-        /// <returns><c>true</c> if User is authorized for POST requests; otherwise, <c>false</c>.</returns>
-        protected virtual bool PostAuthCheck()
-        {
-            return PostRoles == string.Empty || User.IsInRole(PostRoles);
-        }
-
-        /// <summary>
-        /// Check if current user is authorized for DELETE Requests.
-        /// </summary>
-        /// <returns><c>true</c> if User is authorized for DELETE requests; otherwise, <c>false</c>.</returns>
-        protected virtual bool DeleteAuthCheck()
-        {
-            return DeleteRoles == string.Empty || User.IsInRole(DeleteRoles);
-        }
-
-        /// <summary>
-        /// Check if current user is authorized for PATCH Requests.
-        /// </summary>
-        /// <returns><c>true</c> if User is authorized for PATCH requests; otherwise, <c>false</c>.</returns>
-        protected virtual bool PatchAuthCheck()
-        {
-            return PatchRoles == string.Empty || User.IsInRole(PatchRoles);
-        }
+        public static readonly string[] DefaultExcludedFields = 
+        [
+            "CreatedOn",
+            "CreatedBy",
+            "UpdatedOn",
+            "UpdatedBy"
+        ];
 
         #endregion
     }
