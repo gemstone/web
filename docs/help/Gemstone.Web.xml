@@ -17,6 +17,96 @@
         <see cref="T:Microsoft.AspNetCore.Builder.StaticFileOptions" />
       </returns>
     </member>
+    <member name="T:Gemstone.Web.APIController.AuthorizationInfoControllerBase">
+      <summary>
+            Base class for a controller that provides information about claims to client applications.
+            </summary>
+    </member>
+    <member name="M:Gemstone.Web.APIController.AuthorizationInfoControllerBase.#ctor">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>Gemstone.Web.APIController.AuthorizationInfoControllerBase</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Gemstone.Web.APIController.AuthorizationInfoControllerBase.CheckAccess(Gemstone.Web.APIController.AuthorizationInfoControllerBase.ResourceAccessEntry[])">
+      <summary>
+            Checks whether the user has permission to access each of the resources listed in the access list.
+            </summary>
+      <param name="accessList">List of resources the user is attempting to access</param>
+      <returns>List of boolean values indicating whether the user has access to each requested resource.</returns>
+    </member>
+    <member name="M:Gemstone.Web.APIController.AuthorizationInfoControllerBase.FindClaims(System.IServiceProvider,System.String,System.String,System.String)">
+      <summary>
+            Gets a list of claims that can be assigned to users who authenticate with the provider.
+            </summary>
+      <param name="serviceProvider">Provides injected dependencies</param>
+      <param name="providerIdentity">Identity of the authentication provider</param>
+      <param name="claimType">The type of claims to search for</param>
+      <param name="searchText">Text used to narrow the list of results</param>
+      <returns>A list of claims from the authentication provider.</returns>
+    </member>
+    <member name="M:Gemstone.Web.APIController.AuthorizationInfoControllerBase.FindClaimTypes(System.IServiceProvider,System.String,System.String)">
+      <summary>
+            Gets the types of claims that the authentication provider associates with its users.
+            </summary>
+      <param name="serviceProvider">Provides injected dependencies</param>
+      <param name="providerIdentity">Identity of the authentication provider</param>
+      <param name="searchText">Text used to narrow the list of results</param>
+      <returns>The list of claim types used by the authentication provider.</returns>
+    </member>
+    <member name="M:Gemstone.Web.APIController.AuthorizationInfoControllerBase.GetAllClaims">
+      <summary>
+            Gets all the claims associated with the authenticated user.
+            </summary>
+      <returns>All of the authenticated user's claims.</returns>
+    </member>
+    <member name="M:Gemstone.Web.APIController.AuthorizationInfoControllerBase.GetClaims(System.String)">
+      <summary>
+            Gets the claims of a given type associated with the authenticated user.
+            </summary>
+      <param name="claimType">The type of the claims to be returned</param>
+      <returns>The authenticated user's claims of the given type.</returns>
+    </member>
+    <member name="M:Gemstone.Web.APIController.AuthorizationInfoControllerBase.GetResources(Microsoft.AspNetCore.Authorization.IAuthorizationPolicyProvider,Microsoft.AspNetCore.Routing.EndpointDataSource)">
+      <summary>
+            Gets a list of resources available for which permissions can be granted within the application.
+            </summary>
+      <param name="policyProvider">Provides authorization policies defined within the application</param>
+      <param name="endpointDataSource">Source for endpoint data used to look up controller and action metadata</param>
+      <returns>A list of resources within the application.</returns>
+    </member>
+    <member name="T:Gemstone.Web.APIController.AuthorizationInfoControllerBase.ResourceAccessEntry">
+      <summary>
+            Represents an entry in a resource access list.
+            </summary>
+    </member>
+    <member name="M:Gemstone.Web.APIController.AuthorizationInfoControllerBase.ResourceAccessEntry.#ctor">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>Gemstone.Web.APIController.AuthorizationInfoControllerBase.ResourceAccessEntry</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="P:Gemstone.Web.APIController.AuthorizationInfoControllerBase.ResourceAccessEntry.Access">
+      <summary>
+            Gets or sets the level of access needed.
+            </summary>
+    </member>
+    <member name="P:Gemstone.Web.APIController.AuthorizationInfoControllerBase.ResourceAccessEntry.ResourceName">
+      <summary>
+            Gets or sets the name of the resource.
+            </summary>
+    </member>
+    <member name="P:Gemstone.Web.APIController.AuthorizationInfoControllerBase.ResourceAccessEntry.ResourceType">
+      <summary>
+            Gets or sets the type of the resource.
+            </summary>
+    </member>
     <member name="T:Gemstone.Web.APIController.IModelController`1">
       <summary>
             Defines an interface for a common ModelController including write operations.
@@ -485,6 +575,11 @@
       <summary>
             Creates a new <see cref="T:Gemstone.Web.APIController.ReadOnlyModelController`1" /></summary>
     </member>
+    <member name="F:Gemstone.Web.APIController.ModelController`1.DefaultExcludedFields">
+      <summary>
+            Default set of fields to exclude from non-primary field record restrictions.
+            </summary>
+    </member>
     <member name="M:Gemstone.Web.APIController.ModelController`1.Delete(System.String,System.Threading.CancellationToken)">
       <summary>
             Deletes a record from associated table by primary key.
@@ -501,18 +596,6 @@
       <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
       <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult" /> containing 1 or <see cref="T:System.Exception" />.</returns>
     </member>
-    <member name="M:Gemstone.Web.APIController.ModelController`1.DeleteAuthCheck">
-      <summary>
-            Check if current user is authorized for DELETE Requests.
-            </summary>
-      <returns>
-        <c>true</c> if User is authorized for DELETE requests; otherwise, <c>false</c>.</returns>
-    </member>
-    <member name="P:Gemstone.Web.APIController.ModelController`1.DeleteRoles">
-      <summary>
-            Gets the roles required for DELETE requests.
-            </summary>
-    </member>
     <member name="M:Gemstone.Web.APIController.ModelController`1.Patch(`0,System.Threading.CancellationToken)">
       <summary>
             Updates a record from associated table.
@@ -521,18 +604,6 @@
       <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
       <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult" /> containing the new record <see cref="!:T" /> or <see cref="T:System.Exception" />.</returns>
     </member>
-    <member name="M:Gemstone.Web.APIController.ModelController`1.PatchAuthCheck">
-      <summary>
-            Check if current user is authorized for PATCH Requests.
-            </summary>
-      <returns>
-        <c>true</c> if User is authorized for PATCH requests; otherwise, <c>false</c>.</returns>
-    </member>
-    <member name="P:Gemstone.Web.APIController.ModelController`1.PatchRoles">
-      <summary>
-            Gets the roles required for PATCH requests.
-            </summary>
-    </member>
     <member name="M:Gemstone.Web.APIController.ModelController`1.Post(`0,System.Threading.CancellationToken)">
       <summary>
             Creates new record in associated table.
@@ -540,18 +611,6 @@
       <param name="record">The record to be created.</param>
       <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
       <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult" /> containing the new <see cref="!:T" /> or <see cref="T:System.Exception" />.</returns>
-    </member>
-    <member name="M:Gemstone.Web.APIController.ModelController`1.PostAuthCheck">
-      <summary>
-            Check if current user is authorized for POST Requests.
-            </summary>
-      <returns>
-        <c>true</c> if User is authorized for POST requests; otherwise, <c>false</c>.</returns>
-    </member>
-    <member name="P:Gemstone.Web.APIController.ModelController`1.PostRoles">
-      <summary>
-            Gets the roles required for POST requests.
-            </summary>
     </member>
     <member name="T:Gemstone.Web.APIController.PageInfo">
       <summary>
@@ -658,13 +717,6 @@
       <param name="parentID">Parent ID to be used if table has set parent keys.</param>
       <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
       <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult" /> containing <see cref="T:T[]" /> or <see cref="T:System.Exception" />.</returns>
-    </member>
-    <member name="M:Gemstone.Web.APIController.ReadOnlyModelController`1.GetAuthCheck">
-      <summary>
-            Check if current User is authorized for GET Requests.
-            </summary>
-      <returns>
-        <c>true</c> if User is authorized for GET requests; otherwise, <c>false</c>.</returns>
     </member>
     <member name="M:Gemstone.Web.APIController.ReadOnlyModelController`1.GetMaxValue(System.String,System.Threading.CancellationToken)">
       <summary>
@@ -817,6 +869,256 @@
             </summary>
       <param name="host">The host of the web server.</param>
       <returns>The list of addresses the server is listening on.</returns>
+    </member>
+    <member name="T:Gemstone.Web.Security.AuthenticationRuntimeMiddleware">
+      <summary>
+            Represents a middleware used to assign claims to authenticated users.
+            </summary>
+      <param name="next">Delegate used to invoke the next middleware in the pipeline</param>
+      <param name="runtime">The authentication runtime used to query assigned claims</param>
+      <param name="providerIdentity">The identity of the provider that authenticated the user</param>
+    </member>
+    <member name="M:Gemstone.Web.Security.AuthenticationRuntimeMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Gemstone.Security.AuthenticationProviders.IAuthenticationRuntime,System.String)">
+      <summary>
+            Represents a middleware used to assign claims to authenticated users.
+            </summary>
+      <param name="next">Delegate used to invoke the next middleware in the pipeline</param>
+      <param name="runtime">The authentication runtime used to query assigned claims</param>
+      <param name="providerIdentity">The identity of the provider that authenticated the user</param>
+    </member>
+    <member name="M:Gemstone.Web.Security.AuthenticationRuntimeMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+      <summary>
+            Assigns claims from the authentication runtime to the authenticated user.
+            </summary>
+      <param name="httpContext">The context of the HTTP request</param>
+      <returns>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>returns</parameter>
+            <parameter>M:Gemstone.Web.Security.AuthenticationRuntimeMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)</parameter>
+          </include>
+        </markup>
+      </returns>
+    </member>
+    <member name="T:Gemstone.Web.Security.AuthenticationWebBuilderExtensions">
+      <summary>
+            Extensions for the authentication web builder.
+            </summary>
+    </member>
+    <member name="M:Gemstone.Web.Security.AuthenticationWebBuilderExtensions.ConfigureGemstoneWebAuthentication``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+      <summary>
+            Sets up the default configuration for services to support Gemstone authentication.
+            </summary>
+      <param name="services">The collection of services</param>
+      <typeparam name="T">Provides setup information for the runtime.</typeparam>
+      <returns>Builder for adding additional authentication schemes.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Security.AuthenticationWebBuilderExtensions.ConfigureGemstoneWebAuthentication(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Gemstone.Security.AuthenticationProviders.IAuthenticationBuilder})">
+      <summary>
+            Sets up the default configuration for services to support Gemstone authentication.
+            </summary>
+      <param name="services">The collection of services</param>
+      <param name="configure">Method to configure the runtime</param>
+      <returns>Builder for adding additional authentication schemes.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Security.AuthenticationWebBuilderExtensions.UseGemstoneAuthentication(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+      <summary>
+            Automatically configures the request pipeline to support well-known authentication providers.
+            </summary>
+      <param name="app">The application builder</param>
+      <returns>The application builder.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Security.AuthenticationWebBuilderExtensions.UseGemstoneAuthentication(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Action{Gemstone.Web.Security.IAuthenticationWebBuilder})">
+      <summary>
+            Configures the request pipeline to support authentication providers using the given configuration method.
+            </summary>
+      <param name="app">The application builder</param>
+      <param name="configure">The method to configure authentication provider middleware</param>
+      <returns>The application builder.</returns>
+    </member>
+    <member name="T:Gemstone.Web.Security.ControllerAccessHandler">
+      <summary>
+            Authorization handler for access to controller actions.
+            </summary>
+    </member>
+    <member name="M:Gemstone.Web.Security.ControllerAccessHandler.#ctor">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>Gemstone.Web.Security.ControllerAccessHandler</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="M:Gemstone.Web.Security.ControllerAccessHandler.HandleRequirementAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Gemstone.Web.Security.ControllerAccessRequirement)">
+      <summary>
+            Makes a decision if authorization is allowed based on a specific requirement.
+            </summary>
+      <param name="context">The authorization context.</param>
+      <param name="requirement">The requirement to evaluate.</param>
+      <returns>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>returns</parameter>
+            <parameter>M:Gemstone.Web.Security.ControllerAccessHandler.HandleRequirementAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Gemstone.Web.Security.ControllerAccessRequirement)</parameter>
+          </include>
+        </markup>
+      </returns>
+    </member>
+    <member name="T:Gemstone.Web.Security.ControllerAccessHandlerExtensions">
+      <summary>
+            Defines extension methods for the controller access handler.
+            </summary>
+    </member>
+    <member name="M:Gemstone.Web.Security.ControllerAccessHandlerExtensions.RequireControllerAccess(Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder)">
+      <summary>
+            Adds the <see cref="T:Gemstone.Web.Security.ControllerAccessRequirement" /> to the policy.
+            </summary>
+      <param name="builder">The policy builder</param>
+      <returns>The policy builder.</returns>
+    </member>
+    <member name="T:Gemstone.Web.Security.ControllerAccessRequirement">
+      <summary>
+            Requirement to be handled by the <see cref="T:Gemstone.Web.Security.ControllerAccessHandler" />.
+            </summary>
+    </member>
+    <member name="M:Gemstone.Web.Security.ControllerAccessRequirement.#ctor">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>Gemstone.Web.Security.ControllerAccessRequirement</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="T:Gemstone.Web.Security.DefaultTicketStore">
+      <summary>
+            Represents an in-memory storage mechanism for authentication tickets.
+            </summary>
+      <param name="memoryCache">The cache in which tickets will be stored</param>
+    </member>
+    <member name="M:Gemstone.Web.Security.DefaultTicketStore.#ctor(Microsoft.Extensions.Caching.Memory.IMemoryCache,Microsoft.Extensions.Options.IOptionsMonitor{Gemstone.Web.Security.SessionCacheOptions})">
+      <summary>
+            Represents an in-memory storage mechanism for authentication tickets.
+            </summary>
+      <param name="memoryCache">The cache in which tickets will be stored</param>
+      <param name="optionsMonitor">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>optionsMonitor</parameter>
+            <parameter>M:Gemstone.Web.Security.DefaultTicketStore.#ctor(Microsoft.Extensions.Caching.Memory.IMemoryCache,Microsoft.Extensions.Options.IOptionsMonitor{Gemstone.Web.Security.SessionCacheOptions})</parameter>
+          </include>
+        </markup>
+      </param>
+    </member>
+    <member name="M:Gemstone.Web.Security.DefaultTicketStore.RemoveAsync(System.String)">
+      <summary>
+            Remove the identity associated with the given key.
+            </summary>
+      <param name="key">The key associated with the identity.</param>
+      <returns>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>returns</parameter>
+            <parameter>M:Gemstone.Web.Security.DefaultTicketStore.RemoveAsync(System.String)</parameter>
+          </include>
+        </markup>
+      </returns>
+    </member>
+    <member name="M:Gemstone.Web.Security.DefaultTicketStore.RenewAsync(System.String,Microsoft.AspNetCore.Authentication.AuthenticationTicket)">
+      <summary>
+            Tells the store that the given identity should be updated.
+            </summary>
+      <param name="key">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>key</parameter>
+            <parameter>M:Gemstone.Web.Security.DefaultTicketStore.RenewAsync(System.String,Microsoft.AspNetCore.Authentication.AuthenticationTicket)</parameter>
+          </include>
+        </markup>
+      </param>
+      <param name="ticket">
+        <markup>
+          <include item="SMCMissingParamTag">
+            <parameter>param</parameter>
+            <parameter>ticket</parameter>
+            <parameter>M:Gemstone.Web.Security.DefaultTicketStore.RenewAsync(System.String,Microsoft.AspNetCore.Authentication.AuthenticationTicket)</parameter>
+          </include>
+        </markup>
+      </param>
+      <returns>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>returns</parameter>
+            <parameter>M:Gemstone.Web.Security.DefaultTicketStore.RenewAsync(System.String,Microsoft.AspNetCore.Authentication.AuthenticationTicket)</parameter>
+          </include>
+        </markup>
+      </returns>
+    </member>
+    <member name="M:Gemstone.Web.Security.DefaultTicketStore.RetrieveAsync(System.String)">
+      <summary>
+            Retrieves an identity from the store for the given key.
+            </summary>
+      <param name="key">The key associated with the identity.</param>
+      <returns>The identity associated with the given key, or <c>null</c> if not found.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Security.DefaultTicketStore.StoreAsync(Microsoft.AspNetCore.Authentication.AuthenticationTicket)">
+      <summary>
+            Store the identity ticket and return the associated key.
+            </summary>
+      <param name="ticket">The identity information to store.</param>
+      <returns>The key that can be used to retrieve the identity later.</returns>
+    </member>
+    <member name="T:Gemstone.Web.Security.IAuthenticationWebBuilder">
+      <summary>
+            Represents a builder for Gemstone authentication web components.
+            </summary>
+    </member>
+    <member name="M:Gemstone.Web.Security.IAuthenticationWebBuilder.UseProvider(System.String)">
+      <summary>
+            Adds the default middleware type for the given provider identity to the application's request pipeline.
+            </summary>
+      <param name="providerIdentity">The identity of the authentication provider</param>
+      <returns>The authentication web builder.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Security.IAuthenticationWebBuilder.UseProvider(System.String,System.String)">
+      <summary>
+            Adds the default middleware type for the given provider identity to the application's request pipeline.
+            </summary>
+      <param name="providerIdentity">The identity of the authentication provider</param>
+      <param name="pathMatch">The path on which requests will require authentication using this provider</param>
+      <returns>The authentication web builder.</returns>
+    </member>
+    <member name="M:Gemstone.Web.Security.IAuthenticationWebBuilder.UseProvider(System.String,System.String,System.String)">
+      <summary>
+            Adds the default middleware type for the given provider identity to the application's request pipeline.
+            </summary>
+      <param name="providerIdentity">The identity of the authentication provider</param>
+      <param name="pathMatch">The path on which requests will require authentication using this provider</param>
+      <param name="scheme">The authentication scheme to require on the endpoint</param>
+      <returns>The authentication web builder.</returns>
+    </member>
+    <member name="T:Gemstone.Web.Security.SessionCacheOptions">
+      <summary>
+            Options to configure the memory cache used by the authentication ticket store.
+            </summary>
+    </member>
+    <member name="M:Gemstone.Web.Security.SessionCacheOptions.#ctor">
+      <summary>
+        <markup>
+          <include item="SMCAutoDocConstructor">
+            <parameter>Gemstone.Web.Security.SessionCacheOptions</parameter>
+          </include>
+        </markup>
+      </summary>
+    </member>
+    <member name="P:Gemstone.Web.Security.SessionCacheOptions.SlidingExpiration">
+      <summary>
+            Gets or sets the amount of time a ticket should
+            remain valid since the last time it was accessed.
+            </summary>
     </member>
   </members>
 </doc>
