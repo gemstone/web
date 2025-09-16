@@ -24,9 +24,9 @@
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <Nullable>enable</Nullable>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <Version>1.0.140</Version>
-    <InformationalVersion Condition="'$(Configuration)'=='Release'">1.0.140 -- Release Build</InformationalVersion>
-    <InformationalVersion Condition="'$(Configuration)'!='Release'">1.0.140 -- Debug Build</InformationalVersion>
+    <Version>1.0.141</Version>
+    <InformationalVersion Condition="'$(Configuration)'=='Release'">1.0.141 -- Release Build</InformationalVersion>
+    <InformationalVersion Condition="'$(Configuration)'!='Release'">1.0.141 -- Debug Build</InformationalVersion>
     <Configurations>Debug;Release;Development</Configurations>
     <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
   </PropertyGroup>
@@ -79,13 +79,13 @@
     <PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
     <PackageReference Include="System.Threading" Version="4.3.0" />
 
-    <PackageReference Include="Gemstone.Common" Version="1.0.140" Condition="'$(Configuration)'!='Development'" />
+    <PackageReference Include="Gemstone.Common" Version="1.0.141" Condition="'$(Configuration)'!='Development'" />
     <ProjectReference Include="..\..\..\common\src\Gemstone\Gemstone.Common.csproj" Condition="'$(Configuration)'=='Development'" />
 
-    <PackageReference Include="Gemstone.Configuration" Version="1.0.140" Condition="'$(Configuration)'!='Development'" />
+    <PackageReference Include="Gemstone.Configuration" Version="1.0.141" Condition="'$(Configuration)'!='Development'" />
     <ProjectReference Include="..\..\..\configuration\src\Gemstone.Configuration\Gemstone.Configuration.csproj" Condition="'$(Configuration)'=='Development'" />
 
-    <PackageReference Include="Gemstone.Data" Version="1.0.140" Condition="'$(Configuration)'!='Development'" />
+    <PackageReference Include="Gemstone.Data" Version="1.0.141" Condition="'$(Configuration)'!='Development'" />
     <ProjectReference Include="..\..\..\data\src\Gemstone.Data\Gemstone.Data.csproj" Condition="'$(Configuration)'=='Development'" />
 
     <!-- <ProjectReference Include="..\..\..\expressions\src\Gemstone.Expressions\Gemstone.Expressions.csproj" Condition="'$(Configuration)'=='Development'" /> -->
