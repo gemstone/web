@@ -1,0 +1,589 @@
+﻿<!DOCTYPE html ><html lang="en-US"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="shortcut icon" href="../icons/favicon.ico" /><link rel="stylesheet" href="../css/bulma.css" /><link rel="stylesheet" href="../css/font-awesome.min.css" /><link rel="stylesheet" href="../css/presentationStyle.css" /><link rel="stylesheet" href="../css/vs.min.css" /><script src="../scripts/jquery-3.5.1.min.js"></script><script src="../scripts/clipboard.min.js"></script><script src="../scripts/highlight.min.js"></script><script src="../scripts/presentationStyle.js"></script><title>AuthorizationInfoControllerBase Class</title><meta name="Title" content="AuthorizationInfoControllerBase" /><meta name="Help.Id" content="T:Gemstone.Web.APIController.AuthorizationInfoControllerBase" /><meta name="Help.ContentType" content="Reference" /><meta name="container" content="Gemstone.Web.APIController" /><meta name="guid" content="T_Gemstone_Web_APIController_AuthorizationInfoControllerBase" /><meta name="Description" content="Base class for a controller that provides information about claims to client applications." /><meta name="tocFile" content="../toc/IDC.xml" /></head><body><div class="fixedLayout"><div id="Header" class="fixedHeader"><div class="pageHeader level mb-0 py-2 px-4"><div id="TitleContainer" class="level-left"><div class="level-item"><a target="_blank" rel="noopener noreferrer" href="https://gemstone.github.io/web/"><img alt="GPA Gemstone Library" src="../icons/gemstone-square-48.png" /></a></div><div id="DocumentationTitle" class="level-item">Gemstone Web Library</div></div><div id="LangFilterSearchContainer" class="level-right"><div class="level-item"><div class="dropdown is-hoverable"><div class="dropdown-trigger"><button class="button" aria-haspopup="true" aria-controls="dropdown-menu"><span id="CurrentLanguage"></span><span class="icon is-small"><i class="fa fa-angle-down" aria-hidden="true"></i></span></button></div><div class="dropdown-menu" role="menu"><div id="LanguageSelections" class="dropdown-content"><a class="dropdown-item languageFilterItem" data-languageId="cs">C#</a><a class="dropdown-item languageFilterItem" data-languageId="vb">VB</a><a class="dropdown-item languageFilterItem" data-languageId="cpp">C++</a><a class="dropdown-item languageFilterItem" data-languageId="js">JavaScript</a></div></div></div></div><div class="level-item"><form id="SearchForm" action="#" onsubmit="TransferToSearchPage(); return false;"><div class="field"><div class="control has-icons-left"><input id="SearchTerms" class="input" type="text" maxlength="200" placeholder="Search" /><span class="icon is-small is-left"><i class="fa fa-search"></i></span><button id="SearchButton" type="submit" class="is-hidden"></button></div></div></form></div></div></div></div><div class="fixedContent"><nav class="breadcrumb my-1 px-2 border-bottom" role="navigation"><ul id="TopicBreadcrumbs" /></nav><div id="ContentContainer" class="columns pl-5 pr-5 fixedContent"><div id="ShowHideTOCColumn" class="column is-hidden-tablet"><a id="ShowHideTOC">Show/Hide TOC</a></div><div id="TOCColumn" class="column is-hidden-mobile"><nav class="toc"><ul id="TableOfContents" class="toc-menu" /></nav></div><div id="Resizer" class="is-hidden"></div><div id="TopicContent" class="column content is-7"><h1>Authorization<wbr />Info<wbr />Controller<wbr />Base Class</h1><div class="summary">
+            Base class for a controller that provides information about claims to client applications.
+            </div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Definition</h2><div id="IDBSection"><strong>Namespace:</strong> <a href="N_Gemstone_Web_APIController.htm">Gemstone.Web.APIController</a><br /><strong>Assembly:</strong> Gemstone.Web (in Gemstone.Web.dll) Version: 1.0.141 -- Release Build+e1035e567cc230706db1d294d4c31f813f5c537a<div class="codeSnippet" data-codeSnippetLanguage="cs"><div class="codeHeader"><span class="codeHeaderTitle">C#</span><span class="buttons"><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button><a href="https://github.com/gemstone/web/blob/master/src/Gemstone.Web/APIController/AuthorizationInfoControllerBase.cs" target="_blank" rel="noopener noreferrer" class="button is-small is-light" title="View the source code"><span class="icon is-small"><i class="fa fa-file-code"></i></span><span>View Source</span></a><a href="Create a new issue: https://github.com/gemstone/web/issues/new " target="_blank" rel="noopener noreferrer" class="button is-small is-light requestExampleLink" title="Request an example for this topic"><span class="icon is-small"><i class="fa fa-comment-dots"></i></span><span>Request Example</span></a></span></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-cs"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="identifier">AuthorizationInfoControllerBase</span> : <span class="noLink">ControllerBase</span></code></pre></div></div><div class="codeSnippet is-hidden" data-codeSnippetLanguage="vb"><div class="codeHeader"><span class="codeHeaderTitle">VB</span><span class="buttons"><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button><a href="https://github.com/gemstone/web/blob/master/src/Gemstone.Web/APIController/AuthorizationInfoControllerBase.cs" target="_blank" rel="noopener noreferrer" class="button is-small is-light" title="View the source code"><span class="icon is-small"><i class="fa fa-file-code"></i></span><span>View Source</span></a><a href="Create a new issue: https://github.com/gemstone/web/issues/new " target="_blank" rel="noopener noreferrer" class="button is-small is-light requestExampleLink" title="Request an example for this topic"><span class="icon is-small"><i class="fa fa-comment-dots"></i></span><span>Request Example</span></a></span></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-vb"><span class="keyword">Public</span> <span class="keyword">MustInherit</span> <span class="keyword">Class</span> <span class="identifier">AuthorizationInfoControllerBase</span>
+	<span class="keyword">Inherits</span> <span class="noLink">ControllerBase</span></code></pre></div></div><div class="codeSnippet is-hidden" data-codeSnippetLanguage="cpp"><div class="codeHeader"><span class="codeHeaderTitle">C++</span><span class="buttons"><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button><a href="https://github.com/gemstone/web/blob/master/src/Gemstone.Web/APIController/AuthorizationInfoControllerBase.cs" target="_blank" rel="noopener noreferrer" class="button is-small is-light" title="View the source code"><span class="icon is-small"><i class="fa fa-file-code"></i></span><span>View Source</span></a><a href="Create a new issue: https://github.com/gemstone/web/issues/new " target="_blank" rel="noopener noreferrer" class="button is-small is-light requestExampleLink" title="Request an example for this topic"><span class="icon is-small"><i class="fa fa-comment-dots"></i></span><span>Request Example</span></a></span></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-cpp"><span class="keyword">public</span> <span class="keyword">ref class</span> <span class="identifier">AuthorizationInfoControllerBase</span> <span class="keyword">abstract</span> : <span class="keyword">public</span> <span class="noLink">ControllerBase</span></code></pre></div></div><div class="codeSnippet is-hidden" data-codeSnippetLanguage="js"><div class="codeHeader"><span class="codeHeaderTitle">JavaScript</span><span class="buttons"><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button><a href="https://github.com/gemstone/web/blob/master/src/Gemstone.Web/APIController/AuthorizationInfoControllerBase.cs" target="_blank" rel="noopener noreferrer" class="button is-small is-light" title="View the source code"><span class="icon is-small"><i class="fa fa-file-code"></i></span><span>View Source</span></a><a href="Create a new issue: https://github.com/gemstone/web/issues/new " target="_blank" rel="noopener noreferrer" class="button is-small is-light requestExampleLink" title="Request an example for this topic"><span class="icon is-small"><i class="fa fa-comment-dots"></i></span><span>Request Example</span></a></span></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-js"><span class="identifier">Gemstone.Web.APIController.AuthorizationInfoControllerBase</span> = <span class="keyword">function</span>();
+
+<span class="identifier">Type</span>.createClass(
+	'Gemstone.Web.APIController.AuthorizationInfoControllerBase',
+	<span class="noLink">Microsoft.AspNetCore.Mvc.ControllerBase</span>);</code></pre></div></div><dl class="inheritanceHierarchy"><dt>Inheritance</dt><dd><span class="noLink">Object</span>  <span class="icon is-small"><i class="fa fa-arrow-right"></i></span>  <span class="noLink">ControllerBase</span>  <span class="icon is-small"><i class="fa fa-arrow-right"></i></span>  <span class="selflink">AuthorizationInfoControllerBase</span></dd></dl></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Constructors</h2><div id="IDAFASection"><table id="ConstructorList" class="table is-hoverable"><tr><td><a href="M_Gemstone_Web_APIController_AuthorizationInfoControllerBase__ctor.htm">AuthorizationInfoControllerBase</a></td><td>Initializes a new instance of the <span class="selflink">AuthorizationInfoControllerBase</span> class</td></tr></table></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Properties</h2><div id="ID01B0FASection"><table id="PropertyList" class="table is-hoverable"><tr><td><span class="noLink">ControllerContext</span></td><td>
+            Gets or sets the <span class="noLink">ControllerContext</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">HttpContext</span></td><td>
+            Gets the <span class="noLink">HttpContext</span> for the executing action.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">MetadataProvider</span></td><td>
+            Gets or sets the <span class="noLink">IModelMetadataProvider</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">ModelBinderFactory</span></td><td>
+            Gets or sets the <span class="noLink">IModelBinderFactory</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">ModelState</span></td><td>
+            Gets the <span class="noLink">ModelStateDictionary</span> that contains the state of the model and of model-binding validation.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">ObjectValidator</span></td><td>
+            Gets or sets the <span class="noLink">IObjectModelValidator</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">ProblemDetailsFactory</span></td><td>
+            Gets or sets the <span class="noLink">ProblemDetailsFactory</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Request</span></td><td>
+            Gets the <span class="noLink">HttpRequest</span> for the executing action.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Response</span></td><td>
+            Gets the <span class="noLink">HttpResponse</span> for the executing action.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RouteData</span></td><td>
+            Gets the <span class="noLink">RouteData</span> for the executing action.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Url</span></td><td>
+            Gets or sets the <span class="noLink">IUrlHelper</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">User</span></td><td>
+            Gets the <span class="noLink">ClaimsPrincipal</span> for user associated with the executing action.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr></table></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Methods</h2><div id="IDBFASection"><table id="MethodList" class="table is-hoverable"><tr><td><span class="noLink">Accepted<span id="LSTE7AA1470_0" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span></td><td>
+            Creates a <span class="noLink">AcceptedResult</span> object that produces an <span class="noLink">Status202Accepted</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Accepted(Object)</span></td><td>
+            Creates a <span class="noLink">AcceptedResult</span> object that produces an <span class="noLink">Status202Accepted</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Accepted(String)</span></td><td>
+            Creates a <span class="noLink">AcceptedResult</span> object that produces an <span class="noLink">Status202Accepted</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Accepted(Uri)</span></td><td>
+            Creates a <span class="noLink">AcceptedResult</span> object that produces an <span class="noLink">Status202Accepted</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Accepted(String, Object)</span></td><td>
+            Creates a <span class="noLink">AcceptedResult</span> object that produces an <span class="noLink">Status202Accepted</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Accepted(Uri, Object)</span></td><td>
+            Creates a <span class="noLink">AcceptedResult</span> object that produces an <span class="noLink">Status202Accepted</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">AcceptedAtAction(String)</span></td><td>
+            Creates a <span class="noLink">AcceptedAtActionResult</span> object that produces an <span class="noLink">Status202Accepted</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">AcceptedAtAction(String, Object)</span></td><td>
+            Creates a <span class="noLink">AcceptedAtActionResult</span> object that produces an <span class="noLink">Status202Accepted</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">AcceptedAtAction(String, String)</span></td><td>
+            Creates a <span class="noLink">AcceptedAtActionResult</span> object that produces an <span class="noLink">Status202Accepted</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">AcceptedAtAction(String, Object, Object)</span></td><td>
+            Creates a <span class="noLink">AcceptedAtActionResult</span> object that produces an <span class="noLink">Status202Accepted</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">AcceptedAtAction(String, String, Object)</span></td><td>
+            Creates a <span class="noLink">AcceptedAtActionResult</span> object that produces an <span class="noLink">Status202Accepted</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">AcceptedAtAction(String, String, Object, Object)</span></td><td>
+            Creates a <span class="noLink">AcceptedAtActionResult</span> object that produces an <span class="noLink">Status202Accepted</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">AcceptedAtRoute(Object)</span></td><td>
+            Creates a <span class="noLink">AcceptedAtRouteResult</span> object that produces an <span class="noLink">Status202Accepted</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">AcceptedAtRoute(String)</span></td><td>
+            Creates a <span class="noLink">AcceptedAtRouteResult</span> object that produces an <span class="noLink">Status202Accepted</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">AcceptedAtRoute(Object, Object)</span></td><td>
+            Creates a <span class="noLink">AcceptedAtRouteResult</span> object that produces an <span class="noLink">Status202Accepted</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">AcceptedAtRoute(String, Object)</span></td><td>
+             Creates a <span class="noLink">AcceptedAtRouteResult</span> object that produces an <span class="noLink">Status202Accepted</span> response.
+             <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">AcceptedAtRoute(String, Object, Object)</span></td><td>
+            Creates a <span class="noLink">AcceptedAtRouteResult</span> object that produces an <span class="noLink">Status202Accepted</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">BadRequest<span id="LSTE7AA1470_1" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span></td><td>
+            Creates an <span class="noLink">BadRequestResult</span> that produces a <span class="noLink">Status400BadRequest</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">BadRequest(ModelStateDictionary)</span></td><td>
+            Creates an <span class="noLink">BadRequestObjectResult</span> that produces a <span class="noLink">Status400BadRequest</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">BadRequest(Object)</span></td><td>
+            Creates an <span class="noLink">BadRequestObjectResult</span> that produces a <span class="noLink">Status400BadRequest</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Challenge<span id="LSTE7AA1470_2" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span></td><td>
+            Creates a <span class="noLink">ChallengeResult</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Challenge(AuthenticationProperties)</span></td><td>
+            Creates a <span class="noLink">ChallengeResult</span> with the specified <span class="parameter">properties</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Challenge(<span id="LSTE7AA1470_3" data-languageSpecificText="cpp=array&lt;"></span>String<span id="LSTE7AA1470_4" data-languageSpecificText="cpp=&gt;|cs=[]|vb=()|nu=[]|fs=[]"></span>)</span></td><td>
+            Creates a <span class="noLink">ChallengeResult</span> with the specified authentication schemes.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Challenge(AuthenticationProperties, <span id="LSTE7AA1470_5" data-languageSpecificText="cpp=array&lt;"></span>String<span id="LSTE7AA1470_6" data-languageSpecificText="cpp=&gt;|cs=[]|vb=()|nu=[]|fs=[]"></span>)</span></td><td>
+            Creates a <span class="noLink">ChallengeResult</span> with the specified authentication schemes and
+            <span class="parameter">properties</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><a href="M_Gemstone_Web_APIController_AuthorizationInfoControllerBase_CheckAccess.htm">CheckAccess</a></td><td>
+            Checks whether the user has permission to access each of the resources listed in the access list.
+            </td></tr><tr><td><span class="noLink">Conflict<span id="LSTE7AA1470_7" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span></td><td>
+            Creates an <span class="noLink">ConflictResult</span> that produces a <span class="noLink">Status409Conflict</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Conflict(ModelStateDictionary)</span></td><td>
+            Creates an <span class="noLink">ConflictObjectResult</span> that produces a <span class="noLink">Status409Conflict</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Conflict(Object)</span></td><td>
+            Creates an <span class="noLink">ConflictObjectResult</span> that produces a <span class="noLink">Status409Conflict</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Content(String)</span></td><td>
+            Creates a <span class="noLink">ContentResult</span> object with <span class="noLink">Status200OK</span> by specifying a
+            <span class="parameter">content</span> string.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Content(String, MediaTypeHeaderValue)</span></td><td>
+            Creates a <span class="noLink">ContentResult</span> object with <span class="noLink">Status200OK</span> by specifying a 
+            <span class="parameter">content</span> string and a <span class="parameter">contentType</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Content(String, String)</span></td><td>
+            Creates a <span class="noLink">ContentResult</span> object with <span class="noLink">Status200OK</span> by specifying a 
+            <span class="parameter">content</span> string and a content type.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Content(String, String, Encoding)</span></td><td>
+            Creates a <span class="noLink">ContentResult</span> object with <span class="noLink">Status200OK</span> by specifying a 
+            <span class="parameter">content</span> string, a <span class="parameter">contentType</span>, and <span class="parameter">contentEncoding</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Created<span id="LSTE7AA1470_8" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span></td><td>
+            Creates a <span class="noLink">CreatedResult</span> object that produces a <span class="noLink">Status201Created</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Created(String, Object)</span></td><td>
+            Creates a <span class="noLink">CreatedResult</span> object that produces a <span class="noLink">Status201Created</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Created(Uri, Object)</span></td><td>
+            Creates a <span class="noLink">CreatedResult</span> object that produces a <span class="noLink">Status201Created</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">CreatedAtAction(String, Object)</span></td><td>
+            Creates a <span class="noLink">CreatedAtActionResult</span> object that produces a <span class="noLink">Status201Created</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">CreatedAtAction(String, Object, Object)</span></td><td>
+            Creates a <span class="noLink">CreatedAtActionResult</span> object that produces a <span class="noLink">Status201Created</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">CreatedAtAction(String, String, Object, Object)</span></td><td>
+            Creates a <span class="noLink">CreatedAtActionResult</span> object that produces a <span class="noLink">Status201Created</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">CreatedAtRoute(Object, Object)</span></td><td>
+            Creates a <span class="noLink">CreatedAtRouteResult</span> object that produces a <span class="noLink">Status201Created</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">CreatedAtRoute(String, Object)</span></td><td>
+            Creates a <span class="noLink">CreatedAtRouteResult</span> object that produces a <span class="noLink">Status201Created</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">CreatedAtRoute(String, Object, Object)</span></td><td>
+            Creates a <span class="noLink">CreatedAtRouteResult</span> object that produces a <span class="noLink">Status201Created</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Equals</span></td><td>Determines whether the specified object is equal to the current object.<br />(Inherited from <span class="noLink">Object</span>)</td></tr><tr><td><span class="noLink">File(<span id="LSTE7AA1470_9" data-languageSpecificText="cpp=array&lt;"></span>Byte<span id="LSTE7AA1470_10" data-languageSpecificText="cpp=&gt;|cs=[]|vb=()|nu=[]|fs=[]"></span>, String)</span></td><td>
+            Returns a file with the specified <span class="parameter">fileContents</span> as content (<span class="noLink">Status200OK</span>),
+            and the specified <span class="parameter">contentType</span> as the Content-Type.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">File(Stream, String)</span></td><td>
+            Returns a file in the specified <span class="parameter">fileStream</span> (<span class="noLink">Status200OK</span>), with the 
+            specified <span class="parameter">contentType</span> as the Content-Type.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">File(String, String)</span></td><td>
+            Returns the file specified by <span class="parameter">virtualPath</span> (<span class="noLink">Status200OK</span>) with the
+            specified <span class="parameter">contentType</span> as the Content-Type.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">File(<span id="LSTE7AA1470_11" data-languageSpecificText="cpp=array&lt;"></span>Byte<span id="LSTE7AA1470_12" data-languageSpecificText="cpp=&gt;|cs=[]|vb=()|nu=[]|fs=[]"></span>, String, Boolean)</span></td><td>
+            Returns a file with the specified <span class="parameter">fileContents</span> as content (<span class="noLink">Status200OK</span>),
+            and the specified <span class="parameter">contentType</span> as the Content-Type.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">File(<span id="LSTE7AA1470_13" data-languageSpecificText="cpp=array&lt;"></span>Byte<span id="LSTE7AA1470_14" data-languageSpecificText="cpp=&gt;|cs=[]|vb=()|nu=[]|fs=[]"></span>, String, String)</span></td><td>
+            Returns a file with the specified <span class="parameter">fileContents</span> as content (<span class="noLink">Status200OK</span>), the
+            specified <span class="parameter">contentType</span> as the Content-Type and the specified <span class="parameter">fileDownloadName</span> as the suggested file name.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">File(Stream, String, Boolean)</span></td><td>
+            Returns a file in the specified <span class="parameter">fileStream</span> (<span class="noLink">Status200OK</span>), with the 
+            specified <span class="parameter">contentType</span> as the Content-Type.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">File(Stream, String, String)</span></td><td>
+            Returns a file in the specified <span class="parameter">fileStream</span> (<span class="noLink">Status200OK</span>) with the
+            specified <span class="parameter">contentType</span> as the Content-Type and the
+            specified <span class="parameter">fileDownloadName</span> as the suggested file name.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">File(String, String, Boolean)</span></td><td>
+            Returns the file specified by <span class="parameter">virtualPath</span> (<span class="noLink">Status200OK</span>) with the
+            specified <span class="parameter">contentType</span> as the Content-Type.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">File(String, String, String)</span></td><td>
+            Returns the file specified by <span class="parameter">virtualPath</span> (<span class="noLink">Status200OK</span>) with the
+            specified <span class="parameter">contentType</span> as the Content-Type and the
+            specified <span class="parameter">fileDownloadName</span> as the suggested file name.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">File(<span id="LSTE7AA1470_15" data-languageSpecificText="cpp=array&lt;"></span>Byte<span id="LSTE7AA1470_16" data-languageSpecificText="cpp=&gt;|cs=[]|vb=()|nu=[]|fs=[]"></span>, String, Nullable<span id="LSTE7AA1470_17" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>DateTimeOffset<span id="LSTE7AA1470_18" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>, EntityTagHeaderValue)</span></td><td>
+            Returns a file with the specified <span class="parameter">fileContents</span> as content (<span class="noLink">Status200OK</span>), 
+            and the specified <span class="parameter">contentType</span> as the Content-Type.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">File(<span id="LSTE7AA1470_19" data-languageSpecificText="cpp=array&lt;"></span>Byte<span id="LSTE7AA1470_20" data-languageSpecificText="cpp=&gt;|cs=[]|vb=()|nu=[]|fs=[]"></span>, String, String, Boolean)</span></td><td>
+            Returns a file with the specified <span class="parameter">fileContents</span> as content (<span class="noLink">Status200OK</span>), the
+            specified <span class="parameter">contentType</span> as the Content-Type and the specified <span class="parameter">fileDownloadName</span> as the suggested file name.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">File(Stream, String, Nullable<span id="LSTE7AA1470_21" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>DateTimeOffset<span id="LSTE7AA1470_22" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>, EntityTagHeaderValue)</span></td><td>
+            Returns a file in the specified <span class="parameter">fileStream</span> (<span class="noLink">Status200OK</span>), 
+            and the specified <span class="parameter">contentType</span> as the Content-Type.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">File(Stream, String, String, Boolean)</span></td><td>
+            Returns a file in the specified <span class="parameter">fileStream</span> (<span class="noLink">Status200OK</span>) with the
+            specified <span class="parameter">contentType</span> as the Content-Type and the
+            specified <span class="parameter">fileDownloadName</span> as the suggested file name.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">File(String, String, Nullable<span id="LSTE7AA1470_23" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>DateTimeOffset<span id="LSTE7AA1470_24" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>, EntityTagHeaderValue)</span></td><td>
+            Returns the file specified by <span class="parameter">virtualPath</span> (<span class="noLink">Status200OK</span>), and the 
+            specified <span class="parameter">contentType</span> as the Content-Type.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">File(String, String, String, Boolean)</span></td><td>
+            Returns the file specified by <span class="parameter">virtualPath</span> (<span class="noLink">Status200OK</span>) with the
+            specified <span class="parameter">contentType</span> as the Content-Type and the
+            specified <span class="parameter">fileDownloadName</span> as the suggested file name.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">File(<span id="LSTE7AA1470_25" data-languageSpecificText="cpp=array&lt;"></span>Byte<span id="LSTE7AA1470_26" data-languageSpecificText="cpp=&gt;|cs=[]|vb=()|nu=[]|fs=[]"></span>, String, Nullable<span id="LSTE7AA1470_27" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>DateTimeOffset<span id="LSTE7AA1470_28" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>, EntityTagHeaderValue, Boolean)</span></td><td>
+            Returns a file with the specified <span class="parameter">fileContents</span> as content (<span class="noLink">Status200OK</span>), 
+            and the specified <span class="parameter">contentType</span> as the Content-Type.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">File(<span id="LSTE7AA1470_29" data-languageSpecificText="cpp=array&lt;"></span>Byte<span id="LSTE7AA1470_30" data-languageSpecificText="cpp=&gt;|cs=[]|vb=()|nu=[]|fs=[]"></span>, String, String, Nullable<span id="LSTE7AA1470_31" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>DateTimeOffset<span id="LSTE7AA1470_32" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>, EntityTagHeaderValue)</span></td><td>
+            Returns a file with the specified <span class="parameter">fileContents</span> as content (<span class="noLink">Status200OK</span>), the 
+            specified <span class="parameter">contentType</span> as the Content-Type, and the specified <span class="parameter">fileDownloadName</span> as the suggested file name.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">File(Stream, String, Nullable<span id="LSTE7AA1470_33" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>DateTimeOffset<span id="LSTE7AA1470_34" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>, EntityTagHeaderValue, Boolean)</span></td><td>
+            Returns a file in the specified <span class="parameter">fileStream</span> (<span class="noLink">Status200OK</span>), 
+            and the specified <span class="parameter">contentType</span> as the Content-Type.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">File(Stream, String, String, Nullable<span id="LSTE7AA1470_35" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>DateTimeOffset<span id="LSTE7AA1470_36" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>, EntityTagHeaderValue)</span></td><td>
+            Returns a file in the specified <span class="parameter">fileStream</span> (<span class="noLink">Status200OK</span>), the 
+            specified <span class="parameter">contentType</span> as the Content-Type, and the specified <span class="parameter">fileDownloadName</span> as the suggested file name.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">File(String, String, Nullable<span id="LSTE7AA1470_37" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>DateTimeOffset<span id="LSTE7AA1470_38" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>, EntityTagHeaderValue, Boolean)</span></td><td>
+            Returns the file specified by <span class="parameter">virtualPath</span> (<span class="noLink">Status200OK</span>), and the 
+            specified <span class="parameter">contentType</span> as the Content-Type.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">File(String, String, String, Nullable<span id="LSTE7AA1470_39" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>DateTimeOffset<span id="LSTE7AA1470_40" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>, EntityTagHeaderValue)</span></td><td>
+            Returns the file specified by <span class="parameter">virtualPath</span> (<span class="noLink">Status200OK</span>), the 
+            specified <span class="parameter">contentType</span> as the Content-Type, and the specified <span class="parameter">fileDownloadName</span> as the suggested file name.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">File(<span id="LSTE7AA1470_41" data-languageSpecificText="cpp=array&lt;"></span>Byte<span id="LSTE7AA1470_42" data-languageSpecificText="cpp=&gt;|cs=[]|vb=()|nu=[]|fs=[]"></span>, String, String, Nullable<span id="LSTE7AA1470_43" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>DateTimeOffset<span id="LSTE7AA1470_44" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>, EntityTagHeaderValue, Boolean)</span></td><td>
+            Returns a file with the specified <span class="parameter">fileContents</span> as content (<span class="noLink">Status200OK</span>), the 
+            specified <span class="parameter">contentType</span> as the Content-Type, and the specified <span class="parameter">fileDownloadName</span> as the suggested file name.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">File(Stream, String, String, Nullable<span id="LSTE7AA1470_45" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>DateTimeOffset<span id="LSTE7AA1470_46" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>, EntityTagHeaderValue, Boolean)</span></td><td>
+            Returns a file in the specified <span class="parameter">fileStream</span> (<span class="noLink">Status200OK</span>), the 
+            specified <span class="parameter">contentType</span> as the Content-Type, and the specified <span class="parameter">fileDownloadName</span> as the suggested file name.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">File(String, String, String, Nullable<span id="LSTE7AA1470_47" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>DateTimeOffset<span id="LSTE7AA1470_48" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>, EntityTagHeaderValue, Boolean)</span></td><td>
+            Returns the file specified by <span class="parameter">virtualPath</span> (<span class="noLink">Status200OK</span>), the 
+            specified <span class="parameter">contentType</span> as the Content-Type, and the specified <span class="parameter">fileDownloadName</span> as the suggested file name.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Finalize</span></td><td>Allows an object to try to free resources and perform other cleanup operations before it is reclaimed by garbage collection.<br />(Inherited from <span class="noLink">Object</span>)</td></tr><tr><td><a href="M_Gemstone_Web_APIController_AuthorizationInfoControllerBase_FindClaims.htm">FindClaims</a></td><td>
+            Gets a list of claims that can be assigned to users who authenticate with the provider.
+            </td></tr><tr><td><a href="M_Gemstone_Web_APIController_AuthorizationInfoControllerBase_FindClaimTypes.htm">FindClaimTypes</a></td><td>
+            Gets the types of claims that the authentication provider associates with its users.
+            </td></tr><tr><td><span class="noLink">Forbid<span id="LSTE7AA1470_49" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span></td><td>
+            Creates a <span class="noLink">ForbidResult</span> (<span class="noLink">Status403Forbidden</span> by default).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Forbid(AuthenticationProperties)</span></td><td>
+            Creates a <span class="noLink">ForbidResult</span> (<span class="noLink">Status403Forbidden</span> by default) with the
+            specified <span class="parameter">properties</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Forbid(<span id="LSTE7AA1470_50" data-languageSpecificText="cpp=array&lt;"></span>String<span id="LSTE7AA1470_51" data-languageSpecificText="cpp=&gt;|cs=[]|vb=()|nu=[]|fs=[]"></span>)</span></td><td>
+            Creates a <span class="noLink">ForbidResult</span> (<span class="noLink">Status403Forbidden</span> by default) with the
+            specified authentication schemes.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Forbid(AuthenticationProperties, <span id="LSTE7AA1470_52" data-languageSpecificText="cpp=array&lt;"></span>String<span id="LSTE7AA1470_53" data-languageSpecificText="cpp=&gt;|cs=[]|vb=()|nu=[]|fs=[]"></span>)</span></td><td>
+            Creates a <span class="noLink">ForbidResult</span> (<span class="noLink">Status403Forbidden</span> by default) with the 
+            specified authentication schemes and <span class="parameter">properties</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><a href="M_Gemstone_Web_APIController_AuthorizationInfoControllerBase_GetAllClaims.htm">GetAllClaims</a></td><td>
+            Gets all the claims associated with the authenticated user.
+            </td></tr><tr><td><a href="M_Gemstone_Web_APIController_AuthorizationInfoControllerBase_GetClaims.htm">GetClaims</a></td><td>
+            Gets the claims of a given type associated with the authenticated user.
+            </td></tr><tr><td><span class="noLink">GetHashCode</span></td><td>Serves as the default hash function. <br />(Inherited from <span class="noLink">Object</span>)</td></tr><tr><td><a href="M_Gemstone_Web_APIController_AuthorizationInfoControllerBase_GetResources.htm">GetResources</a></td><td>
+            Gets a list of resources available for which permissions can be granted within the application.
+            </td></tr><tr><td><span class="noLink">GetType</span></td><td>Gets the <span class="noLink">Type</span> of the current instance.<br />(Inherited from <span class="noLink">Object</span>)</td></tr><tr><td><span class="noLink">LocalRedirect</span></td><td>
+            Creates a <span class="noLink">LocalRedirectResult</span> object that redirects 
+            (<span class="noLink">Status302Found</span>) to the specified local <span class="parameter">localUrl</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">LocalRedirectPermanent</span></td><td>
+            Creates a <span class="noLink">LocalRedirectResult</span> object with <span class="noLink">Permanent</span> set to
+            true (<span class="noLink">Status301MovedPermanently</span>) using the specified <span class="parameter">localUrl</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">LocalRedirectPermanentPreserveMethod</span></td><td>
+            Creates a <span class="noLink">LocalRedirectResult</span> object with <span class="noLink">Permanent</span> set to
+            true and <span class="noLink">PreserveMethod</span> set to true 
+            (<span class="noLink">Status308PermanentRedirect</span>) using the specified <span class="parameter">localUrl</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">LocalRedirectPreserveMethod</span></td><td>
+            Creates a <span class="noLink">LocalRedirectResult</span> object with <span class="noLink">Permanent</span> set to
+            false and <span class="noLink">PreserveMethod</span> set to true 
+            (<span class="noLink">Status307TemporaryRedirect</span>) using the specified <span class="parameter">localUrl</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">MemberwiseClone</span></td><td>Creates a shallow copy of the current <span class="noLink">Object</span>.<br />(Inherited from <span class="noLink">Object</span>)</td></tr><tr><td><span class="noLink">NoContent</span></td><td>
+            Creates a <span class="noLink">NoContentResult</span> object that produces an empty
+            <span class="noLink">Status204NoContent</span> response.   
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">NotFound<span id="LSTE7AA1470_54" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span></td><td>
+            Creates an <span class="noLink">NotFoundResult</span> that produces a <span class="noLink">Status404NotFound</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">NotFound(Object)</span></td><td>
+            Creates an <span class="noLink">NotFoundObjectResult</span> that produces a <span class="noLink">Status404NotFound</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Ok<span id="LSTE7AA1470_55" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span></td><td>
+            Creates a <span class="noLink">OkResult</span> object that produces an empty <span class="noLink">Status200OK</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Ok(Object)</span></td><td>
+            Creates an <span class="noLink">OkObjectResult</span> object that produces an <span class="noLink">Status200OK</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">PhysicalFile(String, String)</span></td><td>
+            Returns the file specified by <span class="parameter">physicalPath</span> (<span class="noLink">Status200OK</span>) with the
+            specified <span class="parameter">contentType</span> as the Content-Type.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">PhysicalFile(String, String, Boolean)</span></td><td>
+            Returns the file specified by <span class="parameter">physicalPath</span> (<span class="noLink">Status200OK</span>) with the
+            specified <span class="parameter">contentType</span> as the Content-Type.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">PhysicalFile(String, String, String)</span></td><td>
+            Returns the file specified by <span class="parameter">physicalPath</span> (<span class="noLink">Status200OK</span>) with the
+            specified <span class="parameter">contentType</span> as the Content-Type and the
+            specified <span class="parameter">fileDownloadName</span> as the suggested file name.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">PhysicalFile(String, String, Nullable<span id="LSTE7AA1470_56" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>DateTimeOffset<span id="LSTE7AA1470_57" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>, EntityTagHeaderValue)</span></td><td>
+            Returns the file specified by <span class="parameter">physicalPath</span> (<span class="noLink">Status200OK</span>), and 
+            the specified <span class="parameter">contentType</span> as the Content-Type.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">PhysicalFile(String, String, String, Boolean)</span></td><td>
+            Returns the file specified by <span class="parameter">physicalPath</span> (<span class="noLink">Status200OK</span>) with the
+            specified <span class="parameter">contentType</span> as the Content-Type and the
+            specified <span class="parameter">fileDownloadName</span> as the suggested file name.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">PhysicalFile(String, String, Nullable<span id="LSTE7AA1470_58" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>DateTimeOffset<span id="LSTE7AA1470_59" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>, EntityTagHeaderValue, Boolean)</span></td><td>
+            Returns the file specified by <span class="parameter">physicalPath</span> (<span class="noLink">Status200OK</span>), and 
+            the specified <span class="parameter">contentType</span> as the Content-Type.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">PhysicalFile(String, String, String, Nullable<span id="LSTE7AA1470_60" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>DateTimeOffset<span id="LSTE7AA1470_61" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>, EntityTagHeaderValue)</span></td><td>
+            Returns the file specified by <span class="parameter">physicalPath</span> (<span class="noLink">Status200OK</span>), the 
+            specified <span class="parameter">contentType</span> as the Content-Type, and the specified <span class="parameter">fileDownloadName</span> as the suggested file name.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">PhysicalFile(String, String, String, Nullable<span id="LSTE7AA1470_62" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>DateTimeOffset<span id="LSTE7AA1470_63" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>, EntityTagHeaderValue, Boolean)</span></td><td>
+            Returns the file specified by <span class="parameter">physicalPath</span> (<span class="noLink">Status200OK</span>), the 
+            specified <span class="parameter">contentType</span> as the Content-Type, and the specified <span class="parameter">fileDownloadName</span> as the suggested file name.
+            This supports range requests (<span class="noLink">Status206PartialContent</span> or
+            <span class="noLink">Status416RangeNotSatisfiable</span> if the range is not satisfiable).
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Problem(String, String, Nullable<span id="LSTE7AA1470_64" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>Int32<span id="LSTE7AA1470_65" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>, String, String)</span></td><td>
+            Creates an <span class="noLink">ObjectResult</span> that produces a <span class="noLink">ProblemDetails</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Problem(String, String, Nullable<span id="LSTE7AA1470_66" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>Int32<span id="LSTE7AA1470_67" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>, String, String, IDictionary<span id="LSTE7AA1470_68" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>String, Object<span id="LSTE7AA1470_69" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>)</span></td><td>
+            Creates an <span class="noLink">ObjectResult</span> that produces a <span class="noLink">ProblemDetails</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Redirect</span></td><td>
+            Creates a <span class="noLink">RedirectResult</span> object that redirects (<span class="noLink">Status302Found</span>)
+            to the specified <span class="parameter">url</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectPermanent</span></td><td>
+            Creates a <span class="noLink">RedirectResult</span> object with <span class="noLink">Permanent</span> set to true
+            (<span class="noLink">Status301MovedPermanently</span>) using the specified <span class="parameter">url</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectPermanentPreserveMethod</span></td><td>
+            Creates a <span class="noLink">RedirectResult</span> object with <span class="noLink">Permanent</span> set to true
+            and <span class="noLink">PreserveMethod</span> set to true (<span class="noLink">Status308PermanentRedirect</span>) 
+            using the specified <span class="parameter">url</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectPreserveMethod</span></td><td>
+            Creates a <span class="noLink">RedirectResult</span> object with <span class="noLink">Permanent</span> set to false
+            and <span class="noLink">PreserveMethod</span> set to true (<span class="noLink">Status307TemporaryRedirect</span>) 
+            using the specified <span class="parameter">url</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToAction<span id="LSTE7AA1470_70" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span></td><td>
+             Redirects (<span class="noLink">Status302Found</span>) to an action with the same name as current one.
+             The 'controller' and 'action' names are retrieved from the ambient values of the current request.
+             <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToAction(String)</span></td><td>
+            Redirects (<span class="noLink">Status302Found</span>) to the specified action using the <span class="parameter">actionName</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToAction(String, Object)</span></td><td>
+            Redirects (<span class="noLink">Status302Found</span>) to the specified action using the 
+            <span class="parameter">actionName</span> and <span class="parameter">routeValues</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToAction(String, String)</span></td><td>
+            Redirects (<span class="noLink">Status302Found</span>) to the specified action using the 
+            <span class="parameter">actionName</span> and the <span class="parameter">controllerName</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToAction(String, String, Object)</span></td><td>
+            Redirects (<span class="noLink">Status302Found</span>) to the specified action using the specified
+            <span class="parameter">actionName</span>, <span class="parameter">controllerName</span>, and <span class="parameter">routeValues</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToAction(String, String, String)</span></td><td>
+            Redirects (<span class="noLink">Status302Found</span>) to the specified action using the specified
+            <span class="parameter">actionName</span>, <span class="parameter">controllerName</span>, and <span class="parameter">fragment</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToAction(String, String, Object, String)</span></td><td>
+            Redirects (<span class="noLink">Status302Found</span>) to the specified action using the specified <span class="parameter">actionName</span>,
+            <span class="parameter">controllerName</span>, <span class="parameter">routeValues</span>, and <span class="parameter">fragment</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToActionPermanent(String)</span></td><td>
+            Redirects (<span class="noLink">Status301MovedPermanently</span>) to the specified action with 
+            <span class="noLink">Permanent</span> set to true using the specified <span class="parameter">actionName</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToActionPermanent(String, Object)</span></td><td>
+            Redirects (<span class="noLink">Status301MovedPermanently</span>) to the specified action with 
+            <span class="noLink">Permanent</span> set to true using the specified <span class="parameter">actionName</span> 
+            and <span class="parameter">routeValues</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToActionPermanent(String, String)</span></td><td>
+            Redirects (<span class="noLink">Status301MovedPermanently</span>) to the specified action with 
+            <span class="noLink">Permanent</span> set to true using the specified <span class="parameter">actionName</span> 
+            and <span class="parameter">controllerName</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToActionPermanent(String, String, Object)</span></td><td>
+            Redirects (<span class="noLink">Status301MovedPermanently</span>) to the specified action with 
+            <span class="noLink">Permanent</span> set to true using the specified <span class="parameter">actionName</span>,
+            <span class="parameter">controllerName</span>, and <span class="parameter">routeValues</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToActionPermanent(String, String, String)</span></td><td>
+            Redirects (<span class="noLink">Status301MovedPermanently</span>) to the specified action with 
+            <span class="noLink">Permanent</span> set to true using the specified <span class="parameter">actionName</span>,
+            <span class="parameter">controllerName</span>, and <span class="parameter">fragment</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToActionPermanent(String, String, Object, String)</span></td><td>
+            Redirects (<span class="noLink">Status301MovedPermanently</span>) to the specified action with 
+            <span class="noLink">Permanent</span> set to true using the specified <span class="parameter">actionName</span>,
+            <span class="parameter">controllerName</span>, <span class="parameter">routeValues</span>, and <span class="parameter">fragment</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToActionPermanentPreserveMethod</span></td><td>
+            Redirects (<span class="noLink">Status308PermanentRedirect</span>) to the specified action with 
+            <span class="noLink">Permanent</span> set to true and <span class="noLink">PreserveMethod</span>
+            set to true, using the specified <span class="parameter">actionName</span>, <span class="parameter">controllerName</span>, 
+            <span class="parameter">routeValues</span>, and <span class="parameter">fragment</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToActionPreserveMethod</span></td><td>
+            Redirects (<span class="noLink">Status307TemporaryRedirect</span>) to the specified action with 
+            <span class="noLink">Permanent</span> set to false and <span class="noLink">PreserveMethod</span> 
+            set to true, using the specified <span class="parameter">actionName</span>, <span class="parameter">controllerName</span>, 
+            <span class="parameter">routeValues</span>, and <span class="parameter">fragment</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToPage(String)</span></td><td>
+            Redirects (<span class="noLink">Status302Found</span>) to the specified <span class="parameter">pageName</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToPage(String, Object)</span></td><td>
+            Redirects (<span class="noLink">Status302Found</span>) to the specified <span class="parameter">pageName</span>
+            using the specified <span class="parameter">routeValues</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToPage(String, String)</span></td><td>
+            Redirects (<span class="noLink">Status302Found</span>) to the specified <span class="parameter">pageName</span>
+            using the specified <span class="parameter">pageHandler</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToPage(String, String, Object)</span></td><td>
+            Redirects (<span class="noLink">Status302Found</span>) to the specified <span class="parameter">pageName</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToPage(String, String, String)</span></td><td>
+            Redirects (<span class="noLink">Status302Found</span>) to the specified <span class="parameter">pageName</span>
+            using the specified <span class="parameter">fragment</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToPage(String, String, Object, String)</span></td><td>
+            Redirects (<span class="noLink">Status302Found</span>) to the specified <span class="parameter">pageName</span>
+            using the specified <span class="parameter">routeValues</span> and <span class="parameter">fragment</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToPagePermanent(String)</span></td><td>
+            Redirects (<span class="noLink">Status301MovedPermanently</span>) to the specified <span class="parameter">pageName</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToPagePermanent(String, Object)</span></td><td>
+            Redirects (<span class="noLink">Status301MovedPermanently</span>) to the specified <span class="parameter">pageName</span>
+            using the specified <span class="parameter">routeValues</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToPagePermanent(String, String)</span></td><td>
+            Redirects (<span class="noLink">Status301MovedPermanently</span>) to the specified <span class="parameter">pageName</span>
+            using the specified <span class="parameter">pageHandler</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToPagePermanent(String, String, String)</span></td><td>
+            Redirects (<span class="noLink">Status301MovedPermanently</span>) to the specified <span class="parameter">pageName</span>
+            using the specified <span class="parameter">fragment</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToPagePermanent(String, String, Object, String)</span></td><td>
+            Redirects (<span class="noLink">Status301MovedPermanently</span>) to the specified <span class="parameter">pageName</span>
+            using the specified <span class="parameter">routeValues</span> and <span class="parameter">fragment</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToPagePermanentPreserveMethod</span></td><td>
+            Redirects (<span class="noLink">Status308PermanentRedirect</span>) to the specified route with
+            <span class="noLink">Permanent</span> set to true and <span class="noLink">PreserveMethod</span>
+            set to true, using the specified <span class="parameter">pageName</span>, <span class="parameter">routeValues</span>, and <span class="parameter">fragment</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToPagePreserveMethod</span></td><td>
+            Redirects (<span class="noLink">Status307TemporaryRedirect</span>) to the specified page with 
+            <span class="noLink">Permanent</span> set to false and <span class="noLink">PreserveMethod</span>
+            set to true, using the specified <span class="parameter">pageName</span>, <span class="parameter">routeValues</span>, and <span class="parameter">fragment</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToRoute(Object)</span></td><td>
+            Redirects (<span class="noLink">Status302Found</span>) to the specified route using the specified <span class="parameter">routeValues</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToRoute(String)</span></td><td>
+            Redirects (<span class="noLink">Status302Found</span>) to the specified route using the specified <span class="parameter">routeName</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToRoute(String, Object)</span></td><td>
+            Redirects (<span class="noLink">Status302Found</span>) to the specified route using the specified
+            <span class="parameter">routeName</span> and <span class="parameter">routeValues</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToRoute(String, String)</span></td><td>
+            Redirects (<span class="noLink">Status302Found</span>) to the specified route using the specified
+            <span class="parameter">routeName</span> and <span class="parameter">fragment</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToRoute(String, Object, String)</span></td><td>
+            Redirects (<span class="noLink">Status302Found</span>) to the specified route using the specified
+            <span class="parameter">routeName</span>, <span class="parameter">routeValues</span>, and <span class="parameter">fragment</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToRoutePermanent(Object)</span></td><td>
+            Redirects (<span class="noLink">Status301MovedPermanently</span>) to the specified route with 
+            <span class="noLink">Permanent</span> set to true using the specified <span class="parameter">routeValues</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToRoutePermanent(String)</span></td><td>
+            Redirects (<span class="noLink">Status301MovedPermanently</span>) to the specified route with 
+            <span class="noLink">Permanent</span> set to true using the specified <span class="parameter">routeName</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToRoutePermanent(String, Object)</span></td><td>
+            Redirects (<span class="noLink">Status301MovedPermanently</span>) to the specified route with
+            <span class="noLink">Permanent</span> set to true using the specified <span class="parameter">routeName</span>
+            and <span class="parameter">routeValues</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToRoutePermanent(String, String)</span></td><td>
+            Redirects (<span class="noLink">Status301MovedPermanently</span>) to the specified route with 
+            <span class="noLink">Permanent</span> set to true using the specified <span class="parameter">routeName</span>
+            and <span class="parameter">fragment</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToRoutePermanent(String, Object, String)</span></td><td>
+            Redirects (<span class="noLink">Status301MovedPermanently</span>) to the specified route with
+            <span class="noLink">Permanent</span> set to true using the specified <span class="parameter">routeName</span>,
+            <span class="parameter">routeValues</span>, and <span class="parameter">fragment</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToRoutePermanentPreserveMethod</span></td><td>
+            Redirects (<span class="noLink">Status308PermanentRedirect</span>) to the specified route with
+            <span class="noLink">Permanent</span> set to true and <span class="noLink">PreserveMethod</span>
+            set to true, using the specified <span class="parameter">routeName</span>, <span class="parameter">routeValues</span>, and <span class="parameter">fragment</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">RedirectToRoutePreserveMethod</span></td><td>
+            Redirects (<span class="noLink">Status307TemporaryRedirect</span>) to the specified route with 
+            <span class="noLink">Permanent</span> set to false and <span class="noLink">PreserveMethod</span>
+            set to true, using the specified <span class="parameter">routeName</span>, <span class="parameter">routeValues</span>, and <span class="parameter">fragment</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">SignIn(ClaimsPrincipal)</span></td><td>
+            Creates a <span class="noLink">SignInResult</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">SignIn(ClaimsPrincipal, AuthenticationProperties)</span></td><td>
+            Creates a <span class="noLink">SignInResult</span> with <span class="parameter">properties</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">SignIn(ClaimsPrincipal, String)</span></td><td>
+            Creates a <span class="noLink">SignInResult</span> with the specified authentication scheme.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">SignIn(ClaimsPrincipal, AuthenticationProperties, String)</span></td><td>
+            Creates a <span class="noLink">SignInResult</span> with the specified authentication scheme and
+            <span class="parameter">properties</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">SignOut<span id="LSTE7AA1470_71" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span></td><td>
+            Creates a <span class="noLink">SignOutResult</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">SignOut(AuthenticationProperties)</span></td><td>
+            Creates a <span class="noLink">SignOutResult</span> with <span class="parameter">properties</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">SignOut(<span id="LSTE7AA1470_72" data-languageSpecificText="cpp=array&lt;"></span>String<span id="LSTE7AA1470_73" data-languageSpecificText="cpp=&gt;|cs=[]|vb=()|nu=[]|fs=[]"></span>)</span></td><td>
+            Creates a <span class="noLink">SignOutResult</span> with the specified authentication schemes.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">SignOut(AuthenticationProperties, <span id="LSTE7AA1470_74" data-languageSpecificText="cpp=array&lt;"></span>String<span id="LSTE7AA1470_75" data-languageSpecificText="cpp=&gt;|cs=[]|vb=()|nu=[]|fs=[]"></span>)</span></td><td>
+            Creates a <span class="noLink">SignOutResult</span> with the specified authentication schemes and
+            <span class="parameter">properties</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">StatusCode(Int32)</span></td><td>
+            Creates a <span class="noLink">StatusCodeResult</span> object by specifying a <span class="parameter">statusCode</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">StatusCode(Int32, Object)</span></td><td>
+            Creates a <span class="noLink">ObjectResult</span> object by specifying a <span class="parameter">statusCode</span> and <span class="parameter">value</span><br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">ToString</span></td><td>Returns a string that represents the current object.<br />(Inherited from <span class="noLink">Object</span>)</td></tr><tr><td><span class="noLink">TryUpdateModelAsync(Object, Type, String)</span></td><td>
+            Updates the specified <span class="parameter">model</span> instance using values from the controller's current
+            <span class="noLink">IValueProvider</span> and a <span class="parameter">prefix</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">TryUpdateModelAsync(Object, Type, String, IValueProvider, Func<span id="LSTE7AA1470_76" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>ModelMetadata, Boolean<span id="LSTE7AA1470_77" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>)</span></td><td>
+            Updates the specified <span class="parameter">model</span> instance using the <span class="parameter">valueProvider</span> and a
+            <span class="parameter">prefix</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">TryUpdateModelAsync<span id="LSTE7AA1470_78" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>TModel<span id="LSTE7AA1470_79" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>(TModel)</span></td><td>
+            Updates the specified <span class="parameter">model</span> instance using values from the controller's current
+            <span class="noLink">IValueProvider</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">TryUpdateModelAsync<span id="LSTE7AA1470_80" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>TModel<span id="LSTE7AA1470_81" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>(TModel, String)</span></td><td>
+            Updates the specified <span class="parameter">model</span> instance using values from the controller's current
+            <span class="noLink">IValueProvider</span> and a <span class="parameter">prefix</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">TryUpdateModelAsync<span id="LSTE7AA1470_82" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>TModel<span id="LSTE7AA1470_83" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>(TModel, String, Func<span id="LSTE7AA1470_84" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>ModelMetadata, Boolean<span id="LSTE7AA1470_85" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>)</span></td><td>
+            Updates the specified <span class="parameter">model</span> instance using values from the controller's current
+            <span class="noLink">IValueProvider</span> and a <span class="parameter">prefix</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">TryUpdateModelAsync<span id="LSTE7AA1470_86" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>TModel<span id="LSTE7AA1470_87" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>(TModel, String, IValueProvider)</span></td><td>
+            Updates the specified <span class="parameter">model</span> instance using the <span class="parameter">valueProvider</span> and a
+            <span class="parameter">prefix</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">TryUpdateModelAsync<span id="LSTE7AA1470_88" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>TModel<span id="LSTE7AA1470_89" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>(TModel, String, <span id="LSTE7AA1470_90" data-languageSpecificText="cpp=array&lt;"></span>Expression<span id="LSTE7AA1470_91" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>Func<span id="LSTE7AA1470_92" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>TModel, Object<span id="LSTE7AA1470_93" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span><span id="LSTE7AA1470_94" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span><span id="LSTE7AA1470_95" data-languageSpecificText="cpp=&gt;|cs=[]|vb=()|nu=[]|fs=[]"></span>)</span></td><td>
+            Updates the specified <span class="parameter">model</span> instance using values from the controller's current
+            <span class="noLink">IValueProvider</span> and a <span class="parameter">prefix</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">TryUpdateModelAsync<span id="LSTE7AA1470_96" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>TModel<span id="LSTE7AA1470_97" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>(TModel, String, IValueProvider, Func<span id="LSTE7AA1470_98" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>ModelMetadata, Boolean<span id="LSTE7AA1470_99" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>)</span></td><td>
+            Updates the specified <span class="parameter">model</span> instance using the <span class="parameter">valueProvider</span> and a
+            <span class="parameter">prefix</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">TryUpdateModelAsync<span id="LSTE7AA1470_100" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>TModel<span id="LSTE7AA1470_101" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>(TModel, String, IValueProvider, <span id="LSTE7AA1470_102" data-languageSpecificText="cpp=array&lt;"></span>Expression<span id="LSTE7AA1470_103" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>Func<span id="LSTE7AA1470_104" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>TModel, Object<span id="LSTE7AA1470_105" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span><span id="LSTE7AA1470_106" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span><span id="LSTE7AA1470_107" data-languageSpecificText="cpp=&gt;|cs=[]|vb=()|nu=[]|fs=[]"></span>)</span></td><td>
+            Updates the specified <span class="parameter">model</span> instance using the <span class="parameter">valueProvider</span> and a
+            <span class="parameter">prefix</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">TryValidateModel(Object)</span></td><td>
+            Validates the specified <span class="parameter">model</span> instance.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">TryValidateModel(Object, String)</span></td><td>
+            Validates the specified <span class="parameter">model</span> instance.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Unauthorized<span id="LSTE7AA1470_108" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span></td><td>
+            Creates an <span class="noLink">UnauthorizedResult</span> that produces an <span class="noLink">Status401Unauthorized</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">Unauthorized(Object)</span></td><td>
+            Creates an <span class="noLink">UnauthorizedObjectResult</span> that produces a <span class="noLink">Status401Unauthorized</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">UnprocessableEntity<span id="LSTE7AA1470_109" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span></td><td>
+            Creates an <span class="noLink">UnprocessableEntityResult</span> that produces a <span class="noLink">Status422UnprocessableEntity</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">UnprocessableEntity(ModelStateDictionary)</span></td><td>
+            Creates an <span class="noLink">UnprocessableEntityObjectResult</span> that produces a <span class="noLink">Status422UnprocessableEntity</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">UnprocessableEntity(Object)</span></td><td>
+            Creates an <span class="noLink">UnprocessableEntityObjectResult</span> that produces a <span class="noLink">Status422UnprocessableEntity</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">ValidationProblem<span id="LSTE7AA1470_110" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></span></td><td>
+            Creates an <span class="noLink">BadRequestObjectResult</span> that produces a <span class="noLink">Status400BadRequest</span> response
+            with validation errors from <span class="noLink">ModelState</span>.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">ValidationProblem(ModelStateDictionary)</span></td><td>
+            Creates an <span class="noLink">BadRequestObjectResult</span> that produces a <span class="noLink">Status400BadRequest</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">ValidationProblem(ValidationProblemDetails)</span></td><td>
+            Creates an <span class="noLink">BadRequestObjectResult</span> that produces a <span class="noLink">Status400BadRequest</span> response.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">ValidationProblem(String, String, Nullable<span id="LSTE7AA1470_111" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>Int32<span id="LSTE7AA1470_112" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>, String, String, ModelStateDictionary)</span></td><td>
+            Creates an <span class="noLink">ActionResult</span> that produces a <span class="noLink">Status400BadRequest</span> response
+            with a <span class="noLink">ValidationProblemDetails</span> value.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr><tr><td><span class="noLink">ValidationProblem(String, String, Nullable<span id="LSTE7AA1470_113" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>Int32<span id="LSTE7AA1470_114" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>, String, String, ModelStateDictionary, IDictionary<span id="LSTE7AA1470_115" data-languageSpecificText="cs=&lt;|vb=(Of |cpp=&lt;|fs=&lt;'|nu=("></span>String, Object<span id="LSTE7AA1470_116" data-languageSpecificText="cs=&gt;|vb=)|cpp=&gt;|fs=&gt;|nu=)"></span>)</span></td><td>
+            Creates an <span class="noLink">ActionResult</span> that produces a <span class="noLink">Status400BadRequest</span> response
+            with a <span class="noLink">ValidationProblemDetails</span> value.
+            <br />(Inherited from <span class="noLink">ControllerBase</span>)</td></tr></table></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>See Also</h2><div id="seeAlsoSection"><h4>Reference</h4><div><a href="N_Gemstone_Web_APIController.htm">Gemstone.Web.APIController Namespace</a></div></div></div><div id="InThisArticleColumn" class="column is-hidden-mobile"><nav class="menu sticky is-hidden"><p class="menu-label"><strong>In This Article</strong></p><ul id="InThisArticleMenu" class="menu-list"><li><a class="quickLink">Definition</a></li><li><a class="quickLink">Constructors</a></li><li><a class="quickLink">Properties</a></li><li><a class="quickLink">Methods</a></li><li><a class="quickLink">See Also</a></li></ul></nav></div></div></div><footer id="PageFooter" class="footer border-top py-3 fixedFooter"><div class="columns"><div class="column"><span class="site-footer-credits">
+<a href="https://gemstone.github.io/web/" target="_self">Documentation Home</a>  •  <a href="https://www.nuget.org/packages/Gemstone.Web/" target="_blank">Gemstone Web Library on NuGet</a><br /><br />
+Generated by <a href="https://github.com/EWSoftware/SHFB" target="_blank">Sandcastle Help File Builder</a>
+</span><p><a href="https://github.com/gemstone/web/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">Copyright © 2020 Grid Protection Alliance</a></p><div class="feedbackLink">Send comments on this topic to
+        <a id="HT_MailLink" href="mailto:support%40gridprotectionalliance.org?Subject=Gemstone%20Web%20Library">GPA Support</a></div>
+        <script type="text/javascript">
+        var HT_mailLink = document.getElementById("HT_MailLink");
+        HT_mailLink.href += ": " + document.title + "\u0026body=" + encodeURIComponent("Your feedback is used to improve the documentation and the product. Your e-mail address will not be used for any other purpose and is disposed of after the issue you report is resolved. While working to resolve the issue that you report, you may be contacted via e-mail to get further details or clarification on the feedback you sent. After the issue you report has been addressed, you may receive an e-mail to let you know that your feedback has been addressed.");
+        </script> 
+				</div><div class="column"> 
+				</div></div></footer></div><script>$(function(){
+SetDefaultLanguage("cs");
+LoadTocFile(null, null);
+InitializeQuickLinks();
+
+$(".toggleSection" ).click(function () {
+    SectionExpandCollapse(this);
+});
+
+$(".toggleSection").keypress(function () {
+    SectionExpandCollapseCheckKey(this, event)
+});
+hljs.highlightAll();
+});</script><script>
+		$(".requestExampleLink").each(function ()
+		{
+			if(this.href.substring(0, 4).toLowerCase() === "http")
+				this.href += "?title=";
+			else
+				this.href += "?subject=Gemstone%20Web%20Library: ";
+
+			this.href += "Add an Example for " + encodeURIComponent(document.title) + "&amp;body=" +
+				encodeURIComponent("Please add an example for " + document.title + ".%0D%0DTODO (optional): Describe a specific " +
+				"scenario you would like to see addressed.%0D%0DHelp Topic: " + window.location.href).replace(/%250D/g, "%0D");
+		});
+	</script></body></html>
