@@ -85,10 +85,12 @@ public static class AuthenticationWebBuilderExtensions
 
         public IAuthenticationWebBuilder UseProvider(string providerIdentity, string pathMatch, string scheme)
         {
+            AuthenticationProviderInfo providerInfo = new(providerIdentity, scheme);
+
             app.Map(pathMatch, branch => branch
                 .UseRouting()
                 .UseAuthorization()
-                .UseMiddleware<AuthenticationRuntimeMiddleware>(providerIdentity)
+                .UseMiddleware<AuthenticationRuntimeMiddleware>(providerInfo)
                 .UseEndpoints(endpoints =>
                 {
                     IEndpointConventionBuilder conventions = endpoints.MapGet("/", async context =>
@@ -121,17 +123,38 @@ public static class AuthenticationWebBuilderExtensions
                 return;
             }
 
+            // Log out of the cookie authentication scheme
+            // to revoke the authentication ticket
             await httpContext.SignOutAsync();
 
-            // This handles the redirect to login page
-            if (!IsAjaxRequest(httpContext.Request))
-                await httpContext.ChallengeAsync();
+            string? scheme = httpContext.User.Identity?.AuthenticationType;
+
+            if (scheme is not null)
+            {
+                IAuthenticationHandlerProvider provider = httpContext.RequestServices.GetRequiredService<IAuthenticationHandlerProvider>();
+                IAuthenticationHandler? handler = await provider.GetHandlerAsync(httpContext, scheme);
+
+                // Check if the authentication provider that signed the
+                // user in has a handler for signing the user out
+                if (handler is not null && handler is IAuthenticationSignOutHandler)
+                    await httpContext.SignOutAsync(scheme);
+            }
+
+            // If the sign out procedure did not trigger any errors or redirects,
+            // this asks the cookie authentication scheme to redirect to the login page
+            if (IsSuccess(httpContext.Response.StatusCode) && !IsAjaxRequest(httpContext.Request))
+                await httpContext.ChallengeAsync(new AuthenticationProperties() { RedirectUri = "/" });
         }
 
         private bool IsLogoutRequest(HttpRequest request)
         {
             PathString logoutPath = Options.LogoutPath;
             return logoutPath.HasValue && request.Path.StartsWithSegments(logoutPath);
+        }
+
+        private static bool IsSuccess(int statusCode)
+        {
+            return statusCode >= 200 && statusCode <= 299;
         }
 
         // Taken from Microsoft's reference source for the Cookie authentication implementation
