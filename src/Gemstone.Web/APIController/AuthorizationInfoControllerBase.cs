@@ -188,11 +188,11 @@ public abstract partial class AuthorizationInfoControllerBase : ControllerBase
             if (!hasControllerAccessRequirement)
                 continue;
 
-            ResourceAccessAttribute? accessAttribute = endpoint.Metadata
-                .GetMetadata<ResourceAccessAttribute>();
+            IReadOnlyList<ResourceAccessAttribute> accessAttributes = endpoint.Metadata
+                .GetOrderedMetadata<ResourceAccessAttribute>();
 
-            string resourceName = accessAttribute.GetResourceName(descriptor);
-            IEnumerable<ResourceAccessType> accessTypes = ToAccessTypes(endpoint, accessAttribute);
+            string resourceName = accessAttributes.GetResourceName(descriptor);
+            IEnumerable<ResourceAccessType> accessTypes = ToAccessTypes(endpoint, accessAttributes);
             HashSet<ResourceAccessType> access = resourceAccessLookup.GetOrAdd(resourceName, _ => []);
             access.UnionWith(accessTypes);
         }
@@ -208,10 +208,15 @@ public abstract partial class AuthorizationInfoControllerBase : ControllerBase
 
         return Ok(resources);
 
-        static IEnumerable<ResourceAccessType> ToAccessTypes(Endpoint endpoint, ResourceAccessAttribute? accessAttribute)
+        static IEnumerable<ResourceAccessType> ToAccessTypes(Endpoint endpoint, IEnumerable<ResourceAccessAttribute> accessAttributes)
         {
-            if (accessAttribute is not null)
-                return [accessAttribute.Access];
+            ResourceAccessType accessType = accessAttributes.GetAccessType();
+
+            if (accessType == ResourceAccessType.None)
+                return [];
+
+            if (accessType != ResourceAccessType.Default)
+                return [accessType];
 
             HttpMethodMetadata? httpMethodMetadata = endpoint.Metadata
                 .GetMetadata<HttpMethodMetadata>();
@@ -220,9 +225,8 @@ public abstract partial class AuthorizationInfoControllerBase : ControllerBase
                 ?? [];
 
             return httpMethods
-                .Select(accessAttribute.GetAccessType)
-                .Where(type => type is not null)
-                .Select(type => type.GetValueOrDefault());
+                .Select(accessAttributes.GetAccessType)
+                .Where(type => type != ResourceAccessType.None);
         }
     }
 
