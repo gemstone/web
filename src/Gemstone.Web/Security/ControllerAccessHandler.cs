@@ -21,6 +21,7 @@
 //
 //******************************************************************************************************
 
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Gemstone.Security.AccessControl;
@@ -153,16 +154,13 @@ public class ControllerAccessHandler : AuthorizationHandler<ControllerAccessRequ
 
     private static void HandleResourceAccessPermission(ContextWrapper wrapper)
     {
-        IResourceAccessAttribute? accessAttribute = wrapper.Endpoint.Metadata
-            .GetMetadata<IResourceAccessAttribute>();
+        IReadOnlyList<ResourceAccessAttribute> accessAttributes = wrapper.Endpoint.Metadata
+            .GetOrderedMetadata<ResourceAccessAttribute>();
 
-        if (accessAttribute is NoResourceAccessAttribute)
-            return;
+        string resourceName = accessAttributes.GetResourceName(wrapper.Descriptor);
+        ResourceAccessType access = accessAttributes.GetAccessType(wrapper.HttpMethod);
 
-        string resourceName = accessAttribute.GetResourceName(wrapper.Descriptor);
-        ResourceAccessType? access = accessAttribute.GetAccessType(wrapper.HttpMethod);
-
-        if (access.HasValue && wrapper.User.HasAccessTo("Controller", resourceName, access.GetValueOrDefault()))
+        if (wrapper.User.HasAccessTo("Controller", resourceName, access))
             wrapper.Succeed();
     }
 
