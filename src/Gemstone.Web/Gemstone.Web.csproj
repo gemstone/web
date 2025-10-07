@@ -29,6 +29,7 @@
     <InformationalVersion Condition="'$(Configuration)'!='Release'">1.0.146 -- Debug Build</InformationalVersion>
     <Configurations>Debug;Release;Development</Configurations>
     <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+    <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
 
   <PropertyGroup>
