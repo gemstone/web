@@ -870,21 +870,45 @@
       <param name="host">The host of the web server.</param>
       <returns>The list of addresses the server is listening on.</returns>
     </member>
+    <member name="T:Gemstone.Web.Security.AuthenticationProviderInfo">
+      <summary>
+            Provides information about an authentication provider.
+            </summary>
+      <param name="identity">The identity of the provider</param>
+      <param name="scheme">The scheme used by the provider to authenticate users</param>
+    </member>
+    <member name="M:Gemstone.Web.Security.AuthenticationProviderInfo.#ctor(System.String,System.String)">
+      <summary>
+            Provides information about an authentication provider.
+            </summary>
+      <param name="identity">The identity of the provider</param>
+      <param name="scheme">The scheme used by the provider to authenticate users</param>
+    </member>
+    <member name="P:Gemstone.Web.Security.AuthenticationProviderInfo.Identity">
+      <summary>
+            Gets the identity of the provider.
+            </summary>
+    </member>
+    <member name="P:Gemstone.Web.Security.AuthenticationProviderInfo.Scheme">
+      <summary>
+            Gets the scheme used by the provider to authenticate users.
+            </summary>
+    </member>
     <member name="T:Gemstone.Web.Security.AuthenticationRuntimeMiddleware">
       <summary>
             Represents a middleware used to assign claims to authenticated users.
             </summary>
       <param name="next">Delegate used to invoke the next middleware in the pipeline</param>
       <param name="runtime">The authentication runtime used to query assigned claims</param>
-      <param name="providerIdentity">The identity of the provider that authenticated the user</param>
+      <param name="providerInfo">Information about the provider that authenticates the user</param>
     </member>
-    <member name="M:Gemstone.Web.Security.AuthenticationRuntimeMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Gemstone.Security.AuthenticationProviders.IAuthenticationRuntime,System.String)">
+    <member name="M:Gemstone.Web.Security.AuthenticationRuntimeMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Gemstone.Security.AuthenticationProviders.IAuthenticationRuntime,Gemstone.Web.Security.AuthenticationProviderInfo)">
       <summary>
             Represents a middleware used to assign claims to authenticated users.
             </summary>
       <param name="next">Delegate used to invoke the next middleware in the pipeline</param>
       <param name="runtime">The authentication runtime used to query assigned claims</param>
-      <param name="providerIdentity">The identity of the provider that authenticated the user</param>
+      <param name="providerInfo">Information about the provider that authenticates the user</param>
     </member>
     <member name="M:Gemstone.Web.Security.AuthenticationRuntimeMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
       <summary>
