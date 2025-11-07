@@ -106,21 +106,11 @@ namespace Gemstone.Web
                 cookieCallback(result.Cookies);
             }
 
-            foreach (KeyValuePair<string, IEnumerable<string>> header in message.Headers)
-            {
-                if (excludedHeaders is not null && excludedHeaders.Contains(header.Key))
-                    continue;
-
+            foreach(KeyValuePair<string, IEnumerable<string>> header in message.Headers.Where(header => excludedHeaders is null || !excludedHeaders.Contains(header.Key)))
                 result.Headers[header.Key] = header.Value.ToArray();
-            }
 
-            foreach (KeyValuePair<string, IEnumerable<string>> header in message.Content.Headers)
-            {
-                if (excludedHeaders is not null && excludedHeaders.Contains(header.Key))
-                    continue;
-
+            foreach (KeyValuePair<string, IEnumerable<string>> header in message.Content.Headers.Where(header => excludedHeaders is null || !excludedHeaders.Contains(header.Key)))
                 result.Headers[header.Key] = header.Value.ToArray();
-            }
 
             result.Headers.Remove("transfer-encoding");
 
