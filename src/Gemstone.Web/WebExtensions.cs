@@ -107,7 +107,7 @@ namespace Gemstone.Web
                 cookieCallback(result.Cookies);
             }
 
-            HashSet<string> fullExcludedList = (excludedHeaders is null ? excludeHeaderBase : excludeHeaderBase.Concat(excludedHeaders)).ToHashSet();
+            HashSet<string> fullExcludedList = (excludedHeaders is null ? excludeHeaderBase : excludeHeaderBase.Concat(excludedHeaders)).ToHashSet(StringComparer.OrdinalIgnoreCase);
 
             foreach(KeyValuePair<string, IEnumerable<string>> header in message.Headers.Where(header => !fullExcludedList.Contains(header.Key)))
                 result.Headers[header.Key] = header.Value.ToArray();
