@@ -57,7 +57,7 @@ namespace Gemstone.Web
         }
 
         /// <summary>
-        /// Used to load headers, respone phrase, and status code into <see cref="HttpResponse"/> for use of proxy endpoints between .NET Core and .NET Framework Apps.
+        /// Used to load headers, response phrase, and status code into <see cref="HttpResponse"/> for use of proxy endpoints between .NET Core and .NET Framework Apps.
         /// </summary>
         /// <param name="result">HttpResponse from controller.</param>
         /// <param name="message">Response message from .NET Framework App.</param>
@@ -67,14 +67,14 @@ namespace Gemstone.Web
 
 
         /// <summary>
-        /// Used to load headers, respone phrase, and status code into <see cref="HttpResponse"/> for use of proxy endpoints between .NET Core and .NET Framework Apps.
+        /// Used to load headers, response phrase, and status code into <see cref="HttpResponse"/> for use of proxy endpoints between .NET Core and .NET Framework Apps.
         /// </summary>
         /// <param name="result">HttpResponse from controller.</param>
         /// <param name="message">Response message from .NET Framework App.</param>
         /// <param name="excludedHeaders">Additional headers to exclude on the copy over between objects.</param>
-        /// <param name="cookieCallback">Callback to append additional cookies to resposne header.</param>
+        /// <param name="cookieCallback">Callback to append additional cookies to response header.</param>
         /// <param name="cancellationToken">Token to cancel the action.</param>
-        public static async Task SetValues(this HttpResponse result, HttpResponseMessage? message, HashSet<string>? excludedHeaders, Action<IResponseCookies>? cookieCallback, CancellationToken cancellationToken)
+        public static async Task SetValues(this HttpResponse result, HttpResponseMessage? message, IEnumerable<string>? excludedHeaders, Action<IResponseCookies>? cookieCallback, CancellationToken cancellationToken)
         {
             if (message is null)
             {
@@ -82,9 +82,15 @@ namespace Gemstone.Web
                 return;
             }
 
+            result.StatusCode = (int)message.StatusCode;
+            IHttpResponseFeature? feature = result.HttpContext.Response.HttpContext.Features.Get<IHttpResponseFeature>();
+            if (feature is not null)
+                feature.ReasonPhrase = message.ReasonPhrase;
+
+            // Handle Set-Cookie Header
             if (message.Headers.TryGetValues("Set-Cookie", out IEnumerable<string>? setCookieHeaders))
             {
-                // Forward any "Set-Cookie" headers from message back to reponse using ASP.NET Core cookie
+                // Forward any "Set-Cookie" headers from message back to response using ASP.NET Core cookie
                 foreach (string header in setCookieHeaders)
                 {
                     // Try parsing HttpResponseMessage cookie header with an HttpResponse CookieOptions value,
@@ -96,27 +102,20 @@ namespace Gemstone.Web
                 }
             }
 
-            result.StatusCode = (int)message.StatusCode;
-            IHttpResponseFeature? feature = result.HttpContext.Response.HttpContext.Features.Get<IHttpResponseFeature>();
-            if (feature is not null)
-                feature.ReasonPhrase = message.ReasonPhrase;
-
             if (cookieCallback is not null)
             {
                 cookieCallback(result.Cookies);
             }
 
-            foreach(KeyValuePair<string, IEnumerable<string>> header in message.Headers.Where(header => excludedHeaders is null || !excludedHeaders.Contains(header.Key)))
+            HashSet<string> fullExcludedList = (excludedHeaders is null ? excludeHeaderBase : excludeHeaderBase.Concat(excludedHeaders)).ToHashSet();
+
+            foreach(KeyValuePair<string, IEnumerable<string>> header in message.Headers.Where(header => !fullExcludedList.Contains(header.Key)))
                 result.Headers[header.Key] = header.Value.ToArray();
 
-            foreach (KeyValuePair<string, IEnumerable<string>> header in message.Content.Headers.Where(header => excludedHeaders is null || !excludedHeaders.Contains(header.Key)))
+            foreach (KeyValuePair<string, IEnumerable<string>> header in message.Content.Headers.Where(header => !fullExcludedList.Contains(header.Key)))
                 result.Headers[header.Key] = header.Value.ToArray();
 
             result.Headers.Remove("transfer-encoding");
-
-            // Set content type
-            if (message.Content.Headers.ContentType is not null)
-                result.ContentType = message.Content.Headers.ContentType.ToString();
 
             if (message.Content.Headers.ContentLength.GetValueOrDefault() <= 0)
                 return;
@@ -132,6 +131,11 @@ namespace Gemstone.Web
 
             return;
         }
+
+        private static string[] excludeHeaderBase = [
+                "Set-Cookie", // Handled seperately
+                "transfer-encoding" // Can break data transfer
+        ];
 
         private static bool TryParseSetCookie(string header, out string name, out string? value, out CookieOptions options)
         {
