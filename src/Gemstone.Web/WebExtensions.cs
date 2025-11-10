@@ -115,8 +115,6 @@ namespace Gemstone.Web
             foreach (KeyValuePair<string, IEnumerable<string>> header in message.Content.Headers.Where(header => !fullExcludedList.Contains(header.Key)))
                 result.Headers[header.Key] = header.Value.ToArray();
 
-            result.Headers.Remove("transfer-encoding");
-
             if (message.Content.Headers.ContentLength.GetValueOrDefault() <= 0)
                 return;
 
