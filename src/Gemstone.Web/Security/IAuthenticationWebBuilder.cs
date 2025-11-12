@@ -22,10 +22,13 @@
 //******************************************************************************************************
 
 using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Gemstone.Configuration;
 using Gemstone.Security.AuthenticationProviders;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -249,8 +252,33 @@ public static class AuthenticationWebBuilderExtensions
 
         return services
             .AddWindowsAuthenticationProvider()
+            .AddOAuthAuthenticationProvider((config) =>
+            {
+                SettingsSection section = Settings.Instance["Security.OpenIDConnect"];
+                config.UserIdClaim = (string)section["UserIdClaim"] ?? "sub";
+            })
             .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddNegotiate("windows", _ => { })
+            .AddOpenIdConnect("oauth", options =>
+            {
+                SettingsSection section = Settings.Instance["Security.OpenIDConnect"];
+
+                //options.Authority = "https://auth.gridprotectionalliance.org/realms/Test";
+                //options.ClientId = "PQDigest";
+                //options.ClientSecret = "5vjXZXmliLyTkTxGeHD7WvyHQPgrd98E";
+                //options.CallbackPath = "/index.html";
+
+                options.Authority = (string)section["Authority"];
+                options.ClientId = (string)section["ClientId"];
+                options.ClientSecret = (string)section["ClientSecret"];
+                options.CallbackPath = "/index.html";
+
+                options.Scope.Add("openid");
+
+                foreach (string scope in ((string)section["Scopes"]).Split(' ', StringSplitOptions.RemoveEmptyEntries))
+                    options.Scope.Add(scope);
+
+            })
             .AddCookie();
     }
 }
