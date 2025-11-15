@@ -9,6 +9,40 @@
             Defines extension methods useful for web applications.
             </summary>
     </member>
+    <member name="M:Gemstone.Web.WebExtensions.SetValues(Microsoft.AspNetCore.Http.HttpResponse,System.Net.Http.HttpResponseMessage,System.Collections.Generic.IEnumerable{System.String},System.Action{Microsoft.AspNetCore.Http.IResponseCookies},System.Threading.CancellationToken)">
+      <summary>
+            Used to load headers, response phrase, and status code into <see cref="T:Microsoft.AspNetCore.Http.HttpResponse" /> for use of proxy endpoints between .NET Core and .NET Framework Apps.
+            </summary>
+      <param name="result">HttpResponse from controller.</param>
+      <param name="message">Response message from .NET Framework App.</param>
+      <param name="excludedHeaders">Additional headers to exclude on the copy over between objects.</param>
+      <param name="cookieCallback">Callback to append additional cookies to response header.</param>
+      <param name="cancellationToken">Token to cancel the action.</param>
+      <returns>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>returns</parameter>
+            <parameter>M:Gemstone.Web.WebExtensions.SetValues(Microsoft.AspNetCore.Http.HttpResponse,System.Net.Http.HttpResponseMessage,System.Collections.Generic.IEnumerable{System.String},System.Action{Microsoft.AspNetCore.Http.IResponseCookies},System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </returns>
+    </member>
+    <member name="M:Gemstone.Web.WebExtensions.SetValues(Microsoft.AspNetCore.Http.HttpResponse,System.Net.Http.HttpResponseMessage,System.Threading.CancellationToken)">
+      <summary>
+            Used to load headers, response phrase, and status code into <see cref="T:Microsoft.AspNetCore.Http.HttpResponse" /> for use of proxy endpoints between .NET Core and .NET Framework Apps.
+            </summary>
+      <param name="result">HttpResponse from controller.</param>
+      <param name="message">Response message from .NET Framework App.</param>
+      <param name="cancellationToken">Token to cancel the action.</param>
+      <returns>
+        <markup>
+          <include item="SMCMissingTag">
+            <parameter>returns</parameter>
+            <parameter>M:Gemstone.Web.WebExtensions.SetValues(Microsoft.AspNetCore.Http.HttpResponse,System.Net.Http.HttpResponseMessage,System.Threading.CancellationToken)</parameter>
+          </include>
+        </markup>
+      </returns>
+    </member>
     <member name="M:Gemstone.Web.WebExtensions.StaticFileEmbeddedResources">
       <summary>
             Used to create <see cref="T:Microsoft.AspNetCore.Builder.StaticFileOptions" /> for serving Gemstone.Web embedded javascript and css stylesheets.
