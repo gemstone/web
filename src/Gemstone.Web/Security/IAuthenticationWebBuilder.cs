@@ -250,35 +250,38 @@ public static class AuthenticationWebBuilderExtensions
                 options.Cookie.IsEssential = true;
             });
 
-        return services
-            .AddWindowsAuthenticationProvider()
-            .AddOAuthAuthenticationProvider((config) =>
+        // Only Add OpenID if it is configured
+        SettingsSection section = Settings.Instance["Security.OpenIDConnect"];
+        bool addOAuth = (bool)(section["Enabled"] ?? false);
+
+        IServiceCollection authenticationServices = services.AddWindowsAuthenticationProvider();
+
+        if (addOAuth)
+            authenticationServices = authenticationServices.AddOAuthAuthenticationProvider((config) =>
             {
-                SettingsSection section = Settings.Instance["Security.OpenIDConnect"];
-                config.UserIdClaim = (string)section["UserIdClaim"] ?? "sub";
-            })
+                config.UserIdClaim = (string)(section["UserIdClaim"] ?? "sub");
+            });
+
+        AuthenticationBuilder builder = authenticationServices
             .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            .AddNegotiate("windows", _ => { })
-            .AddOpenIdConnect("oauth", options =>
-            {
-                SettingsSection section = Settings.Instance["Security.OpenIDConnect"];
+            .AddNegotiate("windows", _ => { });
 
-                //options.Authority = "https://auth.gridprotectionalliance.org/realms/Test";
-                //options.ClientId = "PQDigest";
-                //options.ClientSecret = "5vjXZXmliLyTkTxGeHD7WvyHQPgrd98E";
-                //options.CallbackPath = "/index.html";
+        if (addOAuth)
+            builder.AddOpenIdConnect("oauth", options =>
+             {
+                 options.Authority = (string)(section["Authority"] ?? "");
+                 options.ClientId = (string)(section["ClientId"] ?? "");
+                 options.ClientSecret = (string)(section["ClientSecret"] ?? "");
+                 options.CallbackPath = "/index.html";
 
-                options.Authority = (string)section["Authority"];
-                options.ClientId = (string)section["ClientId"];
-                options.ClientSecret = (string)section["ClientSecret"];
-                options.CallbackPath = "/index.html";
+                 options.Scope.Add("openid");
 
-                options.Scope.Add("openid");
+                 foreach (string scope in ((string)(section["Scopes"] ?? "")).Split(' ', StringSplitOptions.RemoveEmptyEntries))
+                     options.Scope.Add(scope);
 
-                foreach (string scope in ((string)section["Scopes"]).Split(' ', StringSplitOptions.RemoveEmptyEntries))
-                    options.Scope.Add(scope);
+             });
 
-            })
+        return builder
             .AddCookie();
     }
 }
