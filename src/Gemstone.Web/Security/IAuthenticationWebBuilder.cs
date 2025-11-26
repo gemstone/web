@@ -193,6 +193,30 @@ public static class AuthenticationWebBuilderExtensions
     }
 
     /// <summary>
+    /// Configures an authentication provider that uses OAuth to authenticate users.
+    /// </summary>
+    /// <param name="builder">The authentication builder for the application</param>
+    /// <param name="providerOptions">The options to configure the OAuth provider</param>
+    /// <returns>The authentication builder for the application.</returns>
+    public static AuthenticationBuilder ConfigureOAuthProvider(this AuthenticationBuilder builder, OAuthAuthenticationProviderOptions providerOptions)
+    {
+        builder.Services.AddOAuthAuthenticationProvider(providerOptions);
+
+        return builder.AddOpenIdConnect("oauth", config =>
+        {
+            config.Authority = providerOptions.Authority;
+            config.ClientId = providerOptions.ClientId;
+            config.ClientSecret = providerOptions.ClientSecret;
+            config.CallbackPath = "/index.html";
+
+            config.Scope.Add("openid");
+
+            foreach (string scope in providerOptions.Scopes.Split(' ', StringSplitOptions.RemoveEmptyEntries))
+                config.Scope.Add(scope);
+        });
+    }
+
+    /// <summary>
     /// Automatically configures the request pipeline to support well-known authentication providers.
     /// </summary>
     /// <param name="app">The application builder</param>
