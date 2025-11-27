@@ -979,6 +979,14 @@
       <param name="configure">Method to configure the runtime</param>
       <returns>Builder for adding additional authentication schemes.</returns>
     </member>
+    <member name="M:Gemstone.Web.Security.AuthenticationWebBuilderExtensions.ConfigureOAuthProvider(Microsoft.AspNetCore.Authentication.AuthenticationBuilder,Gemstone.Security.AuthenticationProviders.OAuthAuthenticationProviderOptions)">
+      <summary>
+            Configures an authentication provider that uses OAuth to authenticate users.
+            </summary>
+      <param name="builder">The authentication builder for the application</param>
+      <param name="providerOptions">The options to configure the OAuth provider</param>
+      <returns>The authentication builder for the application.</returns>
+    </member>
     <member name="M:Gemstone.Web.Security.AuthenticationWebBuilderExtensions.UseGemstoneAuthentication(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
       <summary>
             Automatically configures the request pipeline to support well-known authentication providers.
