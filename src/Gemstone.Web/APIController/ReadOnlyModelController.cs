@@ -359,7 +359,7 @@ namespace Gemstone.Web.APIController
         /// <returns>A <see cref="PageInfo"/> object containing the pagination information or <see cref="Exception"/>.</returns>
         [HttpPost, Route("PageInfo/{parentID?}")]
         [ResourceAccess(ResourceAccessType.Read)]
-        public virtual async Task<IActionResult> GetPageInfo(SearchPost<T> postData, string? parentID, CancellationToken cancellationToken)
+        public virtual async Task<IActionResult> GetPageInfo([FromBody] SearchPost<T> postData, string? parentID, CancellationToken cancellationToken)
         {
             await using AdoDataConnection connection = CreateConnection();
             TableOperations<T> tableOperations = new(connection);
