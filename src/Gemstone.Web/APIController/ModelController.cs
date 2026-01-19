@@ -91,8 +91,7 @@ namespace Gemstone.Web.APIController
         {
             await using AdoDataConnection connection = CreateConnection();
             SecureTableOperations<T> tableOperations = new(connection);
-            object primaryKey = tableOperations.BaseOperations.GetPrimaryKeys(record).First();
-            await tableOperations.DeleteRecordWhereAsync(HttpContext.User, $"{PrimaryKeyField} = {{0}}", cancellationToken, primaryKey);
+            await tableOperations.DeleteRecordAsync(HttpContext.User, record, cancellationToken);
 
             return Ok(1);
         }

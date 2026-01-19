@@ -430,7 +430,7 @@ namespace Gemstone.Web.APIController
             await using AdoDataConnection connection = CreateConnection();
             SecureTableOperations<T> tableOperations = new(connection);
 
-            T? result = tableOperations.BaseOperations.NewRecord();
+            T? result = tableOperations.NewRecord();
             return Ok(result);
         }
 
@@ -451,7 +451,7 @@ namespace Gemstone.Web.APIController
             // Create a connection and table operations instance
             await using AdoDataConnection connection = CreateConnection();
             SecureTableOperations<T> tableOperations = new(connection);
-            string tableName = tableOperations.BaseOperations.TableName;
+            string tableName = tableOperations.TableName;
             string sql = $"SELECT MAX([{fieldName}]) FROM [{tableName}]";
 
             object? maxValue = await connection.ExecuteScalarAsync(sql, cancellationToken).ConfigureAwait(false);
