@@ -49,7 +49,7 @@ namespace Gemstone.Web.APIController
         {
             public string Token { get; } = Guid.NewGuid().ToString();
 
-            public TableOperations<T> Table { get; }
+            public SecureTableOperations<T> Table { get; }
 
             public IAsyncEnumerator<T?>? Records { get; set; }
 
@@ -58,7 +58,7 @@ namespace Gemstone.Web.APIController
             private ConnectionCache()
             {
                 m_connection = new AdoDataConnection(Settings.Default);
-                Table = new TableOperations<T>(m_connection);
+                Table = new SecureTableOperations<T>(m_connection);
             }
 
             public void Dispose()
@@ -177,7 +177,7 @@ namespace Gemstone.Web.APIController
         {
             ConnectionCache cache = ConnectionCache.Create(expiration ?? 1.0D);
 
-            cache.Records = cache.Table.QueryRecordsWhereAsync(filterExpression, cancellationToken, parameters).GetAsyncEnumerator(cancellationToken);
+            cache.Records = cache.Table.QueryRecordsWhereAsync(HttpContext.User, filterExpression, cancellationToken, parameters).GetAsyncEnumerator(cancellationToken);
 
             return Task.FromResult<IActionResult>(Ok(cache.Token));
         }
@@ -237,7 +237,7 @@ namespace Gemstone.Web.APIController
         public virtual async Task<IActionResult> Get(string? parentID, int page, CancellationToken cancellationToken)
         {
             await using AdoDataConnection connection = CreateConnection();
-            TableOperations<T> tableOperations = new(connection);
+            SecureTableOperations<T> tableOperations = new(connection);
             RecordFilter<T>? filter = null;
 
             if (ParentKey != string.Empty && parentID is not null)
@@ -250,7 +250,7 @@ namespace Gemstone.Web.APIController
                 };
             }
 
-            IAsyncEnumerable<T> result = tableOperations.QueryRecordsAsync(DefaultSort, DefaultSortDirection, page, PageSize, cancellationToken, filter);
+            IAsyncEnumerable<T> result = tableOperations.QueryRecordsAsync(HttpContext.User, DefaultSort, DefaultSortDirection, page, PageSize, cancellationToken, filter);
 
             return Ok(await result.ToArrayAsync(cancellationToken).ConfigureAwait(false));
         }
@@ -267,10 +267,10 @@ namespace Gemstone.Web.APIController
         public virtual async Task<IActionResult> Get(string sort, bool ascending, int page, CancellationToken cancellationToken)
         {
             await using AdoDataConnection connection = CreateConnection();
-            TableOperations<T> tableOperations = new(connection);
+            SecureTableOperations<T> tableOperations = new(connection);
             RecordFilter<T>? filter = null;
 
-            IAsyncEnumerable<T> result = tableOperations.QueryRecordsAsync(sort, ascending, page, PageSize, cancellationToken, filter);
+            IAsyncEnumerable<T> result = tableOperations.QueryRecordsAsync(HttpContext.User, sort, ascending, page, PageSize, cancellationToken, filter);
 
             return Ok(await result.ToArrayAsync(cancellationToken).ConfigureAwait(false));
         }
@@ -288,7 +288,7 @@ namespace Gemstone.Web.APIController
         public virtual async Task<IActionResult> Get(string parentID, string sort, bool ascending, int page, CancellationToken cancellationToken)
         {
             await using AdoDataConnection connection = CreateConnection();
-            TableOperations<T> tableOperations = new(connection);
+            SecureTableOperations<T> tableOperations = new(connection);
             RecordFilter<T> filter = new()
             {
                 FieldName = ParentKey,
@@ -296,7 +296,7 @@ namespace Gemstone.Web.APIController
                 SearchParameter = parentID
             };
 
-            IAsyncEnumerable<T> result = tableOperations.QueryRecordsAsync(sort, ascending, page, PageSize, cancellationToken, filter);
+            IAsyncEnumerable<T> result = tableOperations.QueryRecordsAsync(HttpContext.User, sort, ascending, page, PageSize, cancellationToken, filter);
 
             return Ok(await result.ToArrayAsync(cancellationToken).ConfigureAwait(false));
         }
@@ -311,8 +311,8 @@ namespace Gemstone.Web.APIController
         public virtual async Task<IActionResult> GetOne(string id, CancellationToken cancellationToken)
         {
             await using AdoDataConnection connection = CreateConnection();
-            TableOperations<T> tableOperations = new(connection);
-            T? result = await tableOperations.QueryRecordAsync(new RecordRestriction($"{PrimaryKeyField} = {{0}}", id), cancellationToken).ConfigureAwait(false);
+            SecureTableOperations<T> tableOperations = new(connection);
+            T? result = await tableOperations.QueryRecordAsync(HttpContext.User, new RecordRestriction($"{PrimaryKeyField} = {{0}}", id), cancellationToken).ConfigureAwait(false);
 
             return result is null ?
                 NotFound() :
@@ -332,7 +332,7 @@ namespace Gemstone.Web.APIController
         public virtual async Task<IActionResult> Search([FromBody] SearchPost<T> postData, int page, string? parentID, CancellationToken cancellationToken)
         {
             await using AdoDataConnection connection = CreateConnection();
-            TableOperations<T> tableOperations = new(connection);
+            SecureTableOperations<T> tableOperations = new(connection);
             RecordFilter<T>[] filters = postData.Searches.ToArray();
 
             if (ParentKey != string.Empty && parentID is not null)
@@ -345,7 +345,7 @@ namespace Gemstone.Web.APIController
                 });
             }
 
-            IAsyncEnumerable<T> result = tableOperations.QueryRecordsAsync(postData.OrderBy, postData.Ascending, page, PageSize, cancellationToken, filters);
+            IAsyncEnumerable<T> result = tableOperations.QueryRecordsAsync(HttpContext.User, postData.OrderBy, postData.Ascending, page, PageSize, cancellationToken, filters);
 
             return Ok(await result.ToArrayAsync(cancellationToken).ConfigureAwait(false));
         }
@@ -362,7 +362,7 @@ namespace Gemstone.Web.APIController
         public virtual async Task<IActionResult> GetPageInfo([FromBody] SearchPost<T> postData, string? parentID, CancellationToken cancellationToken)
         {
             await using AdoDataConnection connection = CreateConnection();
-            TableOperations<T> tableOperations = new(connection);
+            SecureTableOperations<T> tableOperations = new(connection);
             RecordFilter<T>[] filters = postData.Searches.ToArray();
 
             if (ParentKey != string.Empty && parentID is not null)
@@ -375,7 +375,7 @@ namespace Gemstone.Web.APIController
                 });
             }
 
-            int recordCount = await tableOperations.QueryRecordCountAsync(cancellationToken, filters).ConfigureAwait(false);
+            int recordCount = await tableOperations.QueryRecordCountAsync(HttpContext.User, cancellationToken, filters).ConfigureAwait(false);
 
             return Ok(new PageInfo()
             {
@@ -396,7 +396,7 @@ namespace Gemstone.Web.APIController
         public virtual async Task<IActionResult> GetPageInfo(string? parentID, CancellationToken cancellationToken)
         {
             await using AdoDataConnection connection = CreateConnection();
-            TableOperations<T> tableOperations = new(connection);
+            SecureTableOperations<T> tableOperations = new(connection);
             RecordFilter<T>[] filters = [];
 
             if (ParentKey != string.Empty && parentID is not null)
@@ -409,7 +409,7 @@ namespace Gemstone.Web.APIController
                 });
             }
 
-            int recordCount = await tableOperations.QueryRecordCountAsync(cancellationToken, filters).ConfigureAwait(false);
+            int recordCount = await tableOperations.QueryRecordCountAsync(HttpContext.User, cancellationToken, filters).ConfigureAwait(false);
 
             return Ok(new PageInfo()
             {
@@ -428,7 +428,7 @@ namespace Gemstone.Web.APIController
         public virtual async Task<IActionResult> New(CancellationToken cancellationToken)
         {
             await using AdoDataConnection connection = CreateConnection();
-            TableOperations<T> tableOperations = new(connection);
+            SecureTableOperations<T> tableOperations = new(connection);
 
             T? result = tableOperations.NewRecord();
             return Ok(result);
@@ -450,7 +450,7 @@ namespace Gemstone.Web.APIController
 
             // Create a connection and table operations instance
             await using AdoDataConnection connection = CreateConnection();
-            TableOperations<T> tableOperations = new(connection);
+            SecureTableOperations<T> tableOperations = new(connection);
             string tableName = tableOperations.TableName;
             string sql = $"SELECT MAX([{fieldName}]) FROM [{tableName}]";
 

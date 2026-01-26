@@ -23,9 +23,7 @@
 // ReSharper disable StaticMemberInGenericType
 
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Reflection;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Gemstone.Data;
@@ -59,8 +57,8 @@ namespace Gemstone.Web.APIController
         public virtual async Task<IActionResult> Patch([FromBody] T record, CancellationToken cancellationToken)
         {
             await using AdoDataConnection connection = CreateConnection();
-            TableOperations<T> tableOperations = new(connection);
-            await tableOperations.UpdateRecordAsync(record, cancellationToken);
+            SecureTableOperations<T> tableOperations = new(connection);
+            await tableOperations.UpdateRecordAsync(HttpContext.User, record, cancellationToken);
 
             return Ok(record);
         }
@@ -92,8 +90,8 @@ namespace Gemstone.Web.APIController
         public virtual async Task<IActionResult> Delete([FromBody] T record, CancellationToken cancellationToken)
         {
             await using AdoDataConnection connection = CreateConnection();
-            TableOperations<T> tableOperations = new(connection);
-            await tableOperations.DeleteRecordAsync(record, cancellationToken);
+            SecureTableOperations<T> tableOperations = new(connection);
+            await tableOperations.DeleteRecordAsync(HttpContext.User, record, cancellationToken);
 
             return Ok(1);
         }
@@ -108,8 +106,8 @@ namespace Gemstone.Web.APIController
         public virtual async Task<IActionResult> Delete(string id, CancellationToken cancellationToken)
         {
             await using AdoDataConnection connection = CreateConnection();
-            TableOperations<T> tableOperations = new(connection);
-            await tableOperations.DeleteRecordWhereAsync($"{PrimaryKeyField} = {{0}}", cancellationToken, id);
+            SecureTableOperations<T> tableOperations = new(connection);
+            await tableOperations.DeleteRecordWhereAsync(HttpContext.User, $"{PrimaryKeyField} = {{0}}", cancellationToken, id);
 
             return Ok(1);
         }
