@@ -119,7 +119,10 @@ public abstract partial class AuthorizationInfoControllerBase : ControllerBase
 
         var claimTypes = claimsProvider
             .GetClaimTypes()
-            .Where(type => searchPattern is null || searchPattern.IsMatch(type.Type))
+            .Where(type => searchPattern is null
+                || searchPattern.IsMatch(type.Type)
+                || searchPattern.IsMatch(type.Alias ?? "")
+                || searchPattern.IsMatch(type.Description ?? ""))
             .Select(type => new { Value = type.Type, Label = type.Alias, LongLabel = type.Description });
 
         return Ok(claimTypes);
@@ -145,8 +148,10 @@ public abstract partial class AuthorizationInfoControllerBase : ControllerBase
         if (!isSupported(claimType))
             return BadRequest($"Claim type not supported");
 
+        searchText = string.IsNullOrWhiteSpace(searchText) ? "*" : searchText; 
+
         var claims = claimsProvider
-            .FindClaims(claimType, searchText ?? "*")
+            .FindClaims(claimType, searchText)
             .Select(claim => new { Label = claim.Description, claim.Value, LongLabel = claim.LongDescription });
 
         return Ok(claims);
