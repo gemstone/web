@@ -262,7 +262,7 @@ public abstract partial class AuthorizationInfoControllerBase : ControllerBase
             string v => Regex.Escape(v)
         });
 
-        return new(searchPattern);
+        return new(searchPattern, RegexOptions.IgnoreCase);
     }
 
     [GeneratedRegex(@"\\.|\*|[^\\*]+")]
