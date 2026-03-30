@@ -22,6 +22,9 @@
 //******************************************************************************************************
 
 using System;
+using System.IO;
+using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using Gemstone.Security.AuthenticationProviders;
 using Microsoft.AspNetCore.Authentication;
@@ -32,6 +35,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
+using static System.Net.Mime.MediaTypeNames;
+using MediaTypeHeaderValue = System.Net.Http.Headers.MediaTypeHeaderValue;
 
 namespace Gemstone.Web.Security;
 
@@ -110,19 +115,40 @@ public static class AuthenticationWebBuilderExtensions
         }
     }
 
-    private class LogoutMiddleware(RequestDelegate next, IOptionsMonitor<CookieAuthenticationOptions> cookieOptions)
+    private class ApplicationSecurityInterfaceMiddleware(RequestDelegate next, IOptionsMonitor<CookieAuthenticationOptions> cookieOptions)
     {
         private CookieAuthenticationOptions Options => cookieOptions
             .Get(CookieAuthenticationDefaults.AuthenticationScheme);
 
         public async Task Invoke(HttpContext httpContext)
         {
-            if (!IsLogoutRequest(httpContext.Request))
+            if (IsLogoutRequest(httpContext.Request))
             {
-                await next(httpContext);
+                await HandleLogoutRequestAsync(httpContext);
                 return;
             }
 
+            if (IsAccessDenied(httpContext.Request))
+            {
+                await HandleAccessDeniedAsync(httpContext);
+                return;
+            }
+
+            await next(httpContext);
+        }
+
+        private bool IsLogoutRequest(HttpRequest request)
+        {
+            return IsMatch(request, Options.LogoutPath);
+        }
+
+        private bool IsAccessDenied(HttpRequest request)
+        {
+            return IsMatch(request, Options.AccessDeniedPath);
+        }
+
+        private static async Task HandleLogoutRequestAsync(HttpContext httpContext)
+        {
             // Log out of the cookie authentication scheme
             // to revoke the authentication ticket
             await httpContext.SignOutAsync();
@@ -146,10 +172,25 @@ public static class AuthenticationWebBuilderExtensions
                 await httpContext.ChallengeAsync(new AuthenticationProperties() { RedirectUri = "/" });
         }
 
-        private bool IsLogoutRequest(HttpRequest request)
+        private static async Task HandleAccessDeniedAsync(HttpContext httpContext)
         {
-            PathString logoutPath = Options.LogoutPath;
-            return logoutPath.HasValue && request.Path.StartsWithSegments(logoutPath);
+            HttpResponse response = httpContext.Response;
+            response.StatusCode = (int)HttpStatusCode.OK;
+
+            Encoding utf8 = new UTF8Encoding(false);
+            MediaTypeHeaderValue textPlain = new(Text.Plain, utf8.WebName);
+            response.ContentType = textPlain.ToString();
+
+            const string ResponseText = "Access Denied";
+            response.ContentLength = utf8.GetByteCount(ResponseText);
+
+            await using StreamWriter writer = new(response.Body, utf8, leaveOpen: true);
+            await writer.WriteAsync(ResponseText);
+        }
+
+        private static bool IsMatch(HttpRequest request, PathString pathString)
+        {
+            return pathString.HasValue && request.Path.StartsWithSegments(pathString);
         }
 
         private static bool IsSuccess(int statusCode)
@@ -244,7 +285,7 @@ public static class AuthenticationWebBuilderExtensions
     {
         AuthenticationWebBuilder builder = new(app.UseAuthentication());
         configure(builder);
-        return app.UseMiddleware<LogoutMiddleware>();
+        return app.UseMiddleware<ApplicationSecurityInterfaceMiddleware>();
     }
 
     private static AuthenticationBuilder ConfigureGemstoneWebDefaults(this IServiceCollection services)
@@ -263,6 +304,7 @@ public static class AuthenticationWebBuilderExtensions
                 options.SlidingExpiration = false;
                 options.LoginPath = "/Login";
                 options.LogoutPath = "/asi/logout";
+                options.AccessDeniedPath = "/asi/forbidden";
                 options.ReturnUrlParameter = "redir";
 
                 options.Cookie.Name = "x-gemstone-auth";
