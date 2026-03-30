@@ -117,6 +117,8 @@ public static class AuthenticationWebBuilderExtensions
 
     private class ApplicationSecurityInterfaceMiddleware(RequestDelegate next, IOptionsMonitor<CookieAuthenticationOptions> cookieOptions)
     {
+        public const string AccessDeniedPath = "/asi/forbidden";
+
         private CookieAuthenticationOptions Options => cookieOptions
             .Get(CookieAuthenticationDefaults.AuthenticationScheme);
 
@@ -144,7 +146,7 @@ public static class AuthenticationWebBuilderExtensions
 
         private bool IsAccessDenied(HttpRequest request)
         {
-            return IsMatch(request, Options.AccessDeniedPath);
+            return IsMatch(request, AccessDeniedPath);
         }
 
         private static async Task HandleLogoutRequestAsync(HttpContext httpContext)
@@ -304,7 +306,7 @@ public static class AuthenticationWebBuilderExtensions
                 options.SlidingExpiration = false;
                 options.LoginPath = "/Login";
                 options.LogoutPath = "/asi/logout";
-                options.AccessDeniedPath = "/asi/forbidden";
+                options.AccessDeniedPath = ApplicationSecurityInterfaceMiddleware.AccessDeniedPath;
                 options.ReturnUrlParameter = "redir";
 
                 options.Cookie.Name = "x-gemstone-auth";
