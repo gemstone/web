@@ -24,6 +24,7 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Gemstone.Security.AuthenticationProviders;
@@ -256,6 +257,12 @@ public static class AuthenticationWebBuilderExtensions
 
             foreach (string scope in providerOptions.Scopes.Split(' ', StringSplitOptions.RemoveEmptyEntries))
                 config.Scope.Add(scope);
+
+            config.Events.OnTokenValidated = context =>
+            {
+                AddProviderIdentityClaim(context.Principal, OAuthAuthenticationProviderExtensions.DefaultIdentity);
+                return Task.CompletedTask;
+            };
         });
     }
 
@@ -318,7 +325,27 @@ public static class AuthenticationWebBuilderExtensions
         return services
             .AddWindowsAuthenticationProvider()
             .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            .AddNegotiate("windows", _ => { })
-            .AddCookie();
+            .AddNegotiate("windows", options =>
+            {
+                options.Events?.OnAuthenticated = context =>
+                {
+                    AddProviderIdentityClaim(context.Principal, WindowsAuthenticationProviderExtensions.DefaultIdentity);
+                    return Task.CompletedTask;
+                };
+            }).AddCookie();
+    }
+
+    /// <summary>
+    /// Adds a claim to the principal indicating the identity of the provider that authenticated the user, if it does not already exist.
+    /// </summary>
+    /// <param name="principal">The claims principal</param>
+    /// <param name="providerIdentity">The identity of the authentication provider</param>
+    private static void AddProviderIdentityClaim(ClaimsPrincipal? principal, string providerIdentity)
+    {
+        if (principal?.Identity is not ClaimsIdentity identity)
+            return;
+
+        if (!identity.HasClaim("Gemstone.ProviderIdentity", providerIdentity))
+            identity.AddClaim(new Claim("Gemstone.ProviderIdentity", providerIdentity));
     }
 }
