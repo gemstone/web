@@ -172,7 +172,16 @@ public static class AuthenticationWebBuilderExtensions
             // If the sign out procedure did not trigger any errors or redirects,
             // this asks the cookie authentication scheme to redirect to the login page
             if (IsSuccess(httpContext.Response.StatusCode) && !IsAjaxRequest(httpContext.Request))
-                await httpContext.ChallengeAsync(new AuthenticationProperties() { RedirectUri = "/" });
+            {
+                string redirectUri = httpContext.Request.PathBase.HasValue
+                    ? $"{httpContext.Request.PathBase}/"
+                    : "/";
+
+                await httpContext.ChallengeAsync(new AuthenticationProperties()
+                {
+                    RedirectUri = redirectUri
+                });
+            }
         }
 
         private static async Task HandleAccessDeniedAsync(HttpContext httpContext)
