@@ -336,11 +336,14 @@ public static class AuthenticationWebBuilderExtensions
             .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddNegotiate("windows", options =>
             {
-                options.Events?.OnAuthenticated = context =>
+                if (options.Events is not null)
                 {
-                    AddProviderIdentityClaim(context.Principal, WindowsAuthenticationProviderExtensions.DefaultIdentity);
-                    return Task.CompletedTask;
-                };
+                    options.Events.OnAuthenticated = context =>
+                    {
+                        AddProviderIdentityClaim(context.Principal, WindowsAuthenticationProviderExtensions.DefaultIdentity);
+                        return Task.CompletedTask;
+                    };
+                }
             }).AddCookie();
     }
 
