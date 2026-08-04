@@ -69,6 +69,27 @@ public abstract partial class AuthorizationInfoControllerBase : ControllerBase
         public ResourceAccessType Access { get; set; }
     }
 
+    /// <summary>
+    /// Represents a resource for which permissions can be granted.
+    /// </summary>
+    public class AuthorizationResource
+    {
+        /// <summary>
+        /// Gets or sets the type of the resource.
+        /// </summary>
+        public string Type { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Gets or sets the name of the resource.
+        /// </summary>
+        public string Name { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Gets or sets the supported access types.
+        /// </summary>
+        public IEnumerable<ResourceAccessType> AccessTypes { get; set; } = [];
+    }
+
     #endregion
 
     #region [ Methods ]
@@ -202,9 +223,9 @@ public abstract partial class AuthorizationInfoControllerBase : ControllerBase
             access.UnionWith(accessTypes);
         }
 
-        var resources = resourceAccessLookup
+        IEnumerable<AuthorizationResource> resources = resourceAccessLookup
             .OrderBy(kvp => kvp.Key)
-            .Select(kvp => new
+            .Select(kvp => new AuthorizationResource
             {
                 Type = "Controller",
                 Name = kvp.Key,
