@@ -234,26 +234,60 @@ public abstract partial class AuthorizationInfoControllerBase : ControllerBase
 
         return Ok(resources);
 
-        static IEnumerable<ResourceAccessType> ToAccessTypes(Endpoint endpoint, IEnumerable<ResourceAccessAttribute> accessAttributes)
+    }
+
+    /// <summary>
+    /// Gets a list of API resources available for which permissions can be granted within the application.
+    /// </summary>
+    /// <param name="policyProvider">Provides authorization policies defined within the application</param>
+    /// <param name="endpointDataSource">Source for endpoint data used to look up controller and action metadata</param>
+    /// <returns>A list of resources within the application.</returns>
+    [HttpGet, Route("APIresources")]
+    public virtual async Task<IActionResult> GetAPIResources(IAuthorizationPolicyProvider policyProvider, EndpointDataSource endpointDataSource)
+    {
+        Dictionary<string, HashSet<ResourceAccessType>> resourceAccessLookup = [];
+
+        foreach (Endpoint endpoint in endpointDataSource.Endpoints)
         {
-            ResourceAccessType accessType = accessAttributes.GetAccessType();
+            ControllerActionDescriptor? descriptor = endpoint.Metadata
+                .GetMetadata<ControllerActionDescriptor>();
 
-            if (accessType == ResourceAccessType.None)
-                return [];
+            if (descriptor is null)
+                continue;
 
-            if (accessType != ResourceAccessType.Default)
-                return [accessType];
+            IReadOnlyList<IAuthorizeData> authorizeData = endpoint.Metadata.GetOrderedMetadata<IAuthorizeData>() ?? [];
+            IReadOnlyList<AuthorizationPolicy> policies = endpoint.Metadata.GetOrderedMetadata<AuthorizationPolicy>() ?? [];
+            IReadOnlyList<IAuthorizationRequirementData> requirementData = endpoint.Metadata.GetOrderedMetadata<IAuthorizationRequirementData>() ?? [];
+            AuthorizationPolicy? policy = await AuthorizationPolicy.CombineAsync(policyProvider, authorizeData, policies);
 
-            HttpMethodMetadata? httpMethodMetadata = endpoint.Metadata
-                .GetMetadata<HttpMethodMetadata>();
+            bool hasAPIAccessRequirement = requirementData
+                .SelectMany(datum => datum.GetRequirements())
+                .Concat(policy?.Requirements ?? [])
+                .Any(requirement => requirement is APIAccessRequirement);
 
-            IReadOnlyList<string> httpMethods = httpMethodMetadata?.HttpMethods
-                ?? [];
+            if (!hasAPIAccessRequirement)
+                continue;
 
-            return httpMethods
-                .Select(accessAttributes.GetAccessType)
-                .Where(type => type != ResourceAccessType.None);
+            IReadOnlyList<ResourceAccessAttribute> accessAttributes = endpoint.Metadata
+                .GetOrderedMetadata<ResourceAccessAttribute>();
+
+            string resourceName = accessAttributes.GetResourceName(descriptor);
+            IEnumerable<ResourceAccessType> accessTypes = ToAccessTypes(endpoint, accessAttributes);
+            HashSet<ResourceAccessType> access = resourceAccessLookup.GetOrAdd(resourceName, _ => []);
+            access.UnionWith(accessTypes);
         }
+
+        IEnumerable<AuthorizationResource> resources = resourceAccessLookup
+            .OrderBy(kvp => kvp.Key)
+            .Select(kvp => new AuthorizationResource
+            {
+                Type = "API",
+                Name = kvp.Key,
+                AccessTypes = kvp.Value.OrderBy(type => type)
+            });
+
+        return Ok(resources);
+
     }
 
     /// <summary>
@@ -272,6 +306,27 @@ public abstract partial class AuthorizationInfoControllerBase : ControllerBase
     #region [ Static ]
 
     // Static Methods
+
+    private static IEnumerable<ResourceAccessType> ToAccessTypes(Endpoint endpoint, IEnumerable<ResourceAccessAttribute> accessAttributes)
+    {
+        ResourceAccessType accessType = accessAttributes.GetAccessType();
+
+        if (accessType == ResourceAccessType.None)
+            return [];
+
+        if (accessType != ResourceAccessType.Default)
+            return [accessType];
+
+        HttpMethodMetadata? httpMethodMetadata = endpoint.Metadata
+            .GetMetadata<HttpMethodMetadata>();
+
+        IReadOnlyList<string> httpMethods = httpMethodMetadata?.HttpMethods
+            ?? [];
+
+        return httpMethods
+            .Select(accessAttributes.GetAccessType)
+            .Where(type => type != ResourceAccessType.None);
+    }
 
     private static Regex? ToSearchPattern(string? searchText)
     {
