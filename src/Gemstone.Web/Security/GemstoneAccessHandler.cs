@@ -37,11 +37,14 @@ namespace Gemstone.Web.Security;
 /// <summary>
 /// Authorization handler for access to generic Resources.
 /// </summary>
-public class GemstoneAccessHandler<T> : AuthorizationHandler<T> where T : IAuthorizationRequirement
+public abstract class GemstoneAccessHandler<TRequirement> : AuthorizationHandler<TRequirement> where TRequirement : IAuthorizationRequirement
 {
     #region [ Members ]
 
-    protected virtual string ResourceType { get; }
+    /// <summary>
+    /// Gets the type of resource handled by the authorization handler.
+    /// </summary>
+    protected abstract string ResourceType { get; }
 
     // Nested Types
     private enum Permission
@@ -51,10 +54,10 @@ public class GemstoneAccessHandler<T> : AuthorizationHandler<T> where T : IAutho
         Neither
     }
 
-    private class ContextWrapper<T>(AuthorizationHandlerContext context, T requirement, HttpContext httpContext, Endpoint endpoint, ControllerActionDescriptor descriptor) where T : IAuthorizationRequirement
+    private class ContextWrapper(AuthorizationHandlerContext context, TRequirement requirement, HttpContext httpContext, Endpoint endpoint, ControllerActionDescriptor descriptor)
     {
         private AuthorizationHandlerContext Context { get; } = context;
-        private T Requirement { get; } = requirement;
+        private TRequirement Requirement { get; } = requirement;
 
         public ClaimsPrincipal User { get; } = context.User;
         public Endpoint Endpoint { get; } = endpoint;
@@ -80,7 +83,7 @@ public class GemstoneAccessHandler<T> : AuthorizationHandler<T> where T : IAutho
     #region [ Methods ]
 
     /// <inheritdoc/>
-    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, T requirement)
+    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, TRequirement requirement)
     {
         if (context.Resource is not HttpContext httpContext)
             return Task.CompletedTask;
@@ -97,7 +100,7 @@ public class GemstoneAccessHandler<T> : AuthorizationHandler<T> where T : IAutho
         if (descriptor is null)
             return Task.CompletedTask;
 
-        ContextWrapper<T> wrapper = new(context, requirement, httpContext, endpoint, descriptor);
+        ContextWrapper wrapper = new(context, requirement, httpContext, endpoint, descriptor);
 
         if (HandleResourceActionPermission(wrapper))
             return Task.CompletedTask;
@@ -106,7 +109,7 @@ public class GemstoneAccessHandler<T> : AuthorizationHandler<T> where T : IAutho
         return Task.CompletedTask;
     }
 
-    private bool HandleResourceActionPermission(ContextWrapper<T> wrapper)
+    private bool HandleResourceActionPermission(ContextWrapper wrapper)
     {
         IRouteNameMetadata? routeNameMetadata = wrapper.Endpoint.Metadata
             .GetMetadata<IRouteNameMetadata>();
@@ -145,7 +148,6 @@ public class GemstoneAccessHandler<T> : AuthorizationHandler<T> where T : IAutho
 
     private static Permission GetResourceActionPermission(ClaimsPrincipal user, string claimValue)
     {
-
         if (user.HasClaim(GemstoneClaimTypes.DenyClaim, claimValue))
             return Permission.Deny;
 
@@ -154,7 +156,7 @@ public class GemstoneAccessHandler<T> : AuthorizationHandler<T> where T : IAutho
             : Permission.Neither;
     }
 
-    private static void HandleResourceAccessPermission(ContextWrapper<T> wrapper, string resourceType)
+    private static void HandleResourceAccessPermission(ContextWrapper wrapper, string resourceType)
     {
         IReadOnlyList<ResourceAccessAttribute> accessAttributes = wrapper.Endpoint.Metadata
             .GetOrderedMetadata<ResourceAccessAttribute>();

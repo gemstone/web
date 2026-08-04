@@ -21,15 +21,7 @@
 //
 //******************************************************************************************************
 
-using System.Collections.Generic;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Gemstone.Security.AccessControl;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Features;
-using Microsoft.AspNetCore.Mvc.Controllers;
-using Microsoft.AspNetCore.Routing;
 
 namespace Gemstone.Web.Security;
 
@@ -38,10 +30,8 @@ namespace Gemstone.Web.Security;
 /// </summary>
 public class ControllerAccessHandler : GemstoneAccessHandler<ControllerAccessRequirement>
 {
-    
     /// <inheritdoc/>
     protected override string ResourceType => "Controller";
-
 }
 
 /// <summary>
