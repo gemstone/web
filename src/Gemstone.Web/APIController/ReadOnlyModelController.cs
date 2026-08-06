@@ -337,12 +337,12 @@ namespace Gemstone.Web.APIController
 
             if (ParentKey != string.Empty && parentID is not null)
             {
-                filters.Append(new RecordFilter<T>()
+                filters = filters.Append(new RecordFilter<T>()
                 {
                     FieldName = ParentKey,
                     Operator = "=",
                     SearchParameter = parentID
-                });
+                }).ToArray();
             }
 
             IAsyncEnumerable<T> result = tableOperations.QueryRecordsAsync(HttpContext.User, postData.OrderBy, postData.Ascending, page, PageSize, cancellationToken, filters);
@@ -367,12 +367,12 @@ namespace Gemstone.Web.APIController
 
             if (ParentKey != string.Empty && parentID is not null)
             {
-                filters.Append(new RecordFilter<T>()
+                filters = filters.Append(new RecordFilter<T>()
                 {
                     FieldName = ParentKey,
                     Operator = "=",
                     SearchParameter = parentID
-                });
+                }).ToArray();
             }
 
             int recordCount = await tableOperations.QueryRecordCountAsync(HttpContext.User, cancellationToken, filters).ConfigureAwait(false);
@@ -401,12 +401,12 @@ namespace Gemstone.Web.APIController
 
             if (ParentKey != string.Empty && parentID is not null)
             {
-                filters.Append(new RecordFilter<T>()
+                filters = filters.Append(new RecordFilter<T>()
                 {
                     FieldName = ParentKey,
                     Operator = "=",
                     SearchParameter = parentID
-                });
+                }).ToArray();
             }
 
             int recordCount = await tableOperations.QueryRecordCountAsync(HttpContext.User, cancellationToken, filters).ConfigureAwait(false);
