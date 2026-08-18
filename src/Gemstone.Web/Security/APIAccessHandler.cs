@@ -1,7 +1,7 @@
 ﻿//******************************************************************************************************
-//  ControllerAccessHandler.cs - Gbtc
+//  APIAccessHandler.cs - Gbtc
 //
-//  Copyright © 2025, Grid Protection Alliance.  All Rights Reserved.
+//  Copyright © 2026, Grid Protection Alliance.  All Rights Reserved.
 //
 //  Licensed to the Grid Protection Alliance (GPA) under one or more contributor license agreements. See
 //  the NOTICE file distributed with this work for additional information regarding copyright ownership.
@@ -16,7 +16,7 @@
 //
 //  Code Modification History:
 //  ----------------------------------------------------------------------------------------------------
-//  07/29/2025 - Stephen C. Wills
+//  07/09/2026 - C. Lackner
 //       Generated original version of source code.
 //
 //******************************************************************************************************
@@ -26,34 +26,34 @@ using Microsoft.AspNetCore.Authorization;
 namespace Gemstone.Web.Security;
 
 /// <summary>
-/// Authorization handler for access to controller actions.
+/// Authorization handler for access to rest api actions.
 /// </summary>
-public class ControllerAccessHandler : GemstoneAccessHandler<ControllerAccessRequirement>
+public class APIAccessHandler : GemstoneAccessHandler<APIAccessRequirement>
 {
     /// <inheritdoc/>
-    protected override string ResourceType => "Controller";
+    protected override string ResourceType => "API";
 }
 
 /// <summary>
-/// Requirement to be handled by the <see cref="ControllerAccessHandler"/>.
+/// Requirement to be handled by the <see cref="APIAccessHandler"/>.
 /// </summary>
-public class ControllerAccessRequirement : IAuthorizationRequirement
+public class APIAccessRequirement : IAuthorizationRequirement
 {
 }
 
 /// <summary>
-/// Defines extension methods for the controller access handler.
+/// Defines extension methods for the <see cref="APIAccessHandler"/>.
 /// </summary>
-public static class ControllerAccessHandlerExtensions
+public static class APIAccessHandlerExtensions
 {
-    private static ControllerAccessRequirement Requirement { get; } = new();
+    private static APIAccessRequirement Requirement { get; } = new();
 
     /// <summary>
-    /// Adds the <see cref="ControllerAccessRequirement"/> to the policy.
+    /// Adds the <see cref="APIAccessRequirement"/> to the policy.
     /// </summary>
     /// <param name="builder">The policy builder</param>
     /// <returns>The policy builder.</returns>
-    public static AuthorizationPolicyBuilder RequireControllerAccess(this AuthorizationPolicyBuilder builder)
+    public static AuthorizationPolicyBuilder RequireAPIAccess(this AuthorizationPolicyBuilder builder)
     {
         return builder.AddRequirements(Requirement);
     }
