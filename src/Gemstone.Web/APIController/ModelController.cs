@@ -72,7 +72,7 @@ namespace Gemstone.Web.APIController
         public virtual async Task<IActionResult> Post([FromBody]T record, CancellationToken cancellationToken)
         {
             await using AdoDataConnection connection = CreateConnection();
-            TableOperations<T> tableOperations = new(connection);
+            ExpressionTableOperations<T> tableOperations = new(connection);
             await tableOperations.AddNewRecordAsync(record, cancellationToken);
             T? foundRecord = await tableOperations.QueryRecordAsync(tableOperations.GetNonPrimaryFieldRecordRestriction(record, DefaultExcludedFields), cancellationToken).ConfigureAwait(false);
 
